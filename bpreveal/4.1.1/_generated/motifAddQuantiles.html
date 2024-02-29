@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>motifAddQuantiles &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="predictToBigwig" href="predictToBigwig.html" />
+    <link rel="prev" title="metrics" href="metrics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="minorcli.html">Utility CLI</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkJson.html">checkJson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lengthCalc.html">lengthCalc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makeLossPlots.html">makeLossPlots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">metrics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">motifAddQuantiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#help-info">Help Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#named-arguments">Named Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#additional-information">Additional Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifAddQuantiles.recordToPatternID"><code class="docutils literal notranslate"><span class="pre">recordToPatternID()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifAddQuantiles.readTsv"><code class="docutils literal notranslate"><span class="pre">readTsv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifAddQuantiles.addFieldNameQuantileMetadata"><code class="docutils literal notranslate"><span class="pre">addFieldNameQuantileMetadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifAddQuantiles.addFieldQuantileData"><code class="docutils literal notranslate"><span class="pre">addFieldQuantileData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifAddQuantiles.addAllMetadata"><code class="docutils literal notranslate"><span class="pre">addAllMetadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifAddQuantiles.writeTsv"><code class="docutils literal notranslate"><span class="pre">writeTsv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifAddQuantiles.getParser"><code class="docutils literal notranslate"><span class="pre">getParser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifAddQuantiles.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predictToBigwig.html">predictToBigwig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapToBigwig.html">shapToBigwig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapToNumpy.html">shapToNumpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="showModel.html">showModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="showTrainingProgress.html">showTrainingProgress</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="minorcli.html">Utility CLI</a></li>
+      <li class="breadcrumb-item active">motifAddQuantiles</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/motifAddQuantiles.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="motifaddquantiles">
+<h1>motifAddQuantiles<a class="headerlink" href="#motifaddquantiles" title="Link to this heading"></a></h1>
+<section id="help-info">
+<h2>Help Info<a class="headerlink" href="#help-info" title="Link to this heading"></a></h2>
+<p><p>Given tsv files generated by motifSeqletCutoffsand motifScan, add quantile information about each motif hit for downstream analysis.</p>
+</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>usage: motifAddQuantiles [-h] --seqlet-tsv SEQLETTSVFNAME
+                         --scan-tsv SCANTSVFNAME
+                         [--seqlet-out SEQLETOUTFNAME]
+                         [--scan-out SCANOUTFNAME]
+                         [--verbose]
+</pre></div>
+</div>
+<section id="named-arguments">
+<h3>Named Arguments<a class="headerlink" href="#named-arguments" title="Link to this heading"></a></h3>
+<dl class="option-list">
+<dt><kbd>--seqlet-tsv</kbd></dt>
+<dd><p>The name of the seqlet tsv file generated by motifSeqletCutoffs.py (or motifScan.py if run with pattern-cutoff-settings).</p>
+</dd>
+<dt><kbd>--scan-tsv</kbd></dt>
+<dd><p>The name of the tsv file generated by motifScan.py</p>
+</dd>
+<dt><kbd>--seqlet-out</kbd></dt>
+<dd><p>Instead of overwriting seqlet-tsv, write the results to this file. If omitted, edit seqlet-tsv in place.</p>
+</dd>
+<dt><kbd>--scan-out</kbd></dt>
+<dd><p>Instead of overwriting scan-tsv write them to this file. If omitted, edit scan-tsv in place.</p>
+</dd>
+<dt><kbd>--verbose</kbd></dt>
+<dd><p>Include more debugging information.</p>
+<p>Default: False</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p id="module-bpreveal.motifAddQuantiles">Calculates quantile values for seqlets and called motif instances.</p>
+<p>This little helper program calculates quantile values for seqlets and called
+motif instances. For each pattern (patterns in different metaclusters are
+distinct), it looks at the seqlets and determines where that seqlet’s
+importance magnitude, contribution match, and sequence match scores fall among
+other seqlets in that pattern. Then, for motif hits, it sees where each hit
+falls, in terms of quantile, among the seqlets in that pattern.</p>
+<p>The quantile is based on a very simple definition. A particular seqlet’s
+quantile is calculated by sorting all of the seqlets for one pattern. The
+lowest-scoring seqlet gets a quantile of 0.0, the highest-scoring gets 1.0, and
+the seqlets in between get quantile values based on their order in the sorted
+metric.</p>
+<p>For scanned hits, we take the sorted array of seqlet statistics (for the same
+pattern as the matched hit fell into) and ask, ‘where would the score of this
+hit rank among the sorted array of seqlet scores?’ The hit’s rank is then its
+quantile score. If a hit falls between the scores of two seqlets, then a linear
+interpolation is performed to assign a quantile value.</p>
+<p>The input and output to this program are tsv files, and the only difference in
+format is that the outputs have three additional columns:
+<code class="docutils literal notranslate"><span class="pre">contrib_magnitude_quantile</span></code>, <code class="docutils literal notranslate"><span class="pre">seq_match_quantile</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">contrib_match_quantile</span></code>. The remaining columns are described below:</p>
+<dl class="simple">
+<dt>chrom</dt><dd><p>The chromosome where the seqlet or hit was found.</p>
+</dd>
+<dt>start</dt><dd><p>The start position (inclusive, zero-based) of the seqlet or motif hit.</p>
+</dd>
+<dt>end</dt><dd><p>The end position (exclusive, zero-based) of the seqlet or motif hit.</p>
+</dd>
+<dt>short_name</dt><dd><p>The user-provided name for this motif. If you didn’t provide one in the
+configuration for
+<a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a>, then it will be
+something like <code class="docutils literal notranslate"><span class="pre">pos_0</span></code> for the positive metacluster, pattern zero.</p>
+</dd>
+<dt>contrib_magnitude</dt><dd><p>The total contribution across this motif instance. A higher value means
+more motif contribution.</p>
+</dd>
+<dt>strand</dt><dd><p>A single character indicating if the motif was on the positive or negative
+strand.</p>
+</dd>
+<dt>metacluster_name</dt><dd><p>Straight from the modisco hdf5 file. It will be something like
+<code class="docutils literal notranslate"><span class="pre">pos_patterns</span></code>.</p>
+</dd>
+<dt>pattern_name</dt><dd><p>Also from the modisco hdf5. It will be something like <code class="docutils literal notranslate"><span class="pre">pattern_5</span></code>.</p>
+</dd>
+<dt>sequence</dt><dd><p>The DNA sequence of that motif instance.</p>
+</dd>
+<dt>index</dt><dd><p>Either the region index in the contribution hdf5 (from
+<a class="reference internal" href="motifScan.html#module-bpreveal.motifScan" title="bpreveal.motifScan"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifScan</span></code></a>), or the seqlet index in the
+modisco hdf5 (from
+<a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a>).</p>
+</dd>
+<dt>seq_match</dt><dd><p>The information content of the sequence
+match to the motif’s pwm.</p>
+</dd>
+<dt>contrib_match</dt><dd><p>The continuous Jaccard similarity
+between the motif’s cwm and the contribution scores of this seqlet.</p>
+</dd>
+<dt>seq-match-quantile</dt><dd><p>Given the PSSM score of each mapped hit to the original TF-MoDISco PSSM,
+calculate the quantile value of this score, given the distribution of
+seqlets corresponding to the TF-MoDISco pattern.</p>
+</dd>
+<dt>contrib-match-quantile</dt><dd><p>Given the CWM score (i.e. Jaccardian-similarity) of each mapped hit’s
+contribution to the original TF-MoDISco CWM, calculate the quantile value
+of this score, given the distribution of seqlets corresponding to the
+TF-MoDISco pattern.</p>
+</dd>
+<dt>contrib-magnitude-quantile</dt><dd><p>Given the total L1 magnitude of contribution across a mapped hit, calculate
+the quantile value of this magnitude, given the distribution of seqlets
+corresponding to theTF-MoDISco pattern.</p>
+</dd>
+</dl>
+<p>If a contribution hdf5 file was not provided to
+<a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a>, the chrom, start,
+and end columns are meaningless.</p>
+<section id="additional-information">
+<h3>Additional Information<a class="headerlink" href="#additional-information" title="Link to this heading"></a></h3>
+<section id="converting-to-bed">
+<h4>Converting to bed<a class="headerlink" href="#converting-to-bed" title="Link to this heading"></a></h4>
+<p>The first six columns define a bed
+file, and a simple <code class="docutils literal notranslate"><span class="pre">cut</span></code> command can generate a viewable bed file from these
+tsvs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">scan</span><span class="o">.</span><span class="n">tsv</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">f</span> <span class="mi">1</span><span class="o">-</span><span class="mi">6</span> <span class="o">|</span> <span class="n">tail</span> <span class="o">-</span><span class="n">n</span> <span class="o">+</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="n">scan</span><span class="o">.</span><span class="n">bed</span>
+</pre></div>
+</div>
+</section>
+<section id="removing-duplicates">
+<h4>Removing duplicates<a class="headerlink" href="#removing-duplicates" title="Link to this heading"></a></h4>
+<p>The hits from scanning can contain duplicates. This can happen if the
+same bases appear in multiple regions (i.e., there is overlap in the region
+set). In this case, it makes sense to only keep the best instance (highest
+importance magnitude) of that motif hit. This can be done with a little
+Unix-fu:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">scan</span><span class="o">.</span><span class="n">tsv</span> <span class="o">|</span> \
+    <span class="n">cut</span> <span class="o">-</span><span class="n">f</span> <span class="mi">1</span><span class="o">-</span><span class="mi">6</span> <span class="o">|</span> \
+    <span class="n">tail</span> <span class="o">-</span><span class="n">n</span> <span class="o">+</span><span class="mi">2</span> <span class="o">|</span> \
+    <span class="n">sort</span> <span class="o">-</span><span class="n">k1</span><span class="p">,</span><span class="mi">1</span> <span class="o">-</span><span class="n">k2</span><span class="p">,</span><span class="mi">2</span><span class="n">n</span> <span class="o">-</span><span class="n">k3</span><span class="p">,</span><span class="mi">3</span><span class="n">n</span> <span class="o">-</span><span class="n">k4</span><span class="p">,</span><span class="mi">4</span> <span class="o">-</span><span class="n">k5</span><span class="p">,</span><span class="mi">5</span><span class="n">nr</span> <span class="o">|</span> \
+    <span class="n">awk</span> <span class="s1">&#39;!_[$1,$2,$3,$4,$6]++&#39;</span> <span class="o">&gt;</span> <span class="n">scan</span><span class="o">.</span><span class="n">bed</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="api">
+<h3>API<a class="headerlink" href="#api" title="Link to this heading"></a></h3>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifAddQuantiles.recordToPatternID">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifAddQuantiles.</span></span><span class="sig-name descname"><span class="pre">recordToPatternID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifAddQuantiles.recordToPatternID" title="Link to this definition"></a></dt>
+<dd><p>Come up with an identifier that uniquely identifies a particular pattern.</p>
+<p>Since a single csv should only represent one modisco run, it’s safe to just
+mash the metacluster and pattern names together. We can’t use short-name because
+somebody could give the same name to different patterns.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifAddQuantiles.readTsv">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifAddQuantiles.</span></span><span class="sig-name descname"><span class="pre">readTsv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifAddQuantiles.readTsv" title="Link to this definition"></a></dt>
+<dd><p>Reads in a tsv file generated by the motif seqlet cutoff and scanning tools.</p>
+<p>Returns a three-tuple. The first contains the field names from the tsv file, in order.
+The second is a list of dicts, each dict corresponding to one field in the tsv.
+The dicts map field names (strings) to the contents of the corresponding column
+for that record.
+The third value returned is a list of the unique pattern identifiers among the
+records; these names are generated by recordToPatternID
+Each record in the returned list of records contains a field that was not present in
+the initial tsv, this field is called _TMPNAME. This field contains the combined
+pattern identifier.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifAddQuantiles.addFieldNameQuantileMetadata">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifAddQuantiles.</span></span><span class="sig-name descname"><span class="pre">addFieldNameQuantileMetadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">standardRecords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampleRecords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patternID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writeName</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifAddQuantiles.addFieldNameQuantileMetadata" title="Link to this definition"></a></dt>
+<dd><p>For one pattern name, add its quantile data for one quantile type.</p>
+<p>For each mapped hit, appends quantile values calculated from a seqlet
+distribution of the considered score. These scores usually will consist of
+seq-match, contribution-match or contribution-magnitude scores.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifAddQuantiles.addFieldQuantileData">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifAddQuantiles.</span></span><span class="sig-name descname"><span class="pre">addFieldQuantileData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">standardRecords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampleRecords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recordNames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writeName</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifAddQuantiles.addFieldQuantileData" title="Link to this definition"></a></dt>
+<dd><p>For one given field, populate the quantile data.</p>
+<p>For each pattern, appends quantile values calculated from a seqlet
+distribution of the considered score. These scores usually will consist of
+seq-match, contribution-match or contribution-magnitude scores.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifAddQuantiles.addAllMetadata">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifAddQuantiles.</span></span><span class="sig-name descname"><span class="pre">addAllMetadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">standardRecords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampleRecords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recordNames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readNames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writeNames</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifAddQuantiles.addAllMetadata" title="Link to this definition"></a></dt>
+<dd><p>Add all of the quantile metadata.</p>
+<p>For each mapped hit, appends ALL quantile values calculated from the seqlet
+distribution of the considered score. These scores usually will consist of
+seq-match, contribution-match and contribution-magnitude scores.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifAddQuantiles.writeTsv">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifAddQuantiles.</span></span><span class="sig-name descname"><span class="pre">writeTsv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">records</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldNames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifAddQuantiles.writeTsv" title="Link to this definition"></a></dt>
+<dd><p>Write a new set of mapped hits with the newly-appended quantile information.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifAddQuantiles.getParser">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifAddQuantiles.</span></span><span class="sig-name descname"><span class="pre">getParser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifAddQuantiles.getParser" title="Link to this definition"></a></dt>
+<dd><p>Return the parser for the CLI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ArgumentParser</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifAddQuantiles.main">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifAddQuantiles.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifAddQuantiles.main" title="Link to this definition"></a></dt>
+<dd><p>Add quantile information.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="metrics.html" class="btn btn-neutral float-left" title="metrics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="predictToBigwig.html" class="btn btn-neutral float-right" title="predictToBigwig" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

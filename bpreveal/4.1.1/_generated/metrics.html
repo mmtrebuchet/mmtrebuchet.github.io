@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>metrics &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="motifAddQuantiles" href="motifAddQuantiles.html" />
+    <link rel="prev" title="makeLossPlots" href="makeLossPlots.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="minorcli.html">Utility CLI</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkJson.html">checkJson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lengthCalc.html">lengthCalc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makeLossPlots.html">makeLossPlots</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#help-info">Help Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#named-arguments">Named Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#output-specification">Output specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.metrics.Region"><code class="docutils literal notranslate"><span class="pre">Region</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.metrics.MetricsCalculator"><code class="docutils literal notranslate"><span class="pre">MetricsCalculator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.metrics.calculatorThread"><code class="docutils literal notranslate"><span class="pre">calculatorThread()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.metrics.regionGenThread"><code class="docutils literal notranslate"><span class="pre">regionGenThread()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.metrics.percentileStats"><code class="docutils literal notranslate"><span class="pre">percentileStats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.metrics.receiveThread"><code class="docutils literal notranslate"><span class="pre">receiveThread()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.metrics.runMetrics"><code class="docutils literal notranslate"><span class="pre">runMetrics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.metrics.getParser"><code class="docutils literal notranslate"><span class="pre">getParser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.metrics.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="motifAddQuantiles.html">motifAddQuantiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predictToBigwig.html">predictToBigwig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapToBigwig.html">shapToBigwig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapToNumpy.html">shapToNumpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="showModel.html">showModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="showTrainingProgress.html">showTrainingProgress</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="minorcli.html">Utility CLI</a></li>
+      <li class="breadcrumb-item active">metrics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/metrics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="metrics">
+<h1>metrics<a class="headerlink" href="#metrics" title="Link to this heading"></a></h1>
+<section id="help-info">
+<h2>Help Info<a class="headerlink" href="#help-info" title="Link to this heading"></a></h2>
+<p><p>Take two bigwig-format files and calculate an assortment of metrics on their contents.</p>
+</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>usage: metrics [-h] --reference REFERENCE --predicted
+               PREDICTED --regions REGIONS [--verbose]
+               [--threads THREADS] [--skip-zeroes]
+               [--json-output] [--apply-abs]
+</pre></div>
+</div>
+<section id="named-arguments">
+<h3>Named Arguments<a class="headerlink" href="#named-arguments" title="Link to this heading"></a></h3>
+<dl class="option-list">
+<dt><kbd>--reference</kbd></dt>
+<dd><p>The name of the reference (i.e., experimental) bigwig.</p>
+</dd>
+<dt><kbd>--predicted</kbd></dt>
+<dd><p>The name of the bigwig file generated by a model.</p>
+</dd>
+<dt><kbd>--regions</kbd></dt>
+<dd><p>The name of a bed file containing the regions to use to calculate the metrics.</p>
+</dd>
+<dt><kbd>--verbose</kbd></dt>
+<dd><p>Display progress as the file is being written. Cannot be used with –json-output.</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--threads</kbd></dt>
+<dd><p>Number of parallel threads to use. Default 1.</p>
+<p>Default: 1</p>
+</dd>
+<dt><kbd>--skip-zeroes</kbd></dt>
+<dd><p>When a region has zero counts, the default behavior is to poison the resultswith NaN, to indicate that a problem has occurred. If this flag is set,then regions with zero counts in either bigwig will be silently skipped.</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--json-output</kbd></dt>
+<dd><p>Instead of producing a human-readable output, generate a machine-readable json file. Cannot be used with –verbose.</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--apply-abs</kbd></dt>
+<dd><p>Use the absolute value of the entries in the bigwig. Useful if one bigwig contains negative values.</p>
+<p>Default: False</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p id="module-bpreveal.metrics">Calculates useful metrics of model performance.</p>
+<p>This little helper program reads in two bigwig files and a bed of regions. For
+each of the regions, it calculates several metrics, and then displays the
+quintiles of the values of those metrics over the regions. For each region,
+four metrics are calculated based on the profiles: <code class="docutils literal notranslate"><span class="pre">mnll</span></code>, <code class="docutils literal notranslate"><span class="pre">jsd</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pearsonr</span></code>, and <code class="docutils literal notranslate"><span class="pre">spearmanr</span></code>. Then, the program displays the quintiles of
+the observed metrics values. The 50th percentile indicates the median value,
+and is likely to be the most useful for typical work.</p>
+<p>Additionally, this tool calculates the total counts over each region and
+calculates, for all regions in the reference against all regions in the
+prediction, the Pearson and Spearman correlation of the counts values.</p>
+<p>This program uses command-line arguments rather than a configuration json,
+since it doesn’t do very much. The arguments are given by running
+<code class="docutils literal notranslate"><span class="pre">metrics</span> <span class="pre">--help</span></code>.</p>
+<p>The metrics are:</p>
+<dl class="simple">
+<dt>mnll</dt><dd><p>The multinomial log-likelihood of seeing the observed data
+given the predicted probability distribution.
+This is the profile loss function.</p>
+</dd>
+<dt>jsd</dt><dd><p>The Jensen-Shannon distance.
+This technique comes from information theory, and determines how
+similar two probability distributions are.
+This is a <em>distance</em> metric, so lower values indicate a better
+match.</p>
+</dd>
+<dt>pearsonr</dt><dd><p>The Pearson correlation coefficient of the profiles.</p>
+</dd>
+<dt>spearmanr</dt><dd><p>The Spearman correlation coefficient of the profiles.</p>
+</dd>
+<dt>Counts pearson</dt><dd><p>The Pearson correlation coefficient of total counts
+in every region.</p>
+</dd>
+<dt>Counts spearman</dt><dd><p>The Spearman correlation coefficient of the total
+counts in every region.</p>
+</dd>
+</dl>
+<section id="output-specification">
+<h3>Output specification<a class="headerlink" href="#output-specification" title="Link to this heading"></a></h3>
+<section id="normal">
+<h4>Normal<a class="headerlink" href="#normal" title="Link to this heading"></a></h4>
+<p>If you don’t specify <code class="docutils literal notranslate"><span class="pre">--json-output</span></code>, then you get a table of metrics. The
+first row gives the percentile cutoffs for the various metrics. The following
+rows give the value of each metric at each percentile value. For example, if
+the 75% column for jsd is 0.72, that means that 75% of your regions have a jsd
+value under 0.72.</p>
+<p>The two last rows give the statistics for the counts performance. Since counts
+metrics are not evaluated region-by-region, there are no quantile statistics
+for them.</p>
+</section>
+<section id="json">
+<h4>json<a class="headerlink" href="#json" title="Link to this heading"></a></h4>
+<p>If you request a JSON output with <code class="docutils literal notranslate"><span class="pre">--json-output</span></code>, then you will get
+a json with the following format:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;metrics-json&gt; ::= {
+    &quot;reference&quot; : &lt;string&gt;,
+    &quot;predicted&quot; : &lt;string&gt;,
+    &quot;regions&quot; : &lt;string&gt;,
+    &quot;mnll&quot; : &lt;metrics-quantile-section&gt;,
+    &quot;jsd&quot; : &lt;metrics-quantile-section&gt;,
+    &quot;pearsonr&quot; : &lt;metrics-quantile-section&gt;,
+    &quot;spearmanr&quot; : &lt;metrics-quantile-section&gt;,
+    &quot;counts-pearson&quot; : &lt;number&gt;,
+    &quot;counts-spearman&quot; : &lt;number&gt;
+    }
+
+&lt;metrics-quantile-section&gt; ::= {
+    &quot;quantile-cutoffs&quot; : [&lt;list-of-numbers&gt;],
+    &quot;quantiles&quot; : [&lt;list-of-numbers&gt;]
+    }
+</pre></div>
+</div>
+</section>
+<section id="output-notes">
+<h4>Output notes<a class="headerlink" href="#output-notes" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>quantile-cutoffs</dt><dd><p>A list of the quantile thresholds used for the metrics. These will be
+<code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">0.25,</span> <span class="pre">0.5,</span> <span class="pre">0.75,</span> <span class="pre">1.0]</span></code></p>
+</dd>
+<dt>quantiles</dt><dd><p>A list of numbers giving the value of the given metric at the given
+quantile. For example, the quantiles[1] will give the 25th percentile of
+the value of that metric.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="api">
+<h3>API<a class="headerlink" href="#api" title="Link to this heading"></a></h3>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.metrics.Region">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.metrics.</span></span><span class="sig-name descname"><span class="pre">Region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.Region" title="Link to this definition"></a></dt>
+<dd><p>A simple container from a line from a bed file.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.metrics.MetricsCalculator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.metrics.</span></span><span class="sig-name descname"><span class="pre">MetricsCalculator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">referenceBwFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictedBwFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">applyAbs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inQueue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outQueue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.MetricsCalculator" title="Link to this definition"></a></dt>
+<dd><p>Calculates metrics as it receives queries from inQueue, puts results in outQueue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>referenceBwFname</strong> – The file name of the reference bigwig.</p></li>
+<li><p><strong>predictedBwFname</strong> – The file name of the predicted bigwig.</p></li>
+<li><p><strong>applyAbs</strong> – Should the values in the bigwig be made positive?</p></li>
+<li><p><strong>inQueue</strong> – The queue that will provide queries.</p></li>
+<li><p><strong>outQueue</strong> – The queue where results will be put.</p></li>
+<li><p><strong>tid</strong> – The thread ID of this process.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.metrics.MetricsCalculator.runRegions">
+<span class="sig-name descname"><span class="pre">runRegions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regionReference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regionPredicted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regionID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.MetricsCalculator.runRegions" title="Link to this definition"></a></dt>
+<dd><p>Run the calculation on a single region.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regionReference</strong> (<a class="reference internal" href="#bpreveal.metrics.Region" title="bpreveal.metrics.Region"><em>Region</em></a>) – A region in the reference bigwig.</p></li>
+<li><p><strong>regionPredicted</strong> (<a class="reference internal" href="#bpreveal.metrics.Region" title="bpreveal.metrics.Region"><em>Region</em></a>) – A region in the predicted bigwig.</p></li>
+<li><p><strong>regionID</strong> (<em>Any</em>) – A tag passed into the output queue.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Given a region, loads up profiles from the reference and predicted bigwigs
+and calculates the various metrics. Puts its results into the output queue.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.metrics.MetricsCalculator.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.MetricsCalculator.run" title="Link to this definition"></a></dt>
+<dd><p>Watch the input queue and run queries until you get the stop signal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.metrics.MetricsCalculator.finish">
+<span class="sig-name descname"><span class="pre">finish</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.MetricsCalculator.finish" title="Link to this definition"></a></dt>
+<dd><p>Wrap up shop, close the bigwigs.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.metrics.calculatorThread">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.metrics.</span></span><span class="sig-name descname"><span class="pre">calculatorThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">referenceBwFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictedBwFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">applyAbs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inQueue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outQueue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.calculatorThread" title="Link to this definition"></a></dt>
+<dd><p>Just spawns a MetricsCalculator and runs it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>referenceBwFname</strong> (<em>str</em>) – The file name of the reference bigwig.</p></li>
+<li><p><strong>predictedBwFname</strong> (<em>str</em>) – The file name of the predicted bigwig.</p></li>
+<li><p><strong>applyAbs</strong> (<em>bool</em>) – Should the values in the bigwig be made positive?</p></li>
+<li><p><strong>inQueue</strong> (<em>Queue</em>) – The queue that will provide queries.</p></li>
+<li><p><strong>outQueue</strong> (<em>Queue</em>) – The queue where results will be put.</p></li>
+<li><p><strong>tid</strong> (<em>int</em>) – The thread ID of this process.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.metrics.regionGenThread">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.metrics.</span></span><span class="sig-name descname"><span class="pre">regionGenThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regionsFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regionQueue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numThreads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numberQueue</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.regionGenThread" title="Link to this definition"></a></dt>
+<dd><p>A thread to generate regions and stuff them in the regionQueue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regionsFname</strong> (<em>str</em>) – The bed file to read in.</p></li>
+<li><p><strong>regionQueue</strong> (<em>Queue</em>) – The queue that the calculator threads will be getting
+their queries from.</p></li>
+<li><p><strong>numThreads</strong> (<em>int</em>) – How many calculator threads will be running?</p></li>
+<li><p><strong>numberQueue</strong> (<em>Queue</em>) – A queue that will hear the number of regions
+in the regions file.</p></li>
+</ul>
+</dd>
+</dl>
+<p>numberQueue is needed so that the parent thread can know how many results
+to expect. This thread counts the number of regions in regionsFname
+and then puts that number in numberQueue <em>before</em> it starts putting
+regions into regionQueue.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.metrics.percentileStats">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.metrics.</span></span><span class="sig-name descname"><span class="pre">percentileStats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsonDict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.percentileStats" title="Link to this definition"></a></dt>
+<dd><p>Given a vector of statistics, calculate percentile values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the statistic being calculated. Used for output.</p></li>
+<li><p><strong>vector</strong> (<em>ndarray</em>) – The data that you want processed.</p></li>
+<li><p><strong>jsonDict</strong> (<em>dict</em>) – A dict where you want quantile information stored.</p></li>
+<li><p><strong>header</strong> (<em>bool</em>) – Should a header be written? If so, prints a row with
+the quantile cutoff values.</p></li>
+<li><p><strong>write</strong> (<em>bool</em>) – Should the results be written at all? If not, they will
+still be added to the jsonDict.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Doesn’t return anything, but does put information in jsonDict.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.metrics.receiveThread">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.metrics.</span></span><span class="sig-name descname"><span class="pre">receiveThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numRegions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputQueue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipZeroes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsonOutput</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsonDict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.receiveThread" title="Link to this definition"></a></dt>
+<dd><p>Listen to the output from the calculator threads and process it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numRegions</strong> (<em>int</em>) – How many total regions will be calculated?
+This is calculated inside regionGenThread and passed back through
+numberQueue.</p></li>
+<li><p><strong>outputQueue</strong> (<em>Queue</em>) – The queue that the calculator threads are putting
+their results in.</p></li>
+<li><p><strong>skipZeroes</strong> (<em>bool</em>) – Should regions where the metrics are undefined be
+filtered out? If not, your results will be contaminated with NaN,
+but this can also be a good indication that something is wrong.</p></li>
+<li><p><strong>jsonOutput</strong> (<em>bool</em>) – Should a json file be written? If so, the normal
+tabular output will not be printed.</p></li>
+<li><p><strong>jsonDict</strong> (<em>dict</em>) – Any additional information you’d like included in
+your json file, like the names of the files that were processed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.metrics.runMetrics">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.metrics.</span></span><span class="sig-name descname"><span class="pre">runMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">applyAbs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipZeroes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsonOutput</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.runMetrics" title="Link to this definition"></a></dt>
+<dd><p>Run the calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference</strong> (<em>str</em>) – The name of the bigwig file with reference data.</p></li>
+<li><p><strong>predicted</strong> (<em>str</em>) – The name of the bigwig file with predictions.</p></li>
+<li><p><strong>regions</strong> (<em>str</em>) – The name of the bed file with regions to analyze.</p></li>
+<li><p><strong>threads</strong> (<em>int</em>) – How many parallel workers should be used?</p></li>
+<li><p><strong>applyAbs</strong> (<em>bool</em>) – Should all values in the bigwigs be made positive?</p></li>
+<li><p><strong>skipZeroes</strong> (<em>bool</em>) – If one of the metrics from one region is NaN,
+should it be ignored (skipZeros = True) or should all the results
+be contaminated with NaN (skipZeros = False)?</p></li>
+<li><p><strong>jsonOutput</strong> (<em>bool</em>) – Should json output be written instead of a table?</p></li>
+</ul>
+</dd>
+</dl>
+<p>Doesn’t return anything, but will print to stdout.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.metrics.getParser">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.metrics.</span></span><span class="sig-name descname"><span class="pre">getParser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.getParser" title="Link to this definition"></a></dt>
+<dd><p>Generate the argument parser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ArgumentParser</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.metrics.main">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.metrics.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.metrics.main" title="Link to this definition"></a></dt>
+<dd><p>Run the whole thing.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="makeLossPlots.html" class="btn btn-neutral float-left" title="makeLossPlots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="motifAddQuantiles.html" class="btn btn-neutral float-right" title="motifAddQuantiles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

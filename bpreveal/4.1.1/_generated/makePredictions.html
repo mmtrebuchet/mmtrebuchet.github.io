@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>makePredictions &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="motifScan" href="motifScan.html" />
+    <link rel="prev" title="interpretPisa" href="interpretPisa.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="majorcli.html">Main CLI</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="interpretFlat.html">interpretFlat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretPisa.html">interpretPisa</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">makePredictions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bnf">BNF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameter-notes">Parameter Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-specification">Output Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.makePredictions.getReader"><code class="docutils literal notranslate"><span class="pre">getReader()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.makePredictions.getWriter"><code class="docutils literal notranslate"><span class="pre">getWriter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.makePredictions.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schema">Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="motifScan.html">motifScan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifSeqletCutoffs.html">motifSeqletCutoffs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareBed.html">prepareBed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareTrainingData.html">prepareTrainingData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainCombinedModel.html">trainCombinedModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainSoloModel.html">trainSoloModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainTransformationModel.html">trainTransformationModel</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="majorcli.html">Main CLI</a></li>
+      <li class="breadcrumb-item active">makePredictions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/makePredictions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.makePredictions">
+<span id="makepredictions"></span><h1>makePredictions<a class="headerlink" href="#module-bpreveal.makePredictions" title="Link to this heading"></a></h1>
+<p>A script to make predictions using a BPReveal model.</p>
+<p>This program streams input from disk and writes output as it calculates, so
+it can run with very little memory even for extremely large prediction tasks.</p>
+<section id="bnf">
+<h2>BNF<a class="headerlink" href="#bnf" title="Link to this heading"></a></h2>
+<a name="prediction-input-configuration"></a><pre class="literal-block">&lt;<a class="reference internal" href="#prediction-input-configuration"><span class="std std-ref">prediction-input-configuration</span></a>&gt; ::=
+    { &lt;<a class="reference internal" href="#prediction-settings-section"><span class="std std-ref">prediction-settings-section</span></a>&gt;,
+      &lt;<a class="reference internal" href="#prediction-input-section"><span class="std std-ref">prediction-input-section</span></a>&gt;,
+      &lt;<a class="reference internal" href="#prediction-threads-section"><span class="std std-ref">prediction-threads-section</span></a>&gt;,
+      &lt;<a class="reference internal" href="bnf.html#verbosity-section"><span class="std std-ref">verbosity-section</span></a>&gt; }</pre>
+<a name="prediction-input-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#prediction-input-section"><span class="std std-ref">prediction-input-section</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#prediction-fasta-input-section"><span class="std std-ref">prediction-fasta-input-section</span></a>&gt;
+  | &lt;<a class="reference internal" href="#prediction-bed-input-section"><span class="std std-ref">prediction-bed-input-section</span></a>&gt;</pre>
+<a name="prediction-settings-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#prediction-settings-section"><span class="std std-ref">prediction-settings-section</span></a>&gt; ::=
+    &quot;settings&quot; : {
+        &quot;output-h5&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+        &quot;batch-size&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+        &quot;heads&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+        &quot;architecture&quot; : &lt;<a class="reference internal" href="#prediction-model-settings"><span class="std std-ref">prediction-model-settings</span></a>&gt; }</pre>
+<a name="prediction-model-settings"></a><pre class="literal-block">&lt;<a class="reference internal" href="#prediction-model-settings"><span class="std std-ref">prediction-model-settings</span></a>&gt; ::=
+    {&quot;model-file&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+     &quot;input-length&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;output-length&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt; }</pre>
+<a name="prediction-bed-input-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#prediction-bed-input-section"><span class="std std-ref">prediction-bed-input-section</span></a>&gt; ::=
+    &quot;genome&quot;: &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &quot;bed-file&quot;: &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;</pre>
+<a name="prediction-fasta-input-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#prediction-fasta-input-section"><span class="std std-ref">prediction-fasta-input-section</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#prediction-fasta-coordinates-section"><span class="std std-ref">prediction-fasta-coordinates-section</span></a>&gt;
+    &quot;fasta-file&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;</pre>
+<a name="prediction-fasta-coordinates-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#prediction-fasta-coordinates-section"><span class="std std-ref">prediction-fasta-coordinates-section</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="bnf.html#empty"><span class="std std-ref">empty</span></a>&gt;
+  | &quot;coordinates&quot; : {
+        &quot;bed-file&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+        &quot;genome&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;},</pre>
+<a name="prediction-threads-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#prediction-threads-section"><span class="std std-ref">prediction-threads-section</span></a>&gt; ::=
+    &quot;num-threads&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+  | &lt;<a class="reference internal" href="bnf.html#empty"><span class="std std-ref">empty</span></a>&gt;</pre>
+</section>
+<section id="parameter-notes">
+<h2>Parameter Notes<a class="headerlink" href="#parameter-notes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>heads</dt><dd><p>Gives the number of output heads for your model.
+You don’t need to tell this program how many tasks there are for each
+head, since it just blindly sticks whatever the model outputs into the
+hdf5 file.</p>
+</dd>
+<dt>output-h5</dt><dd><p>The name of the output file that will contain the predictions.</p>
+</dd>
+<dt>batch-size</dt><dd><p>How many samples should be run simultaneously? I recommend 64 or so.</p>
+</dd>
+<dt>model-file</dt><dd><p>The name of the Keras model file on disk.</p>
+</dd>
+<dt>input-length, output-length</dt><dd><p>The input and output lengths of your model.</p>
+</dd>
+<dt>fasta-file</dt><dd><p>A file containing the sequences for which you’d like predictions. Each sequence in
+this bed file must be <code class="docutils literal notranslate"><span class="pre">input-length</span></code> long. If you specify <code class="docutils literal notranslate"><span class="pre">fasta-file</span></code>,
+you cannot also specify <code class="docutils literal notranslate"><span class="pre">bed-file</span></code> and <code class="docutils literal notranslate"><span class="pre">genome</span></code>
+(except, optionally, in the <code class="docutils literal notranslate"><span class="pre">coordinates</span></code> section.)</p>
+</dd>
+<dt>bed-file, genome</dt><dd><p>If you do not give <code class="docutils literal notranslate"><span class="pre">fasta-file</span></code>, you can instead give a
+<code class="docutils literal notranslate"><span class="pre">bed-file</span></code> and <code class="docutils literal notranslate"><span class="pre">genome</span></code> fasta. Each region in the bed file should be
+<code class="docutils literal notranslate"><span class="pre">output-length</span></code> long, and the program will automatically inflate the regions
+to the <code class="docutils literal notranslate"><span class="pre">input-length</span></code> of your model.</p>
+</dd>
+<dt>num-threads</dt><dd><p>(Optional) How many parallel predictors should be run? Unless you’re really taxed
+for performance, leave this at 1.</p>
+</dd>
+<dt>coordinates</dt><dd><p>(Optional, only valid with <code class="docutils literal notranslate"><span class="pre">fasta-file</span></code>.)
+The <code class="docutils literal notranslate"><span class="pre">bed-file</span></code> and <code class="docutils literal notranslate"><span class="pre">genome</span></code> entries may be specified to add coordinate information
+when you predict from <code class="docutils literal notranslate"><span class="pre">fasta-file</span></code>. If provided, then the output hdf5 will contain
+<code class="docutils literal notranslate"><span class="pre">chrom_names</span></code>, <code class="docutils literal notranslate"><span class="pre">chrom_sizes</span></code>, <code class="docutils literal notranslate"><span class="pre">coords_chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">coords_start</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">coords_end</span></code> datasets, in addition to the descriptions dataset.
+Only the <em>coordinate</em> information is taken from the bed file, and only chromosome
+size information is loaded from the genome file.
+The actual sequences to predict will be drawn from <code class="docutils literal notranslate"><span class="pre">fasta-file</span></code>.
+This way, you can make predictions from a fasta but then easily convert it to a
+bigwig.</p>
+</dd>
+</dl>
+</section>
+<section id="output-specification">
+<h2>Output Specification<a class="headerlink" href="#output-specification" title="Link to this heading"></a></h2>
+<p>This program will produce an hdf5-format file containing the predicted values.
+It is organized as follows:</p>
+<dl>
+<dt>descriptions</dt><dd><p>A list of strings of length (numRegions,).
+If you give a fasta file, these will correspond to
+the description lines (i.e., the lines starting with <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>).
+If you gave a bed file as input, each one will be an empty string.</p>
+</dd>
+<dt>head_0, head_1, head_2, …</dt><dd><p>You get a subgroup for each output head of the model. The subgroups are named
+<code class="docutils literal notranslate"><span class="pre">head_N</span></code>, where N is 0, 1, 2, etc.
+Each head contains:</p>
+<dl class="simple">
+<dt>logcounts</dt><dd><p>A vector of shape (numRegions,) that gives
+the logcounts value for each region.</p>
+</dd>
+<dt>logits</dt><dd><p>The array of logit values for each track for
+each region.
+The shape is (numRegions x outputWidth x numTasks).
+Don’t forget that you must calculate the softmax on the whole
+set of logits, not on each task’s logits independently.
+(Use <a class="reference internal" href="utils.html#bpreveal.utils.logitsToProfile" title="bpreveal.utils.logitsToProfile"><code class="xref py py-func docutils literal notranslate"><span class="pre">bpreveal.utils.logitsToProfile()</span></code></a> to do this.)</p>
+</dd>
+</dl>
+</dd>
+<dt>chrom_names</dt><dd><p>A list of strings that give you the meaning
+of each index in the <code class="docutils literal notranslate"><span class="pre">coords_chrom</span></code> dataset.
+This is particularly handy when you want to make a bigwig file, since
+you can extract a header from this data.
+Only populated if a bed file and genome were provided.</p>
+</dd>
+<dt>chrom_sizes</dt><dd><p>The size of each chromosome in the same order
+as <code class="docutils literal notranslate"><span class="pre">chrom_names</span></code>.
+Mostly used to create bigwig headers.
+Only populated if a bed file and genome were provided.</p>
+</dd>
+<dt>coords_chrom</dt><dd><p>A list of integers, one for each region
+predicted, that gives the chromosome index (see <code class="docutils literal notranslate"><span class="pre">chrom_names</span></code>)
+for that region.
+Only populated if a bed file and genome were provided.</p>
+</dd>
+<dt>coords_start</dt><dd><p>The start base of each predicted region.
+Only populated if a bed file and genome were provided.</p>
+</dd>
+<dt>coords_stop</dt><dd><p>The end point of each predicted region.
+Only populated if a bed file and genome were provided.</p>
+</dd>
+</dl>
+</section>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.makePredictions.getReader">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.makePredictions.</span></span><span class="sig-name descname"><span class="pre">getReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.makePredictions.getReader" title="Link to this definition"></a></dt>
+<dd><p>Loads the reader appropriate for the configuration.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.makePredictions.getWriter">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.makePredictions.</span></span><span class="sig-name descname"><span class="pre">getWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numPredictions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.makePredictions.getWriter" title="Link to this definition"></a></dt>
+<dd><p>Creates a writer appropriate for the configuration.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.makePredictions.main">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.makePredictions.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.makePredictions.main" title="Link to this definition"></a></dt>
+<dd><p>Run the predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) – is taken straight from the json specification.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Link to this heading"></a></h2>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;makePredictions&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for makePredictions.py&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;output-h5&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;batch-size&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;genome&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;heads&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;architecture&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;input-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;output-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;model-file&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;input-length&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;output-length&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;model-file&quot;</span><span class="p">]</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;output-h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;batch-size&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;heads&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;architecture&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;fasta-file&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;bed-file&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;num-threads&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;minimum&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;coordinates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;bed-file&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;genome&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bed-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;genome&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;verbosity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/verbosity&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;settings&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;verbosity&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fasta-file&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bed-file&quot;</span><span class="p">]}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bed-file&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;genome&quot;</span><span class="p">]}}},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;genome&quot;</span><span class="p">]}],</span>
+<span class="w">            </span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fasta-file&quot;</span><span class="p">]},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;coordinates&quot;</span><span class="p">]}]}</span>
+<span class="w">        </span><span class="p">}]</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="interpretPisa.html" class="btn btn-neutral float-left" title="interpretPisa" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="motifScan.html" class="btn btn-neutral float-right" title="motifScan" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

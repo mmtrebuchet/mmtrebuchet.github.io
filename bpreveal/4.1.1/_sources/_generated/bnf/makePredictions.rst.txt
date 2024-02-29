@@ -1,0 +1,120 @@
+.. raw:: html
+
+    <a name="prediction-input-configuration"></a>
+
+.. _prediction-input-configuration:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prediction-input-configuration<prediction-input-configuration>`> ::=
+        { <:ref:`prediction-settings-section<prediction-settings-section>`>,
+          <:ref:`prediction-input-section<prediction-input-section>`>,
+          <:ref:`prediction-threads-section<prediction-threads-section>`>,
+          <:ref:`verbosity-section<verbosity-section>`> }
+    
+.. raw:: html
+
+    <a name="prediction-input-section"></a>
+
+.. _prediction-input-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prediction-input-section<prediction-input-section>`> ::=
+        <:ref:`prediction-fasta-input-section<prediction-fasta-input-section>`>
+      | <:ref:`prediction-bed-input-section<prediction-bed-input-section>`>
+    
+.. raw:: html
+
+    <a name="prediction-settings-section"></a>
+
+.. _prediction-settings-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prediction-settings-section<prediction-settings-section>`> ::=
+        "settings" : {
+            "output-h5" : <:ref:`file-name<file-name>`>,
+            "batch-size" : <:ref:`integer<integer>`>,
+            "heads" : <:ref:`integer<integer>`>,
+            "architecture" : <:ref:`prediction-model-settings<prediction-model-settings>`> }
+    
+.. raw:: html
+
+    <a name="prediction-model-settings"></a>
+
+.. _prediction-model-settings:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prediction-model-settings<prediction-model-settings>`> ::=
+        {"model-file" : <:ref:`file-name<file-name>`>,
+         "input-length" : <:ref:`integer<integer>`>,
+         "output-length" : <:ref:`integer<integer>`> }
+    
+.. raw:: html
+
+    <a name="prediction-bed-input-section"></a>
+
+.. _prediction-bed-input-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prediction-bed-input-section<prediction-bed-input-section>`> ::=
+        "genome": <:ref:`file-name<file-name>`>,
+        "bed-file": <:ref:`file-name<file-name>`>
+    
+.. raw:: html
+
+    <a name="prediction-fasta-input-section"></a>
+
+.. _prediction-fasta-input-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prediction-fasta-input-section<prediction-fasta-input-section>`> ::=
+        <:ref:`prediction-fasta-coordinates-section<prediction-fasta-coordinates-section>`>
+        "fasta-file" : <:ref:`file-name<file-name>`>
+    
+.. raw:: html
+
+    <a name="prediction-fasta-coordinates-section"></a>
+
+.. _prediction-fasta-coordinates-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prediction-fasta-coordinates-section<prediction-fasta-coordinates-section>`> ::=
+        <:ref:`empty<empty>`>
+      | "coordinates" : {
+            "bed-file" : <:ref:`file-name<file-name>`>,
+            "genome" : <:ref:`file-name<file-name>`>},
+    
+.. raw:: html
+
+    <a name="prediction-threads-section"></a>
+
+.. _prediction-threads-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prediction-threads-section<prediction-threads-section>`> ::=
+        "num-threads" : <:ref:`integer<integer>`>,
+      | <:ref:`empty<empty>`>
+    

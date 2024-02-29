@@ -1,0 +1,31 @@
+.. raw:: html
+
+    <a name="motif-scan-config"></a>
+
+.. _motif-scan-config:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`motif-scan-config<motif-scan-config>`> ::=
+        {<:ref:`scan-quantile-settings<scan-quantile-settings>`>
+         "scan-settings" : {
+             "scan-contrib-h5" : <:ref:`string<string>`>,
+             "hits-tsv" : <:ref:`string<string>`>,
+             "num-threads" : <:ref:`integer<integer>`>}
+         <:ref:`verbosity-section<verbosity-section>`>}
+    
+.. raw:: html
+
+    <a name="scan-quantile-settings"></a>
+
+.. _scan-quantile-settings:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`scan-quantile-settings<scan-quantile-settings>`> ::=
+        "seqlet-cutoff-json" : <:ref:`string<string>`>,
+      | "seqlet-cutoff-settings" : <:ref:`seqlet-scanning-settings<seqlet-scanning-settings>`>,

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>interpretPisa &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="makePredictions" href="makePredictions.html" />
+    <link rel="prev" title="interpretFlat" href="interpretFlat.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="majorcli.html">Main CLI</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="interpretFlat.html">interpretFlat</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">interpretPisa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bnf">BNF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameter-notes">Parameter Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-specification">Output Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#history">HISTORY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretPisa.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schema">Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="makePredictions.html">makePredictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifScan.html">motifScan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifSeqletCutoffs.html">motifSeqletCutoffs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareBed.html">prepareBed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareTrainingData.html">prepareTrainingData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainCombinedModel.html">trainCombinedModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainSoloModel.html">trainSoloModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainTransformationModel.html">trainTransformationModel</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="majorcli.html">Main CLI</a></li>
+      <li class="breadcrumb-item active">interpretPisa</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/interpretPisa.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.interpretPisa">
+<span id="interpretpisa"></span><h1>interpretPisa<a class="headerlink" href="#module-bpreveal.interpretPisa" title="Link to this heading"></a></h1>
+<p>A script to generate PISA scores.</p>
+<p>PISA is described <a class="reference internal" href="pisa.html"><span class="doc">here</span></a></p>
+<section id="bnf">
+<h2>BNF<a class="headerlink" href="#bnf" title="Link to this heading"></a></h2>
+<a name="pisa-fasta-configuration"></a><pre class="literal-block">&lt;<a class="reference internal" href="#pisa-fasta-configuration"><span class="std std-ref">pisa-fasta-configuration</span></a>&gt; ::=
+    {&quot;model-file&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+     &lt;<a class="reference internal" href="#bed-or-fasta"><span class="std std-ref">bed-or-fasta</span></a>&gt;,
+     &quot;num-shuffles&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;head-id&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;task-id&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;output-h5&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+     &quot;output-length&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;input-length&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &lt;<a class="reference internal" href="#kmer-size-section"><span class="std std-ref">kmer-size-section</span></a>&gt;
+     &lt;<a class="reference internal" href="prepareBed.html#num-threads-section"><span class="std std-ref">num-threads-section</span></a>&gt;
+     &lt;<a class="reference internal" href="bnf.html#verbosity-section"><span class="std std-ref">verbosity-section</span></a>&gt;}</pre>
+<a name="bed-or-fasta"></a><pre class="literal-block">&lt;<a class="reference internal" href="#bed-or-fasta"><span class="std std-ref">bed-or-fasta</span></a>&gt; ::=
+    &quot;genome&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &quot;bed-file&quot;: &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;
+  | &quot;fasta-file&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;
+  | &quot;sequence-fasta&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt; (DEPRECATED)</pre>
+<a name="kmer-size-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#kmer-size-section"><span class="std std-ref">kmer-size-section</span></a>&gt; ::=
+    &quot;kmer-size&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+  | &lt;<a class="reference internal" href="bnf.html#empty"><span class="std std-ref">empty</span></a>&gt;</pre>
+</section>
+<section id="parameter-notes">
+<h2>Parameter Notes<a class="headerlink" href="#parameter-notes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>model-file</dt><dd><p>The name of the saved Keras model to interpret.</p>
+</dd>
+<dt>head-id</dt><dd><p>The head number that you’d like to interpret.</p>
+</dd>
+<dt>task-id</dt><dd><p>The task within that head that you’d like to interpret. Note that while
+interpretFlat can combine multiple tasks, PISA can only consider one task
+at a time.</p>
+</dd>
+<dt>output-h5</dt><dd><p>The name of the hdf5 file where you’d like the output saved.</p>
+</dd>
+<dt>output-length, input-length</dt><dd><p>The output and input length of your model.</p>
+</dd>
+<dt>genome, bed-file</dt><dd><p>If you provide a bed file, this file represents the <em>individual bases</em> that
+should be shapped. There is no restriction on the number of regions, nor on
+their length. If you are interested in the effects of a particular motif,
+then you’d put the region surrounding that motif in the bed file, making it
+as large as you want to see the interactions you’re interested in.</p>
+</dd>
+<dt>fasta-file</dt><dd><p>You can also supply the sequences directly with a fasta file. Since PISA
+calculates shap scores for a single base, this tool always calculates the
+pisa scores for the <em>leftmost</em> base in the output window. Suppose the input
+length is 3090 bp, and the output is 1000 bp. In this case, the receptive
+field is 2091 bp, and there are 1045 bp of overhang on each end of the
+input sequence. So, for each input sequence, this program will assign shap
+scores to the 1046th base (one-indexed) of the input sequence.</p>
+</dd>
+<dt>num-shuffles</dt><dd><p>This is the number of background samples that should be used for
+calculating shap values. I recommend 20.</p>
+</dd>
+<dt>kmer-size</dt><dd><p>(Optional) If provided, this changes how the shuffles work. By default (or
+if you specify <code class="docutils literal notranslate"><span class="pre">kmer-size</span> <span class="pre">=</span> <span class="pre">1</span></code>) all of the bases in the input are jumbled
+randomly. However, if you specify <code class="docutils literal notranslate"><span class="pre">kmer-size=2</span></code>, then the distribution of
+dimers will be preserved in the shuffled sequences. If you specify
+<code class="docutils literal notranslate"><span class="pre">kmer-size=3</span></code>, then trimers will be preserved, and so on.</p>
+</dd>
+<dt>num-threads</dt><dd><p>(Optional) If provided, use multiple batcher threads in parallel, on the same
+GPU. Shap is relatively inefficient on the GPU, and by using two or three threads,
+you can get better throughput. If you run into memory issues, use one thread.</p>
+</dd>
+</dl>
+</section>
+<section id="output-specification">
+<h2>Output Specification<a class="headerlink" href="#output-specification" title="Link to this heading"></a></h2>
+<p>It produces an hdf5 format which is organized as follows:</p>
+<dl class="simple">
+<dt>head-id</dt><dd><p>An integer representing which head of the model was
+used to generate the data.</p>
+</dd>
+<dt>task-id</dt><dd><p>An integer giving the task number within the specified head.</p>
+</dd>
+<dt>input_predictions</dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">(numSamples,)</span></code> array of the logit value
+of the target base when that sequence is run through the network.</p>
+</dd>
+<dt>shuffle_predictions</dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">(numSamples,</span> <span class="pre">numShuffles)</span></code> array of
+the logits of the target base in the shuffled reference sequences.</p>
+</dd>
+<dt>sequence</dt><dd><p>A one-hot encoded array representing the sequence
+under each PISA value.
+The shape is <code class="docutils literal notranslate"><span class="pre">(num</span> <span class="pre">regions</span> <span class="pre">*</span> <span class="pre">receptive-field</span> <span class="pre">*</span> <span class="pre">4)</span></code>.
+Note that this is receptive field, not input length, since each base
+being shapped will only be affected by bases in its receptive field,
+and there’s no reason to store the noise.</p>
+</dd>
+<dt>shap</dt><dd><p>A table of the shap scores.
+The shape is the same as the sequence table, and each position in the
+shap table represents the corresponding base in the sequence table.
+These values are contribution scores to the difference-from-reference
+of the logit at this base.</p>
+</dd>
+</dl>
+<p>If you specified a bed file with input regions, it will also have these datasets:</p>
+<dl class="simple">
+<dt>chrom_names</dt><dd><p>A list of strings giving the name of each chromosome. This is used to
+figure out which chromosome each number in <cite>coords_chrom</cite> corresponds to.</p>
+</dd>
+<dt>chrom_sizes</dt><dd><p>A list of integers giving the size of each chromosome. This is mostly here
+as a handy reference when you want to make a bigwig file.</p>
+</dd>
+<dt>coords_base</dt><dd><p>The center point for each of the regions in the table of PISA values.</p>
+</dd>
+<dt>coords_chrom</dt><dd><p>The chromosome on which each PISA vector is found. This is a list of
+integers. The width of the integer data type may vary from run to run, and
+is calculated based on the number of chromosomes in the genome file.</p>
+</dd>
+</dl>
+<p>If, however, you gave a fasta file of input sequences, it will instead have the
+following dataset:</p>
+<dl class="simple">
+<dt>descriptions</dt><dd><p>A string taken from the fasta file. These are the comment (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>) lines,
+and are stored without the leading <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>. This will have shape
+<code class="docutils literal notranslate"><span class="pre">(numSamples,)</span></code></p>
+</dd>
+</dl>
+</section>
+<section id="history">
+<h2>HISTORY<a class="headerlink" href="#history" title="Link to this heading"></a></h2>
+<p>Before BPReveal 4.0.0, this was two programs: <code class="docutils literal notranslate"><span class="pre">interpretPisaBed</span></code> and
+<code class="docutils literal notranslate"><span class="pre">interpretPisaFasta</span></code>. They shared almost all of the same code, so they were
+merged into interpretPisa. The old names are still present in the bin/
+directory, where they symlink to the same python file in src.
+In BPReveal 6.0.0, the old symlinks will be removed.</p>
+</section>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.interpretPisa.main">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.interpretPisa.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretPisa.main" title="Link to this definition"></a></dt>
+<dd><p>Run the calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) – A JSON object matching the interpretPisa specification.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Link to this heading"></a></h2>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;interpretPisa&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for interpretPisa.py&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;genome&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;bed-file&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;fasta-file&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;sequence-fasta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;input-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;output-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;head-id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;task-id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;output-h5&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;num-shuffles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;minimum&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;kmer-size&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;minimum&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;num-threads&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;minimum&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;verbosity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/verbosity&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;input-length&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;output-length&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;head-id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;task-id&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;output-h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;num-shuffles&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;verbosity&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;genome&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;bed-file&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fasta-file&quot;</span><span class="p">]},</span>
+<span class="w">                              </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sequence-fasta&quot;</span><span class="p">]}]}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fasta-file&quot;</span><span class="p">]},</span>
+<span class="w">                      </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sequence-fasta&quot;</span><span class="p">]}],</span>
+<span class="w">            </span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;genome&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;bed-file&quot;</span><span class="p">]}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="interpretFlat.html" class="btn btn-neutral float-left" title="interpretFlat" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="makePredictions.html" class="btn btn-neutral float-right" title="makePredictions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

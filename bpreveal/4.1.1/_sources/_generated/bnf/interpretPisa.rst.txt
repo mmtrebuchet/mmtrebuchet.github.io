@@ -1,0 +1,53 @@
+.. raw:: html
+
+    <a name="pisa-fasta-configuration"></a>
+
+.. _pisa-fasta-configuration:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`pisa-fasta-configuration<pisa-fasta-configuration>`> ::=
+        {"model-file" : <:ref:`file-name<file-name>`>,
+         <:ref:`bed-or-fasta<bed-or-fasta>`>,
+         "num-shuffles" : <:ref:`integer<integer>`>,
+         "head-id" : <:ref:`integer<integer>`>,
+         "task-id" : <:ref:`integer<integer>`>,
+         "output-h5" : <:ref:`file-name<file-name>`>,
+         "output-length" : <:ref:`integer<integer>`>,
+         "input-length" : <:ref:`integer<integer>`>,
+         <:ref:`kmer-size-section<kmer-size-section>`>
+         <:ref:`num-threads-section<num-threads-section>`>
+         <:ref:`verbosity-section<verbosity-section>`>}
+    
+.. raw:: html
+
+    <a name="bed-or-fasta"></a>
+
+.. _bed-or-fasta:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`bed-or-fasta<bed-or-fasta>`> ::=
+        "genome" : <:ref:`file-name<file-name>`>,
+        "bed-file": <:ref:`file-name<file-name>`>
+      | "fasta-file" : <:ref:`file-name<file-name>`>
+      | "sequence-fasta" : <:ref:`file-name<file-name>`> (DEPRECATED)
+    
+.. raw:: html
+
+    <a name="kmer-size-section"></a>
+
+.. _kmer-size-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`kmer-size-section<kmer-size-section>`> ::=
+        "kmer-size" : <:ref:`integer<integer>`>,
+      | <:ref:`empty<empty>`>
+    

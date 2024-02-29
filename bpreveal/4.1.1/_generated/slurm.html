@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tools.slurm &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.addNoiseUtils" href="addNoiseUtils.html" />
+    <link rel="prev" title="tools.plots" href="plots.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="toolsapi.html">Tools API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plots.html">tools.plots</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tools.slurm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.tools.slurm.configSlurm"><code class="docutils literal notranslate"><span class="pre">configSlurm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.tools.slurm.configSlurmLocal"><code class="docutils literal notranslate"><span class="pre">configSlurmLocal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.tools.slurm.jobsNonGpu"><code class="docutils literal notranslate"><span class="pre">jobsNonGpu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.tools.slurm.jobsLocal"><code class="docutils literal notranslate"><span class="pre">jobsLocal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.tools.slurm.jobsGpu"><code class="docutils literal notranslate"><span class="pre">jobsGpu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.tools.slurm.writeDependencyScript"><code class="docutils literal notranslate"><span class="pre">writeDependencyScript()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addNoiseUtils.html">tools.addNoiseUtils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="toolsapi.html">Tools API</a></li>
+      <li class="breadcrumb-item active">tools.slurm</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/slurm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.tools.slurm">
+<span id="tools-slurm"></span><h1>tools.slurm<a class="headerlink" href="#module-bpreveal.tools.slurm" title="Link to this heading"></a></h1>
+<p>Handy functions for dealing with slurm.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.tools.slurm.configSlurm">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.tools.slurm.</span></span><span class="sig-name descname"><span class="pre">configSlurm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shellRcFiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workingDirectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxJobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.tools.slurm.configSlurm" title="Link to this definition"></a></dt>
+<dd><p>Generate a configuration dictionary for running jobs with slurm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>maxJobs</strong> (<em>int</em>) – Maximum number of array jobs to run at once.</p></li>
+<li><p><strong>shellRcFiles</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>str</em>) – shellRcFiles is a list of strings, each one giving the
+name of a .shrc file in your home directory. These will be sourced, in
+order, inside the generated script. If shellRcFiles is just a string,
+it names one and only .shrc file that should be executed.</p></li>
+<li><p><strong>envName</strong> (<em>str</em>) – envName is a string, and it gives the name for the
+environment that should be loaded. if envName is “ml”, then instead of
+a conda command being used to load bpreveal, the module system on
+cerebro will be used instead. If you have not installed bpreveal
+yourself, you should use “ml” for envName.</p></li>
+<li><p><strong>workingDirectory</strong> (<em>str</em>) – The directory where your code is based. Slurm
+scripts will be placed in &lt;workingDirectory&gt;/slurm/&lt;jobName&gt;.slurm, and
+logs will be in &lt;workingDirectory&gt;/logs/&lt;jobName&gt;.&lt;id&gt;.log.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A configuration dictionary.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.tools.slurm.configSlurmLocal">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.tools.slurm.</span></span><span class="sig-name descname"><span class="pre">configSlurmLocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shellRcFiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workingDirectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.tools.slurm.configSlurmLocal" title="Link to this definition"></a></dt>
+<dd><p>Generate a configuration dictionary for running jobs with slurm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shellRcFiles</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>str</em>) – shellRcFiles is a list of strings, each one giving the
+name of a .shrc file in your home directory. These will be sourced, in
+order, inside the generated script. If shellRcFiles is just a string,
+it names one and only .shrc file that should be executed.</p></li>
+<li><p><strong>envName</strong> (<em>str</em>) – The name of the conda environment to activate.</p></li>
+<li><p><strong>workingDirectory</strong> (<em>str</em>) – The directory where your code is based.
+Shell scripts will be placed in &lt;workingDirectory&gt;/slurm/&lt;jobName&gt;.zsh,
+and logs will be in &lt;workingDirectory&gt;/logs/&lt;jobName&gt;.log.</p></li>
+<li><p><strong>cpus</strong> (<em>int</em>) – How many total CPUs are available on this machine?</p></li>
+<li><p><strong>memory</strong> (<em>int</em>) – How much memory (in GiB) is available for these jobs, in total?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A configuration dictionary.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.tools.slurm.jobsNonGpu">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.tools.slurm.</span></span><span class="sig-name descname"><span class="pre">jobsNonGpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jobName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ntasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extraHeader</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.tools.slurm.jobsNonGpu" title="Link to this definition"></a></dt>
+<dd><p>Run a job on a non-gpu node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extraHeader</strong> (<em>str</em>) – Any additional text to add to the job script.</p></li>
+<li><p><strong>config</strong> (<em>dict</em>) – The configuration dict generated by configSlurm.</p></li>
+<li><p><strong>tasks</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of strings, each giving the commands for one job.</p></li>
+<li><p><strong>jobName</strong> (<em>str</em>) – The name of the job for logging and the slurm file.</p></li>
+<li><p><strong>ntasks</strong> (<em>int</em>) – How many CPUs should be used?</p></li>
+<li><p><strong>mem</strong> (<em>int</em>) – How much memory (in GiB) should be allocated</p></li>
+<li><p><strong>time</strong> (<em>str</em>) – How long should the job run, in the format “hh:mm:ss”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string giving the name of the slurm job script that was generated.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.tools.slurm.jobsLocal">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.tools.slurm.</span></span><span class="sig-name descname"><span class="pre">jobsLocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jobName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ntasks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extraHeader</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.tools.slurm.jobsLocal" title="Link to this definition"></a></dt>
+<dd><p>Run a job on a non-gpu node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extraHeader</strong> – Any additional text to add to the job script.</p></li>
+<li><p><strong>config</strong> – The configuration dict generated by configSlurm.</p></li>
+<li><p><strong>tasks</strong> – A list of strings, each giving the commands for one job.</p></li>
+<li><p><strong>jobName</strong> – The name of the job for logging and the slurm file.</p></li>
+<li><p><strong>ntasks</strong> – If parallel is used, this is how many cores <em>each</em> job will use.</p></li>
+<li><p><strong>mem</strong> – If parallel is used, this is how much memory <em>each</em> job will use.</p></li>
+<li><p><strong>time</strong> – Ignored</p></li>
+<li><p><strong>extraHeader</strong> – A string that will be appended to the start of the job script.</p></li>
+<li><p><strong>parallel</strong> – Should jobs be run in parallel? Only possible if ntasks and mem
+are specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string giving the name of the slurm job script that was generated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.tools.slurm.jobsGpu">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.tools.slurm.</span></span><span class="sig-name descname"><span class="pre">jobsGpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jobName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ntasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extraHeader</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.tools.slurm.jobsGpu" title="Link to this definition"></a></dt>
+<dd><p>Run a job on a gpu node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extraHeader</strong> – Any additional text to add to the job script.</p></li>
+<li><p><strong>config</strong> – The configuration dict generated by configSlurm.</p></li>
+<li><p><strong>tasks</strong> – A list of strings, each giving the commands for one job.</p></li>
+<li><p><strong>jobName</strong> – The name of the job for logging and the slurm file.</p></li>
+<li><p><strong>ntasks</strong> – How many CPUs should be used?</p></li>
+<li><p><strong>mem</strong> – How much memory (in GiB) should be allocated</p></li>
+<li><p><strong>time</strong> – How long should the job run, in the format “hh:mm:ss”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string giving the name of the slurm job script that was generated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.tools.slurm.writeDependencyScript">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.tools.slurm.</span></span><span class="sig-name descname"><span class="pre">writeDependencyScript</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jobspecs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wholeJobName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseJobId</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cancelScript</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.tools.slurm.writeDependencyScript" title="Link to this definition"></a></dt>
+<dd><p>Write a bash script that queues up a set of jobs with a given dependency structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>dict</em>) – The configuration dict from configSlurm.</p></li>
+<li><p><strong>jobspecs</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – A jobspec is a tuple of (str, [str,str,str,…])
+where the first string is the name of the slurm file to run.
+The strings after it are the names of the slurm files that the
+job needs to finish before it can run (i.e., its dependencies).</p></li>
+<li><p><strong>wholeJobName</strong> (<em>str</em>) – The name of the script file to generate</p></li>
+<li><p><strong>baseJobId</strong> (<em>int</em><em> | </em><em>None</em>) – If provided, make all jobs be dependencies of this job ID.</p></li>
+<li><p><strong>local</strong> (<em>bool</em>) – Should this be run locally? If so, just write a shell script that runs
+all the jobs, with no slurm dependency stuff.</p></li>
+<li><p><strong>cancelScript</strong> (<em>str</em>) – Name of a script to write that contains commands to
+cancel all of the jobs in this array.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plots.html" class="btn btn-neutral float-left" title="tools.plots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="addNoiseUtils.html" class="btn btn-neutral float-right" title="tools.addNoiseUtils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

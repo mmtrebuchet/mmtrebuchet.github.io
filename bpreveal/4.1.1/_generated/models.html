@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>models &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="motifUtils" href="motifUtils.html" />
+    <link rel="prev" title="losses" href="losses.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bedUtils.html">bedUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html">callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaOptimize.html">gaOptimize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators.html">generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretUtils.html">interpretUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaccard.html">jaccard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html">layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logUtils.html">logUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="losses.html">losses</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.models.soloModel"><code class="docutils literal notranslate"><span class="pre">soloModel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.models.transformationModel"><code class="docutils literal notranslate"><span class="pre">transformationModel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.models.combinedModel"><code class="docutils literal notranslate"><span class="pre">combinedModel()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="motifUtils.html">motifUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema.html">schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ushuffle.html">ushuffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.models">
+<span id="models"></span><h1>models<a class="headerlink" href="#module-bpreveal.models" title="Link to this heading"></a></h1>
+<p>Functions to build BPNet-style models.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.models.soloModel">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.models.</span></span><span class="sig-name descname"><span class="pre">soloModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numFilters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numLayers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputFilterWidth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputFilterWidth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelName</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.models.soloModel" title="Link to this definition"></a></dt>
+<dd><p>This is the classic BPNet architecture.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputLength</strong> (<em>int</em>) – is the length of the one-hot encoded DNA sequence.</p></li>
+<li><p><strong>outputLength</strong> (<em>int</em>) – is the length of the predicted profile.</p></li>
+<li><p><strong>numFilters</strong> (<em>int</em>) – is the number of convolutional filters used at each layer.</p></li>
+<li><p><strong>numLayers</strong> (<em>int</em>) – is the number of dilated convolutions.</p></li>
+<li><p><strong>inputFilterWidth</strong> (<em>int</em>) – is the width of the first convolutional layer,
+the one looking for motifs.</p></li>
+<li><p><strong>outputFilterWidth</strong> (<em>int</em>) – is the width of the profile head convolutional filter at
+the very bottom of the network.</p></li>
+<li><p><strong>headList</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – is taken directly from a &lt;head-list&gt; in the configuration JSON.</p></li>
+<li><p><strong>modelName</strong> (<em>str</em>) – The name you want this model to have when saved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A TF model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Model</em></p>
+</dd>
+</dl>
+<p>Input to this model is a (batch x inputLength x 4) tensor of one-hot encoded DNA.
+Output is a list of (profilePreds, profilePreds, profilePreds,… ,
+countPreds, countPreds, countPreds…).
+profilePreds is a tensor of shape (batch x numTasks x outputLength), containing the
+logits of the profile values for each task.
+countsPreds is a tensor of shape (batch x numTasks) containing the log counts for
+each task.</p>
+<p>It is an error to call this function with an inconsistent network structure,
+such as an input that is too long.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.models.transformationModel">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.models.</span></span><span class="sig-name descname"><span class="pre">transformationModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soloModelIn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profileArchitectureSpecification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">countsArchitectureSpecification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.models.transformationModel" title="Link to this definition"></a></dt>
+<dd><p>Construct a simple model used to regress out the solo model from experimental data.</p>
+<p>Given a solo model (typically representing bias), generate a simple network that
+can be used to transform the solo model’s output into the experimental data.
+That is,
+experimental = f(bias)
+and f is a simple function like y=mx+b or something.
+When you train the model returned by this function, you are training the m
+and b parameters of that function. Note that this function sets the solo
+model to non-trainable, since you’re not trying to make the bias model
+better, you’re trying to transform the solo model’s output to look like
+experimental data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>soloModelIn</strong> (<em>Model</em>) – A Keras model that you’d like to transform.</p></li>
+<li><p><strong>profileArchitectureSpecification</strong> (<em>dict</em>) – Straight from the config JSON.</p></li>
+<li><p><strong>countsArchitectureSpecification</strong> (<em>dict</em>) – Straight from the config JSON.</p></li>
+<li><p><strong>headList</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Also from the config JSON.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Keras model with the same output shape as the soloModel.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Model</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.models.combinedModel">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.models.</span></span><span class="sig-name descname"><span class="pre">combinedModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numFilters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numLayers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputFilterWidth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputFilterWidth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biasModel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.models.combinedModel" title="Link to this definition"></a></dt>
+<dd><p>Build a combined model.</p>
+<p>This builds a standard BPNet model, but then adds in the bias at the very end:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="p">,</span><span class="o">-----------------</span><span class="n">SEQUENCE</span><span class="o">------------------</span><span class="p">,</span>
+    <span class="n">V</span>                                           <span class="p">,</span>
+<span class="n">Cropdown</span> <span class="n">step</span>                                   <span class="n">V</span>
+<span class="n">_____________</span>                           <span class="n">_________________</span>
+<span class="o">|</span> <span class="n">SOLO</span> <span class="n">MODEL</span><span class="o">|</span>                           <span class="o">|</span> <span class="n">RESIDUAL</span> <span class="n">MODEL</span><span class="o">|</span>
+<span class="o">|</span><span class="n">___________</span><span class="o">|</span>                           <span class="o">|</span><span class="n">_______________</span><span class="o">|</span>
+     <span class="o">|</span>                                          <span class="o">|</span>
+<span class="n">_____V_______</span>          <span class="n">_______</span>                  <span class="o">|</span>
+<span class="o">|</span> <span class="n">TRANSFORM</span> <span class="o">|--------&gt;</span> <span class="o">|</span> <span class="n">ADD</span> <span class="o">|&lt;-----------------</span><span class="s1">&#39;</span>
+<span class="o">|</span><span class="n">___________</span><span class="o">|</span>          <span class="o">|</span><span class="n">_____</span><span class="o">|</span>
+                          <span class="o">|</span>
+                     <span class="n">_____V_____</span>
+                     <span class="o">|</span><span class="n">COMBINED</span> <span class="o">|</span>
+                     <span class="o">|</span><span class="n">_________</span><span class="o">|</span>
+</pre></div>
+</div>
+<p>Since you’ll usually want to isolate the bias-free model (AKA residual model),
+that is returned separately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputLength</strong> (<em>int</em>) – The length of the one-hot encoded DNA sequence (which must be the
+same for the bias model and the residual model).</p></li>
+<li><p><strong>outputLength</strong> (<em>int</em>) – The length of the predicted profile.</p></li>
+<li><p><strong>numFilters</strong> (<em>int</em>) – The number of convolutional filters used at each layer
+in the residual model.</p></li>
+<li><p><strong>numLayers</strong> (<em>int</em>) – The number of dilated convolutions in the residual model.</p></li>
+<li><p><strong>inputFilterWidth</strong> (<em>int</em>) – The width of the first convolutional layer in the residual
+model, the one looking for motifs.</p></li>
+<li><p><strong>outputFilterWidth</strong> (<em>int</em>) – The width of the profile head convolutional filter in the
+residual model at the very bottom of the network.</p></li>
+<li><p><strong>headList</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Taken straight from the config json.</p></li>
+<li><p><strong>biasModel</strong> (<em>Model</em>) – A keras model that goes from sequence to transformed bias.
+This is the file that is saved when you generate the transformation model,
+and internally comprises both the solo model and a transformation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>Two Keras models.</p>
+<ul class="simple">
+<li><p>The first is the combined output, i.e., the COMBINED node in the
+graph above. Input to this model is a (batch x inputLength x 4) tensor
+of one-hot encoded DNA. Output is a list of (profilePreds,
+profilePreds, profilePreds,… , countPreds, countPreds,
+countPreds…). profilePreds is a tensor of shape (batch x numTasks x
+outputLength), containing the logits of the profile values for each
+task. countsPreds is a tensor of shape (batch x numTasks) containing
+the log counts for each task.</p></li>
+<li><p>The second is the bias-free model, RESIDUAL MODEL in the graph above.
+It has the same input and output shapes as the COMBINED model.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[<em>Model</em>, <em>Model</em>]</p>
+</dd>
+</dl>
+<p>It is an error to call this function with an inconsistent network structure,
+such as an input that is too long.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="losses.html" class="btn btn-neutral float-left" title="losses" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="motifUtils.html" class="btn btn-neutral float-right" title="motifUtils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

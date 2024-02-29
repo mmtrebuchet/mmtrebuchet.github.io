@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>prepareBed &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="prepareTrainingData" href="prepareTrainingData.html" />
+    <link rel="prev" title="motifSeqletCutoffs" href="motifSeqletCutoffs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="majorcli.html">Main CLI</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="interpretFlat.html">interpretFlat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretPisa.html">interpretPisa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makePredictions.html">makePredictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifScan.html">motifScan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifSeqletCutoffs.html">motifSeqletCutoffs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">prepareBed</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bnf">BNF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameter-notes">Parameter Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-information">Additional information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#counts-windowing">Counts windowing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#most-columns-ignored">Most columns ignored</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#history">History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.prepareBed.loadRegionsByChrom"><code class="docutils literal notranslate"><span class="pre">loadRegionsByChrom()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.prepareBed.loadRegionsByBed"><code class="docutils literal notranslate"><span class="pre">loadRegionsByBed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.prepareBed.loadRegionsByRegex"><code class="docutils literal notranslate"><span class="pre">loadRegionsByRegex()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.prepareBed.loadRegions"><code class="docutils literal notranslate"><span class="pre">loadRegions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.prepareBed.removeOverlaps"><code class="docutils literal notranslate"><span class="pre">removeOverlaps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.prepareBed.filterByMaxCounts"><code class="docutils literal notranslate"><span class="pre">filterByMaxCounts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.prepareBed.filterByMinCounts"><code class="docutils literal notranslate"><span class="pre">filterByMinCounts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.prepareBed.validateRegions"><code class="docutils literal notranslate"><span class="pre">validateRegions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.prepareBed.rewriteOldBigwigsFormat"><code class="docutils literal notranslate"><span class="pre">rewriteOldBigwigsFormat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.prepareBed.prepareBeds"><code class="docutils literal notranslate"><span class="pre">prepareBeds()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schema">Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prepareTrainingData.html">prepareTrainingData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainCombinedModel.html">trainCombinedModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainSoloModel.html">trainSoloModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainTransformationModel.html">trainTransformationModel</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="majorcli.html">Main CLI</a></li>
+      <li class="breadcrumb-item active">prepareBed</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/prepareBed.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.prepareBed">
+<span id="preparebed"></span><h1>prepareBed<a class="headerlink" href="#module-bpreveal.prepareBed" title="Link to this heading"></a></h1>
+<p>Generates test, train, and validation splits and optionally performs some filtering.</p>
+<section id="bnf">
+<h2>BNF<a class="headerlink" href="#bnf" title="Link to this heading"></a></h2>
+<a name="prepare-bed-configuration"></a><pre class="literal-block">&lt;<a class="reference internal" href="#prepare-bed-configuration"><span class="std std-ref">prepare-bed-configuration</span></a>&gt; ::=
+    {&lt;<a class="reference internal" href="#bigwig-section"><span class="std std-ref">bigwig-section</span></a>&gt;,
+     &quot;splits&quot; : {&lt;<a class="reference internal" href="#split-settings"><span class="std std-ref">split-settings</span></a>&gt;},
+     &quot;genome&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+     &quot;output-length&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;input-length&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;max-jitter&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &lt;<a class="reference internal" href="#output-file-name-section"><span class="std std-ref">output-file-name-section</span></a>&gt;,
+     &quot;resize-mode&quot; : &lt;<a class="reference internal" href="#resize-mode"><span class="std std-ref">resize-mode</span></a>&gt;,
+     &lt;<a class="reference internal" href="#overlap-section"><span class="std std-ref">overlap-section</span></a>&gt;
+     &lt;<a class="reference internal" href="#num-threads-section"><span class="std std-ref">num-threads-section</span></a>&gt;
+     &lt;<a class="reference internal" href="bnf.html#verbosity-section"><span class="std std-ref">verbosity-section</span></a>&gt;}</pre>
+<a name="bigwig-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#bigwig-section"><span class="std std-ref">bigwig-section</span></a>&gt; ::=
+    &quot;heads&quot; : [&lt;<a class="reference internal" href="#head-preparation-list"><span class="std std-ref">head-preparation-list</span></a>&gt;]
+  | (DEPRECATED) &quot;bigwigs&quot; : [&lt;<a class="reference internal" href="#bigwig-preparation-list"><span class="std std-ref">bigwig-preparation-list</span></a>&gt;]</pre>
+<a name="overlap-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#overlap-section"><span class="std std-ref">overlap-section</span></a>&gt; ::=
+    &quot;remove-overlaps&quot; : true,
+    &quot;overlap-max-distance&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+  | &quot;remove-overlaps&quot; : false,</pre>
+<a name="head-preparation-list"></a><pre class="literal-block">&lt;<a class="reference internal" href="#head-preparation-list"><span class="std std-ref">head-preparation-list</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#individual-preparation-head"><span class="std std-ref">individual-preparation-head</span></a>&gt;
+  | &lt;<a class="reference internal" href="#individual-preparation-head"><span class="std std-ref">individual-preparation-head</span></a>&gt;, &lt;<a class="reference internal" href="#head-preparation-list"><span class="std std-ref">head-preparation-list</span></a>&gt;</pre>
+<a name="resize-mode"></a><pre class="literal-block">&lt;<a class="reference internal" href="#resize-mode"><span class="std std-ref">resize-mode</span></a>&gt; ::=
+    &quot;none&quot;
+  | &quot;center&quot;
+  | &quot;start&quot;</pre>
+<a name="output-file-name-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#output-file-name-section"><span class="std std-ref">output-file-name-section</span></a>&gt; ::=
+    &quot;output-prefix&quot; : &quot;&lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;&quot;
+  | &quot;output-train&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &quot;output-val&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &quot;output-test&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;</pre>
+<a name="individual-preparation-head"></a><pre class="literal-block">&lt;<a class="reference internal" href="#individual-preparation-head"><span class="std std-ref">individual-preparation-head</span></a>&gt; ::=
+ { &quot;bigwig-names&quot; : [&lt;<a class="reference internal" href="#list-of-bigwig-files"><span class="std std-ref">list-of-bigwig-files</span></a>&gt;],
+   &lt;<a class="reference internal" href="#max-cutoff-section"><span class="std std-ref">max-cutoff-section</span></a>&gt;,
+   &lt;<a class="reference internal" href="#min-cutoff-section"><span class="std std-ref">min-cutoff-section</span></a>&gt;
+   }</pre>
+<a name="max-cutoff-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#max-cutoff-section"><span class="std std-ref">max-cutoff-section</span></a>&gt; ::=
+   &quot;max-quantile&quot; : &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;
+ | &quot;max-counts&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;</pre>
+<a name="min-cutoff-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#min-cutoff-section"><span class="std std-ref">min-cutoff-section</span></a>&gt; ::=
+   &quot;min-quantile&quot; : &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;
+ | &quot;min-counts&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;</pre>
+<a name="split-settings"></a><pre class="literal-block">&lt;<a class="reference internal" href="#split-settings"><span class="std std-ref">split-settings</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#split-by-chromosome-settings"><span class="std std-ref">split-by-chromosome-settings</span></a>&gt;
+  | &lt;<a class="reference internal" href="#split-by-name-settings"><span class="std std-ref">split-by-name-settings</span></a>&gt;
+  | &lt;<a class="reference internal" href="#split-by-bed-settings"><span class="std std-ref">split-by-bed-settings</span></a>&gt;</pre>
+<a name="split-by-chromosome-settings"></a><pre class="literal-block">&lt;<a class="reference internal" href="#split-by-chromosome-settings"><span class="std std-ref">split-by-chromosome-settings</span></a>&gt; ::=
+    &quot;train-chroms&quot; : [&lt;<a class="reference internal" href="bnf.html#list-of-string"><span class="std std-ref">list-of-string</span></a>&gt;],
+    &quot;val-chroms&quot; : [&lt;<a class="reference internal" href="bnf.html#list-of-string"><span class="std std-ref">list-of-string</span></a>&gt; ],
+    &quot;test-chroms&quot; : [&lt;<a class="reference internal" href="bnf.html#list-of-string"><span class="std std-ref">list-of-string</span></a>&gt; ],
+    &quot;regions&quot; : [&lt;<a class="reference internal" href="#list-of-bed-files"><span class="std std-ref">list-of-bed-files</span></a>&gt;]</pre>
+<a name="split-by-bed-settings"></a><pre class="literal-block">&lt;<a class="reference internal" href="#split-by-bed-settings"><span class="std std-ref">split-by-bed-settings</span></a>&gt; ::=
+    &quot;train-regions&quot; : [&lt;<a class="reference internal" href="#list-of-bed-files"><span class="std std-ref">list-of-bed-files</span></a>&gt;],
+    &quot;val-regions&quot; : [&lt;<a class="reference internal" href="#list-of-bed-files"><span class="std std-ref">list-of-bed-files</span></a>&gt;],
+    &quot;test-regions&quot; : [&lt;<a class="reference internal" href="#list-of-bed-files"><span class="std std-ref">list-of-bed-files</span></a>&gt;]</pre>
+<a name="split-by-name-settings"></a><pre class="literal-block">&lt;<a class="reference internal" href="#split-by-name-settings"><span class="std std-ref">split-by-name-settings</span></a>&gt; ::=
+    &quot;regions&quot; : [&lt;<a class="reference internal" href="#list-of-bed-files"><span class="std std-ref">list-of-bed-files</span></a>&gt;],
+    &quot;test-regex&quot; : &quot;&lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;&quot;,
+    &quot;train-regex&quot; : &quot;&lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;&quot;,
+    &quot;val-regex&quot; : &quot;&lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;&quot;</pre>
+<a name="list-of-bigwig-files"></a><pre class="literal-block">&lt;<a class="reference internal" href="#list-of-bigwig-files"><span class="std std-ref">list-of-bigwig-files</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;, &lt;<a class="reference internal" href="#list-of-bigwig-files"><span class="std std-ref">list-of-bigwig-files</span></a>&gt;
+  | &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;</pre>
+<a name="list-of-bed-files"></a><pre class="literal-block">&lt;<a class="reference internal" href="#list-of-bed-files"><span class="std std-ref">list-of-bed-files</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;, &lt;<a class="reference internal" href="#list-of-bed-files"><span class="std std-ref">list-of-bed-files</span></a>&gt;
+  | &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;</pre>
+<a name="num-threads-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#num-threads-section"><span class="std std-ref">num-threads-section</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="bnf.html#empty"><span class="std std-ref">empty</span></a>&gt;
+  | &quot;num-threads&quot; &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,</pre>
+<a name="bigwig-preparation-list"></a><pre class="literal-block">&lt;<a class="reference internal" href="#bigwig-preparation-list"><span class="std std-ref">bigwig-preparation-list</span></a>&gt; ::=
+(DEPRECATED)    &lt;<a class="reference internal" href="#individual-preparation-bigwig"><span class="std std-ref">individual-preparation-bigwig</span></a>&gt;
+(DEPRECATED)  | &lt;<a class="reference internal" href="#individual-preparation-bigwig"><span class="std std-ref">individual-preparation-bigwig</span></a>&gt;, &lt;<a class="reference internal" href="#bigwig-preparation-list"><span class="std std-ref">bigwig-preparation-list</span></a>&gt;</pre>
+<a name="individual-preparation-bigwig"></a><pre class="literal-block">&lt;<a class="reference internal" href="#individual-preparation-bigwig"><span class="std std-ref">individual-preparation-bigwig</span></a>&gt; ::=
+(DEPRECATED)  { &quot;file-name&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+(DEPRECATED)    &lt;<a class="reference internal" href="#max-cutoff-section"><span class="std std-ref">max-cutoff-section</span></a>&gt;,
+(DEPRECATED)    &lt;<a class="reference internal" href="#min-cutoff-section"><span class="std std-ref">min-cutoff-section</span></a>&gt;
+(DEPRECATED)    }</pre>
+</section>
+<section id="parameter-notes">
+<h2>Parameter Notes<a class="headerlink" href="#parameter-notes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>bigwig-names</dt><dd><p>A list of the data bigwigs that correspond to this head.
+For example, these might be the positive and negative strands of a ChIP-nexus
+sample.</p>
+</dd>
+<dt>resize-mode</dt><dd><p>specifies where in the regions in the bed file the output regions should
+be centered.
+Note that this program assumes your bed files are in bed3 format, that
+is, (chrom, start, stop).
+If you have additional columns with information like peak offset, those
+data will be ignored.</p>
+</dd>
+<dt>max-quantile, min-quantile</dt><dd><p>The max and min quantile values, if provided, will be used to
+threshold which regions are included in the output.
+First, all of the counts in the given regions are computed (which takes
+a while!), and then the given quantile is computed.
+All regions exceeding that value are not included in the output files.</p>
+</dd>
+<dt>max-counts, min-counts</dt><dd><p>Similarly, if max and min counts are given, all regions having more
+(or fewer) reads than the given number will be excluded.</p>
+</dd>
+<dt>output-prefix</dt><dd><p>Specifies the base name for the output bed files. You can use either
+output-prefix OR list all three output-train, output-val, and output-test.
+If you specify output-prefix, then five bed files will be made, called
+<code class="docutils literal notranslate"><span class="pre">output-prefix_train.bed</span></code>, <code class="docutils literal notranslate"><span class="pre">output-prefix_val.bed</span></code>,
+<code class="docutils literal notranslate"><span class="pre">output-prefix_test.bed</span></code>, <code class="docutils literal notranslate"><span class="pre">output-prefix_all.bed</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">output-prefix_reject.bed</span></code></p>
+</dd>
+<dt>output-train, output-val, output-test</dt><dd><p>If you give these file names, then the training, validation and test splits
+will be written to these three files, respectively.</p>
+</dd>
+<dt>regions</dt><dd><p>Needed for splits by chromosome or by regex. This is a bed file of every
+possible region that you might want to train on.</p>
+</dd>
+<dt>train-chroms, val-chroms, test-chroms</dt><dd><p>Split up your input regions by chromosome.</p>
+</dd>
+<dt>train-regex, val-regex, test-regex</dt><dd><p>If you use a regex, then the name field of each bed line will be matched
+against each of the three regexes.
+The line will be added to the split where it matches.
+If a bed line matches more than one regex, that will raise an error.
+If a line matches no regexes, it is added to the rejects.</p>
+</dd>
+<dt>train-regions, val-regions, test-regions</dt><dd><p>You may provide a specific bed file for each of the splits. In this case,
+the regions in each of these files are used to construct each respective
+split.</p>
+</dd>
+<dt>remove-overlaps</dt><dd><p>flag can be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> if you’d
+like to exclude overlapping regions.
+This is done by resizing all regions down to
+<code class="docutils literal notranslate"><span class="pre">overlap-max-distance</span></code>, and then, if multiple regions have an
+overlap, one is deleted at random.
+If <code class="docutils literal notranslate"><span class="pre">remove-overlaps</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>, then
+it is an error to set <code class="docutils literal notranslate"><span class="pre">overlap-max-distance</span></code>.</p>
+</dd>
+<dt>num-threads</dt><dd><p>How many threads should be used for loading counts information?
+I recommend setting this to as many threads as your machine has.</p>
+</dd>
+</dl>
+</section>
+<section id="additional-information">
+<h2>Additional information<a class="headerlink" href="#additional-information" title="Link to this heading"></a></h2>
+<section id="counts-windowing">
+<h3>Counts windowing<a class="headerlink" href="#counts-windowing" title="Link to this heading"></a></h3>
+<p>I should mention that the maximum and minimum counts are not compared across the
+same window.
+When comparing a region against the maximum counts value, all counts within a
+window of size <code class="docutils literal notranslate"><span class="pre">input-length</span> <span class="pre">+</span> <span class="pre">2*jitter</span></code> are added up.
+This way, if you have a crazy-huge spike just outside your region, that region
+will be rejected if the jittering could include it in the training data.
+Conversely, for minimum counts, the counts within a window of length
+<code class="docutils literal notranslate"><span class="pre">output-length</span> <span class="pre">-</span> <span class="pre">2*jitter</span></code> will be considered.
+This way, no matter what jitter value is selected, there will be at least the
+given number of counts in the region.</p>
+</section>
+<section id="most-columns-ignored">
+<h3>Most columns ignored<a class="headerlink" href="#most-columns-ignored" title="Link to this heading"></a></h3>
+<p>prepareBed takes a very lenient approach to validating your bed files.
+It will not check that the score column in your file is numeric, nor will
+it check to see if you have flipped some columns in your input file.</p>
+</section>
+</section>
+<section id="history">
+<h2>History<a class="headerlink" href="#history" title="Link to this heading"></a></h2>
+<p>The old <code class="docutils literal notranslate"><span class="pre">bigwigs</span></code> format was deprecated in BPReveal 4.0.0 and will be
+removed in BPReveal 5.0.0</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">remove-overlaps</span></code> field became mandatory in BPReveal 3.0.0.</p>
+</section>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.prepareBed.loadRegionsByChrom">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.prepareBed.</span></span><span class="sig-name descname"><span class="pre">loadRegionsByChrom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainChroms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valChroms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">testChroms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regionFnames</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.prepareBed.loadRegionsByChrom" title="Link to this definition"></a></dt>
+<dd><p>Load splits based on chromosomes.</p>
+<p>Given chromosomes for the training, validation, and test splits, and a list of
+bed files, generate the regions in each split.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trainChroms</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of chromosome names for the training split.</p></li>
+<li><p><strong>valChroms</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of chromosomes for the validation split.</p></li>
+<li><p><strong>testChroms</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of chromosome names for the test split.</p></li>
+<li><p><strong>regionFnames</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of bed file names to read in.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The training, test, validation, and reject regions as lists.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[list[<em>Interval</em>], list[<em>Interval</em>], list[<em>Interval</em>], list[<em>Interval</em>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.prepareBed.loadRegionsByBed">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.prepareBed.</span></span><span class="sig-name descname"><span class="pre">loadRegionsByBed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainRegionFnames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valRegionFnames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">testRegionFnames</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.prepareBed.loadRegionsByBed" title="Link to this definition"></a></dt>
+<dd><p>Given bed file names, load them into lists of intervals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trainRegionFnames</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of bed files containing regions to train on.</p></li>
+<li><p><strong>valRegionFnames</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of bed files containing regions to use for validation.</p></li>
+<li><p><strong>testRegionFnames</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of bed files for the test set of regions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Four lists of regions: Training, test, validation, and rejects.
+(Rejects will always be empty with this function.)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[list[<em>Interval</em>], list[<em>Interval</em>], list[<em>Interval</em>], list[<em>Interval</em>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.prepareBed.loadRegionsByRegex">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.prepareBed.</span></span><span class="sig-name descname"><span class="pre">loadRegionsByRegex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainString</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">testString</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valString</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regionFnames</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.prepareBed.loadRegionsByRegex" title="Link to this definition"></a></dt>
+<dd><p>Go over the bed files and assign splits based on regexes matched against the name column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trainString</strong> (<em>str</em>) – The regex that matches samples in the training split</p></li>
+<li><p><strong>testString</strong> (<em>str</em>) – The regex that matches samples in the test split</p></li>
+<li><p><strong>valString</strong> (<em>str</em>) – The regex that matches samples in the validation split.</p></li>
+<li><p><strong>regionFnames</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of bed files that will be read in.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Four lists of Intervals, corresponding to the training, test, validation,
+and rejected regions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[list[<em>Interval</em>], list[<em>Interval</em>], list[<em>Interval</em>], list[<em>Interval</em>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.prepareBed.loadRegions">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.prepareBed.</span></span><span class="sig-name descname"><span class="pre">loadRegions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.prepareBed.loadRegions" title="Link to this definition"></a></dt>
+<dd><p>Given a configuration (see the specification), return four PyBedTools BedTool objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) – A JSON object satisfying the prepareBed specification.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>Four BedTools:</p>
+<ol class="arabic simple">
+<li><p>The first will consist of the training regions,</p></li>
+<li><p>the second will be the validation regions,</p></li>
+<li><p>then the test regions,</p></li>
+<li><p>finally any regions that were rejected on loading.</p></li>
+</ol>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.prepareBed.removeOverlaps">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.prepareBed.</span></span><span class="sig-name descname"><span class="pre">removeOverlaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genome</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.prepareBed.removeOverlaps" title="Link to this definition"></a></dt>
+<dd><p>Remove overlaps among the given regions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>dict</em>) – Straight from the JSON.</p></li>
+<li><p><strong>regions</strong> (<em>BedTool</em><em> | </em><em>list</em>) – A BedTool (or list of Intervals)</p></li>
+<li><p><strong>genome</strong> (<em>FastaFile</em>) – A FastaFile (not string) giving the genome.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[<em>BedTool</em>, <em>BedTool</em>]</p>
+</dd>
+</dl>
+<p>Takes in the list of regions, resizes each to the minimum size, and if there are overlaps,
+randomly chooses one of the overlapping regions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.prepareBed.filterByMaxCounts">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.prepareBed.</span></span><span class="sig-name descname"><span class="pre">filterByMaxCounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigRegionsList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigwigLists</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validRegions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numThreads</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.prepareBed.filterByMaxCounts" title="Link to this definition"></a></dt>
+<dd><p>Filters the regions in bigRegionList based on the max-quantile or max-counts in the config.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>dict</em>) – Straight from the configuration JSON.</p></li>
+<li><p><strong>bigRegionsList</strong> (<em>list</em><em>[</em><em>Interval</em><em>]</em>) – A list of intervals that have already been inflated to account for jitter</p></li>
+<li><p><strong>bigwigLists</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The bigwigs that should be scanned, grouped by head.</p></li>
+<li><p><strong>validRegions</strong> (<em>ndarray</em>) – A vector booleans, for each region in bigRegionList, if region i is
+rejected, then validRegions[i] will be 0 when this function exits.</p></li>
+<li><p><strong>numThreads</strong> (<em>int</em>) – How many parallel workers should be used?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A BedTool containing only valid regions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>BedTool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.prepareBed.filterByMinCounts">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.prepareBed.</span></span><span class="sig-name descname"><span class="pre">filterByMinCounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smallRegionsList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigRegionsList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigwigLists</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validRegions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numThreads</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.prepareBed.filterByMinCounts" title="Link to this definition"></a></dt>
+<dd><p>Filters the regions in smallRegionList based on the min-quantile or min-counts in the config.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>dict</em>) – Straight from the configuration JSON.</p></li>
+<li><p><strong>bigRegionsList</strong> (<em>list</em><em>[</em><em>Interval</em><em>]</em>) – A list of intervals that have already been inflated to account for jitter</p></li>
+<li><p><strong>smallRegionsList</strong> (<em>list</em><em>[</em><em>Interval</em><em>]</em>) – A list of intervals that have already been inflated to
+account for jitter</p></li>
+<li><p><strong>bigwigLists</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The bigwigs that should be scanned, grouped by head.</p></li>
+<li><p><strong>validRegions</strong> (<em>ndarray</em>) – A vector booleans, for each region k in smallRegionList,
+corresponding to region i in bigRegionsList, if region k is rejected,
+then validRegions[i] will be 0 when this function exits.</p></li>
+<li><p><strong>numThreads</strong> (<em>int</em>) – How many parallel workers should be used?</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.prepareBed.validateRegions">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.prepareBed.</span></span><span class="sig-name descname"><span class="pre">validateRegions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigwigLists</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numThreads</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.prepareBed.validateRegions" title="Link to this definition"></a></dt>
+<dd><p>The workhorse of this program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>dict</em>) – Straight from the JSON.</p></li>
+<li><p><strong>regions</strong> (<em>BedTool</em><em> | </em><em>list</em><em>[</em><em>Interval</em><em>]</em>) – A BedTool or list.</p></li>
+<li><p><strong>genome</strong> (<em>FastaFile</em>) – A FastaFile (not the name as a str.)</p></li>
+<li><p><strong>bigwigLists</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – The names of the data files to use.</p></li>
+<li><p><strong>numThreads</strong> (<em>int</em>) – How many parallel workers should be used?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Two BedTools, one for regions that passed the filters and another for
+those that failed.</p>
+</dd>
+</dl>
+<p>Given a config (see the spec), a BedTool of regions, an open pysam FastaFile, and a list of
+bigwigs to check, filter down the regions so that they satisfy the configuration.
+Returns two BedTools: The first contains the regions that passed the filters, and the second
+contains the rejected regions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.prepareBed.rewriteOldBigwigsFormat">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.prepareBed.</span></span><span class="sig-name descname"><span class="pre">rewriteOldBigwigsFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.prepareBed.rewriteOldBigwigsFormat" title="Link to this definition"></a></dt>
+<dd><p>If the config has a bigwigs section, rewrite it to the new style.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.prepareBed.prepareBeds">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.prepareBed.</span></span><span class="sig-name descname"><span class="pre">prepareBeds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.prepareBed.prepareBeds" title="Link to this definition"></a></dt>
+<dd><p>The main function of this script.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) – A JSON object matching the prepareBed specification.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Link to this heading"></a></h2>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;prepareBed&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for prepareBed.py&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;heads&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;bigwig-names&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;max-counts&quot;</span><span class="p">:{</span>
+<span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;min-counts&quot;</span><span class="p">:{</span>
+<span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;max-quantile&quot;</span><span class="p">:{</span>
+<span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;min-quantile&quot;</span><span class="p">:{</span>
+<span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bigwig-names&quot;</span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;allOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="p">{</span><span class="nt">&quot;oneOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;max-counts&quot;</span><span class="p">]},</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;max-quantile&quot;</span><span class="p">]}]},</span>
+<span class="w">                    </span><span class="p">{</span><span class="nt">&quot;oneOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;min-counts&quot;</span><span class="p">]},</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;min-quantile&quot;</span><span class="p">]}]}</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;splits&quot;</span><span class="p">:{</span>
+<span class="w">            </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;train-chroms&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}},</span>
+<span class="w">                        </span><span class="nt">&quot;val-chroms&quot;</span><span class="p">:</span><span class="w">   </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}},</span>
+<span class="w">                        </span><span class="nt">&quot;test-chroms&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}},</span>
+<span class="w">                        </span><span class="nt">&quot;regions&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                                     </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}}</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;train-chroms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;val-chroms&quot;</span><span class="p">,</span>
+<span class="w">                                 </span><span class="s2">&quot;test-chroms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;regions&quot;</span><span class="p">]</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;train-regions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                                          </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}},</span>
+<span class="w">                        </span><span class="nt">&quot;val-regions&quot;</span><span class="p">:</span><span class="w">   </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                                          </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}},</span>
+<span class="w">                        </span><span class="nt">&quot;test-regions&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                                          </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}}</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;train-regions&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;val-regions&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;test-regions&quot;</span><span class="p">]</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;train-regex&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;val-regex&quot;</span><span class="p">:</span><span class="w">   </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;test-regex&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;regions&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                                     </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}}</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;train-regex&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;val-regex&quot;</span><span class="p">,</span>
+<span class="w">                                 </span><span class="s2">&quot;test-regex&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;regions&quot;</span><span class="p">]</span>
+<span class="w">                </span><span class="p">}]},</span>
+<span class="w">        </span><span class="nt">&quot;genome&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;output-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;input-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;max-jitter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;output-prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;output-train&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;output-val&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;output-test&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;resize-mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;center&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;start&quot;</span><span class="p">]},</span>
+<span class="w">        </span><span class="nt">&quot;remove-overlaps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;overlap-max-distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;num-threads&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;verbosity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/verbosity&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;heads&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;splits&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;genome&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;output-length&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;input-length&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="s2">&quot;max-jitter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;remove-overlaps&quot;</span><span class="p">,</span><span class="w">  </span><span class="s2">&quot;verbosity&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;allOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;if&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;remove-overlaps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;const&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}}},</span>
+<span class="w">            </span><span class="nt">&quot;then&quot;</span><span class="p">:{</span>
+<span class="w">                </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;overlap-max-distance&quot;</span><span class="p">]</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;else&quot;</span><span class="p">:{</span>
+<span class="w">                </span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;overlap-max-distance&quot;</span><span class="p">]}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;output-prefix&quot;</span><span class="p">]},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;output-train&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;output-val&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;output-test&quot;</span><span class="p">]}]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="motifSeqletCutoffs.html" class="btn btn-neutral float-left" title="motifSeqletCutoffs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="prepareTrainingData.html" class="btn btn-neutral float-right" title="prepareTrainingData" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

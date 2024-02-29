@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>motifSeqletCutoffs &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="prepareBed" href="prepareBed.html" />
+    <link rel="prev" title="motifScan" href="motifScan.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="majorcli.html">Main CLI</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="interpretFlat.html">interpretFlat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretPisa.html">interpretPisa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makePredictions.html">makePredictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifScan.html">motifScan</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">motifSeqletCutoffs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bnf">BNF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameter-notes">Parameter Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-specification">Output Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifSeqletCutoffs.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schema">Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prepareBed.html">prepareBed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareTrainingData.html">prepareTrainingData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainCombinedModel.html">trainCombinedModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainSoloModel.html">trainSoloModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainTransformationModel.html">trainTransformationModel</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="majorcli.html">Main CLI</a></li>
+      <li class="breadcrumb-item active">motifSeqletCutoffs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/motifSeqletCutoffs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.motifSeqletCutoffs">
+<span id="motifseqletcutoffs"></span><h1>motifSeqletCutoffs<a class="headerlink" href="#module-bpreveal.motifSeqletCutoffs" title="Link to this heading"></a></h1>
+<p>Reads in a modisco h5 and prepares to scan for seqlets.</p>
+<p>In order to see where seqlets are found on the genome, we need to scan the cwms
+derived from modiscolite.
+The first step of this process is to look at the seqlets that MoDISco called for
+each pattern it identified, and establish cutoff values.
+This program does that.
+It reads in a modiscolite hdf5 file and calculates cutoff values of seqlet
+similarity for what constitutes a hit.
+It requires one JSON-format input, and generates two outputs: First, it
+generates a tsv file containing all of the seqlets in the modisco h5 with some
+helpful metadata, like how well they match the pattern they are identified
+as being a part of.
+Second, it produces a JSON-format file that will be needed
+by <a class="reference internal" href="motifScan.html#module-bpreveal.motifScan" title="bpreveal.motifScan"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifScan</span></code></a>.</p>
+<section id="bnf">
+<h2>BNF<a class="headerlink" href="#bnf" title="Link to this heading"></a></h2>
+<a name="motif-seqlet-cutoffs-configuration"></a><pre class="literal-block">&lt;<a class="reference internal" href="#motif-seqlet-cutoffs-configuration"><span class="std std-ref">motif-seqlet-cutoffs-configuration</span></a>&gt; ::=
+    {&lt;<a class="reference internal" href="#seqlet-scanning-settings"><span class="std std-ref">seqlet-scanning-settings</span></a>&gt;,
+    &lt;<a class="reference internal" href="bnf.html#verbosity-section"><span class="std std-ref">verbosity-section</span></a>&gt;}</pre>
+<a name="seqlet-scanning-settings"></a><pre class="literal-block">&lt;<a class="reference internal" href="#seqlet-scanning-settings"><span class="std std-ref">seqlet-scanning-settings</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#seqlet-tsv-section"><span class="std std-ref">seqlet-tsv-section</span></a>&gt;
+    &quot;modisco-h5&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &lt;<a class="reference internal" href="#seqlet-contrib-section"><span class="std std-ref">seqlet-contrib-section</span></a>&gt;
+    &lt;<a class="reference internal" href="#pattern-spec-section"><span class="std std-ref">pattern-spec-section</span></a>&gt;,
+    &quot;seq-match-quantile&quot; : &lt;<a class="reference internal" href="bnf.html#number-or-null"><span class="std std-ref">number-or-null</span></a>&gt;,
+    &quot;contrib-match-quantile&quot; : &lt;<a class="reference internal" href="bnf.html#number-or-null"><span class="std std-ref">number-or-null</span></a>&gt;,
+    &quot;contrib-magnitude-quantile&quot; : &lt;<a class="reference internal" href="bnf.html#number-or-null"><span class="std std-ref">number-or-null</span></a>&gt;,
+    &quot;trim-threshold&quot; : &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;,
+    &quot;trim-padding&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;background-probs&quot; : &lt;<a class="reference internal" href="#vector-or-genome"><span class="std std-ref">vector-or-genome</span></a>&gt;,
+    &lt;<a class="reference internal" href="#quantile-json-section"><span class="std std-ref">quantile-json-section</span></a>&gt;</pre>
+<a name="pattern-spec-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#pattern-spec-section"><span class="std std-ref">pattern-spec-section</span></a>&gt; ::=
+    &quot;patterns&quot; : &quot;all&quot;
+  | &quot;patterns&quot; : [&lt;<a class="reference internal" href="#list-of-pattern-specs"><span class="std std-ref">list-of-pattern-specs</span></a>&gt;]</pre>
+<a name="list-of-pattern-specs"></a><pre class="literal-block">&lt;<a class="reference internal" href="#list-of-pattern-specs"><span class="std std-ref">list-of-pattern-specs</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#pattern-spec"><span class="std std-ref">pattern-spec</span></a>&gt;
+  | &lt;<a class="reference internal" href="#pattern-spec"><span class="std std-ref">pattern-spec</span></a>&gt;, &lt;<a class="reference internal" href="#list-of-pattern-specs"><span class="std std-ref">list-of-pattern-specs</span></a>&gt;</pre>
+<a name="pattern-spec"></a><pre class="literal-block">&lt;<a class="reference internal" href="#pattern-spec"><span class="std std-ref">pattern-spec</span></a>&gt; ::=
+    {&quot;metacluster-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+     &quot;pattern-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt; }
+  | {&quot;metacluster-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+     &quot;pattern-names&quot; : [&lt;<a class="reference internal" href="bnf.html#list-of-string"><span class="std std-ref">list-of-string</span></a>&gt;]
+  | {&quot;metacluster-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+     &quot;pattern-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+     &quot;short-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;}
+  | {&quot;metacluster-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+     &quot;pattern-names&quot; : [&lt;<a class="reference internal" href="bnf.html#list-of-string"><span class="std std-ref">list-of-string</span></a>&gt;],
+     &quot;short-names&quot; : [&lt;<a class="reference internal" href="bnf.html#list-of-string"><span class="std std-ref">list-of-string</span></a>&gt;]}</pre>
+<a name="vector-or-genome"></a><pre class="literal-block">&lt;<a class="reference internal" href="#vector-or-genome"><span class="std std-ref">vector-or-genome</span></a>&gt; ::=
+    &quot;danRer11&quot; | &quot;hg38&quot; | &quot;dm6&quot; | &quot;mm10&quot; | &quot;sacCer3&quot;
+  | [&lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;, &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;, &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;, &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;],</pre>
+<a name="quantile-json-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#quantile-json-section"><span class="std std-ref">quantile-json-section</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="bnf.html#empty"><span class="std std-ref">empty</span></a>&gt;
+  | &quot;quantile-json&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,</pre>
+<a name="seqlet-contrib-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#seqlet-contrib-section"><span class="std std-ref">seqlet-contrib-section</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="bnf.html#empty"><span class="std std-ref">empty</span></a>&gt;
+  | &quot;modisco-contrib-h5&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,</pre>
+<a name="seqlet-tsv-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#seqlet-tsv-section"><span class="std std-ref">seqlet-tsv-section</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="bnf.html#empty"><span class="std std-ref">empty</span></a>&gt;
+  | &quot;seqlets-tsv&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,</pre>
+</section>
+<section id="parameter-notes">
+<h2>Parameter Notes<a class="headerlink" href="#parameter-notes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>seqlets-tsv</dt><dd><p>(Optional) The name of the file that should be written containing the
+scanned seqlets. See <code class="xref py py-mod docutils literal notranslate"><span class="pre">motifAddQuantiles&lt;bpreveal.motifAddQuantiles</span></code>
+for the structure of this file.</p>
+</dd>
+<dt>modisco-h5</dt><dd><p>This is the hdf5 file generated by modisco.</p>
+</dd>
+<dt>modisco-contrib-h5</dt><dd><p>(Optional) The contribution score file generated by
+<a class="reference internal" href="interpretFlat.html#module-bpreveal.interpretFlat" title="bpreveal.interpretFlat"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretFlat</span></code></a>, which is necessary to
+recover the genomic coordinates of the seqlets, since the Modisco hdf5
+doesn’t contain that info. The contribution scores are <em>not</em> extracted from
+this file, just coordinates. <em>THIS DOES NOT CURRENTLY WORK, SINCE SEQLET
+INDEXES ARE RESET BY MODISCO</em></p>
+</dd>
+</dl>
+<p>There are two ways of specifying patterns, either by giving each pattern and
+metacluster pair individually, or by listing multiple patterns under a single
+metacluster. The short-names, if provided, will be used to populate the name
+field in the generated tsv. You could use this to give a particular pattern the
+name of its binding protein.</p>
+<dl class="simple">
+<dt>seq-match-quantile</dt><dd><p>Given the PSSM score of each mapped hit to the original TF-MoDISco PSSM,
+calculate the quantile value of this score, given the distribution of
+seqlets corresponding to the TF-MoDISco pattern.</p>
+</dd>
+<dt>contrib-match-quantile</dt><dd><p>Given the CWM score (i.e. Jaccardian-similarity) of each mapped hit’s
+contribution to the original TF-MoDISco CWM, calculate the quantile value
+of this score, given the distribution of seqlets corresponding to the
+TF-MoDISco pattern.</p>
+</dd>
+<dt>contrib-magnitude-quantile</dt><dd><p>Given the total L1 magnitude of contribution across a mapped hit, calculate
+the quantile value of this magnitude, given the distribution of seqlets
+corresponding to theTF-MoDISco pattern.</p>
+</dd>
+<dt>trim-threshold</dt><dd><p>For each pattern, acts as a threshold for trimming non-contributing bases
+from TF-MoDISco’s specified pattern length. This trimming is a
+reimplementation of tfmodiscolite’s <cite>core.trim_to_support</cite> feature that
+trims off the edges of each pattern along the boundaries that are less than
+<cite>trim-threshold*max(contribution)</cite>. Default: .3</p>
+</dd>
+<dt>trim-padding</dt><dd><p>After the pattern trimming step (see <cite>trim-threshold</cite> parameter), pad each
+pattern with <cite>trim-padding</cite> bases to prevent removal of important flanking
+sequence features. This padding is a reimplementation of tfmodiscolite.
+Default: 1</p>
+</dd>
+<dt>background-probs</dt><dd><p>Gives the genetic content of your genome. For example, if you had a genome
+with 60 percent GC content, this would be [0.2, 0.3, 0.3, 0.2]. The order
+of the bases is A, C, G, and T.
+This may also be a string naming a genome, such as <code class="docutils literal notranslate"><span class="pre">sacCer3</span></code>.
+BPReveal knows about danRer11, hg38, mm10, dm6, and sacCer3.</p>
+</dd>
+<dt>patterns</dt><dd><p>May be either a pattern spec (see below) or the string “all”, in which case
+every pattern will be used to scan.</p>
+</dd>
+<dt>metacluster-name</dt><dd><p>Will be something like <code class="docutils literal notranslate"><span class="pre">pos_patterns</span></code> or <code class="docutils literal notranslate"><span class="pre">neg_patterns</span></code>.</p>
+</dd>
+<dt>pattern-name</dt><dd><p>Will be something like <code class="docutils literal notranslate"><span class="pre">pattern_0</span></code> or <code class="docutils literal notranslate"><span class="pre">pattern_6</span></code>.
+Note that this is the name in the modisco output file, not the actual name
+of the motif.</p>
+</dd>
+<dt>short-name</dt><dd><p>(Optional) If provided, this gives a more human-readable name to a
+particular pattern. This is just used to annotate the output, it has no
+effect on the actual scanning or quantiling operation.</p>
+</dd>
+<dt>pattern-names, short-names</dt><dd><p>Instead of providing a pattern-spec for each pattern, you may include a
+list of patterns within one metacluster. These are lists of strings.</p>
+</dd>
+</dl>
+</section>
+<section id="output-specification">
+<h2>Output Specification<a class="headerlink" href="#output-specification" title="Link to this heading"></a></h2>
+<p>See <a class="reference internal" href="motifAddQuantiles.html#module-bpreveal.motifAddQuantiles" title="bpreveal.motifAddQuantiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifAddQuantiles</span></code></a> for a description of the
+tsv file, and <a class="reference internal" href="motifScan.html#module-bpreveal.motifScan" title="bpreveal.motifScan"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifScan</span></code></a> for a description of the
+generated JSON.</p>
+</section>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifSeqletCutoffs.main">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifSeqletCutoffs.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifSeqletCutoffs.main" title="Link to this definition"></a></dt>
+<dd><p>Determine the cutoffs based on modisco outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) – A JSON object based on the motifSeqletCutoffs specification.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Link to this heading"></a></h2>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;motifSeqletCutoffs&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for motifSeqletCutoffs.py&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;definitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;seqlet-scanning-settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;seqlets-tsv&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;modisco-h5&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;modisco-contrib-h5&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;seq-match-quantile&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/fraction-or-null&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;contrib-match-quantile&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/fraction-or-null&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;contrib-magnitude-quantile&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/fraction-or-null&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;trim-threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/fraction-or-null&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;trim-padding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;background-probs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                         </span><span class="nt">&quot;minItems&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">                         </span><span class="nt">&quot;maxItems&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">                         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/fraction&quot;</span><span class="p">}},</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">                         </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;danRer11&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;hg38&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mm10&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dm6&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sacCer3&quot;</span><span class="p">]}</span>
+<span class="w">                    </span><span class="p">]</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;quantile-json&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;patterns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:[</span>
+<span class="w">                        </span><span class="p">{</span>
+<span class="w">                            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/pattern-spec-section&quot;</span><span class="p">}</span>
+<span class="w">                        </span><span class="p">},</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;all&quot;</span><span class="p">]}</span>
+<span class="w">                    </span><span class="p">]</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;modisco-h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;seq-match-quantile&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;contrib-match-quantile&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;contrib-magnitude-quantile&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;trim-threshold&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;trim-padding&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;background-probs&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;patterns&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;pattern-spec-section&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;metacluster-name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;pattern-name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;pattern-names&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}},</span>
+<span class="w">                </span><span class="nt">&quot;short-name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;short-names&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;metacluster-name&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:[</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;allOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pattern-name&quot;</span><span class="p">]},</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pattern-names&quot;</span><span class="p">]},</span>
+<span class="w">                                            </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;short-names&quot;</span><span class="p">]}]}}]},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;allOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pattern-names&quot;</span><span class="p">]},</span>
+<span class="w">                        </span><span class="p">{</span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pattern-name&quot;</span><span class="p">]},</span>
+<span class="w">                                            </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;short-name&quot;</span><span class="p">]}]}}]}]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;verbosity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/verbosity&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;allOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/seqlet-scanning-settings&quot;</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;verbosity&quot;</span><span class="p">]}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="motifScan.html" class="btn btn-neutral float-left" title="motifScan" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="prepareBed.html" class="btn btn-neutral float-right" title="prepareBed" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

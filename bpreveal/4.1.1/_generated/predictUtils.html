@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>internal.predictUtils &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Development" href="development.html" />
+    <link rel="prev" title="internal.constants" href="constants.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="internalapi.html">Internal</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="disableTensorflowLogging.html">internal.disableTensorflowLogging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">internal.constants</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">internal.predictUtils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.predictUtils.FastaReader"><code class="docutils literal notranslate"><span class="pre">FastaReader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.FastaReader.curSequence"><code class="docutils literal notranslate"><span class="pre">FastaReader.curSequence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.FastaReader.curLabel"><code class="docutils literal notranslate"><span class="pre">FastaReader.curLabel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.FastaReader.pop"><code class="docutils literal notranslate"><span class="pre">FastaReader.pop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.predictUtils.BedReader"><code class="docutils literal notranslate"><span class="pre">BedReader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.BedReader.curSequence"><code class="docutils literal notranslate"><span class="pre">BedReader.curSequence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.BedReader.curLabel"><code class="docutils literal notranslate"><span class="pre">BedReader.curLabel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.BedReader.numPredictions"><code class="docutils literal notranslate"><span class="pre">BedReader.numPredictions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.BedReader.pop"><code class="docutils literal notranslate"><span class="pre">BedReader.pop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.predictUtils.H5Writer"><code class="docutils literal notranslate"><span class="pre">H5Writer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.H5Writer.buildDatasets"><code class="docutils literal notranslate"><span class="pre">H5Writer.buildDatasets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.H5Writer.addEntry"><code class="docutils literal notranslate"><span class="pre">H5Writer.addEntry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.H5Writer.commit"><code class="docutils literal notranslate"><span class="pre">H5Writer.commit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.internal.predictUtils.H5Writer.close"><code class="docutils literal notranslate"><span class="pre">H5Writer.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.predictUtils.addGenomeInfo"><code class="docutils literal notranslate"><span class="pre">addGenomeInfo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.predictUtils.addCoordsInfo"><code class="docutils literal notranslate"><span class="pre">addCoordsInfo()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="internalapi.html">Internal</a></li>
+      <li class="breadcrumb-item active">internal.predictUtils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/predictUtils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.internal.predictUtils">
+<span id="internal-predictutils"></span><h1>internal.predictUtils<a class="headerlink" href="#module-bpreveal.internal.predictUtils" title="Link to this heading"></a></h1>
+<p>Some functions and classes for streaming predictions.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.FastaReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.internal.predictUtils.</span></span><span class="sig-name descname"><span class="pre">FastaReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fastaFname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.FastaReader" title="Link to this definition"></a></dt>
+<dd><p>Streams a fasta file from disk lazily.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fastaFname</strong> – The name of the fasta file to load.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.FastaReader.curSequence">
+<span class="sig-name descname"><span class="pre">curSequence</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#bpreveal.internal.predictUtils.FastaReader.curSequence" title="Link to this definition"></a></dt>
+<dd><p>The current sequence in this file. Updated by <a class="reference internal" href="#bpreveal.internal.predictUtils.FastaReader.pop" title="bpreveal.internal.predictUtils.FastaReader.pop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pop()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.FastaReader.curLabel">
+<span class="sig-name descname"><span class="pre">curLabel</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#bpreveal.internal.predictUtils.FastaReader.curLabel" title="Link to this definition"></a></dt>
+<dd><p>The current description line in this file. Updated by <a class="reference internal" href="#bpreveal.internal.predictUtils.FastaReader.pop" title="bpreveal.internal.predictUtils.FastaReader.pop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pop()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.FastaReader.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.FastaReader.pop" title="Link to this definition"></a></dt>
+<dd><p>Pop the current sequence off the queue. Updates curSequence and curLabel.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.BedReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.internal.predictUtils.</span></span><span class="sig-name descname"><span class="pre">BedReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bedFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genomeFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.BedReader" title="Link to this definition"></a></dt>
+<dd><p>Streams a bed file from disk and loads sequence information lazily.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bedFname</strong> (<em>str</em>) – The name of the fasta file to load.</p></li>
+<li><p><strong>genomeFname</strong> (<em>str</em>) – The name of the fasta-format genome file.</p></li>
+<li><p><strong>padding</strong> (<em>int</em>) – The amount by which each region should be expanded before
+fetching the sequence. This will be (inputLength - outputLength) // 2
+for most cases.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.BedReader.curSequence">
+<span class="sig-name descname"><span class="pre">curSequence</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#bpreveal.internal.predictUtils.BedReader.curSequence" title="Link to this definition"></a></dt>
+<dd><p>The genomic sequence under the current region.</p>
+<p>This will update when you call pop().</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.BedReader.curLabel">
+<span class="sig-name descname"><span class="pre">curLabel</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#bpreveal.internal.predictUtils.BedReader.curLabel" title="Link to this definition"></a></dt>
+<dd><p>Just for compatibility with the FastaReader, this will always be an empty string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.BedReader.numPredictions">
+<span class="sig-name descname"><span class="pre">numPredictions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#bpreveal.internal.predictUtils.BedReader.numPredictions" title="Link to this definition"></a></dt>
+<dd><p>The total number of regions in the bed file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.BedReader.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.BedReader.pop" title="Link to this definition"></a></dt>
+<dd><p>Pop the current sequence off the queue.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.H5Writer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.internal.predictUtils.</span></span><span class="sig-name descname"><span class="pre">H5Writer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numHeads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numPredictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bedFname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genomeFname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.H5Writer" title="Link to this definition"></a></dt>
+<dd><p>Batches up predictions and saves them in chunks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> – The name of the hdf5 file to save.</p></li>
+<li><p><strong>numHeads</strong> – The total number of heads for this model.</p></li>
+<li><p><strong>numPredictions</strong> – How many total predictions will be made?</p></li>
+<li><p><strong>bedFname</strong> (<em>str</em><em> | </em><em>None</em>) – </p></li>
+<li><p><strong>genomeFname</strong> (<em>str</em><em> | </em><em>None</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.H5Writer.buildDatasets">
+<span class="sig-name descname"><span class="pre">buildDatasets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleOutputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.H5Writer.buildDatasets" title="Link to this definition"></a></dt>
+<dd><p>Actually construct the output hdf5 file.</p>
+<p>You must give this function the first prediction from the model so that
+it can size its datasets appropriately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sampleOutputs</strong> – An output from the Batcher. This is not written to the file,
+it’s just used to get the right size for the datasets.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.H5Writer.addEntry">
+<span class="sig-name descname"><span class="pre">addEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batcherOut</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.H5Writer.addEntry" title="Link to this definition"></a></dt>
+<dd><p>Add a single output from the Batcher.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.H5Writer.commit">
+<span class="sig-name descname"><span class="pre">commit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.H5Writer.commit" title="Link to this definition"></a></dt>
+<dd><p>Actually write the data out to the backing hdf5 file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.H5Writer.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.H5Writer.close" title="Link to this definition"></a></dt>
+<dd><p>Close the output hdf5.</p>
+<p>You MUST call close on this object, as otherwise the last bit of data won’t
+get written to disk.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.addGenomeInfo">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.predictUtils.</span></span><span class="sig-name descname"><span class="pre">addGenomeInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genome</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.addGenomeInfo" title="Link to this definition"></a></dt>
+<dd><p>Create a chrom name and chrom size dataset so that this h5 can be converted into a bigwig.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outFile</strong> (<em>File</em>) – The (opened) hdf5 file to write.</p></li>
+<li><p><strong>genome</strong> (<em>FastaFile</em>) – The (opened) FastaFile object containing genome information.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The types you need to use to store chromosome index and position information,
+as well as a dictionary to map chromosome name to index.
+The first is what you need for coords_chrom, the second for coords_start and coords_end.
+They will each be one of <code class="docutils literal notranslate"><span class="pre">np.uint8</span></code>, <code class="docutils literal notranslate"><span class="pre">np.uint16</span></code>, <code class="docutils literal notranslate"><span class="pre">np.uint32</span></code>, or <code class="docutils literal notranslate"><span class="pre">np.uint64</span></code>.
+The dictionary (the third element) maps string chromosome names (like <code class="docutils literal notranslate"><span class="pre">chrII</span></code>) to
+integers. It is the inverse of the created <code class="docutils literal notranslate"><span class="pre">chrom_names</span></code> dataset.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[type, type, dict[str, int]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.internal.predictUtils.addCoordsInfo">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.predictUtils.</span></span><span class="sig-name descname"><span class="pre">addCoordsInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'coords_stop'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.predictUtils.addCoordsInfo" title="Link to this definition"></a></dt>
+<dd><p>Initialize an hdf5 with coordinate information.</p>
+<p>Creates the chrom_names, chrom_sizes, coords_chrom, coords_start,
+and coords_stop datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regions</strong> – A BedTool of regions that will be written.</p></li>
+<li><p><strong>outFile</strong> – The opened hdf5 file.</p></li>
+<li><p><strong>genome</strong> – An opened pysam.FastaFile with your genome.</p></li>
+<li><p><strong>stopName</strong> – What should the stop point dataset be called?
+For interpretation scores, it should be called coords_end, while
+for predictions it should be called coords_stop.
+I’m sorry that this parameter exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="constants.html" class="btn btn-neutral float-left" title="internal.constants" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="development.html" class="btn btn-neutral float-right" title="Development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>interpretUtils &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="jaccard" href="jaccard.html" />
+    <link rel="prev" title="generators" href="generators.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bedUtils.html">bedUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html">callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaOptimize.html">gaOptimize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators.html">generators</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">interpretUtils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.Query"><code class="docutils literal notranslate"><span class="pre">Query</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.Result"><code class="docutils literal notranslate"><span class="pre">Result</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.PisaResult"><code class="docutils literal notranslate"><span class="pre">PisaResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.FlatResult"><code class="docutils literal notranslate"><span class="pre">FlatResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.Generator"><code class="docutils literal notranslate"><span class="pre">Generator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.Generator.construct"><code class="docutils literal notranslate"><span class="pre">Generator.construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.Generator.done"><code class="docutils literal notranslate"><span class="pre">Generator.done()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.Saver"><code class="docutils literal notranslate"><span class="pre">Saver</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.Saver.construct"><code class="docutils literal notranslate"><span class="pre">Saver.construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.Saver.add"><code class="docutils literal notranslate"><span class="pre">Saver.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.Saver.parentFinish"><code class="docutils literal notranslate"><span class="pre">Saver.parentFinish()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.Saver.done"><code class="docutils literal notranslate"><span class="pre">Saver.done()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.FlatRunner"><code class="docutils literal notranslate"><span class="pre">FlatRunner</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FlatRunner.run"><code class="docutils literal notranslate"><span class="pre">FlatRunner.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.PisaRunner"><code class="docutils literal notranslate"><span class="pre">PisaRunner</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.PisaRunner.run"><code class="docutils literal notranslate"><span class="pre">PisaRunner.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.FlatListSaver"><code class="docutils literal notranslate"><span class="pre">FlatListSaver</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FlatListSaver.construct"><code class="docutils literal notranslate"><span class="pre">FlatListSaver.construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FlatListSaver.parentFinish"><code class="docutils literal notranslate"><span class="pre">FlatListSaver.parentFinish()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FlatListSaver.done"><code class="docutils literal notranslate"><span class="pre">FlatListSaver.done()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FlatListSaver.add"><code class="docutils literal notranslate"><span class="pre">FlatListSaver.add()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.FlatH5Saver"><code class="docutils literal notranslate"><span class="pre">FlatH5Saver</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FlatH5Saver.construct"><code class="docutils literal notranslate"><span class="pre">FlatH5Saver.construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FlatH5Saver.done"><code class="docutils literal notranslate"><span class="pre">FlatH5Saver.done()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FlatH5Saver.add"><code class="docutils literal notranslate"><span class="pre">FlatH5Saver.add()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.PisaH5Saver"><code class="docutils literal notranslate"><span class="pre">PisaH5Saver</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.PisaH5Saver.construct"><code class="docutils literal notranslate"><span class="pre">PisaH5Saver.construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.PisaH5Saver.done"><code class="docutils literal notranslate"><span class="pre">PisaH5Saver.done()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.PisaH5Saver.add"><code class="docutils literal notranslate"><span class="pre">PisaH5Saver.add()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.ListGenerator"><code class="docutils literal notranslate"><span class="pre">ListGenerator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.ListGenerator.construct"><code class="docutils literal notranslate"><span class="pre">ListGenerator.construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.ListGenerator.done"><code class="docutils literal notranslate"><span class="pre">ListGenerator.done()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.FastaGenerator"><code class="docutils literal notranslate"><span class="pre">FastaGenerator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FastaGenerator.construct"><code class="docutils literal notranslate"><span class="pre">FastaGenerator.construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FastaGenerator.done"><code class="docutils literal notranslate"><span class="pre">FastaGenerator.done()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.FlatBedGenerator"><code class="docutils literal notranslate"><span class="pre">FlatBedGenerator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FlatBedGenerator.construct"><code class="docutils literal notranslate"><span class="pre">FlatBedGenerator.construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.FlatBedGenerator.done"><code class="docutils literal notranslate"><span class="pre">FlatBedGenerator.done()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.PisaBedGenerator"><code class="docutils literal notranslate"><span class="pre">PisaBedGenerator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.PisaBedGenerator.construct"><code class="docutils literal notranslate"><span class="pre">PisaBedGenerator.construct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.interpretUtils.PisaBedGenerator.done"><code class="docutils literal notranslate"><span class="pre">PisaBedGenerator.done()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretUtils.combineMultAndDiffref"><code class="docutils literal notranslate"><span class="pre">combineMultAndDiffref()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jaccard.html">jaccard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html">layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logUtils.html">logUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="losses.html">losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifUtils.html">motifUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema.html">schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ushuffle.html">ushuffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">interpretUtils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/interpretUtils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.interpretUtils">
+<span id="interpretutils"></span><h1>interpretUtils<a class="headerlink" href="#module-bpreveal.interpretUtils" title="Link to this heading"></a></h1>
+<p>A big ol’ module that contains high-efficiency tools for calculating shap scores.</p>
+<p>In user code, it’s actually not that bad to use this module.
+Here’s what you do.</p>
+<ol class="arabic simple">
+<li><p>Create a Generator.</p></li>
+<li><p>Create a Saver.</p></li>
+<li><p>Pass those to a Runner.</p></li>
+<li><p>Call .run() on the Runner.</p></li>
+</ol>
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.Query">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">Query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oneHotSequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.Query" title="Link to this definition"></a></dt>
+<dd><p>This is what is passed to the batcher.</p>
+<p>It has three things.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> – The <code class="docutils literal notranslate"><span class="pre">(input-length,</span> <span class="pre">4)</span></code> one-hot encoded sequence of the current base.</p></li>
+<li><p><strong>passData</strong> (<em>Any</em>) – As with Result objects, is either a tuple of <code class="docutils literal notranslate"><span class="pre">(chromName,</span> <span class="pre">position)</span></code>
+(for when you have a bed file) or a string with a fasta description line
+(for when you’re starting with a fasta). If you’re using the
+<a class="reference internal" href="#bpreveal.interpretUtils.ListGenerator" title="bpreveal.interpretUtils.ListGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ListGenerator</span></code></a>, then it can be anything.</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – Indicates which output slot this data should be put in.
+Since there’s no guarantee that the results will arrive in order, we have to
+track which query was which.</p></li>
+<li><p><strong>oneHotSequence</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>uint8</em><em>]</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p>Lifetime:</p>
+<ol class="arabic simple">
+<li><p>Created by a Generator’s iterator</p></li>
+<li><p>_generatorThread iterates, and puts the Query in each inQueue.</p></li>
+<li><p>inQueue is read by _batcherThread.</p></li>
+<li><p>_batcherThread calls .add on the Batcher.</p></li>
+<li><p>Batcher processes query.</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.Result">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><a class="headerlink" href="#bpreveal.interpretUtils.Result" title="Link to this definition"></a></dt>
+<dd><p>The base class for results.</p>
+<p>Subclassed by <a class="reference internal" href="#bpreveal.interpretUtils.PisaResult" title="bpreveal.interpretUtils.PisaResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">PisaResult</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">flatResult</span></code>.</p>
+<p>Lifetime:</p>
+<ol class="arabic simple">
+<li><p>Generated by a Batcher.</p></li>
+<li><p>Batcher places in outQueue.</p></li>
+<li><p>outQueue is read by saverThread</p></li>
+<li><p>saverThread calls .add() on the Saver.</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.PisaResult">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">PisaResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputPrediction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shufflePredictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.PisaResult" title="Link to this definition"></a></dt>
+<dd><p>This is the output from shapping a single base.</p>
+<p>It contains a few things.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputPrediction</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em>) – A scalar floating point value, of the predicted logit
+from the input sequence at the base that was being shapped.</p></li>
+<li><p><strong>shufflePredictions</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em>) – A <code class="docutils literal notranslate"><span class="pre">(numShuffles,)</span></code> numpy array of the logits
+returned by running predictions on the reference sequence, again evaluated
+at the position of the base that was being shapped.</p></li>
+<li><p><strong>sequence</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>uint8</em><em>]</em><em>]</em>) – is a <code class="docutils literal notranslate"><span class="pre">(receptive-field,</span> <span class="pre">4)</span></code> numpy array of the
+one-hot encoded input sequence.</p></li>
+<li><p><strong>shap</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float16</em><em>]</em><em>]</em>) – is a <code class="docutils literal notranslate"><span class="pre">(receptive-field,</span> <span class="pre">4)</span></code> numpy array of shap scores.</p></li>
+<li><p><strong>passData</strong> (<em>Any</em>) – is data that is not touched by the batcher, but added by
+the generator and necessary for creating the output file.
+If the generator is reading from a bed file, then it is a tuple of (chromName, position)
+and that data should be used to populate the coords_chrom and coords_base fields.
+If the generator was using a fasta file, it is the title line from the original fasta,
+with its leading <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> removed.</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – Indicates which address the data should be stored at in the output hdf5.
+Since there’s no order guarantee when you’re receiving data, we have to keep track
+of the order in the original input.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatResult">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">FlatResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatResult" title="Link to this definition"></a></dt>
+<dd><p>A Result object that is given to savers for flat interpretation analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>uint8</em><em>]</em><em>]</em>) – A one-hot encoded array of the sequence that was explained, of shape
+<code class="docutils literal notranslate"><span class="pre">(input-length,</span> <span class="pre">4)</span></code></p></li>
+<li><p><strong>shap</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float16</em><em>]</em><em>]</em>) – An array of shape <code class="docutils literal notranslate"><span class="pre">(input-length,</span> <span class="pre">4)</span></code>, containing the shap scores.</p></li>
+<li><p><strong>passData</strong> (<em>Any</em>) – is a (picklable) object that is passed through from the generator.
+For bed-based interpretations, it will be a three-tuple of (chrom, start, end)
+(The start and end positions correspond to the INPUT to the model, so they are inflated
+with respect to the bed file.)
+For fasta-based interpretations it will be a string.</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – Gives the position in the output hdf5 where the scores should be saved.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.Generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">Generator</span></span><a class="headerlink" href="#bpreveal.interpretUtils.Generator" title="Link to this definition"></a></dt>
+<dd><p>This is the base class for generating pisa samples.</p>
+<p>Lifetime:</p>
+<ol class="arabic simple">
+<li><p>Initially created in user code. The generator at this point only
+contains serializable data.</p></li>
+<li><p>Passed to a Runner.</p></li>
+<li><p>The Runner passes it to a generatorThread, which runs in a separate Process.</p></li>
+<li><p>generatorThread calls .construct(), and the Generator opens any files it needs.</p></li>
+<li><p>generatorThread iterates over the Generator until it is exhausted.</p></li>
+<li><p>generatorThread calls .done().</p></li>
+</ol>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.Generator.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.Generator.construct" title="Link to this definition"></a></dt>
+<dd><p>Set up the generator (in the child thread).</p>
+<p>When the generator is about to start, this method is called once before
+requesting the iterator.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.Generator.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.Generator.done" title="Link to this definition"></a></dt>
+<dd><p>When the batcher is done, this is called to free any allocated resources.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.Saver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">Saver</span></span><a class="headerlink" href="#bpreveal.interpretUtils.Saver" title="Link to this definition"></a></dt>
+<dd><p>The saver runs in the main thread, so it’s safe to open files and stuff in __init__.</p>
+<p>Descendants of this class shall receive Results from the batcher and save them to an
+appropriate structure, usually on disk.
+The user creates a Saver object in the main thread, and then the saver gets
+construct()ed inside a separate thread created by the runners. Therefore, you
+should only create members that are serializable in __init__.</p>
+<p>Lifetime:</p>
+<ol class="arabic simple">
+<li><p>Created in user code with only serializable data.</p></li>
+<li><p>Passed to a Runner, which passes it to a saverThread in a new process.</p></li>
+<li><p>saverThread calls .construct().</p></li>
+<li><p>saverThread reads from a queue and repeatedly calls .add().</p></li>
+<li><p>saverThread calls .done()</p></li>
+<li><p>The Runner, once saverThread is joined, calls parentFinish in the parent thread.</p></li>
+</ol>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.Saver.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.Saver.construct" title="Link to this definition"></a></dt>
+<dd><p>Do any setup necessary in the child thread.</p>
+<p>This function should actually open the output files, since it will
+be called from inside the actual saver thread.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.Saver.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.Saver.add" title="Link to this definition"></a></dt>
+<dd><p>Add the given Result to wherever you’re saving them out.</p>
+<p>Note that this will not be called with None at the end of the run,
+that is special-cased in the code that runs your saver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<a class="reference internal" href="#bpreveal.interpretUtils.Result" title="bpreveal.interpretUtils.Result"><em>Result</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.Saver.parentFinish">
+<span class="sig-name descname"><span class="pre">parentFinish</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.Saver.parentFinish" title="Link to this definition"></a></dt>
+<dd><p>This is called in the parent thread when the saver is done.</p>
+<p>Usually, there’s nothing to do, but the parent thread might need
+to close shared memory, so this function is guaranteed to be called
+by the Runners.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.Saver.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.Saver.done" title="Link to this definition"></a></dt>
+<dd><p>Called when the batcher is complete (indicated by putting a None in its output queue).</p>
+<p>Now is the time to close all of your files.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatRunner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">FlatRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modelFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numHeads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taskIDs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profileSaver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">countsSaver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numShuffles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmerSize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatRunner" title="Link to this definition"></a></dt>
+<dd><p>Runs shap scores.</p>
+<p>I try to avoid class-based wrappers around simple things, but this is not simple.
+This class creates threads to read in data, and then creates two threads that run interpretation
+samples in batches. Finally, it takes the results from the interpretation thread and saves
+those out to an hdf5-format file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modelFname</strong> (<em>str</em>) – is the name of the model on disk</p></li>
+<li><p><strong>headID</strong> (<em>int</em>) – The head to shap.</p></li>
+<li><p><strong>taskIDs</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – The tasks to shap, obviously.
+Typically, you’d want to interpret all of the tasks in a head, so for a two-task
+head, taskIDs would be <code class="docutils literal notranslate"><span class="pre">[0,1]</span></code>.</p></li>
+<li><p><strong>batchSize</strong> (<em>int</em>) – is the <em>shap</em> batch size, which should be your usual batch size divided
+by the number of shuffles. (since the original sequence and shuffles are run together)</p></li>
+<li><p><strong>generator</strong> (<a class="reference internal" href="#bpreveal.interpretUtils.Generator" title="bpreveal.interpretUtils.Generator"><em>Generator</em></a>) – is a Generator object that will be passed to _generatorThread</p></li>
+<li><p><strong>saver</strong> – is a Saver object that will be used to save out the data.</p></li>
+<li><p><strong>numShuffles</strong> (<em>int</em>) – is the number of reference sequences that should be generated for each
+shap evaluation. (I recommend 20 or so)</p></li>
+<li><p><strong>kmerSize</strong> (<em>int</em>) – Should the shuffle preserve k-mer distribution? If kmerSize == 1, then no.
+If kmerSize &gt; 1, preserve the distribution of kmers of the given size.</p></li>
+<li><p><strong>numHeads</strong> (<em>int</em>) – </p></li>
+<li><p><strong>profileSaver</strong> (<a class="reference internal" href="#bpreveal.interpretUtils.Saver" title="bpreveal.interpretUtils.Saver"><em>Saver</em></a>) – </p></li>
+<li><p><strong>countsSaver</strong> (<a class="reference internal" href="#bpreveal.interpretUtils.Saver" title="bpreveal.interpretUtils.Saver"><em>Saver</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatRunner.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatRunner.run" title="Link to this definition"></a></dt>
+<dd><p>Start up the threads and waits for them to finish.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.PisaRunner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">PisaRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modelFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taskID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numShuffles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receptiveField</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmerSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numBatchers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.PisaRunner" title="Link to this definition"></a></dt>
+<dd><p>Tool to run pisa batches.</p>
+<p>I try to avoid class-based wrappers around simple things, but this is not simple.
+This class creates threads to read in data, and then creates a thread that runs pisa
+samples in batches. Finally, it takes the results from the pisa thread and saves
+those out to an hdf5-format file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modelFname</strong> (<em>str</em>) – is the name of the model on disk</p></li>
+<li><p><strong>headID</strong> (<em>int</em>) – The head to shap.</p></li>
+<li><p><strong>taskID</strong> (<em>int</em>) – The task to shap.</p></li>
+<li><p><strong>batchSize</strong> (<em>int</em>) – is the <em>shap</em> batch size, which should be your usual batch size divided
+by the number of shuffles. (since the original sequence and shuffles are run together)</p></li>
+<li><p><strong>generator</strong> (<a class="reference internal" href="#bpreveal.interpretUtils.Generator" title="bpreveal.interpretUtils.Generator"><em>Generator</em></a>) – is a Generator object that will be passed to _generatorThread</p></li>
+<li><p><strong>saver</strong> (<a class="reference internal" href="#bpreveal.interpretUtils.Saver" title="bpreveal.interpretUtils.Saver"><em>Saver</em></a>) – is a Saver object that will be used to save out the data.</p></li>
+<li><p><strong>numShuffles</strong> (<em>int</em>) – is the number of reference sequences that should be generated for each
+shap evaluation. (I recommend 20 or so)</p></li>
+<li><p><strong>receptiveField</strong> (<em>int</em>) – is the receptive field of the model. To save on writing a lot of
+zeroes, the result objects only contain bases that are in the receptive field
+of the base being shapped.</p></li>
+<li><p><strong>kmerSize</strong> (<em>int</em>) – Should the shuffle preserve k-mer distribution? If kmerSize == 1, then no.
+If kmerSize &gt; 1, preserve the distribution of kmers of the given size.</p></li>
+<li><p><strong>numBatchers</strong> (<em>int</em>) – How many parallel batchers should be run? I find that my GPU usage
+is very efficient with three, but you can use just one if you’re running into memory
+issues.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.PisaRunner.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.PisaRunner.run" title="Link to this definition"></a></dt>
+<dd><p>Start up the threads and waits for them to finish.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatListSaver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">FlatListSaver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numSamples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputLength</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatListSaver" title="Link to this definition"></a></dt>
+<dd><p>A simple Saver that holds the results in memory so you can use them immediately.</p>
+<p>Since the Saver is created in its own thread, just storing the results
+in this object doesn’t work - they get removed when the writer
+process completes.
+So we need to create some shared memory. This Saver takes care of that
+for sequences and shap scores, but discards passData, since we don’t know
+a priori how large passData objects will be. In a typical use case, you’d
+use this in situations where you already know which sequence is which,
+so saving passData doesn’t really make sense anyway.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numSamples</strong> (<em>int</em>) – The total number of samples that this saver will get.
+It has to know this during construction so it can allocate
+enough memory.</p></li>
+<li><p><strong>inputLength</strong> (<em>int</em>) – The input length of the model.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatListSaver.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatListSaver.construct" title="Link to this definition"></a></dt>
+<dd><p>Set up the data sets.</p>
+<p>This is run in the child process.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatListSaver.parentFinish">
+<span class="sig-name descname"><span class="pre">parentFinish</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatListSaver.parentFinish" title="Link to this definition"></a></dt>
+<dd><p>Extract the data from the child process.</p>
+<p>This must be called to load the shap data from the child,
+since it’s currently packed away inside a linear array.
+I could just expose _outShapArray, but this reorganizes it in a much
+more intuitive way.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatListSaver.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatListSaver.done" title="Link to this definition"></a></dt>
+<dd><p>Copy over the data from the child thread to the parent.</p>
+<p>This method is called from the child process.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatListSaver.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatListSaver.add" title="Link to this definition"></a></dt>
+<dd><p>Add the result to the internal list.</p>
+<p>This is called from the child process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<a class="reference internal" href="#bpreveal.interpretUtils.FlatResult" title="bpreveal.interpretUtils.FlatResult"><em>FlatResult</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatH5Saver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">FlatH5Saver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numSamples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genome</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useTqdm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatH5Saver" title="Link to this definition"></a></dt>
+<dd><p>Saves the shap scores to the output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputFname</strong> (<em>str</em>) – is the name of the hdf5-format file that the shap scores will
+be deposited in.</p></li>
+<li><p><strong>numSamples</strong> (<em>int</em>) – is the number of regions (i.e., bases) that pisa will be run on.
+This is needed because we store reference predictions.</p></li>
+<li><p><strong>inputLength</strong> (<em>int</em>) – The input length of the model.</p></li>
+<li><p><strong>genome</strong> (<em>str</em><em> | </em><em>None</em>) – (Optional) Gives the name of a fasta-format file that contains
+the genome of the organism. If provided, then chromosome name and size information
+will be included in the output, and, additionally, two other datasets will be
+created: coords_chrom, and coords_base.</p></li>
+<li><p><strong>useTqdm</strong> (<em>bool</em>) – Should a progress bar be displayed?</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatH5Saver.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatH5Saver.construct" title="Link to this definition"></a></dt>
+<dd><p>Set up the data sets for writing.</p>
+<p>This is called inside the child thread.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatH5Saver.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatH5Saver.done" title="Link to this definition"></a></dt>
+<dd><p>Close up shop.</p>
+<p>Called in the child process.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatH5Saver.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatH5Saver.add" title="Link to this definition"></a></dt>
+<dd><p>Add the given result to the output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<a class="reference internal" href="#bpreveal.interpretUtils.FlatResult" title="bpreveal.interpretUtils.FlatResult"><em>FlatResult</em></a>) – The output from the batcher.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.PisaH5Saver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">PisaH5Saver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numSamples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numShuffles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receptiveField</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genome</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useTqdm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.PisaH5Saver" title="Link to this definition"></a></dt>
+<dd><p>Saves the shap scores to the output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputFname</strong> (<em>str</em>) – is the name of the hdf5-format file that the shap scores
+will be deposited in.</p></li>
+<li><p><strong>numSamples</strong> (<em>int</em>) – is the number of regions (i.e., bases) that pisa will be run on.</p></li>
+<li><p><strong>numShuffles</strong> (<em>int</em>) – is the number of shuffles that are used to generate the reference.
+This is needed because we store reference predictions.</p></li>
+<li><p><strong>receptiveField</strong> (<em>int</em>) – How wide is the model’s receptive field?</p></li>
+<li><p><strong>genome</strong> (<em>str</em><em> | </em><em>None</em>) – an optional parameter, gives the name of a fasta-format file that contains
+the genome of the organism. If provided, then chromosome name and size information
+will be included in the output, and, additionally, two other datasets will be
+created: coords_chrom, and coords_base.</p></li>
+<li><p><strong>useTqdm</strong> (<em>bool</em>) – Should a progress bar be displayed?</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.PisaH5Saver.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.PisaH5Saver.construct" title="Link to this definition"></a></dt>
+<dd><p>Run in the child thread.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.PisaH5Saver.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.PisaH5Saver.done" title="Link to this definition"></a></dt>
+<dd><p>Called from the child process.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.PisaH5Saver.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.PisaH5Saver.add" title="Link to this definition"></a></dt>
+<dd><p>Add the given result to the output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<a class="reference internal" href="#bpreveal.interpretUtils.PisaResult" title="bpreveal.interpretUtils.PisaResult"><em>PisaResult</em></a>) – The output from the batcher.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.ListGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">ListGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequences</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passDataList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.ListGenerator" title="Link to this definition"></a></dt>
+<dd><p>A very simple Generator that is initialized with an iterable of strings.</p>
+<p>(A list of strings is an iterable, but this works with generator functions
+and other things too!)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequences</strong> (<em>Iterable</em><em>[</em><em>str</em><em>]</em>) – Any iterable that yields strings, like a list of strings.
+Note that this function immediately converts whatever you pass in
+into a list, so very large iterables will consume a lot of memory.</p></li>
+<li><p><strong>passDataList</strong> (<em>list</em><em> | </em><em>None</em>) – (optional) Will be passed through the batcher to
+the saver.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.ListGenerator.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.ListGenerator.construct" title="Link to this definition"></a></dt>
+<dd><p>Set up stuff in the child thread.</p>
+<p>Note that this doesn’t load data - because the child thread is
+forked from the parent, it already contains the lists of data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.ListGenerator.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.ListGenerator.done" title="Link to this definition"></a></dt>
+<dd><p>Called in the child thread, does nothing.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FastaGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">FastaGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fastaFname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FastaGenerator" title="Link to this definition"></a></dt>
+<dd><p>Reads a fasta file from disk and generates Queries from it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fastaFname</strong> (<em>str</em>) – The name of the fasta-format file containing
+query sequences.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FastaGenerator.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FastaGenerator.construct" title="Link to this definition"></a></dt>
+<dd><p>Open the file and start reading.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FastaGenerator.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FastaGenerator.done" title="Link to this definition"></a></dt>
+<dd><p>Close the Fasta file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatBedGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">FlatBedGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bedFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genomeFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputLength</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatBedGenerator" title="Link to this definition"></a></dt>
+<dd><p>Reads in lines from a bed file and fetches the genomic sequence around them.</p>
+<p>Note that the regions should have length outputLength, and they will be automatically
+padded to the appropriate input length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bedFname</strong> (<em>str</em>) – The bed file to read.</p></li>
+<li><p><strong>genomeFname</strong> (<em>str</em>) – The genome fasta that sequences will be drawn from.</p></li>
+<li><p><strong>inputLength</strong> (<em>int</em>) – The input length of your model.</p></li>
+<li><p><strong>outputLength</strong> (<em>int</em>) – The output length of your model.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatBedGenerator.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatBedGenerator.construct" title="Link to this definition"></a></dt>
+<dd><p>Open the bed file and fasta genome.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.FlatBedGenerator.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.FlatBedGenerator.done" title="Link to this definition"></a></dt>
+<dd><p>Close the fasta file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.PisaBedGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">PisaBedGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bedFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genomeFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputLength</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.PisaBedGenerator" title="Link to this definition"></a></dt>
+<dd><p>Reads in lines from a bed file and fetches the genomic sequence at every base.</p>
+<p>This is very different than the <a class="reference internal" href="#bpreveal.interpretUtils.FlatBedGenerator" title="bpreveal.interpretUtils.FlatBedGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlatBedGenerator</span></code></a>, which generates
+one sequence query per bed file entry. This class generates a query for every
+base that the bed file contains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bedFname</strong> (<em>str</em>) – The bed file to read.</p></li>
+<li><p><strong>genomeFname</strong> (<em>str</em>) – The genome fasta that sequences will be drawn from.</p></li>
+<li><p><strong>inputLength</strong> (<em>int</em>) – The input length of your model.</p></li>
+<li><p><strong>outputLength</strong> (<em>int</em>) – The output length of your model.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.PisaBedGenerator.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.PisaBedGenerator.construct" title="Link to this definition"></a></dt>
+<dd><p>Run in the child thread, opens up the files and reads the bed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.PisaBedGenerator.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.PisaBedGenerator.done" title="Link to this definition"></a></dt>
+<dd><p>Close the fasta.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.interpretUtils.combineMultAndDiffref">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.interpretUtils.</span></span><span class="sig-name descname"><span class="pre">combineMultAndDiffref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mult</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orig_inp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretUtils.combineMultAndDiffref" title="Link to this definition"></a></dt>
+<dd><p>Combine the shap multipliers and difference from reference to generate hypothetical scores.</p>
+<p>This is injected deep into shap and generates the hypothetical importance scores.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generators.html" class="btn btn-neutral float-left" title="generators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="jaccard.html" class="btn btn-neutral float-right" title="jaccard" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

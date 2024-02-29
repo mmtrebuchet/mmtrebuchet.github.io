@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>motifUtils &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="schema" href="schema.html" />
+    <link rel="prev" title="models" href="models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bedUtils.html">bedUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html">callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaOptimize.html">gaOptimize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators.html">generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretUtils.html">interpretUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaccard.html">jaccard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html">layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logUtils.html">logUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="losses.html">losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">motifUtils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.arrayQuantileMap"><code class="docutils literal notranslate"><span class="pre">arrayQuantileMap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.slidingDotproduct"><code class="docutils literal notranslate"><span class="pre">slidingDotproduct()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.ppmToPwm"><code class="docutils literal notranslate"><span class="pre">ppmToPwm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.ppmToPssm"><code class="docutils literal notranslate"><span class="pre">ppmToPssm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.cwmTrimPoints"><code class="docutils literal notranslate"><span class="pre">cwmTrimPoints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.Pattern"><code class="docutils literal notranslate"><span class="pre">Pattern</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.cwm"><code class="docutils literal notranslate"><span class="pre">Pattern.cwm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.ppm"><code class="docutils literal notranslate"><span class="pre">Pattern.ppm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.pwm"><code class="docutils literal notranslate"><span class="pre">Pattern.pwm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.pssm"><code class="docutils literal notranslate"><span class="pre">Pattern.pssm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.cwmTrimLeftPoint"><code class="docutils literal notranslate"><span class="pre">Pattern.cwmTrimLeftPoint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.cwmTrimRightPoint"><code class="docutils literal notranslate"><span class="pre">Pattern.cwmTrimRightPoint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.cwmTrim"><code class="docutils literal notranslate"><span class="pre">Pattern.cwmTrim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.pssmTrim"><code class="docutils literal notranslate"><span class="pre">Pattern.pssmTrim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.numSeqlets"><code class="docutils literal notranslate"><span class="pre">Pattern.numSeqlets</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletStarts"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletStarts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletEnds"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletEnds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletIndexes"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletIndexes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletRevcomps"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletRevcomps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletSequences"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletSequences</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletOneHots"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletOneHots</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletContribs"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletContribs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletSeqMatches"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletSeqMatches</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletContribMatches"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletContribMatches</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletContribMagnitudes"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletContribMagnitudes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.cutoffSeqMatch"><code class="docutils literal notranslate"><span class="pre">Pattern.cutoffSeqMatch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.cutoffContribMatch"><code class="docutils literal notranslate"><span class="pre">Pattern.cutoffContribMatch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.cutoffContribMagnitude"><code class="docutils literal notranslate"><span class="pre">Pattern.cutoffContribMagnitude</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletChroms"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletChroms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletGenomicStarts"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletGenomicStarts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletGenomicEnds"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletGenomicEnds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.metaclusterName"><code class="docutils literal notranslate"><span class="pre">Pattern.metaclusterName</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.patternName"><code class="docutils literal notranslate"><span class="pre">Pattern.patternName</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.shortName"><code class="docutils literal notranslate"><span class="pre">Pattern.shortName</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.loadCwm"><code class="docutils literal notranslate"><span class="pre">Pattern.loadCwm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.loadSeqlets"><code class="docutils literal notranslate"><span class="pre">Pattern.loadSeqlets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.getCutoffs"><code class="docutils literal notranslate"><span class="pre">Pattern.getCutoffs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.seqletInfoIterator"><code class="docutils literal notranslate"><span class="pre">Pattern.seqletInfoIterator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.loadSeqletCoordinates"><code class="docutils literal notranslate"><span class="pre">Pattern.loadSeqletCoordinates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Pattern.getScanningInfo"><code class="docutils literal notranslate"><span class="pre">Pattern.getScanningInfo()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.seqletCutoffs"><code class="docutils literal notranslate"><span class="pre">seqletCutoffs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.makePatternObjects"><code class="docutils literal notranslate"><span class="pre">makePatternObjects()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.MiniPattern"><code class="docutils literal notranslate"><span class="pre">MiniPattern</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.MiniPattern.scan"><code class="docutils literal notranslate"><span class="pre">MiniPattern.scan()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.Hit"><code class="docutils literal notranslate"><span class="pre">Hit</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.Hit.toDict"><code class="docutils literal notranslate"><span class="pre">Hit.toDict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.PatternScanner"><code class="docutils literal notranslate"><span class="pre">PatternScanner</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.PatternScanner.scanIndex"><code class="docutils literal notranslate"><span class="pre">PatternScanner.scanIndex()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.motifUtils.PatternScanner.done"><code class="docutils literal notranslate"><span class="pre">PatternScanner.done()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.scannerThread"><code class="docutils literal notranslate"><span class="pre">scannerThread()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.writerThread"><code class="docutils literal notranslate"><span class="pre">writerThread()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifUtils.scanPatterns"><code class="docutils literal notranslate"><span class="pre">scanPatterns()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="schema.html">schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ushuffle.html">ushuffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">motifUtils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/motifUtils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.motifUtils">
+<span id="motifutils"></span><h1>motifUtils<a class="headerlink" href="#module-bpreveal.motifUtils" title="Link to this heading"></a></h1>
+<p>Provides a set of classes and functions to perform CWM-scanning.</p>
+<p>In brief, a summary of these classes and functions are below:</p>
+<p>def arrayQuantileMap: maps quantiles of a value from a standard distribution
+def slidingDotproduct: scanning mechanism for scoring hits
+def ppmToPwm: converts PPM to PWM (log2)
+def ppmToPssm: converts PPM to PSSM (log)
+def cwmTrimPoints: determines TF-MoDISco trimmed pattern boundaries
+class Pattern: holds TF-MoDISco pattern metadata and associated functions
+def seqletCutoffs: defines quantile thresholds from seqlets of a pattern
+def makePatternObjects: create a consolidated set of desired patterns to scan
+class MiniPattern: compressed reimplementation of class Pattern
+class Hit: holds mapped coordinate and quality information of each hit
+class PatternScanner: constructs scanner
+def scannerThread: thread involved with scanning a contribution window
+def writerThread: thread involved with writing hits
+def scanPatterns: implements other utilities to scan TF-MoDISco patterns</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.arrayQuantileMap">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">arrayQuantileMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">standard</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardSorted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.arrayQuantileMap" title="Link to this definition"></a></dt>
+<dd><p>Get each sample’s quantile in standard array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>standard</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>_ScalarType_co</em><em>]</em><em>]</em>) – The reference array.</p></li>
+<li><p><strong>samples</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>_ScalarType_co</em><em>]</em><em>]</em>) – The values that will be placed among the standard.</p></li>
+<li><p><strong>standardSorted</strong> (<em>bool</em>) – Is the standard array already sorted?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>For each sample in <cite>samples</cite>, what quantile of <cite>standard</cite> would it fall in?</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em>[<em>Any</em>, <em>dtype</em>[<em>float32</em>]]</p>
+</dd>
+</dl>
+<p>For each sample in samples (samples is an array of shape (N,)), in
+which quantile of the array of standards (of shape (M,)) would
+that sample fall?</p>
+<p>For example, if standard were [1,2,3,5, 100],
+then a sample of 1 would be in the 0 quantile (since it’d fall at the
+beginning of the array of standards) while a sample of 10 would be somewhere
+the 0.75 quantile (corresponding to 5) and the 1.0 quantile (corresponding to
+the 100 standard).
+Its precise position is determined by interpolating the quantiles in the
+standards. So in the above example, 10 would be closer to 0.75 than 1.0, because
+10 is closer to 5 than it is to 100.
+Returns a single array of the quantile positions for the samples (of shape (N,)).
+For a sample array of [2, 4, 6, 99], this would be something like
+[0.25, 0.625, 0.75001, 0.9999].
+Values in samples that fall outside the bounds of the standard are clipped
+to have a quantile of exactly 0 or exactly 1.0.</p>
+<p>standardSorted, if True, means that the standard array is already sorted.
+It doesn’t change the behavior of this function, but it can speed it up since
+this function will otherwise have to sort the array of standards.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.slidingDotproduct">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">slidingDotproduct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seqletValues</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pssm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.slidingDotproduct" title="Link to this definition"></a></dt>
+<dd><p>Run the sliding dotproduct algorithm used in the original BPNet.</p>
+<p>Simply put, it’s just a convolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seqletValues</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>_ScalarType_co</em><em>]</em><em>]</em>) – is a ndarray of shape (numSequences 4),</p></li>
+<li><p><strong>pssm</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>_ScalarType_co</em><em>]</em><em>]</em>) – the pssm, an array of shape (motifLength, 4)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the scores of comparing the seqlets to their PSSM,
+an array of shape (motifLength, 4)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em>[<em>Any</em>, <em>dtype</em>[<em>float32</em>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.ppmToPwm">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">ppmToPwm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ppm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backgroundProbs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.ppmToPwm" title="Link to this definition"></a></dt>
+<dd><p>Turn a position probability matrix into a position weight matrix.</p>
+<p>Given a position probability matrix, which gives the probability of each
+base at each position, convert that into a position weight matrix, which gives
+the information (in bits) contained at each position.</p>
+<p>ppm is an ndarray of shape (motifLength, 4), representing the motif.
+backgroundProbs is an array of shape (4,), giving the background distribution of
+bases in the genome. For a genome with 60% AT and 40% GC, this would be
+[0.3, 0.2, 0.2, 0.3]</p>
+<p>returns the pwm, which is an array of shape (motifLength, 4)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ppm</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>_ScalarType_co</em><em>]</em><em>]</em>) – is a ndarray of shape (pwmlength, 4)</p></li>
+<li><p><strong>backgroundProbs</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>_ScalarType_co</em><em>]</em><em>]</em>) – is an ndarray of shape (4) representing
+probabilities to normalize information context over occurring
+frequencies</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the pwm, an array of shape (motifLength, 4)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em>[<em>Any</em>, <em>dtype</em>[<em>float32</em>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.ppmToPssm">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">ppmToPssm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ppm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backgroundProbs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.ppmToPssm" title="Link to this definition"></a></dt>
+<dd><p>Turn a position probability matrix into an information content matrix.</p>
+<p>Given a position probability matrix, convert that to a pssm array,
+which is a measure of the information contained by each base.
+This method adds a small (1%) pseudocount at each position.</p>
+<p>ppm is an ndarray of shape (motifLength, 4), representing the motif.
+backgroundProbs is an array of shape (4,), with the same meaning as in
+ppmToPwm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ppm</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>_ScalarType_co</em><em>]</em><em>]</em>) – is a ndarray of shape (pwmlength, 4)</p></li>
+<li><p><strong>backgroundProbs</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>_ScalarType_co</em><em>]</em><em>]</em>) – is an ndarray of shape (4) representing
+probabilities to normalize information context over occurring
+frequencies</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the pssm, an array of shape (motifLength, 4)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em>[<em>Any</em>, <em>dtype</em>[<em>float32</em>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.cwmTrimPoints">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">cwmTrimPoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cwm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trimThreshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.cwmTrimPoints" title="Link to this definition"></a></dt>
+<dd><p>Find where the motif actually is inside a CWM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cwm</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>_ScalarType_co</em><em>]</em><em>]</em>) – is a ndarray of shape (cwmlength, 4)</p></li>
+<li><p><strong>trimThreshold</strong> (<em>float</em>) – is a floating point number. The lower this is,
+the more flanking bases will be kept.</p></li>
+<li><p><strong>padding</strong> (<em>int</em>) – The number of bases that should be added back on each
+side of the trimmed motif.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the start and stop indices of the trimmed motif</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[int, int]</p>
+</dd>
+</dl>
+<p>Given a cwm and a threshold, give the slice coordinates that should be used
+to remove bases with low contribution. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>       <span class="n">C</span>
+       <span class="n">C</span> <span class="n">A</span>  <span class="n">A</span>
+       <span class="n">C</span> <span class="n">A</span> <span class="n">CA</span>
+      <span class="n">AC</span> <span class="n">ATCA</span>
+<span class="n">nnnnTnACGATCAGnnnnn</span>
+<span class="mi">0123456789012345678</span>
+</pre></div>
+</div>
+<p>where the number of letters indicates the importance, should be trimmed to get rid
+of the noisy (n) bases, and also maybe the flanking T and G.
+We calculate the maximum contribution (in this case, the stack of 5 Cs)
+and trim off all bases on the outside that are below trimThreshold*maxContrib
+If trimThreshold were 0.25, then any bases with less than 1.25 contribution would be
+trimmed, like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">C</span>
+ <span class="n">C</span> <span class="n">A</span>  <span class="n">A</span>
+ <span class="n">C</span> <span class="n">A</span> <span class="n">CA</span>
+<span class="n">AC</span> <span class="n">ATCA</span>
+<span class="n">ACGATCA</span>
+<span class="mi">6789012</span>
+</pre></div>
+</div>
+<p>If padding is set to zero, then this function will return (6,13), the indices of the passing
+bases. (Note that it goes to 13, not 12, because Python slices go <em>up to</em> the second index.
+We add padding to each side. If padding were 3, then the returned indices would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">C</span>
+    <span class="n">C</span> <span class="n">A</span>  <span class="n">A</span>
+    <span class="n">C</span> <span class="n">A</span> <span class="n">CA</span>
+    <span class="n">AC</span> <span class="n">ATCA</span>
+<span class="n">nTnACGATCAgnn</span>
+<span class="mi">3456789012345</span>
+</pre></div>
+</div>
+<p>and the returned indexes would be (3,16)</p>
+<p>The returned start and stop coordinates are a tuple, so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="n">cwmTrimPoints</span><span class="p">(</span><span class="n">cwm</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+<span class="n">newCwm</span> <span class="o">=</span> <span class="n">cwm</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">,:]</span>
+</pre></div>
+</div>
+<p>(the : in the second axis is because the cwm will have shape (length, 4)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">Pattern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metaclusterName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patternName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shortName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.Pattern" title="Link to this definition"></a></dt>
+<dd><p>A pattern is a simple data storage class.</p>
+<p>This class represents a TF-MoDISco pattern that contains metadata stored in
+the modisco.h5 file, re-represented in a helpful way to perform CWM-scanning
+and compute seqlet-derived quantile distribution information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metaclusterName</strong> (<em>str</em>) – </p></li>
+<li><p><strong>patternName</strong> (<em>str</em>) – </p></li>
+<li><p><strong>shortName</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.cwm">
+<span class="sig-name descname"><span class="pre">cwm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.cwm" title="Link to this definition"></a></dt>
+<dd><p>A (length, 4) array of the contribution weight matrix.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.ppm">
+<span class="sig-name descname"><span class="pre">ppm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.ppm" title="Link to this definition"></a></dt>
+<dd><p>A (length, 4) array of the probability of each base at each position in the pattern.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.pwm">
+<span class="sig-name descname"><span class="pre">pwm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.pwm" title="Link to this definition"></a></dt>
+<dd><p>The position weight matrix for this motif, the usual motif representation in logos.</p>
+<p>(if you want the trimmed pwm, it’s pwm[cwmTrimLeftPoint:cwmTrimRightPoint].)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.pssm">
+<span class="sig-name descname"><span class="pre">pssm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.pssm" title="Link to this definition"></a></dt>
+<dd><p>The information content at each base in the motif.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.cwmTrimLeftPoint">
+<span class="sig-name descname"><span class="pre">cwmTrimLeftPoint</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.cwmTrimLeftPoint" title="Link to this definition"></a></dt>
+<dd><p>When trimming the motif using cwmTrimPoints, where should you start and stop?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.cwmTrimRightPoint">
+<span class="sig-name descname"><span class="pre">cwmTrimRightPoint</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.cwmTrimRightPoint" title="Link to this definition"></a></dt>
+<dd><p>When trimming the motif using cwmTrimPoints, where should you start and stop?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.cwmTrim">
+<span class="sig-name descname"><span class="pre">cwmTrim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.cwmTrim" title="Link to this definition"></a></dt>
+<dd><p>For quick reference, I store the trimmed cwm and pssm.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.pssmTrim">
+<span class="sig-name descname"><span class="pre">pssmTrim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.pssmTrim" title="Link to this definition"></a></dt>
+<dd><p>For quick reference, I store the trimmed cwm and pssm.</p>
+<p>(if you want the trimmed pwm, it’s pwm[cwmTrimLeftPoint:cwmTrimRightPoint].)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.numSeqlets">
+<span class="sig-name descname"><span class="pre">numSeqlets</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.numSeqlets" title="Link to this definition"></a></dt>
+<dd><p>How many seqlets are in this pattern?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletStarts">
+<span class="sig-name descname"><span class="pre">seqletStarts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletStarts" title="Link to this definition"></a></dt>
+<dd><p>Relative to the cwm window (given by seqletIndexes), where does this seqlet start?</p>
+<p>Shape (numSeqlets,)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletEnds">
+<span class="sig-name descname"><span class="pre">seqletEnds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletEnds" title="Link to this definition"></a></dt>
+<dd><p>Relative to the cwm window (given by seqletIndexes), where does this seqlet end?</p>
+<p>Shape (numSeqlets,)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletIndexes">
+<span class="sig-name descname"><span class="pre">seqletIndexes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletIndexes" title="Link to this definition"></a></dt>
+<dd><p>This is the index from the modisco output file, which is currently meaningless.</p>
+<p>TODO When tfmodisco-lite carries through the seqlet indexes correctly, modify this.
+Shape (numSeqlets,)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletRevcomps">
+<span class="sig-name descname"><span class="pre">seqletRevcomps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">bool_</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletRevcomps" title="Link to this definition"></a></dt>
+<dd><p>For each seqlet, is it reverse-complemented?</p>
+<p>Shape (numSeqlets,)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletSequences">
+<span class="sig-name descname"><span class="pre">seqletSequences</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletSequences" title="Link to this definition"></a></dt>
+<dd><p>A list of strings giving the sequence of each seqlet.</p>
+<p>Shape (numSeqlets,)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletOneHots">
+<span class="sig-name descname"><span class="pre">seqletOneHots</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletOneHots" title="Link to this definition"></a></dt>
+<dd><p>The one-hot encoded sequence.</p>
+<p>Shape (numSeqlets, seqletLength, 4)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletContribs">
+<span class="sig-name descname"><span class="pre">seqletContribs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletContribs" title="Link to this definition"></a></dt>
+<dd><p>The contribution scores for each base.</p>
+<p>Shape (numSeqlets, seqletLength, 4)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletSeqMatches">
+<span class="sig-name descname"><span class="pre">seqletSeqMatches</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletSeqMatches" title="Link to this definition"></a></dt>
+<dd><p>The information content match for each seqlet to the pattern’s pssm.</p>
+<p>Shape (numSeqlets, seqletLength, 4)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletContribMatches">
+<span class="sig-name descname"><span class="pre">seqletContribMatches</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletContribMatches" title="Link to this definition"></a></dt>
+<dd><p>The continuous Jaccard similarity between each seqlet and the pattern’s cwm</p>
+<p>Shape (numSeqlets,)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletContribMagnitudes">
+<span class="sig-name descname"><span class="pre">seqletContribMagnitudes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletContribMagnitudes" title="Link to this definition"></a></dt>
+<dd><p>The sum of the absolute value of all contribution scores for each seqlet.</p>
+<p>Shape (numSeqlets,)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.cutoffSeqMatch">
+<span class="sig-name descname"><span class="pre">cutoffSeqMatch</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.cutoffSeqMatch" title="Link to this definition"></a></dt>
+<dd><p>What is the minimal information content (i.e., pssm) match score for a hit?</p>
+<p>Stored when you give quantile bounds to getCutoffs</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.cutoffContribMatch">
+<span class="sig-name descname"><span class="pre">cutoffContribMatch</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.cutoffContribMatch" title="Link to this definition"></a></dt>
+<dd><p>What is the minimal Jaccard similarity between a seqlet and the cwm for a hit?</p>
+<p>Stored when you give quantile bounds to getCutoffs</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.cutoffContribMagnitude">
+<span class="sig-name descname"><span class="pre">cutoffContribMagnitude</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.cutoffContribMagnitude" title="Link to this definition"></a></dt>
+<dd><p>What is the minimum total contribution a seqlet must have to be a hit?</p>
+<p>Stored when you give quantile bounds to getCutoffs</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletChroms">
+<span class="sig-name descname"><span class="pre">seqletChroms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletChroms" title="Link to this definition"></a></dt>
+<dd><p>What chromosome is each seqlet on?</p>
+<p>Populated when you load in coordinates from the contribution hdf5.
+Shape (numSeqlets,)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletGenomicStarts">
+<span class="sig-name descname"><span class="pre">seqletGenomicStarts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletGenomicStarts" title="Link to this definition"></a></dt>
+<dd><p>After trimming, where does the motif start?
+Populated when you load in coordinates from the contribution hdf5.
+Shape (numSeqlets,)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletGenomicEnds">
+<span class="sig-name descname"><span class="pre">seqletGenomicEnds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletGenomicEnds" title="Link to this definition"></a></dt>
+<dd><p>After trimming, where does the motif end?
+Populated when you load in coordinates from the contribution hdf5.
+Shape (numSeqlets,)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.metaclusterName">
+<span class="sig-name descname"><span class="pre">metaclusterName</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.metaclusterName" title="Link to this definition"></a></dt>
+<dd><p>The name of the metacluster, like “neg_patterns” or “pos_patterns”</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.patternName">
+<span class="sig-name descname"><span class="pre">patternName</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.patternName" title="Link to this definition"></a></dt>
+<dd><p>The name of the pattern (i.e., motif), like “pattern_0”</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.shortName">
+<span class="sig-name descname"><span class="pre">shortName</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#bpreveal.motifUtils.Pattern.shortName" title="Link to this definition"></a></dt>
+<dd><p>The human-readable name of this pattern.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.loadCwm">
+<span class="sig-name descname"><span class="pre">loadCwm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modiscoFp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trimThreshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backgroundProbs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.Pattern.loadCwm" title="Link to this definition"></a></dt>
+<dd><p>Given an opened hdf5 file object, load up the contribution scores for this pattern.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modiscoFp</strong> (<em>File</em>) – is a filepath referencing the modisco.h5 file
+generated by tfmodiscolite</p></li>
+<li><p><strong>trimThreshold</strong> (<em>float</em>) – is a floating point number. The lower this is,
+the more flanking bases will be kept.</p></li>
+<li><p><strong>padding</strong> (<em>int</em>) – is an integer. After trimming, pad each end of motif
+by this many flanking bases to reconstruct flank specificity.</p></li>
+<li><p><strong>backgroundProbs</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em>) – is an ndarray of shape (4) representing
+probabilities to normalize information context over occurring
+frequencies</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>trimThreshold and padding are used to trim the motifs, see cwmTrimPoints
+for documentation on those parameters.</p>
+<p>backgroundProbs gives the average frequency of each base across the genome as
+an array of shape (4,). See ppmToPwm and ppmToPssm for details on this parameter.</p>
+<p>After running this function, this Pattern object will contain a few arrays:</p>
+<p>pwm, which contains the position weight matrix for the underlying seqlets
+pssm, the information content of the motif
+ppm, the frequency of each base at each position.
+cwm, the contribution scores at each position.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.loadSeqlets">
+<span class="sig-name descname"><span class="pre">loadSeqlets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modiscoFp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.Pattern.loadSeqlets" title="Link to this definition"></a></dt>
+<dd><p>Load seqlets from the modisco hdf5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>modiscoFp</strong> (<em>File</em>) – is a filepath referencing the modisco.h5 file
+generated by tfmodiscolite</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>This function loads up all the seqlet data from the modisco file and calculates
+quantile values for information content match, contribution jaccard match,
+and contribution L1 match.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.getCutoffs">
+<span class="sig-name descname"><span class="pre">getCutoffs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantileSeqMatch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantileContribMatch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantileContribMagnitude</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.Pattern.getCutoffs" title="Link to this definition"></a></dt>
+<dd><p>Calculate cutoff values given target quantiles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantileSeqMatch</strong> (<em>float</em>) – is a float designating the minimum PSSM match quantile
+threshold that a mapped hit must meet based on the distribution of seqlet
+PSSM match scores. If value is None instead of float, skip this threshold.</p></li>
+<li><p><strong>quantileContribMatch</strong> (<em>float</em>) – is a float designating the minimum CWM match quantile
+threshold that a mapped hit must meet based on the distribution of seqlet
+CWM match scores. If value is None instead of float, skip this threshold.</p></li>
+<li><p><strong>quantileContribMagnitude</strong> (<em>float</em>) – is a float designating the minimum contribution
+quantile threshold that a mapped hit must meet based on the distribution
+of seqlet contribution scores. If value is None instead of float, skip this
+threshold.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Given the quantile values you want to use as cutoffs, actually
+look at the seqlet data and pick the right parameters. If you want to choose
+your own quantile cutoffs, set the cutoffSeqMatch, cutoffContribMatch,
+and cutoffContribMagnitude members of this object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.seqletInfoIterator">
+<span class="sig-name descname"><span class="pre">seqletInfoIterator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.Pattern.seqletInfoIterator" title="Link to this definition"></a></dt>
+<dd><p>Make an iterator to go over the seqlets.</p>
+<p>An iterator (meaning you can use it as the range in a for loop)
+that goes over every seqlet and returns a dictionary of information about it.
+This is useful when you want to write those seqlets to a file.
+Returns a dictionary of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>   <span class="s2">&quot;chrom&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;start&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">integer</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;end&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">integer</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;short-name&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;contrib-magnitude&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;strand&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">character</span><span class="o">&gt;</span><span class="p">,</span>
+
+    <span class="s2">&quot;metacluster-name&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;pattern-name&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="s2">&quot;sequence&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;index&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">integer</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;seq-match&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;contrib-match&quot;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.loadSeqletCoordinates">
+<span class="sig-name descname"><span class="pre">loadSeqletCoordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contribH5fp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.Pattern.loadSeqletCoordinates" title="Link to this definition"></a></dt>
+<dd><p>Break stuff.</p>
+<p>This method is incomplete because we haven’t fixed a bug in tfmodisco-lite that allows
+us to recover the genomic coordinates of the seqlets identified by modisco.
+When it is done, it will use the seqlet indexes from the modisco output to look
+up the genomic coordinates of each seqlet and create three new fields in this object:
+seqletChroms, seqletGenomicStarts, seqletGenomicEnds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>contribH5fp</strong> (<em>File</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Pattern.getScanningInfo">
+<span class="sig-name descname"><span class="pre">getScanningInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.Pattern.getScanningInfo" title="Link to this definition"></a></dt>
+<dd><p>Get what you need to know to scan CWMs.</p>
+<dl class="simple">
+<dt>metacluster-name</dt><dd><p>Will be assigned as <cite>pos_patterns</cite> or <cite>neg_patterns</cite> to represent
+whether the sequence feature increases or decreases SHAP value</p>
+</dd>
+<dt>pattern-name</dt><dd><p>Identifier corresponding to the pattern returned by tf-modiscolite</p>
+</dd>
+<dt>short-name</dt><dd><p>Combined identifier of metacluster-name and pattern-name</p>
+</dd>
+<dt>cwm</dt><dd><p>The CWM, an array of shape (motifLength, 4)</p>
+</dd>
+<dt>pssm</dt><dd><p>The PSSM, an array of shape (motifLength, 4)</p>
+</dd>
+<dt>seq-match-cutoff</dt><dd><p>A float designating the minimum PSSM match quantile
+threshold that a mapped hit must meet based on the distribution of seqlet
+PSSM match scores. If value is None instead of float, skip this threshold.</p>
+</dd>
+<dt>contrib-match-cutoff</dt><dd><p>A float designating the minimum CWM match quantile
+threshold that a mapped hit must meet based on the distribution of seqlet
+CWM match scores. If value is None instead of float, skip this threshold.</p>
+</dd>
+<dt>contrib-magnitude-cutoff</dt><dd><p>A float designating the minimum contribution
+quantile threshold that a mapped hit must meet based on the distribution
+of seqlet contribution scores. If value is None instead of float, skip this
+threshold.</p>
+</dd>
+</dl>
+<p>Get a dictionary (that can be converted to json) containing
+all the information needed to map motifs by cwm scanning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.seqletCutoffs">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">seqletCutoffs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modiscoH5Fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contribH5Fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patternSpec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantileSeqMatch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantileContribMatch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantileContribMagnitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trimThreshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trimPadding</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backgroundProbs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputSeqletsFname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.seqletCutoffs" title="Link to this definition"></a></dt>
+<dd><p>Given a modisco hdf5 file, go over the seqlets and establish the quantile boundaries.</p>
+<p>If you give hard cutoffs for information content and L1 norm match, this function need not
+be called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modiscoH5Fname</strong> (<em>str</em>) – Gives the name of the modisco output hdf5.</p></li>
+<li><p><strong>contribH5Fname</strong> (<em>str</em>) – The name of the hdf5 file that was generated by interpretFlat.py.
+This file contains genomic coordinates of the seqlets, and is used to determine the
+location of each seqlet identified by modisco.
+FIXME TODO FIXME:
+Since modisco doesn’t preserve seqlet indexes right now, this parameter is ignored.
+All seqlets will be reported as being on chromosome chr1 and will have a meaningless
+position.</p></li>
+<li><p><strong>patternSpec</strong> (<em>list</em><em>[</em><em>dict</em><em>] </em><em>| </em><em>Literal</em><em>[</em><em>'all'</em><em>]</em>) – Either a list of dicts, or the string “all”. See makePatternObjects for how
+this parameter is interpreted.</p></li>
+<li><p><strong>quantileSeqMatch</strong> (<em>float</em>) – The information content shared between the PSSM (which is based on
+nucleotide frequency, NOT contribution scores. A lower value means allow sequences
+which are a worse match to the PSSM.</p></li>
+<li><p><strong>quantileContribMatch</strong> (<em>float</em>) – The similarity required between the contribution scores of
+each seqlet and the cwm of the pattern (i.e., motif). Lower means let through worse
+matches to the contribution scores.</p></li>
+<li><p><strong>quantileContribMagnitude</strong> (<em>float</em>) – gives the cutoff in terms of total importance for a seqlet for
+it to be considered. A low value means that seqlets that have low total contribution
+(sum(abs(contrib scores))) can still be considered hits.</p></li>
+<li><p><strong>trimThreshold</strong> (<em>float</em>) – Gives how aggressive the flank-trimming will be.</p></li>
+<li><p><strong>trimPadding</strong> (<em>int</em>) – Gives the padding to be added to the flanks.
+See <a class="reference internal" href="#bpreveal.motifUtils.cwmTrimPoints" title="bpreveal.motifUtils.cwmTrimPoints"><code class="xref py py-func docutils literal notranslate"><span class="pre">bpreveal.motifUtils.cwmTrimPoints()</span></code></a> for details of these parameters.</p></li>
+<li><p><strong>backgroundProbs</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em>) – An array of shape (4,) of floats that gives the background
+distribution for each base in the genome. See <a class="reference internal" href="#bpreveal.motifUtils.ppmToPwm" title="bpreveal.motifUtils.ppmToPwm"><code class="xref py py-func docutils literal notranslate"><span class="pre">ppmToPwm()</span></code></a> and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pwmToPssm()</span></code> for details on this argument.</p></li>
+<li><p><strong>outputSeqletsFname</strong> (<em>str</em><em> | </em><em>None</em>) – (Optional) Gives a name for a file where the all of the
+seqlets in the Modisco output should be saved as a tsv file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dicts that will be needed by the cwm scanning utility.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[dict]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>The returned list is structured as follows::</dt><dd><p>[{“metacluster-name”: &lt;string&gt;,
+“pattern-name”: &lt;string&gt;,
+“cwm”: &lt;array of floats of shape (length, 4)&gt;,
+“pssm”: &lt;array of floats of shape (length, 4)&gt;,
+“seq-match-cutoff”: &lt;float-or-null&gt;,
+“contrib-match-cutoff”: &lt;float-or-null&gt;,
+“contrib-magnitude-cutoff”: &lt;float-or-null&gt; },
+…
+]</p>
+</dd>
+</dl>
+<p>This dictionary can be saved as a json for use with the motif scanning tool, or passed
+directly to the motif scanning Python functions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.makePatternObjects">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">makePatternObjects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">patternSpec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modiscoH5Fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.makePatternObjects" title="Link to this definition"></a></dt>
+<dd><p>Get a list of patterns to scan.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>patternSpec</strong> (<em>list</em><em>[</em><em>dict</em><em>] </em><em>| </em><em>&quot;all&quot;</em>) – The pattern specs from the config json.</p></li>
+<li><p><strong>modiscoH5Fname</strong> (<em>str</em>) – The name of the hdf5-format file generated by MoDISco.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#bpreveal.motifUtils.Pattern" title="bpreveal.motifUtils.Pattern"><em>Pattern</em></a>]</p>
+</dd>
+</dl>
+<p>If patternSpec is a list, it may have one of two forms:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[ {&quot;metacluster-name&quot; : &lt;string&gt;,
+&quot;pattern-name&quot; : &lt;string&gt;,
+??&quot;short-name&quot; : &lt;string&gt; ??
+},
+...
+]
+</pre></div>
+</div>
+<p>where each entry gives one metacluster with ONE pattern,
+or it may give multiple patterns as a list:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[ {&quot;metacluster-name&quot; : &lt;string&gt;,
+&quot;pattern-names&quot; : [&lt;string&gt;, ...],
+??&quot;short-names&quot; : [&lt;string&gt;,...]??
+},
+...
+]
+</pre></div>
+</div>
+<p>(Note the ‘s’ in pattern-names, as opposed to the singular pattern-name above.)
+short-name, or short-names, is an optional parameter. If given, then instead of the
+patterns being named “pos_2”, they will have the name you give, which could be something
+much more human-readable, like “Sox2”.</p>
+<p>Alternatively, patternSpec may be the string “all”
+in which case all patterns in the modisco hdf5 file will be scanned.
+(And the short names will be pos_0, pos_1, …)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.MiniPattern">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">MiniPattern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.MiniPattern" title="Link to this definition"></a></dt>
+<dd><p>A smaller pattern object for the scanners to use.</p>
+<dl class="simple">
+<dt>metacluster-name</dt><dd><p>Will be assigned as <cite>pos_patterns</cite> or <cite>neg_patterns</cite> to represent
+whether the sequence feature increases or decreases SHAP value</p>
+</dd>
+<dt>pattern-name</dt><dd><p>Identifier corresponding to the pattern returned by tf-modiscolite</p>
+</dd>
+<dt>short-name</dt><dd><p>Combined identifier of metacluster-name and pattern-name</p>
+</dd>
+<dt>cwm</dt><dd><p>The CWM, an array of shape (motifLength, 4)</p>
+</dd>
+<dt>rcwm</dt><dd><p>The reverse complement CWM, an array of shape (motifLength, 4)</p>
+</dd>
+<dt>pssm</dt><dd><p>The PSSM, an array of shape (motifLength, 4)</p>
+</dd>
+<dt>rpssm</dt><dd><p>The reverse complement PSSM, an array of shape (motifLength, 4)</p>
+</dd>
+<dt>seqMatchCutoff</dt><dd><p>A float designating the minimum PSSM match quantile
+threshold that a mapped hit must meet based on the distribution of seqlet
+PSSM match scores. If value is None instead of float, skip this threshold.</p>
+</dd>
+<dt>contribMatchCutoff</dt><dd><p>A float designating the minimum CWM match quantile
+threshold that a mapped hit must meet based on the distribution of seqlet
+CWM match scores. If value is None instead of float, skip this threshold.</p>
+</dd>
+<dt>contribMagnitudeCutoff</dt><dd><p>A float designating the minimum contribution
+quantile threshold that a mapped hit must meet based on the distribution
+of seqlet contribution scores. If value is None instead of float, skip this
+threshold.</p>
+</dd>
+</dl>
+<p>During the CWM scanning step, the full Pattern class is unnecessary, since it
+loads up a lot of seqlet data. This lightweight class is designed to be used inside
+the scanning threads. It represents one pattern, and can quickly scan sequences and
+contribution score tracks against its pattern.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) – </p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.MiniPattern.scan">
+<span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.MiniPattern.scan" title="Link to this definition"></a></dt>
+<dd><p>Given a sequence and a contribution track, identify places where this pattern matches.</p>
+<p>sequence is a (length, 4) one-hot encoded
+DNA fragment, and scores is the actual (not hypothetical) contribution score
+data from that region. Scores is (length, 4) in shape, but all of the
+bases that are not present should have zero contribution score.
+Returns a list of hits. A hit is a tuple with five elements.
+First, an integer giving the offset in the sequence where the hit starts.
+Second, the strand on which the hit was found.
+Third, the contribution magnitude of the pattern at that position.
+Fourth, the contribution match score of the importance scores at that position.
+Finally, the sequence match score against the pattern at that position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>uint8</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>scores</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[tuple[int, <em>Literal</em>[‘+’, ‘-’], float, float, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Hit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">Hit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shortName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metaclusterName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patternName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strand</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contribMagnitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contribMatchScore</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seqMatchScore</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.Hit" title="Link to this definition"></a></dt>
+<dd><p>A small struct used to bundle up found hits for insertion in the pipe to the writer thread.</p>
+<dl class="simple">
+<dt>chrom</dt><dd><p>Chromosome belonging to hit coordinate</p>
+</dd>
+<dt>start</dt><dd><p>0-based start site of hit coordinate</p>
+</dd>
+<dt>end</dt><dd><p>0-based end site of hit coordinate</p>
+</dd>
+<dt>shortName</dt><dd><p>Combined identifier of metacluster-name and pattern-name</p>
+</dd>
+<dt>patternName</dt><dd><p>Identifier corresponding to the pattern returned by tf-modiscolite</p>
+</dd>
+<dt>metaclusterName</dt><dd><p>Will be assigned as <cite>pos_patterns</cite> or <cite>neg_patterns</cite> to represent
+whether the sequence feature increases or decreases SHAP value</p>
+</dd>
+<dt>strand</dt><dd><p>Strand alignment of the hit coordinate</p>
+</dd>
+<dt>sequence</dt><dd><p>Sequence of the hit coordinate</p>
+</dd>
+<dt>index</dt><dd><p>Region index that hit coordinate belongs to. Should following indexing of given
+contribution .h5 by which the hit was mapped across.</p>
+</dd>
+<dt>contribMagnitude</dt><dd><p>L1 magnitude of contribution (sum(abs(x))) across hit</p>
+</dd>
+<dt>contribMatchScore</dt><dd><p>Match score to the hit’s motif CWM based on Jaccard similarity</p>
+</dd>
+<dt>seqMatchScore</dt><dd><p>Match score to the hit’s motif PSSM given the log likelihood of a match</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chrom</strong> (<em>str</em>) – </p></li>
+<li><p><strong>start</strong> (<em>int</em>) – </p></li>
+<li><p><strong>end</strong> (<em>int</em>) – </p></li>
+<li><p><strong>shortName</strong> (<em>str</em>) – </p></li>
+<li><p><strong>metaclusterName</strong> (<em>str</em>) – </p></li>
+<li><p><strong>patternName</strong> (<em>str</em>) – </p></li>
+<li><p><strong>strand</strong> (<em>Literal</em><em>[</em><em>'+'</em><em>, </em><em>'-'</em><em>]</em>) – </p></li>
+<li><p><strong>sequence</strong> (<em>str</em>) – </p></li>
+<li><p><strong>index</strong> (<em>int</em>) – </p></li>
+<li><p><strong>contribMagnitude</strong> (<em>float</em>) – </p></li>
+<li><p><strong>contribMatchScore</strong> (<em>float</em>) – </p></li>
+<li><p><strong>seqMatchScore</strong> (<em>float</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.Hit.toDict">
+<span class="sig-name descname"><span class="pre">toDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.Hit.toDict" title="Link to this definition"></a></dt>
+<dd><p>Converts the class to a dictionary that’s easier to use with tsv writers.</p>
+<dl class="simple">
+<dt>chrom</dt><dd><p>Chromosome belonging to hit coordinate</p>
+</dd>
+<dt>start</dt><dd><p>0-based start site of hit coordinate</p>
+</dd>
+<dt>end</dt><dd><p>0-based end site of hit coordinate</p>
+</dd>
+<dt>short_name</dt><dd><p>Combined identifier of metacluster-name and pattern-name</p>
+</dd>
+<dt>contrib_magnitude</dt><dd><p>L1 magnitude of contribution (sum(abs(x))) across hit</p>
+</dd>
+<dt>strand</dt><dd><p>Strand alignment of the hit coordinate</p>
+</dd>
+<dt>sequence</dt><dd><p>Sequence of the hit coordinate</p>
+</dd>
+<dt>region_index</dt><dd><p>Region index that hit coordinate belongs to. Should following indexing of given
+contribution .h5 by which the hit was mapped across.</p>
+</dd>
+<dt>metacluster_name</dt><dd><p>Will be assigned as <cite>pos_patterns</cite> or <cite>neg_patterns</cite> to represent
+whether the sequence feature increases or decreases SHAP value</p>
+</dd>
+<dt>pattern_name</dt><dd><p>Identifier corresponding to the pattern returned by tf-modiscolite</p>
+</dd>
+<dt>seq_match</dt><dd><p>Match score to the hit’s motif PSSM given the log likelihood of a match</p>
+</dd>
+<dt>contrib_match</dt><dd><p>Match score to the hit’s motif CWM based on Jaccard similarity</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.PatternScanner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">PatternScanner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hitQueue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contribFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patternConfig</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.PatternScanner" title="Link to this definition"></a></dt>
+<dd><p>Used inside a scanner thread to do the actual scanning.</p>
+<p>Provides functionality to scan a CWM/PSSM/other
+motif representation across a given set of contribution score windows
+to assign scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hitQueue</strong> (<em>Queue</em>) – </p></li>
+<li><p><strong>contribFname</strong> (<em>str</em>) – </p></li>
+<li><p><strong>patternConfig</strong> (<em>dict</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.PatternScanner.scanIndex">
+<span class="sig-name descname"><span class="pre">scanIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.PatternScanner.scanIndex" title="Link to this definition"></a></dt>
+<dd><p>Scan a single locus.</p>
+<p>Given an index into the hdf5 contribution file, extract the sequence
+and contribution scores there and run a scan.
+idx is an integer ranging from 0 to the number of entries in the hdf5 file
+(minus one, of course, since zero-based indexing).
+This function will look for hits in this region and then stuff any hits it finds
+into hitQueue for saving by the writer thread.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>idx</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.PatternScanner.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.PatternScanner.done" title="Link to this definition"></a></dt>
+<dd><p>When scanning is finished, close the contribution .h5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.scannerThread">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">scannerThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryQueue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hitQueue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contribFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patternConfig</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.scannerThread" title="Link to this definition"></a></dt>
+<dd><p>This is the thread for one scanner.</p>
+<p>Each scanner is looking for every pattern,
+and gets regions to scan from queryQueue. Every time it finds a hit in one of the
+queries it pulled, it stuffs those Hit objects into hitQueue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queryQueue</strong> (<em>Queue</em>) – The queue that this thread will read from to get its queries.</p></li>
+<li><p><strong>hitQueue</strong> (<em>Queue</em>) – The queue this thread will put its results into.</p></li>
+<li><p><strong>contribFname</strong> (<em>str</em>) – is a string naming the hdf5-format file generated by
+interpretFlat.py.</p></li>
+<li><p><strong>patternConfig</strong> (<em>dict</em>) – a dictionary/json generated by the quantile script
+that contains the necessary information to scan for the patterns.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.writerThread">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">writerThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hitQueue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scannerThreads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsvFname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.writerThread" title="Link to this definition"></a></dt>
+<dd><p>This thread runs concurrently with however many scanners you’re using.</p>
+<p>It reads from hitQueue and saves out any hits to a csv file, a bed file, or both.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hitQueue</strong> (<em>Queue</em>) – The queue that the scanners will write to.</p></li>
+<li><p><strong>scannerThreads</strong> (<em>int</em>) – gives the number of scanners running concurrently.
+Why does the writer need to know this? Because each scanner sends a special flag
+down the queue when it’s done, and the writer needs to know how many of these
+special values to expect before it knows that all the scanners have finished.</p></li>
+<li><p><strong>tsvFname</strong> (<em>str</em>) – The name of the tsv file that should be written.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifUtils.scanPatterns">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifUtils.</span></span><span class="sig-name descname"><span class="pre">scanPatterns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contribH5Fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patternConfig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsvFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numThreads</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifUtils.scanPatterns" title="Link to this definition"></a></dt>
+<dd><p>ContribH5Fname is the name of a contribution score file generated by interpretFlat.py</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>contribH5Fname</strong> (<em>str</em>) – a string naming the hdf5-format file generated by
+interpretFlat.py.</p></li>
+<li><p><strong>patternConfig</strong> (<em>dict</em>) – a dictionary/json generated by the quantile script
+that contains the necessary information to scan for the patterns.</p></li>
+<li><p><strong>tsvFname</strong> (<em>str</em>) – the name of the output file containing the hits. Columns 1-6 of this file can
+be extracted with cut to get a bed file.</p></li>
+<li><p><strong>numThreads</strong> (<em>int</em>) – the <em>total</em> number of threads to use for the scanning. This must be at least
+three, since this function builds a pipeline with one thread generating queries,
+one saving results, and all the rest furiously scanning the query sequences for matches.
+I suggest running rampant with as many threads as they’ll let you use, the scanning is very
+computationally expensive!</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="models.html" class="btn btn-neutral float-left" title="models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="schema.html" class="btn btn-neutral float-right" title="schema" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

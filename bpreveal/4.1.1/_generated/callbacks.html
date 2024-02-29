@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>callbacks &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gaOptimize" href="gaOptimize.html" />
+    <link rel="prev" title="bedUtils" href="bedUtils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bedUtils.html">bedUtils</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">callbacks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.callbacks.getCallbacks"><code class="docutils literal notranslate"><span class="pre">getCallbacks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback"><code class="docutils literal notranslate"><span class="pre">DisplayCallback</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.epochNumber"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.epochNumber</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.batchNumber"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.batchNumber</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.printLocationsEpoch"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.printLocationsEpoch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.printLocationsBatch"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.printLocationsBatch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.multipliers"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.multipliers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.prevEpochLogs"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.prevEpochLogs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.lastBatchEndTime"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.lastBatchEndTime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.lastValBatchEndTime"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.lastValBatchEndTime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.lastEpochEndTime"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.lastEpochEndTime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.lastEpochStartTime"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.lastEpochStartTime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.numEpochs"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.numEpochs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.curEpochWaitTime"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.curEpochWaitTime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.maxLen"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.maxLen</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.trainBeginTime"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.trainBeginTime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.numBatches"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.numBatches</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.numValBatches"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.numValBatches</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.on_train_begin"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.on_train_begin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.on_epoch_begin"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.on_epoch_begin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.formatStr"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.formatStr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.on_epoch_end"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.on_epoch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.on_train_batch_end"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.on_train_batch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.DisplayCallback.on_test_batch_end"><code class="docutils literal notranslate"><span class="pre">DisplayCallback.on_test_batch_end()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss"><code class="docutils literal notranslate"><span class="pre">ApplyAdaptiveCountsLoss</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss.on_train_begin"><code class="docutils literal notranslate"><span class="pre">ApplyAdaptiveCountsLoss.on_train_begin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss.getLosses"><code class="docutils literal notranslate"><span class="pre">ApplyAdaptiveCountsLoss.getLosses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss.whatWouldValLossBe"><code class="docutils literal notranslate"><span class="pre">ApplyAdaptiveCountsLoss.whatWouldValLossBe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss.resetCallbacks"><code class="docutils literal notranslate"><span class="pre">ApplyAdaptiveCountsLoss.resetCallbacks()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss.on_epoch_end"><code class="docutils literal notranslate"><span class="pre">ApplyAdaptiveCountsLoss.on_epoch_end()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gaOptimize.html">gaOptimize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators.html">generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretUtils.html">interpretUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaccard.html">jaccard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html">layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logUtils.html">logUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="losses.html">losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifUtils.html">motifUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema.html">schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ushuffle.html">ushuffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">callbacks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/callbacks.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.callbacks">
+<span id="callbacks"></span><h1>callbacks<a class="headerlink" href="#module-bpreveal.callbacks" title="Link to this heading"></a></h1>
+<p>A set of callbacks useful for training a model.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.callbacks.getCallbacks">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.callbacks.</span></span><span class="sig-name descname"><span class="pre">getCallbacks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">earlyStop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputPrefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plateauPatience</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trainBatchGen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valBatchGen</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.getCallbacks" title="Link to this definition"></a></dt>
+<dd><p>Return a set of callbacks for your model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>earlyStop</strong> (<em>int</em>) – The <code class="docutils literal notranslate"><span class="pre">early-stopping-patience</span></code> from the config file.</p></li>
+<li><p><strong>outputPrefix</strong> (<em>str</em>) – The <code class="docutils literal notranslate"><span class="pre">output-prefix</span></code> for the model, including directory.</p></li>
+<li><p><strong>plateauPatience</strong> (<em>int</em>) – The <code class="docutils literal notranslate"><span class="pre">learning-rate-plateau-patience</span></code> from the config file.</p></li>
+<li><p><strong>heads</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – The heads list for your model, to which adaptive loss <span class="math notranslate nohighlight">\({\lambda}\)</span> tensors
+have been added.</p></li>
+<li><p><strong>trainBatchGen</strong> (<a class="reference internal" href="generators.html#bpreveal.generators.H5BatchGenerator" title="bpreveal.generators.H5BatchGenerator"><em>H5BatchGenerator</em></a>) – The batch generator for training. Just used to see how many
+batches there will be.</p></li>
+<li><p><strong>valBatchGen</strong> (<a class="reference internal" href="generators.html#bpreveal.generators.H5BatchGenerator" title="bpreveal.generators.H5BatchGenerator"><em>H5BatchGenerator</em></a>) – The batch generator for validation. Just used to see how many
+batches there will be.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of Keras callbacks that you should use to train your model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tensorflow.keras.callbacks.Callback]</p>
+</dd>
+</dl>
+<p>The returned callbacks are:</p>
+<dl class="simple">
+<dt>EarlyStopping</dt><dd><p>Stop training if the validation loss hasn’t improved for a while.</p>
+</dd>
+<dt>ModelCheckpoint</dt><dd><p>Write a checkpoint file every time the validation loss improves.</p>
+</dd>
+<dt>ReduceLROnPlateau</dt><dd><p>If validation loss hasn’t improved for a while, decrease the learning rate.</p>
+</dd>
+<dt>ApplyAdaptiveCountsLoss</dt><dd><p>Implement the <a class="reference internal" href="countsLossReweighting.html"><span class="doc">adaptive counts loss algorithm</span></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.callbacks.</span></span><span class="sig-name descname"><span class="pre">DisplayCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback" title="Link to this definition"></a></dt>
+<dd><p>Replaces the tensorflow progress bar logger with lots of printing to stderr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trainBatchGen</strong> – The training batch generator.</p></li>
+<li><p><strong>valBatchGen</strong> – The validation batch generator.</p></li>
+<li><p><strong>plateauCallback</strong> – The plateau callback, used to access the LR schedule.</p></li>
+<li><p><strong>earlyStopCallback</strong> – The EarlyStopping callback, used to see how long we have left.</p></li>
+<li><p><strong>adaptiveLossCallback</strong> – The adaptive loss callback, used to read <span class="math notranslate nohighlight">\({\lambda}\)</span> values.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.epochNumber">
+<span class="sig-name descname"><span class="pre">epochNumber</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.epochNumber" title="Link to this definition"></a></dt>
+<dd><p>What is the currently-running epoch number?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.batchNumber">
+<span class="sig-name descname"><span class="pre">batchNumber</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.batchNumber" title="Link to this definition"></a></dt>
+<dd><p>What is the currently-running training batch number?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.printLocationsEpoch">
+<span class="sig-name descname"><span class="pre">printLocationsEpoch</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.printLocationsEpoch" title="Link to this definition"></a></dt>
+<dd><p>For a given data type, what row should it be printed on
+in the epoch pane? For example, “val_loss” might go on row 5.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.printLocationsBatch">
+<span class="sig-name descname"><span class="pre">printLocationsBatch</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.printLocationsBatch" title="Link to this definition"></a></dt>
+<dd><p>What row should each data type go on in the batch pane?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.multipliers">
+<span class="sig-name descname"><span class="pre">multipliers</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.multipliers" title="Link to this definition"></a></dt>
+<dd><p>For a given data type, what constant should it be multiplied by
+for display? This is used to weight profile losses by profile-loss-weight.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.prevEpochLogs">
+<span class="sig-name descname"><span class="pre">prevEpochLogs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.prevEpochLogs" title="Link to this definition"></a></dt>
+<dd><p>The logs from last epoch</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.lastBatchEndTime">
+<span class="sig-name descname"><span class="pre">lastBatchEndTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.lastBatchEndTime" title="Link to this definition"></a></dt>
+<dd><p>When did the last batch finish?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.lastValBatchEndTime">
+<span class="sig-name descname"><span class="pre">lastValBatchEndTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.lastValBatchEndTime" title="Link to this definition"></a></dt>
+<dd><p>When did the last validation batch finish?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.lastEpochEndTime">
+<span class="sig-name descname"><span class="pre">lastEpochEndTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.lastEpochEndTime" title="Link to this definition"></a></dt>
+<dd><p>When did the last epoch finish?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.lastEpochStartTime">
+<span class="sig-name descname"><span class="pre">lastEpochStartTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.lastEpochStartTime" title="Link to this definition"></a></dt>
+<dd><p>When did the current epoch start?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.numEpochs">
+<span class="sig-name descname"><span class="pre">numEpochs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.numEpochs" title="Link to this definition"></a></dt>
+<dd><p>What is the maximum number of training epochs?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.curEpochWaitTime">
+<span class="sig-name descname"><span class="pre">curEpochWaitTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.curEpochWaitTime" title="Link to this definition"></a></dt>
+<dd><p>How long between the end of the last epoch and the start of this one?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.maxLen">
+<span class="sig-name descname"><span class="pre">maxLen</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.maxLen" title="Link to this definition"></a></dt>
+<dd><p>Of all the data types, what is the length of the longest name?
+Used to calculate column positions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.trainBeginTime">
+<span class="sig-name descname"><span class="pre">trainBeginTime</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.trainBeginTime" title="Link to this definition"></a></dt>
+<dd><p>When did the whole training process start?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.numBatches">
+<span class="sig-name descname"><span class="pre">numBatches</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.numBatches" title="Link to this definition"></a></dt>
+<dd><p>How many training batches per epoch?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.numValBatches">
+<span class="sig-name descname"><span class="pre">numValBatches</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.numValBatches" title="Link to this definition"></a></dt>
+<dd><p>How many validation batches per epoch?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.on_train_begin">
+<span class="sig-name descname"><span class="pre">on_train_begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.on_train_begin" title="Link to this definition"></a></dt>
+<dd><p>Just loads in the total number of epochs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>logs</strong> (<em>dict</em><em> | </em><em>None</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.on_epoch_begin">
+<span class="sig-name descname"><span class="pre">on_epoch_begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">epoch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.on_epoch_begin" title="Link to this definition"></a></dt>
+<dd><p>Just sets the timers up, so you can check how long an epoch took at the end.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>epoch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>logs</strong> (<em>dict</em><em> | </em><em>None</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.formatStr">
+<span class="sig-name descname"><span class="pre">formatStr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.formatStr" title="Link to this definition"></a></dt>
+<dd><p>Formats an object to be 10 characters wide.</p>
+<p>If a second object is provided, format as a ratio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> (<em>str</em><em> | </em><em>int</em><em> | </em><em>float</em><em> | </em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – The thing to format</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An 11 character wide formatted string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.on_epoch_end">
+<span class="sig-name descname"><span class="pre">on_epoch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">epoch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.on_epoch_end" title="Link to this definition"></a></dt>
+<dd><p>Writes out all the logs for this epoch and the last one at INFO logging level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>epoch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>logs</strong> (<em>dict</em><em> | </em><em>None</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.on_train_batch_end">
+<span class="sig-name descname"><span class="pre">on_train_batch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.on_train_batch_end" title="Link to this definition"></a></dt>
+<dd><p>Write the loss info for the current batch at DEBUG level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>logs</strong> (<em>dict</em><em> | </em><em>None</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.DisplayCallback.on_test_batch_end">
+<span class="sig-name descname"><span class="pre">on_test_batch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.DisplayCallback.on_test_batch_end" title="Link to this definition"></a></dt>
+<dd><p>Just emit a counter with the batch number at DEBUG level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>logs</strong> (<em>dict</em><em> | </em><em>None</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.callbacks.ApplyAdaptiveCountsLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.callbacks.</span></span><span class="sig-name descname"><span class="pre">ApplyAdaptiveCountsLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss" title="Link to this definition"></a></dt>
+<dd><p>Implements the adaptive counts loss algorithm.</p>
+<p>This updates the counts loss weights in your model on the fly, so that you can specify a
+target fraction of the loss that is due to counts, and the model will automatically update
+the weight. It currently does not update profile weights, so you can’t yet automatically
+balance the losses in a multitask model.
+(You can still manually specify them in the config json, of course!)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>heads</strong> (<em>dict</em>) – Is straight from the json, except with “INTERNAL_counts-loss-weight-variable”
+entries in each head. If present, these variables are the Keras Variables that contain the
+loss weights. These will be updated in this callback.</p></li>
+<li><p><strong>aggression</strong> (<em>float</em>) – A number from 0 to 1.</p></li>
+<li><p><strong>lrPlateauCallback</strong> – The learning rate plateau callback that your model is going to use.</p></li>
+<li><p><strong>earlyStopCallback</strong> – The early stopping callback that your model is going to use.</p></li>
+<li><p><strong>checkpointCallback</strong> – The checkpoint callback that your model is going to use.</p></li>
+</ul>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">aggression</span></code> determines how aggressively the counts loss
+will be re-weighted. Lower values indicate slower changes, and a value of 1.0 means that
+the old loss should be completely discarded at each iteration.
+(If the newly calculated loss weight is ever off by over a factor of two, it’s clamped to
+be exactly twice (or half) of the old weight, so that gross instability in the early stages
+doesn’t cause the model to explode.)</p>
+<p>The three callbacks are the others used in the model, and the model should run them BEFORE
+this callback is executed.
+This callback messes with their internal state (naughty, naughty!) because changing the
+loss weights could cause the model’s loss value to go up even though the model hasn’t
+gotten any worse.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.ApplyAdaptiveCountsLoss.on_train_begin">
+<span class="sig-name descname"><span class="pre">on_train_begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss.on_train_begin" title="Link to this definition"></a></dt>
+<dd><p>Set up the initial guesses for <span class="math notranslate nohighlight">\({\lambda}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>logs</strong> (<em>dict</em><em> | </em><em>None</em>) – Ignored.</p>
+</dd>
+</dl>
+<p>At the beginning of training, see which heads are using adaptive weights.
+For those heads, load in an initial guess for <span class="math notranslate nohighlight">\({\lambda}\)</span> based on the BPNet heuristic.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.ApplyAdaptiveCountsLoss.getLosses">
+<span class="sig-name descname"><span class="pre">getLosses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">epoch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headName</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss.getLosses" title="Link to this definition"></a></dt>
+<dd><p>Get what the losses actually were in a previous epoch using that epoch’s <span class="math notranslate nohighlight">\({\lambda}\)</span> values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>epoch</strong> (<em>int</em>) – The epoch for which you’d like losses.</p></li>
+<li><p><strong>headName</strong> (<em>str</em>) – The head for which you’d like losses.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple with four losses: (profile, counts, val_profile, val_counts).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[float, float, float, float]</p>
+</dd>
+</dl>
+<p>What were the profile, counts, val_profile, and val_counts (in that order)
+losses at the given epoch? The counts weight returned from this function
+uses the counts weight in use at the given epoch.
+This method assumes that the validation and training losses
+match some regexes, and these are based on layer names. If someone
+got really goofy with head names (e.g., one head named “x” and another
+named “profile_x”, then this could get messed up.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.ApplyAdaptiveCountsLoss.whatWouldValLossBe">
+<span class="sig-name descname"><span class="pre">whatWouldValLossBe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">epoch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss.whatWouldValLossBe" title="Link to this definition"></a></dt>
+<dd><p>Determine a previous epoch’s validation loss but use the current <span class="math notranslate nohighlight">\({\lambda}\)</span> values to do it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>epoch</strong> (<em>int</em>) – The epoch number where you’d like to know what the loss would have been.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A float giving the corrected validation loss at that epoch.</p>
+</dd>
+</dl>
+<p>Had we been using the current <span class="math notranslate nohighlight">\({\lambda}\)</span> in a previous epoch, what would
+its validation loss have been?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.ApplyAdaptiveCountsLoss.resetCallbacks">
+<span class="sig-name descname"><span class="pre">resetCallbacks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss.resetCallbacks" title="Link to this definition"></a></dt>
+<dd><p>Manipulate the other callbacks so they don’t break when <span class="math notranslate nohighlight">\({\lambda}\)</span> changes.</p>
+<p>This is the squirreliest method here. The other callbacks that track model progression
+track the loss of the model at the record-setting epoch. But the definition of loss itself
+is changing during the training, so we need to update their stored idea of what the model’s
+loss was during the training.</p>
+<p>For example, consider the following scenario:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">raw_loss</span>  <span class="n">loss_weight</span>  <span class="n">scaled_loss</span>
+<span class="mi">10</span>          <span class="mi">1</span>           <span class="mi">10</span>
+<span class="mi">9</span>           <span class="mi">1</span>           <span class="mi">9</span>
+<span class="mi">8</span>           <span class="mi">1</span>           <span class="mi">8</span>
+<span class="mi">7</span>           <span class="mi">2</span>           <span class="mi">14</span>
+<span class="mi">6</span>           <span class="mi">2</span>           <span class="mi">12</span>
+<span class="mi">5</span>           <span class="mi">2</span>           <span class="mi">10</span>
+</pre></div>
+</div>
+<p>A callback that was tracking the loss, looking for the minimum, would claim
+that the best epoch was epoch 3, where the scaled loss was eight.
+We need to go into that callback and say, “no, with our current loss weight,
+the loss on epoch three would <em>actually</em> have been 16.” so that the
+callback thinks that the loss of 14 on epoch 4 is an improvement.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.callbacks.ApplyAdaptiveCountsLoss.on_epoch_end">
+<span class="sig-name descname"><span class="pre">on_epoch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">epoch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.callbacks.ApplyAdaptiveCountsLoss.on_epoch_end" title="Link to this definition"></a></dt>
+<dd><p>Update the other callbacks and calculate a new <span class="math notranslate nohighlight">\({\lambda}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>epoch</strong> (<em>int</em>) – The epoch number that just finished.</p></li>
+<li><p><strong>logs</strong> (<em>dict</em><em> | </em><em>None</em>) – The history logs from the last epoch.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bedUtils.html" class="btn btn-neutral float-left" title="bedUtils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gaOptimize.html" class="btn btn-neutral float-right" title="gaOptimize" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

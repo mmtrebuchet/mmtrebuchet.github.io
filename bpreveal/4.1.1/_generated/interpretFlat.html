@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>interpretFlat &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="interpretPisa" href="interpretPisa.html" />
+    <link rel="prev" title="Main CLI" href="majorcli.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="majorcli.html">Main CLI</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">interpretFlat</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bnf">BNF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameter-notes">Parameter Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-specification">Output Specification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#genome-and-bed-file">Genome and bed file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fasta-file">Fasta file</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-information">Additional Information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#no-fasta-coordinate-data">No fasta coordinate data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#history">History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.interpretFlat.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schema">Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="interpretPisa.html">interpretPisa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makePredictions.html">makePredictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifScan.html">motifScan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifSeqletCutoffs.html">motifSeqletCutoffs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareBed.html">prepareBed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareTrainingData.html">prepareTrainingData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainCombinedModel.html">trainCombinedModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainSoloModel.html">trainSoloModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainTransformationModel.html">trainTransformationModel</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="majorcli.html">Main CLI</a></li>
+      <li class="breadcrumb-item active">interpretFlat</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/interpretFlat.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.interpretFlat">
+<span id="interpretflat"></span><h1>interpretFlat<a class="headerlink" href="#module-bpreveal.interpretFlat" title="Link to this heading"></a></h1>
+<p>A script to generate importance scores in the style of the original BPNet.</p>
+<section id="bnf">
+<h2>BNF<a class="headerlink" href="#bnf" title="Link to this heading"></a></h2>
+<a name="flat-interpretation-configuration"></a><pre class="literal-block">&lt;<a class="reference internal" href="#flat-interpretation-configuration"><span class="std std-ref">flat-interpretation-configuration</span></a>&gt; ::=
+    {&lt;<a class="reference internal" href="interpretPisa.html#bed-or-fasta"><span class="std std-ref">bed-or-fasta</span></a>&gt;,
+     &quot;model-file&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+     &quot;input-length&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;output-length&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;heads&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;head-id&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;
+     &quot;profile-task-ids&quot; : [&lt;<a class="reference internal" href="bnf.html#list-of-integer"><span class="std std-ref">list-of-integer</span></a>&gt;],
+     &quot;profile-h5&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+     &quot;counts-h5&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+     &quot;num-shuffles&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &lt;<a class="reference internal" href="interpretPisa.html#kmer-size-section"><span class="std std-ref">kmer-size-section</span></a>&gt;
+     &lt;<a class="reference internal" href="bnf.html#verbosity-section"><span class="std std-ref">verbosity-section</span></a>&gt;}</pre>
+<a name="bed-or-fasta"></a><pre class="literal-block">&lt;<a class="reference internal" href="interpretPisa.html#bed-or-fasta"><span class="std std-ref">bed-or-fasta</span></a>&gt; ::=
+    &quot;genome&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &quot;bed-file&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;
+ |  &quot;fasta-file&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;
+ |  &quot;fasta-file&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &quot;coordinates&quot;: {
+        &quot;genome&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+        &quot;bed-file&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;}</pre>
+<a name="kmer-size-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="interpretPisa.html#kmer-size-section"><span class="std std-ref">kmer-size-section</span></a>&gt; ::=
+    &quot;kmer-size&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+  | &lt;<a class="reference internal" href="bnf.html#empty"><span class="std std-ref">empty</span></a>&gt;</pre>
+</section>
+<section id="parameter-notes">
+<h2>Parameter Notes<a class="headerlink" href="#parameter-notes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>genome, bed-file</dt><dd><p>If you specify these two parameters in the configuration, then this program
+will read coordinates from the bed file, extract the sequences from the
+provided fasta, and run interpretations on those sequences. In this case,
+the output file will include <code class="docutils literal notranslate"><span class="pre">chrom_names</span></code>, <code class="docutils literal notranslate"><span class="pre">chrom_sizes</span></code>, <code class="docutils literal notranslate"><span class="pre">coords_start</span></code>,
+<code class="docutils literal notranslate"><span class="pre">coords_end</span></code>, and <code class="docutils literal notranslate"><span class="pre">coords_chrom</span></code>. The <code class="docutils literal notranslate"><span class="pre">bed-file</span></code> that you give should have
+regions matching the model’s <em>output</em> length. The regions will be
+automatically inflated in order to extract the input sequence from the
+genome. Somewhat confusingly, this means that the contribution scores will
+include contributions from bases that are not in your bed file. This is
+because the contribution scores explain how all of the input bases
+contribute to the output observed at the region in the bed file.</p>
+</dd>
+<dt>fasta-file</dt><dd><p>If you specify a fasta file, then the sequences are taken directly from
+that file. In this case, the output hdf5 file will not include the
+<code class="docutils literal notranslate"><span class="pre">chrom_names</span></code>, <code class="docutils literal notranslate"><span class="pre">chrom_sizes</span></code>, <code class="docutils literal notranslate"><span class="pre">coords_start</span></code>, <code class="docutils literal notranslate"><span class="pre">coords_end</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">coords_chrom</span></code> fields. Instead it will contain a <code class="docutils literal notranslate"><span class="pre">descriptions</span></code> dataset,
+which holds the description lines from the fasta. If you specify
+<code class="docutils literal notranslate"><span class="pre">fasta-file</span></code>, then the sequences in that fasta must be as long as the
+model’s <em>input</em> length. (Since we need the whole sequence that will be
+explained.) In this case, the contribution scores in the output will match
+one-to-one with the input bases.</p>
+</dd>
+<dt>coordinates, genome, bed-file</dt><dd><p>If you give a fasta file and also include a <code class="docutils literal notranslate"><span class="pre">coordinates</span></code> section, then
+the sequences to interpret will be drawn from the given <code class="docutils literal notranslate"><span class="pre">fasta-file</span></code>, but
+coordinate information and chromosome sizes will be taken from the bed file
+and genome fasta. This means that you can use
+<a class="reference internal" href="shapToBigwig.html#module-bpreveal.shapToBigwig" title="bpreveal.shapToBigwig"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shapToBigwig</span></code></a> even though the sequences
+don’t come from a real genome. In this case, the output hdf5 will contain
+all of the usual coordinate datasets in addition to the <code class="docutils literal notranslate"><span class="pre">description</span></code>
+dataset that you usually get for interpreting from a fasta file.</p>
+</dd>
+<dt>heads</dt><dd><p>This parameter is the <em>total</em> number of heads that the model has.</p>
+</dd>
+<dt>head-id</dt><dd><p>This parameter gives which head you want importance values calculated for.</p>
+</dd>
+<dt>profile-task-ids</dt><dd><p>Lists which of the profile predictions (i.e., tasks) from the specified
+head you want considered. Almost always, you should include all of the
+profiles. For a single-task head, this would be <code class="docutils literal notranslate"><span class="pre">[0]</span></code>, and for a two-task
+head this would be <code class="docutils literal notranslate"><span class="pre">[0,1]</span></code>.</p>
+</dd>
+<dt>profile-h5, counts-h5</dt><dd><p>These are the names of the output files that will be saved to disk.</p>
+</dd>
+<dt>num-shuffles</dt><dd><p>This is the number of background samples that should be used for
+calculating shap values. I recommend 20.</p>
+</dd>
+<dt>kmer-size</dt><dd><p>(Optional) If provided, this changes how the shuffles work. By default (or
+if you specify <code class="docutils literal notranslate"><span class="pre">kmer-size</span> <span class="pre">=</span> <span class="pre">1</span></code>) all of the bases in the input are jumbled
+randomly. However, if you specify <code class="docutils literal notranslate"><span class="pre">kmer-size=2</span></code>, then the distribution of
+dimers will be preserved in the shuffled sequences. If you specify
+<code class="docutils literal notranslate"><span class="pre">kmer-size=3</span></code>, then trimers will be preserved, and so on.</p>
+</dd>
+</dl>
+</section>
+<section id="output-specification">
+<h2>Output Specification<a class="headerlink" href="#output-specification" title="Link to this heading"></a></h2>
+<section id="genome-and-bed-file">
+<h3>Genome and bed file<a class="headerlink" href="#genome-and-bed-file" title="Link to this heading"></a></h3>
+<p>If you gave a genome fasta and a bed file of regions, the output will have this
+structure:</p>
+<dl class="simple">
+<dt>chrom_names</dt><dd><p>A list of strings giving the name of each chromosome. <code class="docutils literal notranslate"><span class="pre">coords_chrom</span></code>
+entries correspond to the order of chromosomes in this dataset.</p>
+</dd>
+<dt>chrom_sizes</dt><dd><p>A list of integers giving the size of each chromosome. This is mostly here
+as a handy reference when you want to make a bigwig file.</p>
+</dd>
+<dt>coords_start</dt><dd><p>The start point for each of the regions that were explained. This will have
+shape <code class="docutils literal notranslate"><span class="pre">(num-regions,)</span></code>. Note that this starts at the beginning of the
+<em>input</em> to the model, so it will not match the coordinates in the bed file.</p>
+</dd>
+<dt>coords_end</dt><dd><p>The end point for each of the regions that were explained. This will have
+shape <code class="docutils literal notranslate"><span class="pre">(num-regions,)</span></code>. As with <code class="docutils literal notranslate"><span class="pre">coords_start</span></code>, this corresponds to the
+last base in the <em>input</em> to the model.</p>
+</dd>
+<dt>coords_chrom</dt><dd><p>The chromosome number on which each region is found. These are integer
+indexes into <code class="docutils literal notranslate"><span class="pre">chrom_names</span></code>, and this dataset has shape <code class="docutils literal notranslate"><span class="pre">(num-regions,)</span></code></p>
+</dd>
+<dt>input_seqs</dt><dd><p>A one-hot encoded array representing the input sequences. It will have
+shape <code class="docutils literal notranslate"><span class="pre">(num-regions</span> <span class="pre">x</span> <span class="pre">input-length</span> <span class="pre">x</span> <span class="pre">4)</span></code></p>
+</dd>
+<dt>hyp_scores</dt><dd><p>A table of the shap scores. It will have shape <code class="docutils literal notranslate"><span class="pre">(num-regions</span> <span class="pre">x</span>
+<span class="pre">input-length</span> <span class="pre">x</span> <span class="pre">4)</span></code>. If you want the actual contribution scores, not the
+hypothetical ones, multiply <code class="docutils literal notranslate"><span class="pre">hyp_scores</span></code> by <code class="docutils literal notranslate"><span class="pre">input_seqs</span></code> to zero out
+all purely hypothetical contribution scores.</p>
+</dd>
+</dl>
+</section>
+<section id="fasta-file">
+<h3>Fasta file<a class="headerlink" href="#fasta-file" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>descriptions</dt><dd><p>A list of strings that are the description lines from the input fasta file
+(with the leading <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> removed). This list will have shape
+<code class="docutils literal notranslate"><span class="pre">(num-regions,)</span></code></p>
+</dd>
+<dt>input_seqs, hyp_scores</dt><dd><p>These have the same meaning as in the bed-and-genome based output files.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="additional-information">
+<h2>Additional Information<a class="headerlink" href="#additional-information" title="Link to this heading"></a></h2>
+<section id="no-fasta-coordinate-data">
+<h3>No fasta coordinate data<a class="headerlink" href="#no-fasta-coordinate-data" title="Link to this heading"></a></h3>
+<p>While you can use <a class="reference internal" href="shapToNumpy.html#module-bpreveal.shapToNumpy" title="bpreveal.shapToNumpy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shapToNumpy</span></code></a> on either format of
+<code class="docutils literal notranslate"><span class="pre">interpretFlat</span></code> output, you cannot convert a fasta-based interpretation
+h5 to a bigwig, since it doesn’t contain coordinate information. You can get
+around this limitation by providing a bed file and a genome in a <code class="docutils literal notranslate"><span class="pre">coordinates</span></code>
+section.</p>
+</section>
+</section>
+<section id="history">
+<h2>History<a class="headerlink" href="#history" title="Link to this heading"></a></h2>
+<p>Before BPReveal 4.0.0, the <code class="docutils literal notranslate"><span class="pre">coords_chrom</span></code> dataset in the generated hdf5 file
+contained strings. For consistency with every other tool in the BPReveal suite,
+it was changed to contain an integer index into the <code class="docutils literal notranslate"><span class="pre">chrom_names</span></code> dataset.</p>
+</section>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.interpretFlat.main">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.interpretFlat.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.interpretFlat.main" title="Link to this definition"></a></dt>
+<dd><p>Run the interpretation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) – A JSON object matching the interpretFlat specification.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Link to this heading"></a></h2>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;interpretFlat&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for interpretFlat.py&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;genome&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;bed-file&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;fasta-file&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;coordinates&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;properties&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;genome&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;bed-file&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;genome&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;bed-file&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;input-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;output-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;heads&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;head-id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;profile-task-ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;profile-h5&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;counts-h5&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;num-shuffles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;minimum&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;kmer-size&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;minimum&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;verbosity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/verbosity&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;input-length&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;output-length&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;heads&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;head-id&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;profile-task-ids&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;profile-h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;counts-h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;num-shuffles&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;verbosity&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;genome&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;bed-file&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;anyOf&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;coordinates&quot;</span><span class="p">]},</span>
+<span class="w">                    </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fasta-file&quot;</span><span class="p">]}</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;anyOf&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;genome&quot;</span><span class="p">]},</span>
+<span class="w">                    </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bed-file&quot;</span><span class="p">]}</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fasta-file&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="majorcli.html" class="btn btn-neutral float-left" title="Main CLI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="interpretPisa.html" class="btn btn-neutral float-right" title="interpretPisa" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

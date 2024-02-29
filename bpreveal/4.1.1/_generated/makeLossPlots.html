@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>makeLossPlots &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="metrics" href="metrics.html" />
+    <link rel="prev" title="lengthCalc" href="lengthCalc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="minorcli.html">Utility CLI</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkJson.html">checkJson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lengthCalc.html">lengthCalc</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">makeLossPlots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#help-info">Help Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#named-arguments">Named Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.makeLossPlots.getParser"><code class="docutils literal notranslate"><span class="pre">getParser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.makeLossPlots.reweightCountsLosses"><code class="docutils literal notranslate"><span class="pre">reweightCountsLosses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.makeLossPlots.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.makeLossPlots.plotLosses"><code class="docutils literal notranslate"><span class="pre">plotLosses()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifAddQuantiles.html">motifAddQuantiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predictToBigwig.html">predictToBigwig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapToBigwig.html">shapToBigwig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapToNumpy.html">shapToNumpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="showModel.html">showModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="showTrainingProgress.html">showTrainingProgress</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="minorcli.html">Utility CLI</a></li>
+      <li class="breadcrumb-item active">makeLossPlots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/makeLossPlots.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="makelossplots">
+<h1>makeLossPlots<a class="headerlink" href="#makelossplots" title="Link to this heading"></a></h1>
+<section id="help-info">
+<h2>Help Info<a class="headerlink" href="#help-info" title="Link to this heading"></a></h2>
+<p><p>Takes in a model history file (json format) and generates plots of all the components of the loss during training.</p>
+</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>usage: makeLossPlots [-h] [--json JSON] [--output OUTPUT]
+                     [--dpi DPI]
+                     [--exclude EXCLUDE [EXCLUDE ...]]
+                     [--start-from STARTFROM] [--verbose]
+                     [--total-only]
+</pre></div>
+</div>
+<section id="named-arguments">
+<h3>Named Arguments<a class="headerlink" href="#named-arguments" title="Link to this heading"></a></h3>
+<dl class="option-list">
+<dt><kbd>--json</kbd></dt>
+<dd><p>The name of the json-format model history file.</p>
+</dd>
+<dt><kbd>--output</kbd></dt>
+<dd><p>The name of the png-format image file that should be written.</p>
+</dd>
+<dt><kbd>--dpi</kbd></dt>
+<dd><p>(optional) The resolution of the image that should be saved.</p>
+<p>Default: 300</p>
+</dd>
+<dt><kbd>--exclude</kbd></dt>
+<dd><p>(optional) Don’t include loss plots from these components of the loss. Specified as a regex, may be specified multiple times.</p>
+</dd>
+<dt><kbd>--start-from</kbd></dt>
+<dd><p>(optional) Instead of starting at epoch 0, start at epoch N</p>
+<p>Default: 0</p>
+</dd>
+<dt><kbd>--verbose</kbd></dt>
+<dd><p>Display extra information as the losses are being processed.</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--total-only</kbd></dt>
+<dd><p>(optional) Instead of plotting all the loss components, just show the total loss.</p>
+<p>Default: False</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p id="module-bpreveal.makeLossPlots">A little utility to plot loss values during training.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.makeLossPlots.getParser">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.makeLossPlots.</span></span><span class="sig-name descname"><span class="pre">getParser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.makeLossPlots.getParser" title="Link to this definition"></a></dt>
+<dd><p>Generate the argument parser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ArgumentParser</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.makeLossPlots.reweightCountsLosses">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.makeLossPlots.</span></span><span class="sig-name descname"><span class="pre">reweightCountsLosses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">history</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lossTypes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.makeLossPlots.reweightCountsLosses" title="Link to this definition"></a></dt>
+<dd><p>Add corrections for the adaptive counts loss algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>history</strong> (<em>dict</em>) – The loss history, straight from the json.</p></li>
+<li><p><strong>lossTypes</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The losses that should be plotted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The weight history, and also edits history and lossTypes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.makeLossPlots.main">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.makeLossPlots.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.makeLossPlots.main" title="Link to this definition"></a></dt>
+<dd><p>Make the plots</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.makeLossPlots.plotLosses">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.makeLossPlots.</span></span><span class="sig-name descname"><span class="pre">plotLosses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lossTypes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startFrom</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.makeLossPlots.plotLosses" title="Link to this definition"></a></dt>
+<dd><p>Given all the loss data, plot them in a grid.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lengthCalc.html" class="btn btn-neutral float-left" title="lengthCalc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="metrics.html" class="btn btn-neutral float-right" title="metrics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

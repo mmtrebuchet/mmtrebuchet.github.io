@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="setup.html" />
+    <link rel="prev" title="Workflows" href="workflow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="text.html">Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">Workflows</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main-cli">Main CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utility-cli">Utility CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools">Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="breakingChanges.html">Breaking Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelArchitectures.html">Model architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="countsLossReweighting.html">Adaptive Counts Loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pisa.html">PISA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bnf.html">BNF Grammars</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="text.html">Overview</a></li>
+      <li class="breadcrumb-item active">Programs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/programs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="programs">
+<h1>Programs<a class="headerlink" href="#programs" title="Link to this heading"></a></h1>
+<section id="main-cli">
+<h2>Main CLI<a class="headerlink" href="#main-cli" title="Link to this heading"></a></h2>
+<p>These are the core programs of BPReveal. Each one takes a JSON configuration file.</p>
+<dl class="simple">
+<dt><a class="reference internal" href="interpretFlat.html#module-bpreveal.interpretFlat" title="bpreveal.interpretFlat"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretFlat</span></code></a></dt><dd><p>Generates shap scores of the same type as
+BPNet.
+Hypothetical contributions for each base are written to a
+modisco-compatible h5.</p>
+</dd>
+<dt><a class="reference internal" href="interpretPisa.html#module-bpreveal.interpretPisa" title="bpreveal.interpretPisa"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretPisa</span></code></a></dt><dd><p>Runs an all-to-all shap analysis on the
+given bed regions or fasta sequences.</p>
+</dd>
+<dt><a class="reference internal" href="makePredictions.html#module-bpreveal.makePredictions" title="bpreveal.makePredictions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">makePredictions</span></code></a></dt><dd><p>Takes a trained model (solo, combined,
+residual, or even transformation models work) and predicts over the
+given regions.</p>
+</dd>
+<dt><a class="reference internal" href="motifScan.html#module-bpreveal.motifScan" title="bpreveal.motifScan"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifScan</span></code></a></dt><dd><p>Scan the genome for patterns of contribution
+scores that match motifs identified by modiscolite.</p>
+</dd>
+<dt><a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a></dt><dd><p>Loads the output from
+<code class="docutils literal notranslate"><span class="pre">modiscolite</span></code> and calculates cutoff values to use during motif
+scanning.</p>
+</dd>
+<dt><a class="reference internal" href="prepareBed.html#module-bpreveal.prepareBed" title="bpreveal.prepareBed"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareBed</span></code></a></dt><dd><p>Given a set of regions and data tracks, reject
+regions that have too few (or too many) reads, or that have unmapped
+bases in the genome.</p>
+</dd>
+<dt><a class="reference internal" href="prepareTrainingData.html#module-bpreveal.prepareTrainingData" title="bpreveal.prepareTrainingData"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareTrainingData</span></code></a></dt><dd><p>Takes in bed and bigwig files and a
+genome, and generates an hdf5-format file containing the samples used
+for training.</p>
+</dd>
+<dt><a class="reference internal" href="trainCombinedModel.html#module-bpreveal.trainCombinedModel" title="bpreveal.trainCombinedModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trainCombinedModel</span></code></a></dt><dd><p>Takes a transformation model and
+experimental data and builds a model to explain the residuals.
+Saves both a combined model and the residual model alone to disk.</p>
+</dd>
+<dt><a class="reference internal" href="trainSoloModel.html#module-bpreveal.trainSoloModel" title="bpreveal.trainSoloModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trainSoloModel</span></code></a></dt><dd><p>Takes in a training input configuration
+and trains up a model to predict the given data, with no bias
+correction.
+Saves the model to disk, along with information from the training phase.</p>
+</dd>
+<dt><a class="reference internal" href="trainTransformationModel.html#module-bpreveal.trainTransformationModel" title="bpreveal.trainTransformationModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trainTransformationModel</span></code></a></dt><dd><p>Takes in a bias (i.e., solo)
+model and the actual experimental (i.e., biology + bias) data.
+Derives a relation to best fit the bias profile onto the experimental
+data.
+Saves a new model to disk, adding a simple layer or two to do the
+regression.</p>
+</dd>
+</dl>
+</section>
+<section id="utility-cli">
+<h2>Utility CLI<a class="headerlink" href="#utility-cli" title="Link to this heading"></a></h2>
+<p>These are little tools and utilities that help in dealing with models. These
+take arguments on the command line.</p>
+<dl class="simple">
+<dt><a class="reference internal" href="lengthCalc.html#module-bpreveal.lengthCalc" title="bpreveal.lengthCalc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lengthCalc</span></code></a></dt><dd><p>Given the parameters of a network, like input
+filter width, number of layers &amp;c., determine the input width or
+output width.</p>
+</dd>
+<dt><a class="reference internal" href="makeLossPlots.html#module-bpreveal.makeLossPlots" title="bpreveal.makeLossPlots"><code class="xref py py-mod docutils literal notranslate"><span class="pre">makeLossPlots</span></code></a></dt><dd><p>Once you’ve trained a model, you can run
+this on the history file to get plots of all of the components of the
+loss.</p>
+</dd>
+<dt><a class="reference internal" href="metrics.html#module-bpreveal.metrics" title="bpreveal.metrics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metrics</span></code></a></dt><dd><p>Calculates a suite of metrics about how good a model’s predictions are.</p>
+</dd>
+<dt><a class="reference internal" href="motifAddQuantiles.html#module-bpreveal.motifAddQuantiles" title="bpreveal.motifAddQuantiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifAddQuantiles</span></code></a></dt><dd><p>Takes the output from
+<a class="reference internal" href="motifScan.html#module-bpreveal.motifScan" title="bpreveal.motifScan"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifScan</span></code></a> and adds quantile information for determining how
+good your motif matches were.</p>
+</dd>
+<dt><a class="reference internal" href="predictToBigwig.html#module-bpreveal.predictToBigwig" title="bpreveal.predictToBigwig"><code class="xref py py-mod docutils literal notranslate"><span class="pre">predictToBigwig</span></code></a></dt><dd><p>Takes the hdf5 file generated by the predict step and converts one track
+from it into a bigwig file.</p>
+</dd>
+<dt><a class="reference internal" href="shapToBigwig.html#module-bpreveal.shapToBigwig" title="bpreveal.shapToBigwig"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shapToBigwig</span></code></a></dt><dd><p>Converts a shap hdf5 file (from
+<a class="reference internal" href="interpretFlat.html#module-bpreveal.interpretFlat" title="bpreveal.interpretFlat"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretFlat</span></code></a>) into a bigwig track for
+visualization.</p>
+</dd>
+<dt><a class="reference internal" href="shapToNumpy.html#module-bpreveal.shapToNumpy" title="bpreveal.shapToNumpy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shapToNumpy</span></code></a></dt><dd><p>Takes the interpretations from
+<a class="reference internal" href="interpretFlat.html#module-bpreveal.interpretFlat" title="bpreveal.interpretFlat"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretFlat</span></code></a> and converts them to numpy
+arrays that can be read in by modiscolite.</p>
+</dd>
+<dt><a class="reference internal" href="checkJson.html#module-bpreveal.checkJson" title="bpreveal.checkJson"><code class="xref py py-mod docutils literal notranslate"><span class="pre">checkJson</span></code></a></dt><dd><p>Take a json file and make sure that it’s valid input for one of the
+BPReveal programs. Can also be used to identify which BPReveal program a
+json belongs to.</p>
+</dd>
+<dt><a class="reference internal" href="showTrainingProgress.html#module-bpreveal.showTrainingProgress" title="bpreveal.showTrainingProgress"><code class="xref py py-mod docutils literal notranslate"><span class="pre">showTrainingProgress</span></code></a></dt><dd><p>Read in the log files generated by the training programs (when verbosity is
+<code class="docutils literal notranslate"><span class="pre">INFO</span></code> or <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> and show you how well the model’s doing in real time.</p>
+</dd>
+<dt><a class="reference internal" href="showModel.html#module-bpreveal.showModel" title="bpreveal.showModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">showModel</span></code></a></dt><dd><p>(DEPRECATED, will be removed in 6.0.0) Make a pretty picture of your model.</p>
+</dd>
+</dl>
+</section>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+<p>These are Python libraries that do most of the heavy lifting, and can be imported
+to do useful things in your code.</p>
+<dl class="simple">
+<dt><a class="reference internal" href="gaOptimize.html#module-bpreveal.gaOptimize" title="bpreveal.gaOptimize"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gaOptimize</span></code></a></dt><dd><p>contains tools for evolving sequences that lead to desired profiles. It
+implements a genetic algorithm that supports insertions and deletions.</p>
+</dd>
+<dt><a class="reference internal" href="utils.html#module-bpreveal.utils" title="bpreveal.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a></dt><dd><p>Contains general-use utilities and a high-performance tool to generate
+predictions for many sequences.</p>
+</dd>
+<dt><a class="reference internal" href="bedUtils.html#module-bpreveal.bedUtils" title="bpreveal.bedUtils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bedUtils</span></code></a></dt><dd><p>Useful functions for manipulating bed files, particularly for tiling the
+genome with regions.</p>
+</dd>
+<dt><a class="reference internal" href="motifUtils.html#module-bpreveal.motifUtils" title="bpreveal.motifUtils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifUtils</span></code></a></dt><dd><p>Functions for dealing with motif scanning and modisco files.</p>
+</dd>
+<dt><a class="reference internal" href="logUtils.html#module-bpreveal.logUtils" title="bpreveal.logUtils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logUtils</span></code></a></dt><dd><p>Functions used to log information. It’s basically TensorFlow’s wrapper
+around the <code class="docutils literal notranslate"><span class="pre">logging</span></code> module in the standard library.</p>
+</dd>
+<dt><a class="reference internal" href="interpretUtils.html#module-bpreveal.interpretUtils" title="bpreveal.interpretUtils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretUtils</span></code></a></dt><dd><p>Functions for getting interpretation scores. Contains a streaming system
+for calculating pisa and flat importance scores.</p>
+</dd>
+<dt><a class="reference internal" href="schema.html#module-bpreveal.schema" title="bpreveal.schema"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schema</span></code></a></dt><dd><p>A set of JSON schemas that validate the inputs to the BPReveal programs.
+These are used to make sure that incorrect inputs trigger errors early, and
+that those errors are clearer to the user.</p>
+</dd>
+<dt><code class="xref py py-mod docutils literal notranslate"><span class="pre">training</span></code></dt><dd><p>A very simple module that actually runs the training loop for
+<a class="reference internal" href="trainSoloModel.html#module-bpreveal.trainSoloModel" title="bpreveal.trainSoloModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trainSoloModel</span></code></a>,
+<a class="reference internal" href="trainTransformationModel.html#module-bpreveal.trainTransformationModel" title="bpreveal.trainTransformationModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trainTransformationModel</span></code></a>, and
+<a class="reference internal" href="trainCombinedModel.html#module-bpreveal.trainCombinedModel" title="bpreveal.trainCombinedModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trainCombinedModel</span></code></a>.</p>
+</dd>
+<dt><a class="reference internal" href="jaccard.html#module-bpreveal.jaccard" title="bpreveal.jaccard"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jaccard</span></code></a></dt><dd><p>Contains wrappers around C functions that calculate the sliding Jaccard similarity
+used to scan for motifs.</p>
+</dd>
+<dt><a class="reference internal" href="ushuffle.html#module-bpreveal.ushuffle" title="bpreveal.ushuffle"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ushuffle</span></code></a></dt><dd><p>A wrapper around the ushuffle library, used to perform shuffles of sequences that
+preserve k-mer distributions.</p>
+</dd>
+</dl>
+</section>
+<section id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Link to this heading"></a></h2>
+<p>These are miscellaneous programs that are not part of BPReveal proper, but that
+I have found useful. They are not actively maintained, and tend to have subpar
+documentation.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="workflow.html" class="btn btn-neutral float-left" title="Workflows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="setup.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

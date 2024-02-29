@@ -1,0 +1,138 @@
+.. raw:: html
+
+    <a name="combined-training-input-configuration"></a>
+
+.. _combined-training-input-configuration:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`combined-training-input-configuration<combined-training-input-configuration>`> ::=
+       {<:ref:`combined-settings-section<combined-settings-section>`> , <:ref:`data-section<data-section>`>,
+         <:ref:`combined-head-section<combined-head-section>`>, <:ref:`verbosity-section<verbosity-section>`>}
+    
+.. raw:: html
+
+    <a name="combined-head-section"></a>
+
+.. _combined-head-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`combined-head-section<combined-head-section>`> ::=
+      "heads" : [<:ref:`combined-head-list<combined-head-list>`>]
+    
+.. raw:: html
+
+    <a name="combined-head-list"></a>
+
+.. _combined-head-list:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`combined-head-list<combined-head-list>`> ::=
+        <:ref:`combined-individual-head<combined-individual-head>`>
+      | <:ref:`combined-individual-head<combined-individual-head>`>, <:ref:`combined-head-list<combined-head-list>`>
+    
+.. raw:: html
+
+    <a name="combined-individual-head"></a>
+
+.. _combined-individual-head:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`combined-individual-head<combined-individual-head>`> ::=
+        {"num-tasks" : <:ref:`integer<integer>`>,
+         "profile-loss-weight" : <:ref:`number<number>`>,
+         <:ref:`counts-loss-section<counts-loss-section>`>,
+         "head-name" : <:ref:`string<string>`>,
+         "use-bias-counts" : <:ref:`boolean<boolean>`>}
+    
+.. raw:: html
+
+    <a name="combined-settings-section"></a>
+
+.. _combined-settings-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`combined-settings-section<combined-settings-section>`> ::=
+        "settings" : {<:ref:`combined-settings-contents<combined-settings-contents>`>}
+    
+.. raw:: html
+
+    <a name="combined-settings-contents"></a>
+
+.. _combined-settings-contents:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`combined-settings-contents<combined-settings-contents>`> ::=
+        {"output-prefix" : "<:ref:`string<string>`>",
+         "epochs" : <:ref:`integer<integer>`>,
+         "early-stopping-patience" : <:ref:`integer<integer>`>,
+         "batch-size" : <:ref:`integer<integer>`>,
+         "learning-rate" : <:ref:`number<number>`>,
+         "learning-rate-plateau-patience" : <:ref:`integer<integer>`>,
+         "transformation-model" : <:ref:`transformation-combined-settings<transformation-combined-settings>`>,
+         "max-jitter" : <:ref:`integer<integer>`>,
+         "architecture" : <:ref:`combined-architecture-specification<combined-architecture-specification>`> }
+    
+.. raw:: html
+
+    <a name="transformation-combined-settings"></a>
+
+.. _transformation-combined-settings:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`transformation-combined-settings<transformation-combined-settings>`> ::=
+        {"transformation-model-file" : <:ref:`file-name<file-name>`> }
+    
+.. raw:: html
+
+    <a name="combined-architecture-specification"></a>
+
+.. _combined-architecture-specification:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`combined-architecture-specification<combined-architecture-specification>`> ::=
+        <:ref:`combined-bpnet-architecture-specification<combined-bpnet-architecture-specification>`>
+    
+.. raw:: html
+
+    <a name="combined-bpnet-architecture-specification"></a>
+
+.. _combined-bpnet-architecture-specification:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`combined-bpnet-architecture-specification<combined-bpnet-architecture-specification>`> ::=
+        {"architecture-name" : "bpnet",
+         "input-length" : <:ref:`number<number>`>,
+         "output-length" : <:ref:`number<number>`>,
+         "model-name" : <:ref:`string<string>`>,
+         "model-args" : <:ref:`string<string>`>,
+         "filters" : <:ref:`number<number>`>,
+         "layers" : <:ref:`number<number>`>,
+         "input-filter-width" : <:ref:`number<number>`>,
+         "output-filter-width" : <:ref:`number<number>`>}

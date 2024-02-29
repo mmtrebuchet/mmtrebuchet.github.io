@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>&lt;no title&gt; &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_generated/bnf/addNoise.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a name="add-noise-configuration"></a><pre class="literal-block">&lt;<a class="reference internal" href="#add-noise-configuration"><span class="std std-ref">add-noise-configuration</span></a>&gt; ::=
+   {&quot;input-h5&quot; : &lt;<a class="reference internal" href="../bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &quot;output-h5&quot; : &lt;<a class="reference internal" href="../bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &lt;<a class="reference internal" href="#output-size-section"><span class="std std-ref">output-size-section</span></a>&gt;,
+    &quot;keep-original-data&quot; : &lt;<a class="reference internal" href="../bnf.html#boolean"><span class="std std-ref">boolean</span></a>&gt;,
+    &quot;sequence-fraction-mutated&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;,
+    &quot;sequence-distribution-fraction&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;,
+    &quot;profile-mutation-types&quot; : [&lt;<a class="reference internal" href="#list-of-profile-mutation-types"><span class="std std-ref">list-of-profile-mutation-types</span></a>&gt;],
+    &quot;num-threads&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &lt;<a class="reference internal" href="../bnf.html#verbosity-section"><span class="std std-ref">verbosity-section</span></a>&gt;}</pre>
+<a name="output-size-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#output-size-section"><span class="std std-ref">output-size-section</span></a>&gt; ::=
+    &quot;num-output-samples&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;
+  | &quot;output-size-ratio&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;</pre>
+<a name="list-of-profile-mutation-types"></a><pre class="literal-block">&lt;<a class="reference internal" href="#list-of-profile-mutation-types"><span class="std std-ref">list-of-profile-mutation-types</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#profile-mutation-type"><span class="std std-ref">profile-mutation-type</span></a>&gt;
+  | &lt;<a class="reference internal" href="#profile-mutation-type"><span class="std std-ref">profile-mutation-type</span></a>&gt;, &lt;<a class="reference internal" href="#list-of-profile-mutation-types"><span class="std std-ref">list-of-profile-mutation-types</span></a>&gt;</pre>
+<a name="profile-mutation-type"></a><pre class="literal-block">&lt;<a class="reference internal" href="#profile-mutation-type"><span class="std std-ref">profile-mutation-type</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#add-mutation-type"><span class="std std-ref">add-mutation-type</span></a>&gt;
+  | &lt;<a class="reference internal" href="#shift-mutation-type"><span class="std std-ref">shift-mutation-type</span></a>&gt;
+  | &lt;<a class="reference internal" href="#subtract-mutation-type"><span class="std std-ref">subtract-mutation-type</span></a>&gt;</pre>
+<a name="add-mutation-type"></a><pre class="literal-block">&lt;<a class="reference internal" href="#add-mutation-type"><span class="std std-ref">add-mutation-type</span></a>&gt; ::=
+    {&quot;type&quot; : &quot;add&quot;,
+     &quot;maximum-reads&quot; : &lt;<a class="reference internal" href="../bnf.html#number-or-null"><span class="std std-ref">number-or-null</span></a>&gt;,
+     &quot;minimum-reads&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;max-change&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &lt;<a class="reference internal" href="#profile-mutation-common-parameters"><span class="std std-ref">profile-mutation-common-parameters</span></a>&gt;}</pre>
+<a name="shift-mutation-type"></a><pre class="literal-block">&lt;<a class="reference internal" href="#shift-mutation-type"><span class="std std-ref">shift-mutation-type</span></a>&gt; ::=
+    {&quot;type&quot; : &quot;shift&quot;,
+     &quot;shift-max-distance&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;shift-reads-independently&quot; : &lt;<a class="reference internal" href="../bnf.html#boolean"><span class="std std-ref">boolean</span></a>&gt;,
+     &lt;<a class="reference internal" href="#profile-mutation-common-parameters"><span class="std std-ref">profile-mutation-common-parameters</span></a>&gt;}</pre>
+<a name="subtract-mutation-type"></a><pre class="literal-block">&lt;<a class="reference internal" href="#subtract-mutation-type"><span class="std std-ref">subtract-mutation-type</span></a>&gt; ::=
+    {&quot;type&quot; : &quot;subtract&quot;,
+     &quot;maximum-reads&quot; : &lt;<a class="reference internal" href="../bnf.html#number-or-null"><span class="std std-ref">number-or-null</span></a>&gt;,
+     &quot;minimum-reads&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;max-change&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &lt;<a class="reference internal" href="#profile-mutation-common-parameters"><span class="std std-ref">profile-mutation-common-parameters</span></a>&gt;}</pre>
+<a name="profile-mutation-common-parameters"></a><pre class="literal-block">&lt;<a class="reference internal" href="#profile-mutation-common-parameters"><span class="std std-ref">profile-mutation-common-parameters</span></a>&gt; ::=
+     &quot;fraction-mutated&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;,
+     &quot;output-distribution-fraction&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;</pre>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

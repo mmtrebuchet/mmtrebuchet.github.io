@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>generators &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="interpretUtils" href="interpretUtils.html" />
+    <link rel="prev" title="gaOptimize" href="gaOptimize.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bedUtils.html">bedUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html">callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaOptimize.html">gaOptimize</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">generators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.generators.H5BatchGenerator"><code class="docutils literal notranslate"><span class="pre">H5BatchGenerator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.generators.H5BatchGenerator.addMeanCounts"><code class="docutils literal notranslate"><span class="pre">H5BatchGenerator.addMeanCounts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.generators.H5BatchGenerator.loadData"><code class="docutils literal notranslate"><span class="pre">H5BatchGenerator.loadData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.generators.H5BatchGenerator.refreshData"><code class="docutils literal notranslate"><span class="pre">H5BatchGenerator.refreshData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.generators.H5BatchGenerator.on_epoch_end"><code class="docutils literal notranslate"><span class="pre">H5BatchGenerator.on_epoch_end()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="interpretUtils.html">interpretUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaccard.html">jaccard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html">layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logUtils.html">logUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="losses.html">losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifUtils.html">motifUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema.html">schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ushuffle.html">ushuffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">generators</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/generators.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.generators">
+<span id="generators"></span><h1>generators<a class="headerlink" href="#module-bpreveal.generators" title="Link to this heading"></a></h1>
+<p>A class to load up hdf5 files.</p>
+<p>These files will have been generated by
+<a class="reference internal" href="prepareTrainingData.html#module-bpreveal.prepareTrainingData" title="bpreveal.prepareTrainingData"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareTrainingData</span></code></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.generators.H5BatchGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.generators.</span></span><span class="sig-name descname"><span class="pre">H5BatchGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.generators.H5BatchGenerator" title="Link to this definition"></a></dt>
+<dd><p>Loads up training data and presents it to the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>headList</strong> (<em>dict</em>) – The list of heads straight from the configuration JSON.
+This gets mutated when mean counts are added, see <a class="reference internal" href="#bpreveal.generators.H5BatchGenerator.addMeanCounts" title="bpreveal.generators.H5BatchGenerator.addMeanCounts"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addMeanCounts()</span></code></a>.</p></li>
+<li><p><strong>dataH5</strong> (<em>File</em>) – The (opened) hdf5 file generated by <code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareTrainingData</span></code>.</p></li>
+<li><p><strong>inputLength</strong> (<em>int</em>) – The input length of your model.</p></li>
+<li><p><strong>outputLength</strong> (<em>int</em>) – The output length of your model.</p></li>
+<li><p><strong>maxJitter</strong> (<em>int</em>) – How much random offset can the generator apply when it creates
+a batch?</p></li>
+<li><p><strong>batchSize</strong> (<em>int</em>) – How many samples will the model be trained on in each batch?</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.generators.H5BatchGenerator.addMeanCounts">
+<span class="sig-name descname"><span class="pre">addMeanCounts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.generators.H5BatchGenerator.addMeanCounts" title="Link to this definition"></a></dt>
+<dd><p>For all heads, calculate the average number of reads over all regions.</p>
+<p>In the BPNet paper, it was shown that <span class="math notranslate nohighlight">\({\lambda}\)</span><span class="math notranslate nohighlight">\({1/2}\)</span> = ĉ/2, where ĉ is the average
+number of counts in each region, and if that value of <span class="math notranslate nohighlight">\({\lambda}\)</span> is used in as the
+counts loss weight, then the profile and counts losses will be given equal weight.</p>
+<p>For each head in self.headList, adds a new field INTERNAL_mean-counts that
+contains the average counts over the output windows.
+For a target counts loss weight fraction f, you can calculate an initial <span class="math notranslate nohighlight">\({\lambda}\)</span> value
+for the counts loss based on:
+<span class="math notranslate nohighlight">\({\lambda}\)</span> = f * ĉ</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.generators.H5BatchGenerator.loadData">
+<span class="sig-name descname"><span class="pre">loadData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.generators.H5BatchGenerator.loadData" title="Link to this definition"></a></dt>
+<dd><p>Read in the hdf5 file and suck all the data into memory.</p>
+<p>Called only once.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.generators.H5BatchGenerator.refreshData">
+<span class="sig-name descname"><span class="pre">refreshData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.generators.H5BatchGenerator.refreshData" title="Link to this definition"></a></dt>
+<dd><p>Go over all the data and load it into the data structures from loadData.</p>
+<p>Called once every epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.generators.H5BatchGenerator.on_epoch_end">
+<span class="sig-name descname"><span class="pre">on_epoch_end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.generators.H5BatchGenerator.on_epoch_end" title="Link to this definition"></a></dt>
+<dd><p>When the epoch is done, re-jitter the data by calling refreshData.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gaOptimize.html" class="btn btn-neutral float-left" title="gaOptimize" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="interpretUtils.html" class="btn btn-neutral float-right" title="interpretUtils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

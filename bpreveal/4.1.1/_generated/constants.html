@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>internal.constants &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="internal.predictUtils" href="predictUtils.html" />
+    <link rel="prev" title="internal.disableTensorflowLogging" href="disableTensorflowLogging.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="internalapi.html">Internal</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="disableTensorflowLogging.html">internal.disableTensorflowLogging</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">internal.constants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.ONEHOT_T"><code class="docutils literal notranslate"><span class="pre">ONEHOT_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.ONEHOT_AR_T"><code class="docutils literal notranslate"><span class="pre">ONEHOT_AR_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.PRED_T"><code class="docutils literal notranslate"><span class="pre">PRED_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.PRED_AR_T"><code class="docutils literal notranslate"><span class="pre">PRED_AR_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.LOGIT_T"><code class="docutils literal notranslate"><span class="pre">LOGIT_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.LOGIT_AR_T"><code class="docutils literal notranslate"><span class="pre">LOGIT_AR_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.LOGCOUNT_T"><code class="docutils literal notranslate"><span class="pre">LOGCOUNT_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.IMPORTANCE_T"><code class="docutils literal notranslate"><span class="pre">IMPORTANCE_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.IMPORTANCE_AR_T"><code class="docutils literal notranslate"><span class="pre">IMPORTANCE_AR_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.MODEL_ONEHOT_T"><code class="docutils literal notranslate"><span class="pre">MODEL_ONEHOT_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.MOTIF_FLOAT_T"><code class="docutils literal notranslate"><span class="pre">MOTIF_FLOAT_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.MOTIF_FLOAT_AR_T"><code class="docutils literal notranslate"><span class="pre">MOTIF_FLOAT_AR_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.H5_CHUNK_SIZE"><code class="docutils literal notranslate"><span class="pre">H5_CHUNK_SIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.QUEUE_TIMEOUT"><code class="docutils literal notranslate"><span class="pre">QUEUE_TIMEOUT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED"><code class="docutils literal notranslate"><span class="pre">GLOBAL_TENSORFLOW_LOADED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.GENOME_NUCLEOTIDE_FREQUENCY"><code class="docutils literal notranslate"><span class="pre">GENOME_NUCLEOTIDE_FREQUENCY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.setTensorflowLoaded"><code class="docutils literal notranslate"><span class="pre">setTensorflowLoaded()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.internal.constants.getTensorflowLoaded"><code class="docutils literal notranslate"><span class="pre">getTensorflowLoaded()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predictUtils.html">internal.predictUtils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="internalapi.html">Internal</a></li>
+      <li class="breadcrumb-item active">internal.constants</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/constants.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.internal.constants">
+<span id="internal-constants"></span><h1>internal.constants<a class="headerlink" href="#module-bpreveal.internal.constants" title="Link to this heading"></a></h1>
+<p>Types that are used throughout BPReveal.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.ONEHOT_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">ONEHOT_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.ONEHOT_T" title="Link to this definition"></a></dt>
+<dd><p>Data type for elements of a one-hot encoded sequence.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.ONEHOT_AR_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">ONEHOT_AR_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.ONEHOT_AR_T" title="Link to this definition"></a></dt>
+<dd><p>Data type for an array of one-hot encoded sequences</p>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">uint8</span></code>]]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.PRED_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">PRED_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.PRED_T" title="Link to this definition"></a></dt>
+<dd><p>Data type for coverage.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.PRED_AR_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">PRED_AR_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.PRED_AR_T" title="Link to this definition"></a></dt>
+<dd><p>Data type for an array of predictions.</p>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.LOGIT_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">LOGIT_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.LOGIT_T" title="Link to this definition"></a></dt>
+<dd><p>Data type for logits from the model.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.LOGIT_AR_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">LOGIT_AR_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.LOGIT_AR_T" title="Link to this definition"></a></dt>
+<dd><p>Data type for an array of logits.</p>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.LOGCOUNT_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">LOGCOUNT_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.LOGCOUNT_T" title="Link to this definition"></a></dt>
+<dd><p>Data type for logcount values.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.IMPORTANCE_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">IMPORTANCE_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.IMPORTANCE_T" title="Link to this definition"></a></dt>
+<dd><p>Store importance scores with 16 bits of precision.</p>
+<p>Since importance scores (particularly PISA values) take up a lot of space, I
+use a small floating point type and compression to mitigate the amount of data.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.IMPORTANCE_AR_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">IMPORTANCE_AR_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.IMPORTANCE_AR_T" title="Link to this definition"></a></dt>
+<dd><p>Data type for an array of importance values.</p>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float16</span></code>]]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.MODEL_ONEHOT_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">MODEL_ONEHOT_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.MODEL_ONEHOT_T" title="Link to this definition"></a></dt>
+<dd><p>Inside the models, we use floating point numbers to represent one-hot sequences.</p>
+<p>For reasons I don’t understand, setting this to uint8 DESTROYS pisa values.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.MOTIF_FLOAT_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">MOTIF_FLOAT_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.MOTIF_FLOAT_T" title="Link to this definition"></a></dt>
+<dd><p>The type used to represent cwms and pwms, and also the type used by the jaccard code.</p>
+<p>If you change this, be sure to change libJaccard.c and libJaccard.pyf (and run
+make) so that the jaccard library uses the correct data type.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.MOTIF_FLOAT_AR_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">MOTIF_FLOAT_AR_T</span></span><a class="headerlink" href="#bpreveal.internal.constants.MOTIF_FLOAT_AR_T" title="Link to this definition"></a></dt>
+<dd><p>An array of motif data.</p>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.H5_CHUNK_SIZE">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">H5_CHUNK_SIZE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">128</span></em><a class="headerlink" href="#bpreveal.internal.constants.H5_CHUNK_SIZE" title="Link to this definition"></a></dt>
+<dd><p>When saving large hdf5 files, store the data in compressed chunks.</p>
+<p>This constant sets the number of entries in each chunk that gets compressed.
+For good performance, whenever you read a compressed hdf5 file, it really helps
+if you read out whole chunks at a time and buffer them. See, for example,
+<a class="reference internal" href="shapToBigwig.html#module-bpreveal.shapToBigwig" title="bpreveal.shapToBigwig"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shapToBigwig</span></code></a> for an example of a chunked
+reader.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.QUEUE_TIMEOUT">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">QUEUE_TIMEOUT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">240</span></em><a class="headerlink" href="#bpreveal.internal.constants.QUEUE_TIMEOUT" title="Link to this definition"></a></dt>
+<dd><p>How long should a queue wait before crashing?</p>
+<p>In parallel code, if something goes wrong, a queue could stay stuck forever.
+Python’s queues have a nifty timeout parameter so that they’ll crash if they
+wait too long. If a queue has been blocking for longer than this timeout, have
+the program crash.</p>
+<p>This is measured in seconds.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">GLOBAL_TENSORFLOW_LOADED</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED" title="Link to this definition"></a></dt>
+<dd><p>Has Tensorflow been loaded in this process?</p>
+<p>This gets set to True if you use any of the tensorflow-importing functions in
+this file. If you import tensorflow in a parent process, child processes will
+not be able to use tensorflow, because tensorflow is dumb like that. Tools like
+the easy® functions and the threaded batcher check to see if Tensorflow has
+been loaded in the parent process before they spawn children.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.GENOME_NUCLEOTIDE_FREQUENCY">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">GENOME_NUCLEOTIDE_FREQUENCY</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'danRer11':</span> <span class="pre">[0.316952,</span> <span class="pre">0.183272,</span> <span class="pre">0.183253,</span> <span class="pre">0.31652],</span> <span class="pre">'dm6':</span> <span class="pre">[0.290034,</span> <span class="pre">0.210142,</span> <span class="pre">0.209919,</span> <span class="pre">0.289903],</span> <span class="pre">'hg38':</span> <span class="pre">[0.295182,</span> <span class="pre">0.203906,</span> <span class="pre">0.204783,</span> <span class="pre">0.296127],</span> <span class="pre">'mm10':</span> <span class="pre">[0.291497,</span> <span class="pre">0.208327,</span> <span class="pre">0.208343,</span> <span class="pre">0.291831],</span> <span class="pre">'sacCer3':</span> <span class="pre">[0.309806,</span> <span class="pre">0.190882,</span> <span class="pre">0.190596,</span> <span class="pre">0.308714]}</span></em><a class="headerlink" href="#bpreveal.internal.constants.GENOME_NUCLEOTIDE_FREQUENCY" title="Link to this definition"></a></dt>
+<dd><p>The frequency of A, C, G, and T (in that order) in common reference genomes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.setTensorflowLoaded">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">setTensorflowLoaded</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.constants.setTensorflowLoaded" title="Link to this definition"></a></dt>
+<dd><p>Call this when you first load tensorflow.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.internal.constants.getTensorflowLoaded">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.internal.constants.</span></span><span class="sig-name descname"><span class="pre">getTensorflowLoaded</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.internal.constants.getTensorflowLoaded" title="Link to this definition"></a></dt>
+<dd><p>Returns true if this process has ever loaded tensorflow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="disableTensorflowLogging.html" class="btn btn-neutral float-left" title="internal.disableTensorflowLogging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="predictUtils.html" class="btn btn-neutral float-right" title="internal.predictUtils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

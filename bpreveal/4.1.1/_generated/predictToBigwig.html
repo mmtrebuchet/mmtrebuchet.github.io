@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>predictToBigwig &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="shapToBigwig" href="shapToBigwig.html" />
+    <link rel="prev" title="motifAddQuantiles" href="motifAddQuantiles.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="minorcli.html">Utility CLI</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkJson.html">checkJson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lengthCalc.html">lengthCalc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makeLossPlots.html">makeLossPlots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifAddQuantiles.html">motifAddQuantiles</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">predictToBigwig</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#help-info">Help Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#named-arguments">Named Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.predictToBigwig.Region"><code class="docutils literal notranslate"><span class="pre">Region</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.predictToBigwig.getChromInserts"><code class="docutils literal notranslate"><span class="pre">getChromInserts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.predictToBigwig.getChromVector"><code class="docutils literal notranslate"><span class="pre">getChromVector()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.predictToBigwig.vectorToListOfInserts"><code class="docutils literal notranslate"><span class="pre">vectorToListOfInserts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.predictToBigwig.buildRegionList"><code class="docutils literal notranslate"><span class="pre">buildRegionList()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.predictToBigwig.writeBigWig"><code class="docutils literal notranslate"><span class="pre">writeBigWig()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.predictToBigwig.getParser"><code class="docutils literal notranslate"><span class="pre">getParser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.predictToBigwig.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="shapToBigwig.html">shapToBigwig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapToNumpy.html">shapToNumpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="showModel.html">showModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="showTrainingProgress.html">showTrainingProgress</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="minorcli.html">Utility CLI</a></li>
+      <li class="breadcrumb-item active">predictToBigwig</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/predictToBigwig.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="predicttobigwig">
+<h1>predictToBigwig<a class="headerlink" href="#predicttobigwig" title="Link to this heading"></a></h1>
+<section id="help-info">
+<h2>Help Info<a class="headerlink" href="#help-info" title="Link to this heading"></a></h2>
+<p><p>Take an hdf5-format file generated by the predict script and render it to a bigwig.</p>
+</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>usage: predictToBigwig [-h] [--h5 H5] [--bw BW]
+                       [--head-id HEADID]
+                       [--task-id TASKID] [--mode MODE]
+                       [--verbose] [--negate]
+                       [--threads NUMTHREADS]
+</pre></div>
+</div>
+<section id="named-arguments">
+<h3>Named Arguments<a class="headerlink" href="#named-arguments" title="Link to this heading"></a></h3>
+<dl class="option-list">
+<dt><kbd>--h5</kbd></dt>
+<dd><p>The name of the hdf5-format file to be read in.</p>
+</dd>
+<dt><kbd>--bw</kbd></dt>
+<dd><p>The name of the bigwig file that should be written.</p>
+</dd>
+<dt><kbd>--head-id</kbd></dt>
+<dd><p>Which head number do you want data for?</p>
+</dd>
+<dt><kbd>--task-id</kbd></dt>
+<dd><p>Which task in that head do you want?</p>
+</dd>
+<dt><kbd>--mode</kbd></dt>
+<dd><p>What do you want written? Options are ‘profile’, meaning you want (softmax(logits) * exp(logcounts)), or ‘logits’, meaning you just want logits, or ‘mnlogits’, meaning you want the logits, but mean-normalized (for easier display), or ‘logcounts’, meaning you want the log counts for every region, or ‘counts’, meaning you want exp(logcounts). You will usually want ‘profile’</p>
+</dd>
+<dt><kbd>--verbose</kbd></dt>
+<dd><p>Display progress as the file is being written.</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--negate</kbd></dt>
+<dd><p>Negate all of the values written to the bigwig. Used for negative-strand predictions.</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>--threads</kbd></dt>
+<dd><p>Number of threads to use for calculating profile tracks (max: num chromosomes)</p>
+<p>Default: 24</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p id="module-bpreveal.predictToBigwig">A script to take the predictions hdf5 file and turn it into a bigwig.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.predictToBigwig.Region">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.predictToBigwig.</span></span><span class="sig-name descname"><span class="pre">Region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chromIdx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h5Idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.predictToBigwig.Region" title="Link to this definition"></a></dt>
+<dd><p>Represents a single region.</p>
+<p>It knows where it is in the genome and also what index it occupies in the hdf5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chromIdx</strong> (<em>int</em>) – The chromosome index, corresponding to <code class="docutils literal notranslate"><span class="pre">chrom_names</span></code> in the hdf5.</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – The genomic start coordinate, inclusive.</p></li>
+<li><p><strong>end</strong> (<em>int</em>) – The genomic end coordinate, exclusive.</p></li>
+<li><p><strong>h5Idx</strong> (<em>int</em>) – The index in the hdf5 file where this region is found.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.predictToBigwig.Region.getValues">
+<span class="sig-name descname"><span class="pre">getValues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h5fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taskID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.predictToBigwig.Region.getValues" title="Link to this definition"></a></dt>
+<dd><p>Get the values in the hdf5 at this region.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h5fp</strong> (<em>File</em>) – An opened hdf5 file containing predictions.</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – One of <code class="docutils literal notranslate"><span class="pre">profile</span></code>, <code class="docutils literal notranslate"><span class="pre">logits</span></code>, <code class="docutils literal notranslate"><span class="pre">mnlogits</span></code>, <code class="docutils literal notranslate"><span class="pre">logcounts</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">counts</span></code>.</p></li>
+<li><p><strong>head</strong> (<em>int</em>) – Which head index do you want the data from?</p></li>
+<li><p><strong>taskID</strong> (<em>int</em>) – Which task do you want the data for?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A vector containing the requested data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.predictToBigwig.getChromInserts">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.predictToBigwig.</span></span><span class="sig-name descname"><span class="pre">getChromInserts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.predictToBigwig.getChromInserts" title="Link to this definition"></a></dt>
+<dd><p>Packs all the arguments into one so it’s easier to use with pool.map().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>arg</strong> (<em>tuple</em><em>[</em><em>list</em><em>[</em><a class="reference internal" href="#bpreveal.predictToBigwig.Region" title="bpreveal.predictToBigwig.Region"><em>Region</em></a><em>]</em><em>, </em><em>str</em><em>, </em><em>int</em><em>, </em><em>int</em><em>, </em><em>str</em><em>]</em>) – In order, regionList, h5Fname, headID, taskID, mode.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The inserts from vectorToListOfInserts.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tuple[<em>ndarray</em>, int]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.predictToBigwig.getChromVector">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.predictToBigwig.</span></span><span class="sig-name descname"><span class="pre">getChromVector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regionList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h5fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taskID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.predictToBigwig.getChromVector" title="Link to this definition"></a></dt>
+<dd><p>Map the values at each Region onto a vector representing the chromosome.</p>
+<p>regionList should only contain regions from one chromosome, as regionList[0].chromIdx
+is used to determine the size of the returned vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regionList</strong> (<em>list</em><em>[</em><a class="reference internal" href="#bpreveal.predictToBigwig.Region" title="bpreveal.predictToBigwig.Region"><em>Region</em></a><em>]</em>) – The regions you want data for.</p></li>
+<li><p><strong>h5fp</strong> (<em>File</em>) – The (open) hdf5 file of predictions.</p></li>
+<li><p><strong>headID</strong> (<em>int</em>) – The head you want data for.</p></li>
+<li><p><strong>taskID</strong> (<em>int</em>) – The task within that head that you want data for.</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – One of <code class="docutils literal notranslate"><span class="pre">profile</span></code>, <code class="docutils literal notranslate"><span class="pre">logits</span></code>, <code class="docutils literal notranslate"><span class="pre">mnlogits</span></code>, <code class="docutils literal notranslate"><span class="pre">logcounts</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">counts</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array as long as the chromosome, with zeros everywhere that
+regionList did not cover, and the values of the data wherever the regions
+do exist. For overlapping regions, the predictions are averaged.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>array</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.predictToBigwig.vectorToListOfInserts">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.predictToBigwig.</span></span><span class="sig-name descname"><span class="pre">vectorToListOfInserts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataVector</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.predictToBigwig.vectorToListOfInserts" title="Link to this definition"></a></dt>
+<dd><p>Convert a chromosome vector to a list of regions that actually have data.</p>
+<p>Given a vector of data from getChromVector, remove all the zeros and give you
+a list of regions with actual data. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vectorToListOfInserts</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<span class="p">[([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span> <span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">9</span><span class="p">)]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataVector</strong> (<em>array</em>) – An array representing the data along an entire chromosome.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of tuples. The first element of each tuple is an array of data,
+and the second is the genomic coordinate where that dataset starts.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tuple[<em>ndarray</em>, int]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.predictToBigwig.buildRegionList">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.predictToBigwig.</span></span><span class="sig-name descname"><span class="pre">buildRegionList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inH5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.predictToBigwig.buildRegionList" title="Link to this definition"></a></dt>
+<dd><p>Builds a list of Region objects for each chromosome in the hdf5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>inH5</strong> (<em>File</em>) – The (open) h5py file containing predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dict mapping chromosome ID to a list of Regions on that chromosome.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[int, list[<a class="reference internal" href="#bpreveal.predictToBigwig.Region" title="bpreveal.predictToBigwig.Region"><em>Region</em></a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.predictToBigwig.writeBigWig">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.predictToBigwig.</span></span><span class="sig-name descname"><span class="pre">writeBigWig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inH5Fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taskID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">negate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numThreads</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.predictToBigwig.writeBigWig" title="Link to this definition"></a></dt>
+<dd><p>Load in the h5 files and write the predictions to a bigwig file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inH5Fname</strong> (<em>str</em>) – The name of an hdf5 file on disk containing predictions.</p></li>
+<li><p><strong>outFname</strong> (<em>str</em>) – The name of the bigwig file to write.</p></li>
+<li><p><strong>headID</strong> (<em>int</em>) – The head you want predictions from.</p></li>
+<li><p><strong>taskID</strong> (<em>int</em>) – The task within that head that you want predictions for.</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – One of <code class="docutils literal notranslate"><span class="pre">profile</span></code>, <code class="docutils literal notranslate"><span class="pre">logits</span></code>, <code class="docutils literal notranslate"><span class="pre">mnlogits</span></code>, <code class="docutils literal notranslate"><span class="pre">logcounts</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">counts</span></code>.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Should the program emit logging information?</p></li>
+<li><p><strong>negate</strong> (<em>bool</em>) – Should the predictions be negated in the output bigwig?
+Useful for chip-nexus.</p></li>
+<li><p><strong>numThreads</strong> (<em>int</em>) – How many threads should be used?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.predictToBigwig.getParser">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.predictToBigwig.</span></span><span class="sig-name descname"><span class="pre">getParser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.predictToBigwig.getParser" title="Link to this definition"></a></dt>
+<dd><p>Generate the argument parser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ArgumentParser</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.predictToBigwig.main">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.predictToBigwig.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.predictToBigwig.main" title="Link to this definition"></a></dt>
+<dd><p>Run the program.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="motifAddQuantiles.html" class="btn btn-neutral float-left" title="motifAddQuantiles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="shapToBigwig.html" class="btn btn-neutral float-right" title="shapToBigwig" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

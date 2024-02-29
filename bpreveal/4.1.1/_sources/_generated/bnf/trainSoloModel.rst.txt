@@ -1,0 +1,167 @@
+.. raw:: html
+
+    <a name="solo-training-input-configuration"></a>
+
+.. _solo-training-input-configuration:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`solo-training-input-configuration<solo-training-input-configuration>`> ::=
+       {<:ref:`solo-settings-section<solo-settings-section>`> , <:ref:`data-section<data-section>`>,
+         <:ref:`head-section<head-section>`>, <:ref:`verbosity-section<verbosity-section>`>}
+    
+.. raw:: html
+
+    <a name="solo-settings-section"></a>
+
+.. _solo-settings-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`solo-settings-section<solo-settings-section>`> ::=
+        "settings" : {<:ref:`solo-settings-contents<solo-settings-contents>`>}
+    
+.. raw:: html
+
+    <a name="data-section"></a>
+
+.. _data-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`data-section<data-section>`> ::=
+        "train-data" : <:ref:`file-name<file-name>`>,
+        "val-data" : <:ref:`file-name<file-name>`>
+    
+.. raw:: html
+
+    <a name="head-section"></a>
+
+.. _head-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`head-section<head-section>`> ::=
+      "heads" : [<:ref:`head-list<head-list>`>]
+    
+.. raw:: html
+
+    <a name="head-list"></a>
+
+.. _head-list:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`head-list<head-list>`> ::=
+        <:ref:`individual-head<individual-head>`>
+      | <:ref:`individual-head<individual-head>`>, <:ref:`head-list<head-list>`>
+    
+.. raw:: html
+
+    <a name="individual-head"></a>
+
+.. _individual-head:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`individual-head<individual-head>`> ::=
+        { "num-tasks" : <:ref:`integer<integer>`>,
+          "profile-loss-weight" : <:ref:`number<number>`>,
+          <:ref:`counts-loss-section<counts-loss-section>`>,
+          "head-name" : <:ref:`string<string>`>}
+    
+.. raw:: html
+
+    <a name="counts-loss-section"></a>
+
+.. _counts-loss-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`counts-loss-section<counts-loss-section>`> ::=
+        "counts-loss-weight" : <:ref:`number<number>`>
+      | "counts-loss-frac-target" : <:ref:`number<number>`>
+      | "counts-loss-weight" : <:ref:`number<number>`>,
+        "counts-loss-frac-target" : <:ref:`number<number>`>
+    
+.. raw:: html
+
+    <a name="counts-loss-frac-target"></a>
+
+.. _counts-loss-frac-target:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`counts-loss-frac-target<counts-loss-frac-target>`> ::=
+        <:ref:`empty<empty>`>
+      | "counts-loss-frac-target" : <:ref:`number<number>`>
+    
+.. raw:: html
+
+    <a name="solo-settings-contents"></a>
+
+.. _solo-settings-contents:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`solo-settings-contents<solo-settings-contents>`> ::=
+        {"output-prefix" : <:ref:`string<string>`>,
+         "epochs" : <:ref:`integer<integer>`>,
+         "max-jitter" : <:ref:`integer<integer>`>,
+         "early-stopping-patience" : <:ref:`integer<integer>`>,
+         "batch-size" : <:ref:`integer<integer>`>,
+         "learning-rate" : <:ref:`number<number>`>,
+         "learning-rate-plateau-patience" : <:ref:`integer<integer>`>,
+         "architecture" : <:ref:`solo-architecture-specification<solo-architecture-specification>`> }
+    
+.. raw:: html
+
+    <a name="solo-architecture-specification"></a>
+
+.. _solo-architecture-specification:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`solo-architecture-specification<solo-architecture-specification>`> ::=
+        <:ref:`solo-bpnet-architecture-specification<solo-bpnet-architecture-specification>`>
+    
+.. raw:: html
+
+    <a name="solo-bpnet-architecture-specification"></a>
+
+.. _solo-bpnet-architecture-specification:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`solo-bpnet-architecture-specification<solo-bpnet-architecture-specification>`> ::=
+        {"architecture-name" : "bpnet",
+        "input-length" : <:ref:`integer<integer>`>,
+        "output-length" : <:ref:`integer<integer>`>,
+        "model-name" : <:ref:`string<string>`>,
+        "model-args" : <:ref:`string<string>`>,
+        "filters" : <:ref:`integer<integer>`>,
+        "layers" : <:ref:`integer<integer>`>,
+        "input-filter-width" : <:ref:`integer<integer>`>,
+        "output-filter-width" : <:ref:`integer<integer>`>}

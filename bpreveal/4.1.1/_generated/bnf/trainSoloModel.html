@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>&lt;no title&gt; &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_generated/bnf/trainSoloModel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a name="solo-training-input-configuration"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#solo-training-input-configuration"><span class="std std-ref">solo-training-input-configuration</span></a>&gt; ::=
+   {&lt;<a class="reference internal" href="../trainSoloModel.html#solo-settings-section"><span class="std std-ref">solo-settings-section</span></a>&gt; , &lt;<a class="reference internal" href="../trainSoloModel.html#data-section"><span class="std std-ref">data-section</span></a>&gt;,
+     &lt;<a class="reference internal" href="../trainSoloModel.html#head-section"><span class="std std-ref">head-section</span></a>&gt;, &lt;<a class="reference internal" href="../bnf.html#verbosity-section"><span class="std std-ref">verbosity-section</span></a>&gt;}</pre>
+<a name="solo-settings-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#solo-settings-section"><span class="std std-ref">solo-settings-section</span></a>&gt; ::=
+    &quot;settings&quot; : {&lt;<a class="reference internal" href="../trainSoloModel.html#solo-settings-contents"><span class="std std-ref">solo-settings-contents</span></a>&gt;}</pre>
+<a name="data-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#data-section"><span class="std std-ref">data-section</span></a>&gt; ::=
+    &quot;train-data&quot; : &lt;<a class="reference internal" href="../bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &quot;val-data&quot; : &lt;<a class="reference internal" href="../bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;</pre>
+<a name="head-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#head-section"><span class="std std-ref">head-section</span></a>&gt; ::=
+  &quot;heads&quot; : [&lt;<a class="reference internal" href="../trainSoloModel.html#head-list"><span class="std std-ref">head-list</span></a>&gt;]</pre>
+<a name="head-list"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#head-list"><span class="std std-ref">head-list</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="../trainSoloModel.html#individual-head"><span class="std std-ref">individual-head</span></a>&gt;
+  | &lt;<a class="reference internal" href="../trainSoloModel.html#individual-head"><span class="std std-ref">individual-head</span></a>&gt;, &lt;<a class="reference internal" href="../trainSoloModel.html#head-list"><span class="std std-ref">head-list</span></a>&gt;</pre>
+<a name="individual-head"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#individual-head"><span class="std std-ref">individual-head</span></a>&gt; ::=
+    { &quot;num-tasks&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+      &quot;profile-loss-weight&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;,
+      &lt;<a class="reference internal" href="../trainSoloModel.html#counts-loss-section"><span class="std std-ref">counts-loss-section</span></a>&gt;,
+      &quot;head-name&quot; : &lt;<a class="reference internal" href="../bnf.html#string"><span class="std std-ref">string</span></a>&gt;}</pre>
+<a name="counts-loss-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#counts-loss-section"><span class="std std-ref">counts-loss-section</span></a>&gt; ::=
+    &quot;counts-loss-weight&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;
+  | &quot;counts-loss-frac-target&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;
+  | &quot;counts-loss-weight&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;,
+    &quot;counts-loss-frac-target&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;</pre>
+<a name="counts-loss-frac-target"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#counts-loss-frac-target"><span class="std std-ref">counts-loss-frac-target</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="../bnf.html#empty"><span class="std std-ref">empty</span></a>&gt;
+  | &quot;counts-loss-frac-target&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;</pre>
+<a name="solo-settings-contents"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#solo-settings-contents"><span class="std std-ref">solo-settings-contents</span></a>&gt; ::=
+    {&quot;output-prefix&quot; : &lt;<a class="reference internal" href="../bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+     &quot;epochs&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;max-jitter&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;early-stopping-patience&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;batch-size&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;learning-rate&quot; : &lt;<a class="reference internal" href="../bnf.html#number"><span class="std std-ref">number</span></a>&gt;,
+     &quot;learning-rate-plateau-patience&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;architecture&quot; : &lt;<a class="reference internal" href="../trainSoloModel.html#solo-architecture-specification"><span class="std std-ref">solo-architecture-specification</span></a>&gt; }</pre>
+<a name="solo-architecture-specification"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#solo-architecture-specification"><span class="std std-ref">solo-architecture-specification</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="../trainSoloModel.html#solo-bpnet-architecture-specification"><span class="std std-ref">solo-bpnet-architecture-specification</span></a>&gt;</pre>
+<a name="solo-bpnet-architecture-specification"></a><pre class="literal-block">&lt;<a class="reference internal" href="../trainSoloModel.html#solo-bpnet-architecture-specification"><span class="std std-ref">solo-bpnet-architecture-specification</span></a>&gt; ::=
+    {&quot;architecture-name&quot; : &quot;bpnet&quot;,
+    &quot;input-length&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;output-length&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;model-name&quot; : &lt;<a class="reference internal" href="../bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+    &quot;model-args&quot; : &lt;<a class="reference internal" href="../bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+    &quot;filters&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;layers&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;input-filter-width&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;output-filter-width&quot; : &lt;<a class="reference internal" href="../bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;}</pre>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

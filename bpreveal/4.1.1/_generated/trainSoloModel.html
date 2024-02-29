@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trainSoloModel &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="trainTransformationModel" href="trainTransformationModel.html" />
+    <link rel="prev" title="trainCombinedModel" href="trainCombinedModel.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="majorcli.html">Main CLI</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="interpretFlat.html">interpretFlat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretPisa.html">interpretPisa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makePredictions.html">makePredictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifScan.html">motifScan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifSeqletCutoffs.html">motifSeqletCutoffs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareBed.html">prepareBed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareTrainingData.html">prepareTrainingData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainCombinedModel.html">trainCombinedModel</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">trainSoloModel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bnf">BNF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameter-notes">Parameter Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-information">Additional information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#window-padding">Window padding</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.trainSoloModel.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schema">Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trainTransformationModel.html">trainTransformationModel</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="majorcli.html">Main CLI</a></li>
+      <li class="breadcrumb-item active">trainSoloModel</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/trainSoloModel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.trainSoloModel">
+<span id="trainsolomodel"></span><h1>trainSoloModel<a class="headerlink" href="#module-bpreveal.trainSoloModel" title="Link to this heading"></a></h1>
+<p>Trains up a sequence-to-profile model in the BPNet style.</p>
+<p>This program generates a neural network that maps genomic sequence to
+experimental readout.
+In cases where you don’t need to regress out a bias track, this is the only
+training program you’ll use.</p>
+<p>The required input files are two hdf5-format files that contain sequences and
+profiles.
+One of these is used for training, one for validation during training.
+See <a class="reference internal" href="prepareTrainingData.html#module-bpreveal.prepareTrainingData" title="bpreveal.prepareTrainingData"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareTrainingData</span></code></a> for
+the specification for this file.</p>
+<p>The program will produce two outputs, one being a Keras model.
+This model will be used later for prediction and interpretation.
+The other output records the progress of the model during training, and it is
+read in by <a class="reference internal" href="makeLossPlots.html#module-bpreveal.makeLossPlots" title="bpreveal.makeLossPlots"><code class="xref py py-mod docutils literal notranslate"><span class="pre">makeLossPlots</span></code></a>.</p>
+<section id="bnf">
+<h2>BNF<a class="headerlink" href="#bnf" title="Link to this heading"></a></h2>
+<a name="solo-training-input-configuration"></a><pre class="literal-block">&lt;<a class="reference internal" href="#solo-training-input-configuration"><span class="std std-ref">solo-training-input-configuration</span></a>&gt; ::=
+   {&lt;<a class="reference internal" href="#solo-settings-section"><span class="std std-ref">solo-settings-section</span></a>&gt; , &lt;<a class="reference internal" href="#data-section"><span class="std std-ref">data-section</span></a>&gt;,
+     &lt;<a class="reference internal" href="#head-section"><span class="std std-ref">head-section</span></a>&gt;, &lt;<a class="reference internal" href="bnf.html#verbosity-section"><span class="std std-ref">verbosity-section</span></a>&gt;}</pre>
+<a name="solo-settings-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#solo-settings-section"><span class="std std-ref">solo-settings-section</span></a>&gt; ::=
+    &quot;settings&quot; : {&lt;<a class="reference internal" href="#solo-settings-contents"><span class="std std-ref">solo-settings-contents</span></a>&gt;}</pre>
+<a name="data-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#data-section"><span class="std std-ref">data-section</span></a>&gt; ::=
+    &quot;train-data&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;,
+    &quot;val-data&quot; : &lt;<a class="reference internal" href="bnf.html#file-name"><span class="std std-ref">file-name</span></a>&gt;</pre>
+<a name="head-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#head-section"><span class="std std-ref">head-section</span></a>&gt; ::=
+  &quot;heads&quot; : [&lt;<a class="reference internal" href="#head-list"><span class="std std-ref">head-list</span></a>&gt;]</pre>
+<a name="head-list"></a><pre class="literal-block">&lt;<a class="reference internal" href="#head-list"><span class="std std-ref">head-list</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#individual-head"><span class="std std-ref">individual-head</span></a>&gt;
+  | &lt;<a class="reference internal" href="#individual-head"><span class="std std-ref">individual-head</span></a>&gt;, &lt;<a class="reference internal" href="#head-list"><span class="std std-ref">head-list</span></a>&gt;</pre>
+<a name="individual-head"></a><pre class="literal-block">&lt;<a class="reference internal" href="#individual-head"><span class="std std-ref">individual-head</span></a>&gt; ::=
+    { &quot;num-tasks&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+      &quot;profile-loss-weight&quot; : &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;,
+      &lt;<a class="reference internal" href="#counts-loss-section"><span class="std std-ref">counts-loss-section</span></a>&gt;,
+      &quot;head-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;}</pre>
+<a name="counts-loss-section"></a><pre class="literal-block">&lt;<a class="reference internal" href="#counts-loss-section"><span class="std std-ref">counts-loss-section</span></a>&gt; ::=
+    &quot;counts-loss-weight&quot; : &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;
+  | &quot;counts-loss-frac-target&quot; : &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;
+  | &quot;counts-loss-weight&quot; : &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;,
+    &quot;counts-loss-frac-target&quot; : &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;</pre>
+<a name="counts-loss-frac-target"></a><pre class="literal-block">&lt;<a class="reference internal" href="#counts-loss-frac-target"><span class="std std-ref">counts-loss-frac-target</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="bnf.html#empty"><span class="std std-ref">empty</span></a>&gt;
+  | &quot;counts-loss-frac-target&quot; : &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;</pre>
+<a name="solo-settings-contents"></a><pre class="literal-block">&lt;<a class="reference internal" href="#solo-settings-contents"><span class="std std-ref">solo-settings-contents</span></a>&gt; ::=
+    {&quot;output-prefix&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+     &quot;epochs&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;max-jitter&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;early-stopping-patience&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;batch-size&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;learning-rate&quot; : &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;,
+     &quot;learning-rate-plateau-patience&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+     &quot;architecture&quot; : &lt;<a class="reference internal" href="#solo-architecture-specification"><span class="std std-ref">solo-architecture-specification</span></a>&gt; }</pre>
+<a name="solo-architecture-specification"></a><pre class="literal-block">&lt;<a class="reference internal" href="#solo-architecture-specification"><span class="std std-ref">solo-architecture-specification</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#solo-bpnet-architecture-specification"><span class="std std-ref">solo-bpnet-architecture-specification</span></a>&gt;</pre>
+<a name="solo-bpnet-architecture-specification"></a><pre class="literal-block">&lt;<a class="reference internal" href="#solo-bpnet-architecture-specification"><span class="std std-ref">solo-bpnet-architecture-specification</span></a>&gt; ::=
+    {&quot;architecture-name&quot; : &quot;bpnet&quot;,
+    &quot;input-length&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;output-length&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;model-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+    &quot;model-args&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+    &quot;filters&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;layers&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;input-filter-width&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;,
+    &quot;output-filter-width&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;}</pre>
+</section>
+<section id="parameter-notes">
+<h2>Parameter Notes<a class="headerlink" href="#parameter-notes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>profile-loss-weight</dt><dd><p>Simply a scalar that the profile loss is multiplied by. This comes in handy
+when you’re training on two datasets with disparate coverage. Since the
+MNLL loss is proportional to the number of reads, a track with higher
+coverage will dominate the loss. Instead of calculating this <em>a priori</em>, I
+find it easiest to start training the model, look at the loss values, and
+then pick multipliers that will make them about even.</p>
+</dd>
+<dt>counts-loss-weight</dt><dd><p>Similar to <code class="docutils literal notranslate"><span class="pre">profile-loss-weight</span></code>, but do keep in mind that you need to
+set it even when you’re training a single output head, since the mean
+squared error value of the counts prediction tends to be minuscule compared
+to the MNLL loss of the profile. Again, instead of calculating it
+<em>a priori</em>, I start training with an initial guess and then refine the
+value later, or you can use the adaptive loss weight algorithm to set it
+automatically. In the original BPNet, this parameter was called <span class="math notranslate nohighlight">\({\lambda}\)</span>, and this
+is the name used inside the codebase.</p>
+</dd>
+<dt>counts-loss-frac-target</dt><dd><p>(Optional) Turns on the adaptive counts loss adjustment algorithm. After
+each epoch, the <code class="docutils literal notranslate"><span class="pre">counts-loss-weight</span></code> parameter is adjusted so that the
+fraction of the loss due to counts (for this head) matches the specified
+number. See <a class="reference internal" href="countsLossReweighting.html"><span class="doc">Adaptive Counts Loss</span></a>.</p>
+</dd>
+<dt>output-prefix</dt><dd><p>The file name where you want your model saved. For example, if you are
+saving models in a directory called <code class="docutils literal notranslate"><span class="pre">models</span></code>, and you want the model to
+be called <code class="docutils literal notranslate"><span class="pre">solo</span></code>, then you’d write <code class="docutils literal notranslate"><span class="pre">&quot;output-prefix&quot;</span> <span class="pre">:</span> <span class="pre">&quot;models/solo&quot;</span></code>.
+In this case, you’ll find the files <code class="docutils literal notranslate"><span class="pre">models/solo.model</span></code>, which is the
+Keras model, and <code class="docutils literal notranslate"><span class="pre">models/solo.history.json</span></code>, containing the training
+history.</p>
+</dd>
+<dt>early-stopping-patience</dt><dd><p>Controls how long the network should wait for an improvement in the loss
+before quitting. I recommend a bit more than double the
+<code class="docutils literal notranslate"><span class="pre">learning-rate-plateau-patience</span></code>, on the order of 11.</p>
+</dd>
+<dt>batch-size</dt><dd><p>Determines how many regions the network will look at simultaneously during
+training. It doesn’t really matter, but if you make it too big your data
+won’t fit on the GPU and if you make it too small your network will take an
+eternity to train. I like 64 or so.</p>
+</dd>
+<dt>learning-rate determines</dt><dd><p>Sets how aggressive the optimizer will be as the network trains. 0.004 is a
+good bet. (Note that the LR will decrease during training because of the
+plateau patience.)</p>
+</dd>
+<dt>learning-rate-plateau-patience</dt><dd><p>How many epochs must pass without improvement before the optimizer
+decreases the learning rate? I recommend 5 or so.</p>
+</dd>
+<dt>architecture-name</dt><dd><p>(UNUSED) A future-proofing argument that will determine what type of
+network you want. Currently, only the basic BPNet-style architecture is
+supported. See <a class="reference internal" href="modelArchitectures.html"><span class="doc">Model architectures</span></a> for details.</p>
+</dd>
+<dt>input-length</dt><dd><p>The length of the input sequence that will be fed into the network. You can
+use the <a class="reference internal" href="lengthCalc.html#module-bpreveal.lengthCalc" title="bpreveal.lengthCalc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lengthCalc</span></code></a> script to calculate this
+based on a desired profile length and architecture.</p>
+</dd>
+<dt>output-length</dt><dd><p>The length of the predicted profile. This is usually on the order of 1000.</p>
+</dd>
+<dt>model-name</dt><dd><p>A string that is stored along with the model. BPReveal does not use it
+internally.</p>
+</dd>
+<dt>model-args</dt><dd><p>(UNUSED) A future-proofing argument. If there is a new feature added to a
+particular architecture, the <code class="docutils literal notranslate"><span class="pre">model-args</span></code> string will be passed to the
+architecture and the architecture may do with that string as it pleases.
+Currently, this serves no purpose.</p>
+</dd>
+<dt>filters</dt><dd><p>The number of convolutional filters at each layer. The more filters you
+add, the more patterns the model will try to learn. Typically this is
+between 32 and 128, smaller for simpler tasks.</p>
+</dd>
+<dt>input-filter-width</dt><dd><p>The size of the very first motif-scanning layer in BPNet. Lately, there’s
+been a trend of making this small, on the order of 7.</p>
+</dd>
+<dt>output-filter-width</dt><dd><p>The width of the very last convolution, the one that actually results in
+the predicted profile. This layer is placed at the very bottom of the
+dilated layers. I use a width of 75, but many people use smaller output
+widths, on the order of 25.</p>
+</dd>
+<dt>max-jitter</dt><dd><p>The maximum allowed shifting of the regions. This random shifting is
+applied during training, and helps to create some variety in the counts
+values to prevent over-fitting. Note that you must use the same jitter you
+used when you created your training data file - if you want to try a
+different jitter, you need to re-generate your data hdf5 files.</p>
+</dd>
+</dl>
+</section>
+<section id="additional-information">
+<h2>Additional information<a class="headerlink" href="#additional-information" title="Link to this heading"></a></h2>
+<section id="window-padding">
+<h3>Window padding<a class="headerlink" href="#window-padding" title="Link to this heading"></a></h3>
+<p>By and large, you can refer to the BPNet paper for details on how this program
+works, the only difference is in the input padding.
+In the original BPNet, for an output window of 1 kb, the input sequence was
+1 kb long, and if a neuron needed to know about bases outside that window, it
+got all zeros.
+For image processing, this makes sense, because you can’t un-crop an image.
+However, for DNA in a genome, you can just expand out the windows and get as
+much DNA sequence as you like.
+Therefore, BPReveal models require an input length that is larger than output
+length, so that the model can use DNA sequence information that is outside of
+its output window.</p>
+</section>
+</section>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.trainSoloModel.main">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.trainSoloModel.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.trainSoloModel.main" title="Link to this definition"></a></dt>
+<dd><p>Build and train a model.</p>
+</dd></dl>
+
+<section id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Link to this heading"></a></h2>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;trainSoloModel&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for trainSoloModel.py&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;train-data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;val-data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;output-prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;epochs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;max-jitter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;early-stopping-patience&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;batch-size&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;learning-rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;learning-rate-plateau-patience&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;architecture&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;architecture-name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bpnet&quot;</span><span class="p">]},</span>
+<span class="w">                        </span><span class="nt">&quot;input-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;output-length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;model-name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;model-args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;filters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;layers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;input-filter-width&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;output-filter-width&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">}},</span>
+<span class="w">                    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;architecture-name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;input-length&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;output-length&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;model-name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;filters&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;layers&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;input-filter-width&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;output-filter-width&quot;</span><span class="p">]}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;output-prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;max-jitter&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;early-stopping-patience&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;batch-size&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;learning-rate&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;learning-rate-plateau-patience&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;architecture&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;transformation-model&quot;</span><span class="p">]}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;heads&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;num-tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;profile-loss-weight&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;head-name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;counts-loss-weight&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;counts-loss-frac-target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">}</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;counts-loss-weight&quot;</span><span class="p">]},</span>
+<span class="w">                    </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;counts-loss-frac-target&quot;</span><span class="p">]}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;num-tasks&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;profile-loss-weight&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;head-name&quot;</span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;not&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;use-bias-counts&quot;</span><span class="p">]}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;verbosity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/verbosity&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;heads&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;train-data&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;val-data&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;settings&quot;</span><span class="p">,</span><span class="w">  </span><span class="s2">&quot;verbosity&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="trainCombinedModel.html" class="btn btn-neutral float-left" title="trainCombinedModel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="trainTransformationModel.html" class="btn btn-neutral float-right" title="trainTransformationModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

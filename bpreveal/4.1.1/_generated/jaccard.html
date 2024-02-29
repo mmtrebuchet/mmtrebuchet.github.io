@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>jaccard &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="layers" href="layers.html" />
+    <link rel="prev" title="interpretUtils" href="interpretUtils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bedUtils.html">bedUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html">callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaOptimize.html">gaOptimize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators.html">generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretUtils.html">interpretUtils</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">jaccard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.jaccard.slidingJaccard"><code class="docutils literal notranslate"><span class="pre">slidingJaccard()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.jaccard.jaccardRegion"><code class="docutils literal notranslate"><span class="pre">jaccardRegion()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html">layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logUtils.html">logUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="losses.html">losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifUtils.html">motifUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema.html">schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ushuffle.html">ushuffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">jaccard</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/jaccard.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.jaccard">
+<span id="jaccard"></span><h1>jaccard<a class="headerlink" href="#module-bpreveal.jaccard" title="Link to this heading"></a></h1>
+<p>Thin wrapper for the internal libjaccard C library.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.jaccard.slidingJaccard">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.jaccard.</span></span><span class="sig-name descname"><span class="pre">slidingJaccard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">importanceScores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.jaccard.slidingJaccard" title="Link to this definition"></a></dt>
+<dd><p>Calculate the sliding Jaccard similarity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>importanceScores</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float16</em><em>]</em><em>]</em>) – An array of shape (M, 4) giving hypothetical importance
+scores.</p></li>
+<li><p><strong>cwm</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em>) – An array of shape (N, 4), giving a motif’s CWM.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of shape (M - N + 1), giving the sliding Jaccard similarities.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em>[<em>Any</em>, <em>dtype</em>[<em>float32</em>]]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>The returned array is defined by::</dt><dd><p>slidingJaccard(A,B)[i] = jaccardRegion(A[i:i+N],B)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.jaccard.jaccardRegion">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.jaccard.</span></span><span class="sig-name descname"><span class="pre">jaccardRegion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">importanceScores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaleFactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.jaccard.jaccardRegion" title="Link to this definition"></a></dt>
+<dd><p>For given region’s importance scores, calculate the continuous Jaccard similarity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>importanceScores</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float16</em><em>]</em><em>]</em>) – An array of shape (length, 4)
+giving a region’s hypothetical importance scores.</p></li>
+<li><p><strong>scaleFactor</strong> (<em>float</em>) – A constant that the importance scores should be multiplied by.</p></li>
+<li><p><strong>cwm</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em>) – An array of shape (length, 4) giving the CWM for a motif.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A single float giving the Jaccard match</p>
+</dd>
+</dl>
+<p>This implements the formula in the modisco paper, namely that</p>
+<div class="math notranslate nohighlight">
+\[J(v_1,v_2) = \frac{\sum_i (v_{1,i} \cap v_{2,i})}{\sum_i (v_{1,i} \cup v_{2,i})}\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x \cap y &amp;= min(|x|, |y|) * sign(x) * sign(y) \\
+x \cup y &amp;= max(|x|, |y|)\end{split}\]</div>
+<p>The scaleFactor is a number that the importanceScores array should be multiplied by.
+If you just want the continuous Jaccard metric, set this to 1.0.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="interpretUtils.html" class="btn btn-neutral float-left" title="interpretUtils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="layers.html" class="btn btn-neutral float-right" title="layers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

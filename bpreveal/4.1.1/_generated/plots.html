@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tools.plots &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.slurm" href="slurm.html" />
+    <link rel="prev" title="Tools API" href="toolsapi.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="toolsapi.html">Tools API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tools.plots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.tools.plots.getCoordinateTicks"><code class="docutils literal notranslate"><span class="pre">getCoordinateTicks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.tools.plots.plotLogo"><code class="docutils literal notranslate"><span class="pre">plotLogo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.tools.plots.plotPisa"><code class="docutils literal notranslate"><span class="pre">plotPisa()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slurm.html">tools.slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addNoiseUtils.html">tools.addNoiseUtils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="toolsapi.html">Tools API</a></li>
+      <li class="breadcrumb-item active">tools.plots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/plots.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.tools.plots">
+<span id="tools-plots"></span><h1>tools.plots<a class="headerlink" href="#module-bpreveal.tools.plots" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.tools.plots.getCoordinateTicks">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.tools.plots.</span></span><span class="sig-name descname"><span class="pre">getCoordinateTicks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numTicks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zeroOrigin</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.tools.plots.getCoordinateTicks" title="Link to this definition"></a></dt>
+<dd><p>Given a start and end coordinate, return x-ticks that should be used for plotting.
+Given a start and end coordinate, return a list of ticks and tick labels that
+1. include exactly the start and stop coordinates
+2. Contain approximately numTicks positions and labels.
+3. Try to fall on easy multiples 1, 2, and 5 times powers of ten.
+4. Are formatted to reduce redundant label noise by omitting repeated initial digits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>int</em>) – </p></li>
+<li><p><strong>end</strong> (<em>int</em>) – </p></li>
+<li><p><strong>numTicks</strong> (<em>int</em>) – </p></li>
+<li><p><strong>zeroOrigin</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[list[float], list[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.tools.plots.plotLogo">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.tools.plots.</span></span><span class="sig-name descname"><span class="pre">plotLogo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'seq'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.tools.plots.plotLogo" title="Link to this definition"></a></dt>
+<dd><p>A convenience function to plot an array of sequence data (like a pwm)
+on a matplotlib axes object.</p>
+<p>Arguments:
+values is an (N,4) array of sequence data. This could be, for example,
+a pwm or a one-hot encoded sequence.</p>
+<p>width is the width of the total logo, useful for aligning axis labels.</p>
+<p>ax is a matplotlib axes object on which the logo will be drawn.</p>
+<dl class="simple">
+<dt>Colors, if provided, can have several meanings:</dt><dd><ol class="arabic simple">
+<li><dl class="simple">
+<dt>Give an explicit rgba color for each base.</dt><dd><p>colors should be an array of shape (N, 4, 4), where the first dimension is the
+sequence position, the second is the base (A, C, G, T, in that order), and the
+third gives an rgba color to use for that base at that position.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Give a color for each base type. In this case, colors will be a dict of tuples:</dt><dd><p>{“A”: (220, 38, 127), “C”: (120, 94, 240), “G”: (254, 97, 0), “T”: (255, 176, 0)}
+This will make each instance of a particular base have the same color.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Give a matplotlib colormap and a min and max value. Each base will be colored</dt><dd><p>based on its magnitude. For example, to highlight bases with large negative values,
+you might specify (‘Blues_r’, -2, 0) to draw all bases with negative scores as blue,
+and bases with less negative colors will be drawn lighter. Bases with scores outside
+the limits you provide will be clipped to the limit values.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The string ‘seq’ means A will be drawn green, C will be blue, G will be orange,</dt><dd><p>and T will be red. These colors are drawn from a colorblind-aware palette.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>width</strong> (<em>float</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.tools.plots.plotPisa">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.tools.plots.</span></span><span class="sig-name descname"><span class="pre">plotPisa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pisaDats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutMiddle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutLengthX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutLengthY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receptiveField</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genomeWindowStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impScores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nameColors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorSpan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxHeight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.tools.plots.plotPisa" title="Link to this definition"></a></dt>
+<dd><p>pisaDats can either be the name of an hdf5 file or an array from loadPisa.
+profileDats can be the name of a bigwig or an array.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="toolsapi.html" class="btn btn-neutral float-left" title="Tools API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="slurm.html" class="btn btn-neutral float-right" title="tools.slurm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

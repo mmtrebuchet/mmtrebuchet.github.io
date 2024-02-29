@@ -1,0 +1,127 @@
+.. raw:: html
+
+    <a name="add-noise-configuration"></a>
+
+.. _add-noise-configuration:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`add-noise-configuration<add-noise-configuration>`> ::=
+       {"input-h5" : <:ref:`file-name<file-name>`>,
+        "output-h5" : <:ref:`file-name<file-name>`>,
+        <:ref:`output-size-section<output-size-section>`>,
+        "keep-original-data" : <:ref:`boolean<boolean>`>,
+        "sequence-fraction-mutated" : <:ref:`number<number>`>,
+        "sequence-distribution-fraction" : <:ref:`number<number>`>,
+        "profile-mutation-types" : [<:ref:`list-of-profile-mutation-types<list-of-profile-mutation-types>`>],
+        "num-threads" : <:ref:`integer<integer>`>,
+        <:ref:`verbosity-section<verbosity-section>`>}
+    
+.. raw:: html
+
+    <a name="output-size-section"></a>
+
+.. _output-size-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`output-size-section<output-size-section>`> ::=
+        "num-output-samples" : <:ref:`integer<integer>`>
+      | "output-size-ratio" : <:ref:`number<number>`>
+    
+.. raw:: html
+
+    <a name="list-of-profile-mutation-types"></a>
+
+.. _list-of-profile-mutation-types:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`list-of-profile-mutation-types<list-of-profile-mutation-types>`> ::=
+        <:ref:`profile-mutation-type<profile-mutation-type>`>
+      | <:ref:`profile-mutation-type<profile-mutation-type>`>, <:ref:`list-of-profile-mutation-types<list-of-profile-mutation-types>`>
+    
+.. raw:: html
+
+    <a name="profile-mutation-type"></a>
+
+.. _profile-mutation-type:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`profile-mutation-type<profile-mutation-type>`> ::=
+        <:ref:`add-mutation-type<add-mutation-type>`>
+      | <:ref:`shift-mutation-type<shift-mutation-type>`>
+      | <:ref:`subtract-mutation-type<subtract-mutation-type>`>
+    
+.. raw:: html
+
+    <a name="add-mutation-type"></a>
+
+.. _add-mutation-type:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`add-mutation-type<add-mutation-type>`> ::=
+        {"type" : "add",
+         "maximum-reads" : <:ref:`number-or-null<number-or-null>`>,
+         "minimum-reads" : <:ref:`integer<integer>`>,
+         "max-change" : <:ref:`integer<integer>`>,
+         <:ref:`profile-mutation-common-parameters<profile-mutation-common-parameters>`>}
+    
+.. raw:: html
+
+    <a name="shift-mutation-type"></a>
+
+.. _shift-mutation-type:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`shift-mutation-type<shift-mutation-type>`> ::=
+        {"type" : "shift",
+         "shift-max-distance" : <:ref:`integer<integer>`>,
+         "shift-reads-independently" : <:ref:`boolean<boolean>`>,
+         <:ref:`profile-mutation-common-parameters<profile-mutation-common-parameters>`>}
+    
+.. raw:: html
+
+    <a name="subtract-mutation-type"></a>
+
+.. _subtract-mutation-type:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`subtract-mutation-type<subtract-mutation-type>`> ::=
+        {"type" : "subtract",
+         "maximum-reads" : <:ref:`number-or-null<number-or-null>`>,
+         "minimum-reads" : <:ref:`integer<integer>`>,
+         "max-change" : <:ref:`integer<integer>`>,
+         <:ref:`profile-mutation-common-parameters<profile-mutation-common-parameters>`>}
+    
+.. raw:: html
+
+    <a name="profile-mutation-common-parameters"></a>
+
+.. _profile-mutation-common-parameters:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`profile-mutation-common-parameters<profile-mutation-common-parameters>`> ::=
+         "fraction-mutated" : <:ref:`number<number>`>,
+         "output-distribution-fraction" : <:ref:`number<number>`>

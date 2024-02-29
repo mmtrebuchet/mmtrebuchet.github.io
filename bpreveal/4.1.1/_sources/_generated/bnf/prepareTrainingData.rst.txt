@@ -1,0 +1,77 @@
+.. raw:: html
+
+    <a name="prepare-data-configuration"></a>
+
+.. _prepare-data-configuration:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prepare-data-configuration<prepare-data-configuration>`> ::=
+        {"genome" : <:ref:`file-name<file-name>`>,
+         "input-length" : <:ref:`integer<integer>`>,
+         "output-length" : <:ref:`integer<integer>`>,
+         "max-jitter" : <:ref:`integer<integer>`>,
+         "regions" : <:ref:`file-name<file-name>`>,
+         "output-h5" : <:ref:`file-name<file-name>`>,
+         "reverse-complement" : <:ref:`boolean<boolean>`>,
+         "heads" : [<:ref:`prepare-data-heads-list<prepare-data-heads-list>`>],
+         <:ref:`verbosity-section<verbosity-section>`>}
+    
+.. raw:: html
+
+    <a name="prepare-data-heads-list"></a>
+
+.. _prepare-data-heads-list:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prepare-data-heads-list<prepare-data-heads-list>`> ::=
+       <:ref:`prepare-data-individual-head<prepare-data-individual-head>`>
+     | <:ref:`prepare-data-individual-head<prepare-data-individual-head>`>, <:ref:`prepare-data-heads-list<prepare-data-heads-list>`>
+    
+.. raw:: html
+
+    <a name="prepare-data-individual-head"></a>
+
+.. _prepare-data-individual-head:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prepare-data-individual-head<prepare-data-individual-head>`> ::=
+        {<:ref:`revcomp-head-section<revcomp-head-section>`>
+         "bigwig-files" : [<:ref:`list-of-bigwig-file-names<list-of-bigwig-file-names>`>] }
+    
+.. raw:: html
+
+    <a name="revcomp-head-section"></a>
+
+.. _revcomp-head-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`revcomp-head-section<revcomp-head-section>`> ::=
+        <:ref:`empty<empty>`>
+      | "revcomp-task-order" : "auto",
+      | "revcomp-task-order" : [<:ref:`list-of-integer<list-of-integer>`>],
+    
+.. raw:: html
+
+    <a name="list-of-bigwig-file-names"></a>
+
+.. _list-of-bigwig-file-names:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`list-of-bigwig-file-names<list-of-bigwig-file-names>`> ::=
+       <:ref:`file-name<file-name>`>
+     | <:ref:`file-name<file-name>`>, <:ref:`file-name<file-name>`>

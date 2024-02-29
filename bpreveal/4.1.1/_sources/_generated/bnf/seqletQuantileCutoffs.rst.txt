@@ -1,0 +1,86 @@
+.. raw:: html
+
+    <a name="quantile-json"></a>
+
+.. _quantile-json:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`quantile-json<quantile-json>`> ::=
+        [<:ref:`list-of-scan-patterns<list-of-scan-patterns>`> ]
+    
+.. raw:: html
+
+    <a name="list-of-scan-patterns"></a>
+
+.. _list-of-scan-patterns:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`list-of-scan-patterns<list-of-scan-patterns>`> ::=
+        <:ref:`scan-pattern<scan-pattern>`>
+        | <:ref:`scan-pattern<scan-pattern>`>, <:ref:`list-of-scan-patterns<list-of-scan-patterns>`>
+    
+.. raw:: html
+
+    <a name="scan-pattern"></a>
+
+.. _scan-pattern:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`scan-pattern<scan-pattern>`> ::=
+        {"metacluster-name" : <:ref:`string<string>`>,
+        "pattern-name" : <:ref:`string<string>`>,
+        "short-name" : <:ref:`string<string>`>
+        "cwm" : <:ref:`motif-array<motif-array>`>,
+        "pssm" : <:ref:`motif-array<motif-array>`>,
+        "seq-match-cutoff" : <:ref:`number-or-null<number-or-null>`>,
+        "contrib-match-cutoff" : <:ref:`number-or-null<number-or-null>`>,
+        "contrib-magnitude-cutoff" : <:ref:`number-or-null<number-or-null>`>}
+    
+.. raw:: html
+
+    <a name="motif-array"></a>
+
+.. _motif-array:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`motif-array<motif-array>`> ::=
+        [ <:ref:`list-of-base-arrays<list-of-base-arrays>`> ]
+    
+.. raw:: html
+
+    <a name="list-of-base-arrays"></a>
+
+.. _list-of-base-arrays:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`list-of-base-arrays<list-of-base-arrays>`> ::=
+        <:ref:`base-array<base-array>`>
+        | <:ref:`base-array<base-array>`>, <:ref:`list-of-base-arrays<list-of-base-arrays>`>
+    
+.. raw:: html
+
+    <a name="base-array"></a>
+
+.. _base-array:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`base-array<base-array>`> ::=
+        [<:ref:`number<number>`>, <:ref:`number<number>`>, <:ref:`number<number>`>, <:ref:`number<number>`>]

@@ -1,0 +1,56 @@
+.. raw:: html
+
+    <a name="flat-interpretation-configuration"></a>
+
+.. _flat-interpretation-configuration:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`flat-interpretation-configuration<flat-interpretation-configuration>`> ::=
+        {<:ref:`bed-or-fasta<bed-or-fasta>`>,
+         "model-file" : <:ref:`file-name<file-name>`>,
+         "input-length" : <:ref:`integer<integer>`>,
+         "output-length" : <:ref:`integer<integer>`>,
+         "heads" : <:ref:`integer<integer>`>,
+         "head-id" : <:ref:`integer<integer>`>
+         "profile-task-ids" : [<:ref:`list-of-integer<list-of-integer>`>],
+         "profile-h5" : <:ref:`file-name<file-name>`>,
+         "counts-h5" : <:ref:`file-name<file-name>`>,
+         "num-shuffles" : <:ref:`integer<integer>`>,
+         <:ref:`kmer-size-section<kmer-size-section>`>
+         <:ref:`verbosity-section<verbosity-section>`>}
+    
+.. raw:: html
+
+    <a name="bed-or-fasta"></a>
+
+.. _bed-or-fasta:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`bed-or-fasta<bed-or-fasta>`> ::=
+        "genome" : <:ref:`file-name<file-name>`>,
+        "bed-file" : <:ref:`file-name<file-name>`>
+     |  "fasta-file" : <:ref:`file-name<file-name>`>
+     |  "fasta-file" : <:ref:`file-name<file-name>`>,
+        "coordinates": {
+            "genome" : <:ref:`file-name<file-name>`>,
+            "bed-file" : <:ref:`file-name<file-name>`>}
+    
+.. raw:: html
+
+    <a name="kmer-size-section"></a>
+
+.. _kmer-size-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`kmer-size-section<kmer-size-section>`> ::=
+        "kmer-size" : <:ref:`integer<integer>`>,
+      | <:ref:`empty<empty>`>

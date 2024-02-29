@@ -1,0 +1,142 @@
+.. raw:: html
+
+    <a name="motif-seqlet-cutoffs-configuration"></a>
+
+.. _motif-seqlet-cutoffs-configuration:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`motif-seqlet-cutoffs-configuration<motif-seqlet-cutoffs-configuration>`> ::=
+        {<:ref:`seqlet-scanning-settings<seqlet-scanning-settings>`>,
+        <:ref:`verbosity-section<verbosity-section>`>}
+    
+.. raw:: html
+
+    <a name="seqlet-scanning-settings"></a>
+
+.. _seqlet-scanning-settings:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`seqlet-scanning-settings<seqlet-scanning-settings>`> ::=
+        <:ref:`seqlet-tsv-section<seqlet-tsv-section>`>
+        "modisco-h5" : <:ref:`file-name<file-name>`>,
+        <:ref:`seqlet-contrib-section<seqlet-contrib-section>`>
+        <:ref:`pattern-spec-section<pattern-spec-section>`>,
+        "seq-match-quantile" : <:ref:`number-or-null<number-or-null>`>,
+        "contrib-match-quantile" : <:ref:`number-or-null<number-or-null>`>,
+        "contrib-magnitude-quantile" : <:ref:`number-or-null<number-or-null>`>,
+        "trim-threshold" : <:ref:`number<number>`>,
+        "trim-padding" : <:ref:`integer<integer>`>,
+        "background-probs" : <:ref:`vector-or-genome<vector-or-genome>`>,
+        <:ref:`quantile-json-section<quantile-json-section>`>
+    
+.. raw:: html
+
+    <a name="pattern-spec-section"></a>
+
+.. _pattern-spec-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`pattern-spec-section<pattern-spec-section>`> ::=
+        "patterns" : "all"
+      | "patterns" : [<:ref:`list-of-pattern-specs<list-of-pattern-specs>`>]
+    
+.. raw:: html
+
+    <a name="list-of-pattern-specs"></a>
+
+.. _list-of-pattern-specs:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`list-of-pattern-specs<list-of-pattern-specs>`> ::=
+        <:ref:`pattern-spec<pattern-spec>`>
+      | <:ref:`pattern-spec<pattern-spec>`>, <:ref:`list-of-pattern-specs<list-of-pattern-specs>`>
+    
+.. raw:: html
+
+    <a name="pattern-spec"></a>
+
+.. _pattern-spec:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`pattern-spec<pattern-spec>`> ::=
+        {"metacluster-name" : <:ref:`string<string>`>,
+         "pattern-name" : <:ref:`string<string>`> }
+      | {"metacluster-name" : <:ref:`string<string>`>,
+         "pattern-names" : [<:ref:`list-of-string<list-of-string>`>]
+      | {"metacluster-name" : <:ref:`string<string>`>,
+         "pattern-name" : <:ref:`string<string>`>,
+         "short-name" : <:ref:`string<string>`>}
+      | {"metacluster-name" : <:ref:`string<string>`>,
+         "pattern-names" : [<:ref:`list-of-string<list-of-string>`>],
+         "short-names" : [<:ref:`list-of-string<list-of-string>`>]}
+    
+.. raw:: html
+
+    <a name="vector-or-genome"></a>
+
+.. _vector-or-genome:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`vector-or-genome<vector-or-genome>`> ::=
+        "danRer11" | "hg38" | "dm6" | "mm10" | "sacCer3"
+      | [<:ref:`number<number>`>, <:ref:`number<number>`>, <:ref:`number<number>`>, <:ref:`number<number>`>],
+    
+.. raw:: html
+
+    <a name="quantile-json-section"></a>
+
+.. _quantile-json-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`quantile-json-section<quantile-json-section>`> ::=
+        <:ref:`empty<empty>`>
+      | "quantile-json" : <:ref:`file-name<file-name>`>,
+    
+.. raw:: html
+
+    <a name="seqlet-contrib-section"></a>
+
+.. _seqlet-contrib-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`seqlet-contrib-section<seqlet-contrib-section>`> ::=
+        <:ref:`empty<empty>`>
+      | "modisco-contrib-h5" : <:ref:`file-name<file-name>`>,
+    
+.. raw:: html
+
+    <a name="seqlet-tsv-section"></a>
+
+.. _seqlet-tsv-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`seqlet-tsv-section<seqlet-tsv-section>`> ::=
+        <:ref:`empty<empty>`>
+      | "seqlets-tsv" : <:ref:`file-name<file-name>`>,

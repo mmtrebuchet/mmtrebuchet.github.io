@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utils &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tools Utility CLI" href="toolsminor.html" />
+    <link rel="prev" title="ushuffle" href="ushuffle.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bedUtils.html">bedUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html">callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaOptimize.html">gaOptimize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators.html">generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretUtils.html">interpretUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaccard.html">jaccard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html">layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logUtils.html">logUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="losses.html">losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifUtils.html">motifUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema.html">schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ushuffle.html">ushuffle</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.loadModel"><code class="docutils literal notranslate"><span class="pre">loadModel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.setMemoryGrowth"><code class="docutils literal notranslate"><span class="pre">setMemoryGrowth()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.limitMemoryUsage"><code class="docutils literal notranslate"><span class="pre">limitMemoryUsage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.loadChromSizes"><code class="docutils literal notranslate"><span class="pre">loadChromSizes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.blankChromosomeArrays"><code class="docutils literal notranslate"><span class="pre">blankChromosomeArrays()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.writeBigwig"><code class="docutils literal notranslate"><span class="pre">writeBigwig()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.oneHotEncode"><code class="docutils literal notranslate"><span class="pre">oneHotEncode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.oneHotDecode"><code class="docutils literal notranslate"><span class="pre">oneHotDecode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.logitsToProfile"><code class="docutils literal notranslate"><span class="pre">logitsToProfile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.easyPredict"><code class="docutils literal notranslate"><span class="pre">easyPredict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.easyInterpretFlat"><code class="docutils literal notranslate"><span class="pre">easyInterpretFlat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.BatchPredictor"><code class="docutils literal notranslate"><span class="pre">BatchPredictor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.BatchPredictor.clear"><code class="docutils literal notranslate"><span class="pre">BatchPredictor.clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.BatchPredictor.submitOHE"><code class="docutils literal notranslate"><span class="pre">BatchPredictor.submitOHE()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.BatchPredictor.submitString"><code class="docutils literal notranslate"><span class="pre">BatchPredictor.submitString()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.BatchPredictor.runBatch"><code class="docutils literal notranslate"><span class="pre">BatchPredictor.runBatch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.BatchPredictor.outputReady"><code class="docutils literal notranslate"><span class="pre">BatchPredictor.outputReady()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.BatchPredictor.empty"><code class="docutils literal notranslate"><span class="pre">BatchPredictor.empty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.BatchPredictor.getOutput"><code class="docutils literal notranslate"><span class="pre">BatchPredictor.getOutput()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.utils.ThreadedBatchPredictor"><code class="docutils literal notranslate"><span class="pre">ThreadedBatchPredictor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.ThreadedBatchPredictor.start"><code class="docutils literal notranslate"><span class="pre">ThreadedBatchPredictor.start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.ThreadedBatchPredictor.stop"><code class="docutils literal notranslate"><span class="pre">ThreadedBatchPredictor.stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.ThreadedBatchPredictor.clear"><code class="docutils literal notranslate"><span class="pre">ThreadedBatchPredictor.clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.ThreadedBatchPredictor.submitOHE"><code class="docutils literal notranslate"><span class="pre">ThreadedBatchPredictor.submitOHE()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.ThreadedBatchPredictor.submitString"><code class="docutils literal notranslate"><span class="pre">ThreadedBatchPredictor.submitString()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.ThreadedBatchPredictor.outputReady"><code class="docutils literal notranslate"><span class="pre">ThreadedBatchPredictor.outputReady()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.ThreadedBatchPredictor.empty"><code class="docutils literal notranslate"><span class="pre">ThreadedBatchPredictor.empty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.utils.ThreadedBatchPredictor.getOutput"><code class="docutils literal notranslate"><span class="pre">ThreadedBatchPredictor.getOutput()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">utils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.utils">
+<span id="utils"></span><h1>utils<a class="headerlink" href="#module-bpreveal.utils" title="Link to this heading"></a></h1>
+<p>Lots of helpful utilities for working with models.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.loadModel">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">loadModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modelFname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.loadModel" title="Link to this definition"></a></dt>
+<dd><p>Load up a BPReveal model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sets <a class="reference internal" href="constants.html#bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED" title="bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED"><code class="xref py py-data docutils literal notranslate"><span class="pre">bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED</span></code></a>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>modelFname</strong> (<em>str</em>) – The name of the model that Keras saved earlier, typically
+a directory.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Keras Model object.</p>
+</dd>
+</dl>
+<p>The returned model does NOT support additional training, since it uses a
+dummy loss.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.setMemoryGrowth">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">setMemoryGrowth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.setMemoryGrowth" title="Link to this definition"></a></dt>
+<dd><p>Turn on the tensorflow option to grow memory usage as needed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sets <a class="reference internal" href="constants.html#bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED" title="bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED"><code class="xref py py-data docutils literal notranslate"><span class="pre">bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED</span></code></a>.</p>
+</div>
+<p>All of the main programs in BPReveal do this, so that you can
+use your GPU for other stuff as you work with models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.limitMemoryUsage">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">limitMemoryUsage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.limitMemoryUsage" title="Link to this definition"></a></dt>
+<dd><p>Limit tensorflow to use only the given fraction of memory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sets <a class="reference internal" href="constants.html#bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED" title="bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED"><code class="xref py py-data docutils literal notranslate"><span class="pre">bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED</span></code></a>.</p>
+</div>
+<p>This will allocate <code class="docutils literal notranslate"><span class="pre">total-memory</span> <span class="pre">*</span> <span class="pre">fraction</span> <span class="pre">-</span> <span class="pre">offset</span></code>
+Why use this? Well, for running multiple processes on the same GPU, you don’t
+want to have them both allocating all the memory. So if you had two processes,
+you’d do something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">child1</span><span class="p">():</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">limitMemoryUsage</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="c1"># Load model, do stuff.</span>
+
+<span class="k">def</span> <span class="nf">child2</span><span class="p">():</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">limitMemoryUsage</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="c1"># Load model, do stuff.</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">child1</span><span class="p">);</span> <span class="n">p1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">child2</span><span class="p">);</span> <span class="n">p2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And now each process will use (1024 MB less than) half the total GPU memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fraction</strong> (<em>float</em>) – How much of the memory on the GPU can I have?</p></li>
+<li><p><strong>offset</strong> (<em>float</em>) – How much memory (in MB) should be reserved when
+I carve out my fraction?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The memory (in MB) reserved.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.loadChromSizes">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">loadChromSizes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chromSizesFname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genomeFname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bwHeader</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fasta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.loadChromSizes" title="Link to this definition"></a></dt>
+<dd><p>Read in a chrom sizes file and return a dictionary mapping chromosome name → size.</p>
+<p>Exactly one of the supplied parameters may be None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chromSizesFname</strong> (<em>str</em><em> | </em><em>None</em>) – The name of a chrom.sizes file on disk.</p></li>
+<li><p><strong>genomeFname</strong> (<em>str</em><em> | </em><em>None</em>) – The name of a genome fasta file on disk.</p></li>
+<li><p><strong>bwHeader</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>] </em><em>| </em><em>None</em>) – A dictionary loaded from a bigwig.
+(Using this makes this function a no-op.)</p></li>
+<li><p><strong>bw</strong> (<em>bigWigFile</em><em> | </em><em>None</em>) – An opened bigwig file.</p></li>
+<li><p><strong>fasta</strong> (<em>FastaFile</em><em> | </em><em>None</em>) – An opened genome fasta.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>{“chr1”: 1234567, “chr2”: 43212567, …}</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.blankChromosomeArrays">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">blankChromosomeArrays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genomeFname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chromSizesFname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bwHeader=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chromSizes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fasta=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numTracks=1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.blankChromosomeArrays" title="Link to this definition"></a></dt>
+<dd><p>Get a set of blank numpy arrays that you can use to save genome-wide data.</p>
+<p>Exactly one of <code class="docutils literal notranslate"><span class="pre">chromSizesFname</span></code>, <code class="docutils literal notranslate"><span class="pre">genomeFname</span></code>, <code class="docutils literal notranslate"><span class="pre">bwHeader</span></code>,
+<code class="docutils literal notranslate"><span class="pre">chromSizes</span></code>, <code class="docutils literal notranslate"><span class="pre">bw</span></code>, or <code class="docutils literal notranslate"><span class="pre">fasta</span></code> may be None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chromSizesFname</strong> (<em>str</em><em> | </em><em>None</em>) – The name of a chrom.sizes file on disk.</p></li>
+<li><p><strong>genomeFname</strong> (<em>str</em><em> | </em><em>None</em>) – The name of a genome fasta file on disk.</p></li>
+<li><p><strong>bwHeader</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>] </em><em>| </em><em>None</em>) – A dictionary loaded from a bigwig.</p></li>
+<li><p><strong>chromSizes</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>] </em><em>| </em><em>None</em>) – A dictionary mapping chromosome name to length.</p></li>
+<li><p><strong>bw</strong> (<em>bigWigFile</em><em> | </em><em>None</em>) – An opened bigwig file.</p></li>
+<li><p><strong>fasta</strong> (<em>FastaFile</em><em> | </em><em>None</em>) – An opened genome fasta.</p></li>
+<li><p><strong>dtype</strong> (<em>type</em>) – The type of the arrays that will be returned.</p></li>
+<li><p><strong>numTracks</strong> (<em>int</em>) – How many tracks of data do you have?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dict mapping chromosome name to a numpy array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, <em>ndarray</em>]</p>
+</dd>
+</dl>
+<p>The returned dict will have an element for every chromosome in the input.
+The shape of each element of the dictionary will be (chromosome-length, numTracks).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.writeBigwig">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">writeBigwig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bwFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chromDict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regionList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regionData</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chromSizes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.writeBigwig" title="Link to this definition"></a></dt>
+<dd><p>Write a bigwig file given some region data.</p>
+<p>You must specify either:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">chromDict</span></code>, in which case <code class="docutils literal notranslate"><span class="pre">regionList</span></code>, <code class="docutils literal notranslate"><span class="pre">chromSizes</span></code></dt><dd><p>and <code class="docutils literal notranslate"><span class="pre">regionData</span></code> must be <code class="docutils literal notranslate"><span class="pre">None</span></code>, or</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">regionList</span></code>, <code class="docutils literal notranslate"><span class="pre">chromSizes</span></code>, and <code class="docutils literal notranslate"><span class="pre">regionData</span></code>, in which</dt><dd><p>case <code class="docutils literal notranslate"><span class="pre">chromDict</span></code> must be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bwFname</strong> (<em>str</em>) – The name of the bigwig file to write.</p></li>
+<li><p><strong>chromDict</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>ndarray</em><em>] </em><em>| </em><em>None</em>) – A dict mapping chromosome names to the data for that
+chromosome. The data should have shape (chromosome-length,).</p></li>
+<li><p><strong>regionList</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em><em>] </em><em>| </em><em>None</em>) – A list of (chrom, start, end) tuples giving the
+locations where the data should be saved.</p></li>
+<li><p><strong>regionData</strong> (<em>Any</em>) – An iterable with the same length as <code class="docutils literal notranslate"><span class="pre">regionList</span></code>.
+The ith element of <code class="docutils literal notranslate"><span class="pre">regionData</span></code> will be
+written to the ith location in <code class="docutils literal notranslate"><span class="pre">regionList</span></code>.</p></li>
+<li><p><strong>chromSizes</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>] </em><em>| </em><em>None</em>) – A dict mapping chromosome name → chromosome size.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.oneHotEncode">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">oneHotEncode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowN</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.oneHotEncode" title="Link to this definition"></a></dt>
+<dd><p>Convert the string sequence into a one-hot encoded numpy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>str</em>) – A DNA sequence to encode.
+May contain uppercase and lowercase letters.</p></li>
+<li><p><strong>allowN</strong> (<em>bool</em>) – If False (the default), raise an AssertionError if
+the sequence contains letters other than <code class="docutils literal notranslate"><span class="pre">ACGTacgt</span></code>.
+If True, any other characters will be encoded as <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array with shape (len(sequence), 4).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="constants.html#bpreveal.internal.constants.ONEHOT_AR_T" title="bpreveal.internal.constants.ONEHOT_AR_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">ONEHOT_AR_T</span></code></a></p>
+</dd>
+</dl>
+<p>The columns are, in order, A, C, G, and T.
+The mapping is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>A or a → [1, 0, 0, 0]
+C or c → [0, 1, 0, 0]
+G or g → [0, 0, 1, 0]
+T or t → [0, 0, 0, 1]
+Other  → [0, 0, 0, 0]
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.oneHotDecode">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">oneHotDecode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oneHotSequence</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.oneHotDecode" title="Link to this definition"></a></dt>
+<dd><p>Take a one-hot encoded sequence and turn it back into a string.</p>
+<p>Given an array representing a one-hot encoded sequence, convert it back
+to a string. The input shall have shape (sequenceLength, 4), and the output
+will be a Python string.
+The decoding is performed based on the following mapping:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[1, 0, 0, 0] → A
+[0, 1, 0, 0] → C
+[0, 0, 1, 0] → G
+[0, 0, 0, 1] → T
+[0, 0, 0, 0] → N
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>oneHotSequence</strong> (<em>ndarray</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.logitsToProfile">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">logitsToProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logitsAcrossSingleRegion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logCountsAcrossSingleRegion</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.logitsToProfile" title="Link to this definition"></a></dt>
+<dd><p>Take logits and logcounts and turn it into a profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logitsAcrossSingleRegion</strong> (<a class="reference internal" href="constants.html#bpreveal.internal.constants.LOGIT_AR_T" title="bpreveal.internal.constants.LOGIT_AR_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">LOGIT_AR_T</span></code></a>) – An array of shape (output-length * num-tasks)</p></li>
+<li><p><strong>logCountsAcrossSingleRegion</strong> (<a class="reference internal" href="constants.html#bpreveal.internal.constants.LOGCOUNT_T" title="bpreveal.internal.constants.LOGCOUNT_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">LOGCOUNT_T</span></code></a>) – A single floating-point number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of shape (output-length * num-tasks), giving the profile
+predictions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="constants.html#bpreveal.internal.constants.PRED_AR_T" title="bpreveal.internal.constants.PRED_AR_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">PRED_AR_T</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.easyPredict">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">easyPredict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequences</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelFname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.easyPredict" title="Link to this definition"></a></dt>
+<dd><p>Make predictions with your model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequences</strong> (<em>Iterable</em><em>[</em><em>str</em><em>] </em><em>| </em><em>str</em>) – The DNA sequence(s) that you want to predict on.</p></li>
+<li><p><strong>modelFname</strong> (<em>str</em>) – The name of the Keras model to use.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of profiles or a single profile, depending on <code class="docutils literal notranslate"><span class="pre">sequences</span></code></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="constants.html#bpreveal.internal.constants.PRED_AR_T" title="bpreveal.internal.constants.PRED_AR_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">PRED_AR_T</span></code></a></p>
+</dd>
+</dl>
+<p>Spawns a separate process to make a single batch of predictions,
+then shuts it down. Why make it complicated? Because it frees the
+GPU after it’s done so other programs and stuff can use it.
+If <code class="docutils literal notranslate"><span class="pre">sequences</span></code> is a single string containing a sequence to predict
+on, that’s okay, it will be treated as a length-one list of sequences
+to predict. <code class="docutils literal notranslate"><span class="pre">sequences</span></code> should be as long as the input length of
+your model.</p>
+<p>The shape of the returned array will be (numSequences x outputLength)
+if you passed in an iterable of strings (like a list of strings), and
+it will be (outputLength,) if you passed in a single string.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.utils.easyInterpretFlat">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">easyInterpretFlat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequences</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taskIDs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numShuffles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmerSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepHypotheticals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.easyInterpretFlat" title="Link to this definition"></a></dt>
+<dd><p>Spin up an entire interpret pipeline just to interpret your sequences.</p>
+<p>You should only use this for quick one-off things since it is EXTREMELY
+slow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequences</strong> (<em>Iterable</em><em>[</em><em>str</em><em>] </em><em>| </em><em>str</em>) – is a list (or technically any Iterable) of strings, and the
+returned importance scores will be in an order that corresponds
+to your sequences.
+You can also provide just one string, in which case the return type
+will change: The first (length-one) dimension will be stripped.</p></li>
+<li><p><strong>modelFname</strong> (<em>str</em>) – The name of the BPReveal model on disk.</p></li>
+<li><p><strong>heads</strong> (<em>int</em>) – The TOTAL number of heads that the model has.</p></li>
+<li><p><strong>headID</strong> (<em>int</em>) – The index of the head of the model that you want interpreted.</p></li>
+<li><p><strong>taskIDs</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – The list of tasks that should be included in the profile score
+calculation. For most cases, you’d want a list of all the tasks,
+like <code class="docutils literal notranslate"><span class="pre">[0,1]</span></code>.</p></li>
+<li><p><strong>numShuffles</strong> (<em>int</em>) – The number of shuffled sequences that are used to calculate
+shap values.</p></li>
+<li><p><strong>kmerSize</strong> (<em>int</em>) – The length of kmers for which the distribution should be preserved
+during the shuffle. If 1, shuffle each base independently. If 2, preserve
+the distribution of dimers, etc.</p></li>
+<li><p><strong>keepHypotheticals</strong> (<em>bool</em>) – Controls whether the output contains hypothetical
+contribution scores or just the actual ones.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dict containing the importance scores.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str,  <a class="reference internal" href="constants.html#bpreveal.internal.constants.IMPORTANCE_AR_T" title="bpreveal.internal.constants.IMPORTANCE_AR_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">IMPORTANCE_AR_T</span></code></a>  |  <a class="reference internal" href="constants.html#bpreveal.internal.constants.ONEHOT_AR_T" title="bpreveal.internal.constants.ONEHOT_AR_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">ONEHOT_AR_T</span></code></a> ]</p>
+</dd>
+</dl>
+<p>If you passed in an iterable of strings (like a list), then the output’s first
+dimension will be the number of sequences and it will depend on keepHypotheticals:</p>
+<ul>
+<li><p>If keepHypotheticals is True, then it will be structured so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;profile&quot;</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="p">(</span><span class="n">numSequences</span> <span class="n">x</span> <span class="n">inputLength</span> <span class="n">x</span> <span class="mi">4</span><span class="p">),</span>
+ <span class="s2">&quot;counts&quot;</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="p">(</span><span class="n">numSequences</span> <span class="n">x</span> <span class="n">inputLength</span> <span class="n">x</span> <span class="mi">4</span><span class="p">),</span>
+ <span class="s2">&quot;sequence&quot;</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="p">(</span><span class="n">numSequences</span> <span class="n">x</span> <span class="n">inputLength</span> <span class="n">x</span> <span class="mi">4</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>This dict has the same meaning as shap scores stored in an
+interpretFlat hdf5.</p>
+</li>
+<li><p>If keepHypotheticals is False (the default), then the
+shap scores will be condensed down to the normal scores that we plot
+in a genome browser:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;profile&quot;</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="p">(</span><span class="n">numSequences</span> <span class="n">x</span> <span class="n">inputLength</span><span class="p">),</span>
+ <span class="s2">&quot;counts&quot;</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="p">(</span><span class="n">numSequences</span> <span class="n">x</span> <span class="n">inputLength</span><span class="p">)}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>However, if sequences was a string instead of an iterable, then the numSequences
+dimension will be suppressed:</p>
+<ul>
+<li><p>For keepHypotheticals == True, you get:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;profile&quot;</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="p">(</span><span class="n">inputLength</span> <span class="n">x</span> <span class="mi">4</span><span class="p">),</span>
+ <span class="s2">&quot;counts&quot;</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="p">(</span><span class="n">inputLength</span> <span class="n">x</span> <span class="mi">4</span><span class="p">),</span>
+ <span class="s2">&quot;sequence&quot;</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="p">(</span><span class="n">inputLength</span> <span class="n">x</span> <span class="mi">4</span><span class="p">)}</span>
+</pre></div>
+</div>
+</li>
+<li><p>and if keepHypotheticals is False, you get:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;profile&quot;</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="p">(</span><span class="n">inputLength</span><span class="p">,),</span>
+ <span class="s2">&quot;counts&quot;</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="p">(</span><span class="n">inputLength</span><span class="p">,)}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.utils.BatchPredictor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">BatchPredictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modelFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.BatchPredictor" title="Link to this definition"></a></dt>
+<dd><p>This is a utility class for when you need to make lots of predictions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sets <a class="reference internal" href="constants.html#bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED" title="bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED"><code class="xref py py-data docutils literal notranslate"><span class="pre">bpreveal.internal.constants.GLOBAL_TENSORFLOW_LOADED</span></code></a>.</p>
+</div>
+<p>It’s doubly-useful if you are generating sequences dynamically. Here’s how
+it works. You first create a predictor by calling BatchPredictor(modelName,
+batchSize). If you’re not sure, a batch size of 64 is probably good.</p>
+<p>Now, you submit any sequences you want predicted, using the submit methods.</p>
+<p>Once you’ve submitted all of your sequences, you can get your results with
+the getOutput() method.</p>
+<p>Note that the getOutput() method returns <em>one</em> result at a time, and
+you have to call getOutput() once for every time you called one of the
+submit methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modelFname</strong> (<em>str</em>) – The name of the BPReveal model that you want to make
+predictions from. It’s the same name you give for the model in any of
+the other BPReveal tools.</p></li>
+<li><p><strong>batchSize</strong> (<em>int</em>) – is the number of samples that should be run simultaneously
+through the model.</p></li>
+<li><p><strong>start</strong> (<em>bool</em>) – Ignored, but present here to give BatchPredictor the same API
+as ThreadedBatchPredictor.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.BatchPredictor.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.BatchPredictor.clear" title="Link to this definition"></a></dt>
+<dd><p>Reset the predictor.</p>
+<p>If you’ve left your predictor in some weird state, you can reset it
+by calling clear(). This empties all the queues.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.BatchPredictor.submitOHE">
+<span class="sig-name descname"><span class="pre">submitOHE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.BatchPredictor.submitOHE" title="Link to this definition"></a></dt>
+<dd><p>Submit a one-hot-encoded sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>uint8</em><em>]</em><em>]</em>) – An (input-length x 4) ndarray containing the
+one-hot encoded sequence to predict.</p></li>
+<li><p><strong>label</strong> (<em>Any</em>) – Any object; it will be returned with the prediction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.BatchPredictor.submitString">
+<span class="sig-name descname"><span class="pre">submitString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.BatchPredictor.submitString" title="Link to this definition"></a></dt>
+<dd><p>Submit a given sequence for prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>str</em>) – A string of length input-length</p></li>
+<li><p><strong>label</strong> (<em>Any</em>) – Any object. Label will be returned to you with the
+prediction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.BatchPredictor.runBatch">
+<span class="sig-name descname"><span class="pre">runBatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maxSamples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.BatchPredictor.runBatch" title="Link to this definition"></a></dt>
+<dd><p>Actually run the batch.</p>
+<p>Normally, this will be called
+by the submit functions, and it will also be called if you ask
+for output and the output queue is empty (assuming there are
+sequences waiting in the input queue.)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>maxSamples</strong> (<em>int</em><em> | </em><em>None</em>) – (Optional) The maximum number of samples to
+run in this batch. It should probably be a multiple of the
+batch size.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.BatchPredictor.outputReady">
+<span class="sig-name descname"><span class="pre">outputReady</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.BatchPredictor.outputReady" title="Link to this definition"></a></dt>
+<dd><p>Is there any output ready for you?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the batcher is sitting on results, and False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.BatchPredictor.empty">
+<span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.BatchPredictor.empty" title="Link to this definition"></a></dt>
+<dd><p>Is it possible to getOutput()?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if predictions haven’t been made yet, but
+they would be made if you asked for output.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.BatchPredictor.getOutput">
+<span class="sig-name descname"><span class="pre">getOutput</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.BatchPredictor.getOutput" title="Link to this definition"></a></dt>
+<dd><p>Return one of the predictions made by the model.</p>
+<p>This implementation guarantees that predictions will be returned in
+the same order as they were submitted, but you should not rely on that
+in the future. Instead, you should use a label when you submit your
+sequences and use that to determine order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A two-tuple.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[list[ <a class="reference internal" href="constants.html#bpreveal.internal.constants.LOGIT_AR_T" title="bpreveal.internal.constants.LOGIT_AR_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">LOGIT_AR_T</span></code></a> ,  <a class="reference internal" href="constants.html#bpreveal.internal.constants.LOGIT_T" title="bpreveal.internal.constants.LOGIT_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">LOGIT_T</span></code></a> ], typing.Any]</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>The first element will be a list of length numHeads*2, representing the
+output from the model. Since the output of the model will always have
+a dimension representing the batch size, and this function only returns
+the result of running a single sequence, the dimension representing
+the batch size is removed. In other words, running the model on a
+single example would give a logits output of shape
+(1 x output-length x num-tasks).
+But this function will remove that, so you will get an array of shape
+(output-length x numTasks)
+As with calling the model directly, the first numHeads elements are the
+logits arrays, and then come the logcounts for each head.
+You can pass the logits and logcounts values to utils.logitsToProfile
+to get your profile.</p></li>
+<li><p>The second element will be the label you
+passed in with the original sequence.</p></li>
+</ul>
+<p>Graphically:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">head</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">logits</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">head</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">logits</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span>
+   <span class="o">&lt;</span><span class="n">head</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">logcounts</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">head</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">logcounts</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span>
+  <span class="p">],</span>
+  <span class="n">label</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.utils.ThreadedBatchPredictor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.utils.</span></span><span class="sig-name descname"><span class="pre">ThreadedBatchPredictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modelFname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numThreads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.ThreadedBatchPredictor" title="Link to this definition"></a></dt>
+<dd><p>Mirrors the API of the BachPredictor class, but predicts in a separate thread.</p>
+<p>This can give you a performance boost, and also lets you
+shut down the predictor thread when you don’t need it.
+Supports the with statement to only turn on the batcher when you’re using it,
+or you can leave it running in the background.</p>
+<p>Usage examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predictor</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">ThreadedBatchPredictor</span><span class="p">(</span><span class="n">modelFname</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Use as you would a normal batchPredictor</span>
+<span class="c1"># When not needed any more:</span>
+<span class="n">predictor</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Alternatively, you can use this as a context manager:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predictor</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">ThreadedBatchPredictor</span><span class="p">(</span><span class="n">modelFname</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">predictor</span><span class="p">:</span>
+    <span class="c1"># use as a normal BatchPredictor.</span>
+<span class="c1"># On leaving the context, the predictor is shut down.</span>
+</pre></div>
+</div>
+<p>The batcher guarantees that the order in which you get results is the same as
+the order you submitted them in, but this could change in the future!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modelFname</strong> (<em>str</em>) – The name of the model to use to make predictions.</p></li>
+<li><p><strong>batchSize</strong> (<em>int</em>) – The number of samples to calculate at once.</p></li>
+<li><p><strong>start</strong> (<em>bool</em>) – Should the predictor start right away?</p></li>
+<li><p><strong>numThreads</strong> (<em>int</em>) – How many predictors should be spawned?</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.ThreadedBatchPredictor.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.ThreadedBatchPredictor.start" title="Link to this definition"></a></dt>
+<dd><p>Spin up the batcher thread.</p>
+<p>If you submit sequences without starting the batcher,
+this method will be called automatically (with a warning).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.ThreadedBatchPredictor.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.ThreadedBatchPredictor.stop" title="Link to this definition"></a></dt>
+<dd><p>Shut down the processor thread.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.ThreadedBatchPredictor.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.ThreadedBatchPredictor.clear" title="Link to this definition"></a></dt>
+<dd><p>Reset the batcher, emptying any queues and reloading the model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.ThreadedBatchPredictor.submitOHE">
+<span class="sig-name descname"><span class="pre">submitOHE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.ThreadedBatchPredictor.submitOHE" title="Link to this definition"></a></dt>
+<dd><p>Submit a one-hot-encoded sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>uint8</em><em>]</em><em>]</em>) – An (input-length x 4) ndarray containing the
+one-hot encoded sequence to predict.</p></li>
+<li><p><strong>label</strong> (<em>Any</em>) – Any object; it will be returned with the prediction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.ThreadedBatchPredictor.submitString">
+<span class="sig-name descname"><span class="pre">submitString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.ThreadedBatchPredictor.submitString" title="Link to this definition"></a></dt>
+<dd><p>Submit a given sequence for prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>str</em>) – A string of length input-length</p></li>
+<li><p><strong>label</strong> (<em>Any</em>) – Any object. Label will be returned to you with the
+prediction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.ThreadedBatchPredictor.outputReady">
+<span class="sig-name descname"><span class="pre">outputReady</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.ThreadedBatchPredictor.outputReady" title="Link to this definition"></a></dt>
+<dd><p>Is there any output ready for you?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the batcher is sitting on results, and False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.ThreadedBatchPredictor.empty">
+<span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.ThreadedBatchPredictor.empty" title="Link to this definition"></a></dt>
+<dd><p>Is it possible to getOutput()?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if predictions haven’t been made yet, but
+they would be made if you asked for output.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.utils.ThreadedBatchPredictor.getOutput">
+<span class="sig-name descname"><span class="pre">getOutput</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.utils.ThreadedBatchPredictor.getOutput" title="Link to this definition"></a></dt>
+<dd><p>Get a single output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The model’s predictions.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[list[ <a class="reference internal" href="constants.html#bpreveal.internal.constants.LOGIT_AR_T" title="bpreveal.internal.constants.LOGIT_AR_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">LOGIT_AR_T</span></code></a> ,  <a class="reference internal" href="constants.html#bpreveal.internal.constants.LOGCOUNT_T" title="bpreveal.internal.constants.LOGCOUNT_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">LOGCOUNT_T</span></code></a> ], typing.Any]</p>
+</dd>
+</dl>
+<p>Same semantics as
+<a class="reference internal" href="#bpreveal.utils.BatchPredictor.getOutput" title="bpreveal.utils.BatchPredictor.getOutput"><code class="xref py py-meth docutils literal notranslate"><span class="pre">BatchPredictor.getOutput</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ushuffle.html" class="btn btn-neutral float-left" title="ushuffle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="toolsminor.html" class="btn btn-neutral float-right" title="Tools Utility CLI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

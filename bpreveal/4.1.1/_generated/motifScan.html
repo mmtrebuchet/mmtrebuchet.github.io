@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>motifScan &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="motifSeqletCutoffs" href="motifSeqletCutoffs.html" />
+    <link rel="prev" title="makePredictions" href="makePredictions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="majorcli.html">Main CLI</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="interpretFlat.html">interpretFlat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretPisa.html">interpretPisa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makePredictions.html">makePredictions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">motifScan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-json">Configuration Json</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bnf">BNF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameter-notes">Parameter Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#quantile-json">Quantile json</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">BNF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Parameter notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#output-specification">Output Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.motifScan.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schema">Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="motifSeqletCutoffs.html">motifSeqletCutoffs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareBed.html">prepareBed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepareTrainingData.html">prepareTrainingData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainCombinedModel.html">trainCombinedModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainSoloModel.html">trainSoloModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainTransformationModel.html">trainTransformationModel</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="majorcli.html">Main CLI</a></li>
+      <li class="breadcrumb-item active">motifScan</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/motifScan.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.motifScan">
+<span id="motifscan"></span><h1>motifScan<a class="headerlink" href="#module-bpreveal.motifScan" title="Link to this heading"></a></h1>
+<p>Scans for motifs given importance scores.</p>
+<p>This program scans over the contribution scores you calculated with
+<a class="reference internal" href="interpretFlat.html#module-bpreveal.interpretFlat" title="bpreveal.interpretFlat"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretFlat</span></code></a> and looks for matches to motifs
+called by modiscolite. It can be run with a quantile JSON from
+<a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a>, or you can include
+the settings for that program inside the JSON for this one, in which case it
+will perform the seqlet analysis first and save those results for you. If you
+include a <code class="docutils literal notranslate"><span class="pre">seqlet-cutoff-settings</span></code> block in the config, it will run the
+<a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a> tools, and if you
+don’t include that, you must include a <code class="docutils literal notranslate"><span class="pre">seqlet-cutoff-json</span></code> file with the
+appropriate cutoffs. It is an error to specify both <code class="docutils literal notranslate"><span class="pre">seqlet-cutoff-settings</span></code>
+and <code class="docutils literal notranslate"><span class="pre">seqlet-cutoff-json</span></code>.</p>
+<section id="configuration-json">
+<h2>Configuration Json<a class="headerlink" href="#configuration-json" title="Link to this heading"></a></h2>
+<section id="bnf">
+<h3>BNF<a class="headerlink" href="#bnf" title="Link to this heading"></a></h3>
+<a name="motif-scan-config"></a><pre class="literal-block">&lt;<a class="reference internal" href="#motif-scan-config"><span class="std std-ref">motif-scan-config</span></a>&gt; ::=
+    {&lt;<a class="reference internal" href="#scan-quantile-settings"><span class="std std-ref">scan-quantile-settings</span></a>&gt;
+     &quot;scan-settings&quot; : {
+         &quot;scan-contrib-h5&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+         &quot;hits-tsv&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+         &quot;num-threads&quot; : &lt;<a class="reference internal" href="bnf.html#integer"><span class="std std-ref">integer</span></a>&gt;}
+     &lt;<a class="reference internal" href="bnf.html#verbosity-section"><span class="std std-ref">verbosity-section</span></a>&gt;}</pre>
+<a name="scan-quantile-settings"></a><pre class="literal-block">&lt;<a class="reference internal" href="#scan-quantile-settings"><span class="std std-ref">scan-quantile-settings</span></a>&gt; ::=
+    &quot;seqlet-cutoff-json&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+  | &quot;seqlet-cutoff-settings&quot; : &lt;<a class="reference internal" href="motifSeqletCutoffs.html#seqlet-scanning-settings"><span class="std std-ref">seqlet-scanning-settings</span></a>&gt;,</pre>
+</section>
+<section id="parameter-notes">
+<h3>Parameter Notes<a class="headerlink" href="#parameter-notes" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>scan-contrib-h5</dt><dd><p>The output of <a class="reference internal" href="interpretFlat.html#module-bpreveal.interpretFlat" title="bpreveal.interpretFlat"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretFlat</span></code></a> and contains
+contribution scores. All of the regions in this file will be scanned.</p>
+</dd>
+<dt>num-threads</dt><dd><p>The number of parallel workers to use.
+Due to the streaming architecture of this program, the minimum value of
+<code class="docutils literal notranslate"><span class="pre">num-threads</span></code> is 3. I have found that this program scales very well up to
+70 cores, and haven’t tested it beyond that.</p>
+</dd>
+<dt>hits-tsv</dt><dd><p>Where would you like the hit data stored?</p>
+</dd>
+<dt>seqlet-cutoff-settings</dt><dd><p>See <a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a> for the
+specification of this block.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="quantile-json">
+<h2>Quantile json<a class="headerlink" href="#quantile-json" title="Link to this heading"></a></h2>
+<p>If you don’t run the seqlet cutoffs during the scan, you need to provide a JSON
+file containing the information for each pattern. This file is generated by
+<a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a> and saved to the name
+<code class="docutils literal notranslate"><span class="pre">quantile-json</span></code> in the configuration to that script.</p>
+<section id="id1">
+<h3>BNF<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<a name="quantile-json"></a><pre class="literal-block">&lt;<a class="reference internal" href="#id2"><span class="std std-ref">quantile-json</span></a>&gt; ::=
+    [&lt;<a class="reference internal" href="#list-of-scan-patterns"><span class="std std-ref">list-of-scan-patterns</span></a>&gt; ]</pre>
+<a name="list-of-scan-patterns"></a><pre class="literal-block">&lt;<a class="reference internal" href="#list-of-scan-patterns"><span class="std std-ref">list-of-scan-patterns</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#scan-pattern"><span class="std std-ref">scan-pattern</span></a>&gt;
+    | &lt;<a class="reference internal" href="#scan-pattern"><span class="std std-ref">scan-pattern</span></a>&gt;, &lt;<a class="reference internal" href="#list-of-scan-patterns"><span class="std std-ref">list-of-scan-patterns</span></a>&gt;</pre>
+<a name="scan-pattern"></a><pre class="literal-block">&lt;<a class="reference internal" href="#scan-pattern"><span class="std std-ref">scan-pattern</span></a>&gt; ::=
+    {&quot;metacluster-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+    &quot;pattern-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;,
+    &quot;short-name&quot; : &lt;<a class="reference internal" href="bnf.html#string"><span class="std std-ref">string</span></a>&gt;
+    &quot;cwm&quot; : &lt;<a class="reference internal" href="#motif-array"><span class="std std-ref">motif-array</span></a>&gt;,
+    &quot;pssm&quot; : &lt;<a class="reference internal" href="#motif-array"><span class="std std-ref">motif-array</span></a>&gt;,
+    &quot;seq-match-cutoff&quot; : &lt;<a class="reference internal" href="bnf.html#number-or-null"><span class="std std-ref">number-or-null</span></a>&gt;,
+    &quot;contrib-match-cutoff&quot; : &lt;<a class="reference internal" href="bnf.html#number-or-null"><span class="std std-ref">number-or-null</span></a>&gt;,
+    &quot;contrib-magnitude-cutoff&quot; : &lt;<a class="reference internal" href="bnf.html#number-or-null"><span class="std std-ref">number-or-null</span></a>&gt;}</pre>
+<a name="motif-array"></a><pre class="literal-block">&lt;<a class="reference internal" href="#motif-array"><span class="std std-ref">motif-array</span></a>&gt; ::=
+    [ &lt;<a class="reference internal" href="#list-of-base-arrays"><span class="std std-ref">list-of-base-arrays</span></a>&gt; ]</pre>
+<a name="list-of-base-arrays"></a><pre class="literal-block">&lt;<a class="reference internal" href="#list-of-base-arrays"><span class="std std-ref">list-of-base-arrays</span></a>&gt; ::=
+    &lt;<a class="reference internal" href="#base-array"><span class="std std-ref">base-array</span></a>&gt;
+    | &lt;<a class="reference internal" href="#base-array"><span class="std std-ref">base-array</span></a>&gt;, &lt;<a class="reference internal" href="#list-of-base-arrays"><span class="std std-ref">list-of-base-arrays</span></a>&gt;</pre>
+<a name="base-array"></a><pre class="literal-block">&lt;<a class="reference internal" href="#base-array"><span class="std std-ref">base-array</span></a>&gt; ::=
+    [&lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;, &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;, &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;, &lt;<a class="reference internal" href="bnf.html#number"><span class="std std-ref">number</span></a>&gt;]</pre>
+</section>
+<section id="id3">
+<h3>Parameter notes<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>In the quantile JSON, we find the actual numerical cutoffs for scanning.</p>
+<dl>
+<dt>metacluster-name, pattern-name</dt><dd><p>These are from the modisco hdf5 file.</p>
+</dd>
+<dt>short-name</dt><dd><p>is a convenient name for this motif, and is
+entirely up to you.
+The short name will be used to populate the name column in the generated
+bed and csv files.</p>
+</dd>
+<dt>cwm</dt><dd><p>An array of shape (length, 4) that contains the cwm of
+the motif.
+It is used to calculate the Jaccard similarity and the L1 score.</p>
+</dd>
+<dt>pssm</dt><dd><p>The sequence-based information content at each
+position, and is used to calculate sequence match scores.</p>
+</dd>
+<dt>seq-match-cutoff, contrib-match-cutoff, contrib-magnitude-cutoff</dt><dd><p>The three cutoff values are the actual scores, <em>not quantile values</em>. These
+are calculated by
+<a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a>. You could set
+these manually, but why would you?</p>
+<p>seq-match: Cutoff where a sequence must have a PSSM score higher than the
+original TF-MoDISco pattern seqlets’ quantile value.</p>
+<p>contrib-match: Cutoff where a sequence must have a CWM score higher than the
+original TF-MoDISco pattern seqlets’ quantile value.</p>
+<p>contrib-match: Cutoff where a sequence must have contribution (L1 magnitude)
+higher than the original TF-MoDISco pattern seqlets’ quantile value.</p>
+<p>Note: Setting any of these cutoff values to 0 will mean that no value can
+be less that the lowest seqlet. Setting a cutoff to 0 is not the same as
+setting a cutoff to None.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="output-specification">
+<h2>Output Specification<a class="headerlink" href="#output-specification" title="Link to this heading"></a></h2>
+<p>For the generated tsv file, see
+<a class="reference internal" href="motifAddQuantiles.html#module-bpreveal.motifAddQuantiles" title="bpreveal.motifAddQuantiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifAddQuantiles</span></code></a>. If you include a
+<code class="docutils literal notranslate"><span class="pre">quantile-json</span></code> in your <code class="docutils literal notranslate"><span class="pre">seqlet-cutoff-settings</span></code>, then running
+<a class="reference internal" href="#module-bpreveal.motifScan" title="bpreveal.motifScan"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifScan</span></code></a> will save out the cutoff JSON.</p>
+</section>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.motifScan.main">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.motifScan.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.motifScan.main" title="Link to this definition"></a></dt>
+<dd><p>Run the scan.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>dict</em>) – A JSON object matching the motifScan specification.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Link to this heading"></a></h2>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;motifScan&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for motifScan.py&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;seqlet-cutoff-json&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;seqlet-cutoff-settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/motifSeqletCutoffs#definitions/seqlet-scanning-settings&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;scan-settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;scan-contrib-h5&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;hits-tsv&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;num-threads&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;minimum&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;scan-contrib-h5&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;hits-tsv&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;num-threads&quot;</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;verbosity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/schema/base#/definitions/verbosity&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;oneOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;seqlet-cutoff-json&quot;</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;seqlet-cutoff-settings&quot;</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;verbosity&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;scan-settings&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="makePredictions.html" class="btn btn-neutral float-left" title="makePredictions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="motifSeqletCutoffs.html" class="btn btn-neutral float-right" title="motifSeqletCutoffs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

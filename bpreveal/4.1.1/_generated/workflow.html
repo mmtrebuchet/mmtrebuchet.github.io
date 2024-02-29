@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workflows &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Programs" href="programs.html" />
+    <link rel="prev" title="Overview" href="text.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="text.html">Overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#without-bias-removal">Without bias removal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#with-bias-removal">With bias removal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="programs.html">Programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="breakingChanges.html">Breaking Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelArchitectures.html">Model architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="countsLossReweighting.html">Adaptive Counts Loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pisa.html">PISA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bnf.html">BNF Grammars</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="text.html">Overview</a></li>
+      <li class="breadcrumb-item active">Workflows</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/workflow.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="workflows">
+<h1>Workflows<a class="headerlink" href="#workflows" title="Link to this heading"></a></h1>
+<section id="without-bias-removal">
+<h2>Without bias removal<a class="headerlink" href="#without-bias-removal" title="Link to this heading"></a></h2>
+<p>For cases where you don’t have a bias track you want to regress out, here are
+the steps:</p>
+<ol class="arabic simple">
+<li><p>Prepare bigwig tracks and select the regions you are interested in.
+There are some utilities for this in BPReveal (<a class="reference internal" href="prepareBed.html#module-bpreveal.prepareBed" title="bpreveal.prepareBed"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareBed</span></code></a>),
+but you are mostly on your own for this stage.</p></li>
+<li><p>Prepare training data files with <a class="reference internal" href="prepareTrainingData.html#module-bpreveal.prepareTrainingData" title="bpreveal.prepareTrainingData"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareTrainingData</span></code></a>.
+These hdf5 files contain the sequences and experimental profiles for
+all the heads in your model.</p></li>
+<li><p>Train a solo model with <a class="reference internal" href="trainSoloModel.html#module-bpreveal.trainSoloModel" title="bpreveal.trainSoloModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trainSoloModel</span></code></a>.</p></li>
+<li><p>Measure the performance of your model with <a class="reference internal" href="metrics.html#module-bpreveal.metrics" title="bpreveal.metrics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metrics</span></code></a>.</p></li>
+<li><p>Make predictions from the model with <a class="reference internal" href="makePredictions.html#module-bpreveal.makePredictions" title="bpreveal.makePredictions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">makePredictions</span></code></a>.</p></li>
+<li><p>Generate importance scores, either one-dimensionally, with
+<a class="reference internal" href="interpretFlat.html#module-bpreveal.interpretFlat" title="bpreveal.interpretFlat"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretFlat</span></code></a>, or by making two-dimensional PISA plots with
+<a class="reference internal" href="interpretPisa.html#module-bpreveal.interpretPisa" title="bpreveal.interpretPisa"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretPisa</span></code></a></p></li>
+<li><p>Run MoDISco to extract motifs (using <a class="reference internal" href="shapToNumpy.html#module-bpreveal.shapToNumpy" title="bpreveal.shapToNumpy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shapToNumpy</span></code></a> the
+external <code class="docutils literal notranslate"><span class="pre">tfmodisco-lite</span></code> package)</p></li>
+<li><p>Use the motif mapping tools <a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a>,
+<a class="reference internal" href="motifScan.html#module-bpreveal.motifScan" title="bpreveal.motifScan"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifScan</span></code></a> and <a class="reference internal" href="motifAddQuantiles.html#module-bpreveal.motifAddQuantiles" title="bpreveal.motifAddQuantiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifAddQuantiles</span></code></a> to map the
+discovered motifs back to the genome.</p></li>
+</ol>
+</section>
+<section id="with-bias-removal">
+<h2>With bias removal<a class="headerlink" href="#with-bias-removal" title="Link to this heading"></a></h2>
+<p>If you do have strong experimental biases, you will need to regress them out.
+In that case, the workflow is the following:</p>
+<ol class="arabic simple">
+<li><p>Prepare bigwig tracks and select the regions you are interested in with
+<a class="reference internal" href="prepareBed.html#module-bpreveal.prepareBed" title="bpreveal.prepareBed"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareBed</span></code></a>.</p></li>
+<li><p>Prepare a data file containing bias using
+<a class="reference internal" href="prepareTrainingData.html#module-bpreveal.prepareTrainingData" title="bpreveal.prepareTrainingData"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareTrainingData</span></code></a>. The bias
+regions may be uninteresting regions in the genome, or you may train on
+your regions of interest but use an experimental control for the data.</p></li>
+<li><p>Train a bias (AKA solo) model with
+<a class="reference internal" href="trainSoloModel.html#module-bpreveal.trainSoloModel" title="bpreveal.trainSoloModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trainSoloModel</span></code></a>.</p></li>
+<li><p>Train a transformation model to match the bias model to the experimental
+data, using
+<a class="reference internal" href="trainTransformationModel.html#module-bpreveal.trainTransformationModel" title="bpreveal.trainTransformationModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trainTransformationModel</span></code></a>.</p></li>
+<li><p>Train a residual model to explain non-bias parts of the experimental data,
+using <a class="reference internal" href="trainCombinedModel.html#module-bpreveal.trainCombinedModel" title="bpreveal.trainCombinedModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trainCombinedModel</span></code></a>.</p></li>
+<li><p>Measure the performance of the full model with
+<a class="reference internal" href="metrics.html#module-bpreveal.metrics" title="bpreveal.metrics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metrics</span></code></a>.</p></li>
+<li><p>Make predictions from the full model and residual model with
+<a class="reference internal" href="makePredictions.html#module-bpreveal.makePredictions" title="bpreveal.makePredictions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">makePredictions</span></code></a>.</p></li>
+<li><p>Generate importance scores from the residual model with
+<a class="reference internal" href="interpretFlat.html#module-bpreveal.interpretFlat" title="bpreveal.interpretFlat"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretFlat</span></code></a>.</p></li>
+<li><p>Run MoDISco, using scores generated by
+<a class="reference internal" href="shapToNumpy.html#module-bpreveal.shapToNumpy" title="bpreveal.shapToNumpy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shapToNumpy</span></code></a>.</p></li>
+<li><p>Map the discovered motifs back to the genome using
+<a class="reference internal" href="motifSeqletCutoffs.html#module-bpreveal.motifSeqletCutoffs" title="bpreveal.motifSeqletCutoffs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifSeqletCutoffs</span></code></a>,
+<a class="reference internal" href="motifScan.html#module-bpreveal.motifScan" title="bpreveal.motifScan"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifScan</span></code></a> and
+<a class="reference internal" href="motifAddQuantiles.html#module-bpreveal.motifAddQuantiles" title="bpreveal.motifAddQuantiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">motifAddQuantiles</span></code></a>.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="text.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="programs.html" class="btn btn-neutral float-right" title="Programs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

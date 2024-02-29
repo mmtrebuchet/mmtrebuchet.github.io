@@ -1,0 +1,275 @@
+.. raw:: html
+
+    <a name="prepare-bed-configuration"></a>
+
+.. _prepare-bed-configuration:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`prepare-bed-configuration<prepare-bed-configuration>`> ::=
+        {<:ref:`bigwig-section<bigwig-section>`>,
+         "splits" : {<:ref:`split-settings<split-settings>`>},
+         "genome" : <:ref:`file-name<file-name>`>,
+         "output-length" : <:ref:`integer<integer>`>,
+         "input-length" : <:ref:`integer<integer>`>,
+         "max-jitter" : <:ref:`integer<integer>`>,
+         <:ref:`output-file-name-section<output-file-name-section>`>,
+         "resize-mode" : <:ref:`resize-mode<resize-mode>`>,
+         <:ref:`overlap-section<overlap-section>`>
+         <:ref:`num-threads-section<num-threads-section>`>
+         <:ref:`verbosity-section<verbosity-section>`>}
+    
+.. raw:: html
+
+    <a name="bigwig-section"></a>
+
+.. _bigwig-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`bigwig-section<bigwig-section>`> ::=
+        "heads" : [<:ref:`head-preparation-list<head-preparation-list>`>]
+      | (DEPRECATED) "bigwigs" : [<:ref:`bigwig-preparation-list<bigwig-preparation-list>`>]
+    
+.. raw:: html
+
+    <a name="overlap-section"></a>
+
+.. _overlap-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`overlap-section<overlap-section>`> ::=
+        "remove-overlaps" : true,
+        "overlap-max-distance" : <:ref:`integer<integer>`>,
+      | "remove-overlaps" : false,
+    
+.. raw:: html
+
+    <a name="head-preparation-list"></a>
+
+.. _head-preparation-list:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`head-preparation-list<head-preparation-list>`> ::=
+        <:ref:`individual-preparation-head<individual-preparation-head>`>
+      | <:ref:`individual-preparation-head<individual-preparation-head>`>, <:ref:`head-preparation-list<head-preparation-list>`>
+    
+.. raw:: html
+
+    <a name="resize-mode"></a>
+
+.. _resize-mode:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`resize-mode<resize-mode>`> ::=
+        "none"
+      | "center"
+      | "start"
+    
+.. raw:: html
+
+    <a name="output-file-name-section"></a>
+
+.. _output-file-name-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`output-file-name-section<output-file-name-section>`> ::=
+        "output-prefix" : "<:ref:`string<string>`>"
+      | "output-train" : <:ref:`file-name<file-name>`>,
+        "output-val" : <:ref:`file-name<file-name>`>,
+        "output-test" : <:ref:`file-name<file-name>`>
+    
+.. raw:: html
+
+    <a name="individual-preparation-head"></a>
+
+.. _individual-preparation-head:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`individual-preparation-head<individual-preparation-head>`> ::=
+     { "bigwig-names" : [<:ref:`list-of-bigwig-files<list-of-bigwig-files>`>],
+       <:ref:`max-cutoff-section<max-cutoff-section>`>,
+       <:ref:`min-cutoff-section<min-cutoff-section>`>
+       }
+    
+.. raw:: html
+
+    <a name="max-cutoff-section"></a>
+
+.. _max-cutoff-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`max-cutoff-section<max-cutoff-section>`> ::=
+       "max-quantile" : <:ref:`number<number>`>
+     | "max-counts" : <:ref:`integer<integer>`>
+    
+.. raw:: html
+
+    <a name="min-cutoff-section"></a>
+
+.. _min-cutoff-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`min-cutoff-section<min-cutoff-section>`> ::=
+       "min-quantile" : <:ref:`number<number>`>
+     | "min-counts" : <:ref:`integer<integer>`>
+    
+.. raw:: html
+
+    <a name="split-settings"></a>
+
+.. _split-settings:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`split-settings<split-settings>`> ::=
+        <:ref:`split-by-chromosome-settings<split-by-chromosome-settings>`>
+      | <:ref:`split-by-name-settings<split-by-name-settings>`>
+      | <:ref:`split-by-bed-settings<split-by-bed-settings>`>
+    
+.. raw:: html
+
+    <a name="split-by-chromosome-settings"></a>
+
+.. _split-by-chromosome-settings:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`split-by-chromosome-settings<split-by-chromosome-settings>`> ::=
+        "train-chroms" : [<:ref:`list-of-string<list-of-string>`>],
+        "val-chroms" : [<:ref:`list-of-string<list-of-string>`> ],
+        "test-chroms" : [<:ref:`list-of-string<list-of-string>`> ],
+        "regions" : [<:ref:`list-of-bed-files<list-of-bed-files>`>]
+    
+.. raw:: html
+
+    <a name="split-by-bed-settings"></a>
+
+.. _split-by-bed-settings:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`split-by-bed-settings<split-by-bed-settings>`> ::=
+        "train-regions" : [<:ref:`list-of-bed-files<list-of-bed-files>`>],
+        "val-regions" : [<:ref:`list-of-bed-files<list-of-bed-files>`>],
+        "test-regions" : [<:ref:`list-of-bed-files<list-of-bed-files>`>]
+    
+.. raw:: html
+
+    <a name="split-by-name-settings"></a>
+
+.. _split-by-name-settings:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`split-by-name-settings<split-by-name-settings>`> ::=
+        "regions" : [<:ref:`list-of-bed-files<list-of-bed-files>`>],
+        "test-regex" : "<:ref:`string<string>`>",
+        "train-regex" : "<:ref:`string<string>`>",
+        "val-regex" : "<:ref:`string<string>`>"
+    
+.. raw:: html
+
+    <a name="list-of-bigwig-files"></a>
+
+.. _list-of-bigwig-files:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`list-of-bigwig-files<list-of-bigwig-files>`> ::=
+        <:ref:`file-name<file-name>`>, <:ref:`list-of-bigwig-files<list-of-bigwig-files>`>
+      | <:ref:`file-name<file-name>`>
+    
+.. raw:: html
+
+    <a name="list-of-bed-files"></a>
+
+.. _list-of-bed-files:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`list-of-bed-files<list-of-bed-files>`> ::=
+        <:ref:`file-name<file-name>`>, <:ref:`list-of-bed-files<list-of-bed-files>`>
+      | <:ref:`file-name<file-name>`>
+    
+    
+.. raw:: html
+
+    <a name="num-threads-section"></a>
+
+.. _num-threads-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`num-threads-section<num-threads-section>`> ::=
+        <:ref:`empty<empty>`>
+      | "num-threads" <:ref:`integer<integer>`>,
+    
+.. raw:: html
+
+    <a name="bigwig-preparation-list"></a>
+
+.. _bigwig-preparation-list:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`bigwig-preparation-list<bigwig-preparation-list>`> ::=
+    (DEPRECATED)    <:ref:`individual-preparation-bigwig<individual-preparation-bigwig>`>
+    (DEPRECATED)  | <:ref:`individual-preparation-bigwig<individual-preparation-bigwig>`>, <:ref:`bigwig-preparation-list<bigwig-preparation-list>`>
+    
+.. raw:: html
+
+    <a name="individual-preparation-bigwig"></a>
+
+.. _individual-preparation-bigwig:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`individual-preparation-bigwig<individual-preparation-bigwig>`> ::=
+    (DEPRECATED)  { "file-name" : <:ref:`file-name<file-name>`>,
+    (DEPRECATED)    <:ref:`max-cutoff-section<max-cutoff-section>`>,
+    (DEPRECATED)    <:ref:`min-cutoff-section<min-cutoff-section>`>
+    (DEPRECATED)    }

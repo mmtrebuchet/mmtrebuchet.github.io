@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gaOptimize &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="generators" href="generators.html" />
+    <link rel="prev" title="callbacks" href="callbacks.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bedUtils.html">bedUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html">callbacks</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">gaOptimize</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.CorruptorLetter"><code class="docutils literal notranslate"><span class="pre">CorruptorLetter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.Corruptor"><code class="docutils literal notranslate"><span class="pre">Corruptor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.Profile"><code class="docutils literal notranslate"><span class="pre">Profile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.CandidateCorruptor"><code class="docutils literal notranslate"><span class="pre">CandidateCorruptor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.ANNOTATION_T"><code class="docutils literal notranslate"><span class="pre">ANNOTATION_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.IN_A"><code class="docutils literal notranslate"><span class="pre">IN_A</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.IN_C"><code class="docutils literal notranslate"><span class="pre">IN_C</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.IN_G"><code class="docutils literal notranslate"><span class="pre">IN_G</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.IN_T"><code class="docutils literal notranslate"><span class="pre">IN_T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.IN_L"><code class="docutils literal notranslate"><span class="pre">IN_L</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.IN_D"><code class="docutils literal notranslate"><span class="pre">IN_D</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.CORRUPTOR_TO_IDX"><code class="docutils literal notranslate"><span class="pre">CORRUPTOR_TO_IDX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.IDX_TO_CORRUPTOR"><code class="docutils literal notranslate"><span class="pre">IDX_TO_CORRUPTOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.corruptorColors"><code class="docutils literal notranslate"><span class="pre">corruptorColors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.corruptorsToArray"><code class="docutils literal notranslate"><span class="pre">corruptorsToArray()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.arrayToCorruptors"><code class="docutils literal notranslate"><span class="pre">arrayToCorruptors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.stringToCorruptorList"><code class="docutils literal notranslate"><span class="pre">stringToCorruptorList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.Organism"><code class="docutils literal notranslate"><span class="pre">Organism</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.gaOptimize.Organism.getSequence"><code class="docutils literal notranslate"><span class="pre">Organism.getSequence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.gaOptimize.Organism.setScore"><code class="docutils literal notranslate"><span class="pre">Organism.setScore()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.gaOptimize.Organism.cmp"><code class="docutils literal notranslate"><span class="pre">Organism.cmp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.gaOptimize.Organism.mutated"><code class="docutils literal notranslate"><span class="pre">Organism.mutated()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.gaOptimize.Organism.mixed"><code class="docutils literal notranslate"><span class="pre">Organism.mixed()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.Population"><code class="docutils literal notranslate"><span class="pre">Population</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.gaOptimize.Population.initialSequence"><code class="docutils literal notranslate"><span class="pre">Population.initialSequence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.gaOptimize.Population.organisms"><code class="docutils literal notranslate"><span class="pre">Population.organisms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.gaOptimize.Population.runCalculation"><code class="docutils literal notranslate"><span class="pre">Population.runCalculation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.gaOptimize.Population.nextGeneration"><code class="docutils literal notranslate"><span class="pre">Population.nextGeneration()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.getCandidateCorruptorList"><code class="docutils literal notranslate"><span class="pre">getCandidateCorruptorList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.anyCorruptorsCloserThan"><code class="docutils literal notranslate"><span class="pre">anyCorruptorsCloserThan()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.removeCorruptors"><code class="docutils literal notranslate"><span class="pre">removeCorruptors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.validCorruptorList"><code class="docutils literal notranslate"><span class="pre">validCorruptorList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.gaOptimize.plotTraces"><code class="docutils literal notranslate"><span class="pre">plotTraces()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generators.html">generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretUtils.html">interpretUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaccard.html">jaccard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html">layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logUtils.html">logUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="losses.html">losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifUtils.html">motifUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema.html">schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ushuffle.html">ushuffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">gaOptimize</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/gaOptimize.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.gaOptimize">
+<span id="gaoptimize"></span><h1>gaOptimize<a class="headerlink" href="#module-bpreveal.gaOptimize" title="Link to this heading"></a></h1>
+<p>Useful tools for creating sequences with a desired property.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.CorruptorLetter">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">CorruptorLetter</span></span><a class="headerlink" href="#bpreveal.gaOptimize.CorruptorLetter" title="Link to this definition"></a></dt>
+<dd><p>Any letter that is a valid corruptor.</p>
+<p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘A’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘C’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘G’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘T’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘d’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘Ǎ’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘Č’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘Ǧ’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘Ť’]]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Corruptor">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">Corruptor</span></span><a class="headerlink" href="#bpreveal.gaOptimize.Corruptor" title="Link to this definition"></a></dt>
+<dd><p>A corruptor gives a coordinate and a change to make.</p>
+<p>The change is represented by a single letter. The letters <cite>ACGT</cite> indicate a SNP
+at that locus, the letter <cite>d</cite> indicates that that base should be deleted, and
+the letters <cite>ǍČǦŤ</cite> indicate that the corresponding base should be inserted
+immediately after the locus.</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">85</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1525</span><span class="p">,</span> <span class="s2">&quot;Ť&quot;</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1603</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘A’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘C’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘G’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘T’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘d’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘Ǎ’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘Č’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘Ǧ’], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code>[‘Ť’]]]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Profile">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">Profile</span></span><a class="headerlink" href="#bpreveal.gaOptimize.Profile" title="Link to this definition"></a></dt>
+<dd><p>A profile is the result from running a model.</p>
+<p>It is a list of (logits, logcounts) tuples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tuple[ <a class="reference internal" href="constants.html#bpreveal.internal.constants.LOGIT_AR_T" title="bpreveal.internal.constants.LOGIT_AR_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">LOGIT_AR_T</span></code></a> ,  <a class="reference internal" href="constants.html#bpreveal.internal.constants.LOGCOUNT_T" title="bpreveal.internal.constants.LOGCOUNT_T"><code class="xref py py-data docutils literal notranslate"><span class="pre">LOGCOUNT_T</span></code></a> ]</p>
+</dd>
+</dl>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]], <code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code>]]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.CandidateCorruptor">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">CandidateCorruptor</span></span><a class="headerlink" href="#bpreveal.gaOptimize.CandidateCorruptor" title="Link to this definition"></a></dt>
+<dd><p>A candidate corruptor gives all possible mutations at a particular locus.</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">85</span><span class="p">,</span> <span class="s2">&quot;ACTd&quot;</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1525</span><span class="p">,</span> <span class="s2">&quot;AGTdǍČǦŤ&quot;</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1603</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that it is possible for a CandidateCorruptor to only allow for one
+possible mutation at a locus.</p>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.ANNOTATION_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">ANNOTATION_T</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">TypeAlias</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">tuple[tuple[int,</span> <span class="pre">int],</span> <span class="pre">str,</span> <span class="pre">str]</span> <span class="pre">|</span> <span class="pre">tuple[tuple[int,</span> <span class="pre">int],</span> <span class="pre">str,</span> <span class="pre">str,</span> <span class="pre">float,</span> <span class="pre">float]</span></em><a class="headerlink" href="#bpreveal.gaOptimize.ANNOTATION_T" title="Link to this definition"></a></dt>
+<dd><p>The shape for an annotation object to pass to <a class="reference internal" href="#bpreveal.gaOptimize.plotTraces" title="bpreveal.gaOptimize.plotTraces"><code class="xref py py-func docutils literal notranslate"><span class="pre">plotTraces()</span></code></a>.</p>
+<p>It contains:</p>
+<ol class="arabic simple">
+<li><p>a pair of integers, giving the start and stop points of that annotation,</p></li>
+<li><p>a string giving its label,</p></li>
+<li><p>a string giving its color,</p></li>
+<li><p>(Optional) a float giving the bottom of its annotation box, and</p></li>
+<li><p>(Optional) a float giving the top of its annotation box.</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.IN_A">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">IN_A</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">CorruptorLetter</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Ǎ'</span></em><a class="headerlink" href="#bpreveal.gaOptimize.IN_A" title="Link to this definition"></a></dt>
+<dd><p>The letter Ǎ represents inserting an A</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.IN_C">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">IN_C</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">CorruptorLetter</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Č'</span></em><a class="headerlink" href="#bpreveal.gaOptimize.IN_C" title="Link to this definition"></a></dt>
+<dd><p>The letter Č represents inserting a C</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.IN_G">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">IN_G</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">CorruptorLetter</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Ǧ'</span></em><a class="headerlink" href="#bpreveal.gaOptimize.IN_G" title="Link to this definition"></a></dt>
+<dd><p>The letter Ǧ represents inserting a G</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.IN_T">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">IN_T</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">CorruptorLetter</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Ť'</span></em><a class="headerlink" href="#bpreveal.gaOptimize.IN_T" title="Link to this definition"></a></dt>
+<dd><p>The letter Ť represents inserting a T</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.IN_L">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">IN_L</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ǍČǦŤ'</span></em><a class="headerlink" href="#bpreveal.gaOptimize.IN_L" title="Link to this definition"></a></dt>
+<dd><p>The four insertion letters</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.IN_D">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">IN_D</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'A':</span> <span class="pre">'Ǎ',</span> <span class="pre">'C':</span> <span class="pre">'Č',</span> <span class="pre">'G':</span> <span class="pre">'Ǧ',</span> <span class="pre">'T':</span> <span class="pre">'Ť'}</span></em><a class="headerlink" href="#bpreveal.gaOptimize.IN_D" title="Link to this definition"></a></dt>
+<dd><p>A dict mapping a regular letter ACGT to an insertion code ǍČǦŤ</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.CORRUPTOR_TO_IDX">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">CORRUPTOR_TO_IDX</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">CorruptorLetter</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'A':</span> <span class="pre">0,</span> <span class="pre">'C':</span> <span class="pre">1,</span> <span class="pre">'G':</span> <span class="pre">2,</span> <span class="pre">'T':</span> <span class="pre">3,</span> <span class="pre">'d':</span> <span class="pre">8,</span> <span class="pre">'Č':</span> <span class="pre">5,</span> <span class="pre">'Ť':</span> <span class="pre">7,</span> <span class="pre">'Ǎ':</span> <span class="pre">4,</span> <span class="pre">'Ǧ':</span> <span class="pre">6}</span></em><a class="headerlink" href="#bpreveal.gaOptimize.CORRUPTOR_TO_IDX" title="Link to this definition"></a></dt>
+<dd><p>Use these to map corruptors to integers.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.IDX_TO_CORRUPTOR">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">IDX_TO_CORRUPTOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ACGTǍČǦŤd'</span></em><a class="headerlink" href="#bpreveal.gaOptimize.IDX_TO_CORRUPTOR" title="Link to this definition"></a></dt>
+<dd><p>Given an integer, which corruptor does it represent?
+This is the inverse of CORRUPTOR_TO_IDX.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.corruptorColors">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">corruptorColors</span></span><a class="headerlink" href="#bpreveal.gaOptimize.corruptorColors" title="Link to this definition"></a></dt>
+<dd><p>BPreveal’s coloring for bases. A is green, C is blue, G is yellow, and T is red.</p>
+<p>These colors are drawn from the Wong palette, but with the green lightened a bit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[CorruptorLetter, tuple[float, float, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.corruptorsToArray">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">corruptorsToArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corruptorList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.corruptorsToArray" title="Link to this definition"></a></dt>
+<dd><p>Convert a list of Corruptors to an array of numbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>corruptorList</strong> (list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]) – A list of corruptors to serialize.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of tuples of numbers representing the same information.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tuple[int, int]]</p>
+</dd>
+</dl>
+<p>Given a list of corruptor tuples, like <code class="docutils literal notranslate"><span class="pre">[(1354,</span> <span class="pre">'C'),</span> <span class="pre">(1514,</span> <span class="pre">'Ť'),</span> <span class="pre">(1693,</span> <span class="pre">'d')]</span></code>,
+convert that to an integer list that can be easily saved. This list will have the
+format <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">[1354,</span> <span class="pre">1],</span> <span class="pre">[1514,</span> <span class="pre">7],</span> <span class="pre">[1693,</span> <span class="pre">8]</span> <span class="pre">]</span></code>
+where the second number indicates the type of corruptor, as given by CORRUPTOR_TO_IDX.
+Returns a list of lists, not a numpy array!
+If you want an array, use <code class="docutils literal notranslate"><span class="pre">np.array(corruptorsToArray(myCorruptors))</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.arrayToCorruptors">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">arrayToCorruptors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corruptorArray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.arrayToCorruptors" title="Link to this definition"></a></dt>
+<dd><p>Turn an array of numbers into a Corruptor list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>corruptorArray</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em>) – A list of tuples of ints.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Corruptors corresponding to the array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]</p>
+</dd>
+</dl>
+<p>Takes an array of numerical corruptors in the form
+<code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">[1354,</span> <span class="pre">1],</span> <span class="pre">[1514,</span> <span class="pre">7],</span> <span class="pre">[1693,</span> <span class="pre">8]</span> <span class="pre">]</span></code>
+and generates the canonical list with letters, as used in the rest of the
+code. This function will work on a list or a numpy array of shape (N x 2).
+Returns a list of tuples, one for each position that was corrupted, like:
+<code class="docutils literal notranslate"><span class="pre">[(1354,</span> <span class="pre">'C'),</span> <span class="pre">(1514,</span> <span class="pre">'Ť'),</span> <span class="pre">(1693,</span> <span class="pre">'d')]</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.stringToCorruptorList">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">stringToCorruptorList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corruptorStr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.stringToCorruptorList" title="Link to this definition"></a></dt>
+<dd><p>Parse a string and turn it into a <a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a> list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>corruptorStr</strong> (<em>str</em>) – The string to parse.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of Corruptors.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]</p>
+</dd>
+</dl>
+<p>Takes a string representing a list of corruptors and generates
+the actual list as a python object. For example, if the string is
+<code class="docutils literal notranslate"><span class="pre">&quot;[(1354,</span> <span class="pre">'C'),</span> <span class="pre">(1514,</span> <span class="pre">'Ť'),</span> <span class="pre">(1693,</span> <span class="pre">'d')]&quot;</span></code>
+this function will parse it to the list of tuples
+<code class="docutils literal notranslate"><span class="pre">[(1354,</span> <span class="pre">'C'),</span> <span class="pre">(1514,</span> <span class="pre">'Ť'),</span> <span class="pre">(1693,</span> <span class="pre">'d')]</span></code></p>
+<p>(The inverse of this function is simply <cite>str</cite> on a corruptor list.)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Organism">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">Organism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corruptors</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.Organism" title="Link to this definition"></a></dt>
+<dd><p>This represents the set of corruptors that are to be applied to the input sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>corruptors</strong> (list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]) – A list of corruptors that this organism represents.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Organism.getSequence">
+<span class="sig-name descname"><span class="pre">getSequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initialSequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputLength</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.Organism.getSequence" title="Link to this definition"></a></dt>
+<dd><p>Apply this organism’s corruptors to initialSequence, a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initialSequence</strong> (<em>str</em>) – A string representing the wild-type sequence that
+this organism will apply its corruptors to.</p></li>
+<li><p><strong>inputLength</strong> (<em>int</em>) – The length of the returned sequence.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string of length inputLength.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p>Note that initialSequence will need to be longer than the inputLength
+to your model, since deletion corruptors can shorten the sequence.
+The length of initialSequence must be at least
+inputLength + maxDeletions,
+and unless you’re filtering somehow, the maximum number of deletions
+is the number of corruptors for this organism.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Organism.setScore">
+<span class="sig-name descname"><span class="pre">setScore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scoreFn</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.Organism.setScore" title="Link to this definition"></a></dt>
+<dd><p>Apply the score function to this organism’s profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scoreFn</strong> (Callable(<a class="reference internal" href="#bpreveal.gaOptimize.Profile" title="bpreveal.gaOptimize.Profile"><code class="xref py py-data docutils literal notranslate"><span class="pre">Profile</span></code></a>, list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]) -&gt; float) – A function that takes this organism’s profile and its corruptor
+list and returns a float.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>This function can only be called after the organism’s profile has been set!</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Organism.cmp">
+<span class="sig-name descname"><span class="pre">cmp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.Organism.cmp" title="Link to this definition"></a></dt>
+<dd><p>A general comparator between two organisms based on their corruptors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#bpreveal.gaOptimize.Organism" title="bpreveal.gaOptimize.Organism"><em>Organism</em></a>) – The organism to compare against.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 if this organism is after (alphabetically) the other
+one, -1 if this organism comes first, or 0 if the two organisms
+have the same corruptors.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+<p>Note that this does not compare profile or score!</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Organism.mutated">
+<span class="sig-name descname"><span class="pre">mutated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">allowedCorruptors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkCorruptors</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.Organism.mutated" title="Link to this definition"></a></dt>
+<dd><p>Mutate this organism’s corruptors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>allowedCorruptors</strong> (list[<a class="reference internal" href="#bpreveal.gaOptimize.CandidateCorruptor" title="bpreveal.gaOptimize.CandidateCorruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">CandidateCorruptor</span></code></a>]) – All corruptors that this organism has access to</p></li>
+<li><p><strong>checkCorruptors</strong> (Callable[[list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]], bool]) – A function that accepts a list of corruptors and
+returns True if they are a valid combination and False otherwise.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A newly-allocated Organism with a new set of corruptors.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#bpreveal.gaOptimize.Organism" title="bpreveal.gaOptimize.Organism"><em>Organism</em></a></p>
+</dd>
+</dl>
+<p>This is something you may want to override in a subclass.
+This returns a NEW organism that has one changed corruptor.
+It chooses one of its current corruptors at random, and then changes
+it to a random selection from allowedCorruptors. (allowedCorruptors
+has the same structure as in a Population).
+It makes sure that the new corruptor doesn’t occur on the same base as
+an existing one (unless it’s an insertion), and also calls
+checkCorruptors on the resulting corruptor candidates. It will make
+100 attempts to generate a new organism, and then it will error out.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Organism.mixed">
+<span class="sig-name descname"><span class="pre">mixed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkCorruptors</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.Organism.mixed" title="Link to this definition"></a></dt>
+<dd><p>Make a new organism by combining this one with another.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> (<a class="reference internal" href="#bpreveal.gaOptimize.Organism" title="bpreveal.gaOptimize.Organism"><em>Organism</em></a>) – Another organism that this should be mixed with.</p></li>
+<li><p><strong>checkCorruptors</strong> (Callable[[list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]], bool]) – A function that returns True if a corruptor
+list is valid, and False otherwise.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A newly-allocated Organism that is a blend of both parents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#bpreveal.gaOptimize.Organism" title="bpreveal.gaOptimize.Organism"><em>Organism</em></a></p>
+</dd>
+</dl>
+<p>This is also something you may wish to override in a subclass.
+Currently, it pools the corruptors from self and other, and then
+randomly selects numCorruptors of them. If that passes checkCorruptors,
+then it returns a NEW organism.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Population">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">Population</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initialSequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">populationSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numCorruptors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowedCorruptors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkCorruptors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fitnessFn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numSurvivingParents</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.Population" title="Link to this definition"></a></dt>
+<dd><p>This is the main class for running the sequence optimization GA.</p>
+<p>This is a heck of a constructor, but you need to make a lot of
+choices to use the GA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initialSequence</strong> (<em>str</em>) – A string of length (input-length + numMutations)</p></li>
+<li><p><strong>inputLength</strong> (<em>int</em>) – is the length of sequence that is given to your model.</p></li>
+<li><p><strong>populationSize</strong> (<em>int</em>) – is the number of organisms at the end of each generation.</p></li>
+<li><p><strong>numCorruptors</strong> (<em>int</em>) – determines how many corruptors will be applied
+in each organism.</p></li>
+<li><p><strong>allowedCorruptors</strong> (list[<a class="reference internal" href="#bpreveal.gaOptimize.CandidateCorruptor" title="bpreveal.gaOptimize.CandidateCorruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">CandidateCorruptor</span></code></a>]) – is a list of tuples. (see below)</p></li>
+<li><p><strong>checkCorruptors</strong> (Callable[[list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]], bool]) – is a function that determines if a list of corruptors
+is valid. (see below)</p></li>
+<li><p><strong>fitnessFn</strong> (Callable[[<a class="reference internal" href="#bpreveal.gaOptimize.Profile" title="bpreveal.gaOptimize.Profile"><code class="xref py py-data docutils literal notranslate"><span class="pre">Profile</span></code></a>, list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]], float],) – The fitness function. It takes two arguments:
+The first argument is a list of tuples containing the model outputs.
+These have the same organization as the outputs from batchPredictor.
+The second argument is a list of corruptors, as presented to checkCorruptors.</p></li>
+<li><p><strong>numSurvivingParents</strong> (<em>int</em>) – The number of parents that will be kept for the next
+generation, usually referred to as elitism in GA terminology.</p></li>
+<li><p><strong>predictor</strong> (<a class="reference internal" href="utils.html#bpreveal.utils.BatchPredictor" title="bpreveal.utils.BatchPredictor"><em>utils.BatchPredictor</em></a>) – A BatchPredictor that has been set up with the model you
+want to use.</p></li>
+</ul>
+</dd>
+</dl>
+<p>The initial sequence must be longer than needed for your model.
+The extra length is needed because this GA can have deletions
+and you need sequence to fill in the gaps when that happens. If you limit
+the number of deletions allowed (say, by not having them in allowedCorruptors
+or restricting them through checkCorruptors), then you need to provide
+(input-length + numPossibleDeletions), and if you’re only allowing SNPs,
+then numPossibleDeletions = 0.</p>
+<p>allowedCorruptors is a list of tuples, with each tuple being a
+<a class="reference internal" href="#bpreveal.gaOptimize.CandidateCorruptor" title="bpreveal.gaOptimize.CandidateCorruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">CandidateCorruptor</span></code></a>. Each tuple contains two elements: a number,
+representing the position in the input sequence (starting at zero), and the
+second is a string containing the allowed corruptions at the base at the
+positing given by the number. For example, if your sequence is AGGCA, and
+you want any base to be corruptor to any other except that the C cannot be
+corrupted to a T and the second G cannot be corrupted at all,
+allowedCorruptors would be
+<code class="docutils literal notranslate"><span class="pre">[(0,</span> <span class="pre">&quot;CGT&quot;),</span> <span class="pre">(1,</span> <span class="pre">&quot;ACT&quot;),</span> <span class="pre">(3,</span> <span class="pre">&quot;AG&quot;),</span> <span class="pre">(4,</span> <span class="pre">&quot;CGT&quot;)]</span></code>.
+In the string of possible corruptors, the capital letters A, C, G, and T
+refer to a SNP of the base at the given position to the new letter,
+a lowercase ‘d’ means that the base there should be deleted, and a
+letter with a caron, like Ǎ, Č, Ǧ, or Ť, means that the given letter
+should be inserted AFTER the base number.</p>
+<p>checkCorruptors should take a list of <a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>. These are
+tuples, and the first element of each tuple is a number, representing the
+base to be corrupted, and the second will be a single character,
+representing the corruption to be applied The corruptor locations will
+always be sorted in increasing order. You could use this, for example, to
+make sure that no two corruptors are next to each other. If you don’t wish
+to apply any logic to the corruptors, pass in <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">True</span></code>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Population.initialSequence">
+<span class="sig-name descname"><span class="pre">initialSequence</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#bpreveal.gaOptimize.Population.initialSequence" title="Link to this definition"></a></dt>
+<dd><p>The un-mutated sequence that all organisms will work with.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Population.organisms">
+<span class="sig-name descname"><span class="pre">organisms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#bpreveal.gaOptimize.Organism" title="bpreveal.gaOptimize.Organism"><span class="pre">Organism</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#bpreveal.gaOptimize.Population.organisms" title="Link to this definition"></a></dt>
+<dd><p>The Organisms in this population.</p>
+<p>When the population is created, the organisms will have no profile or score
+information.</p>
+<p>After you execute <code class="xref py py-meth docutils literal notranslate"><span class="pre">runCalculation()</span></code>, each
+organism will contain profile and score data, and the organisms list will
+be sorted in ascending order of score. So organisms[-1] is the best
+organism in the population.</p>
+<p>After you call <code class="xref py py-meth docutils literal notranslate"><span class="pre">nextGeneration()</span></code>, the organisms
+in the population are reset and don’t contain score or profile information
+any more.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Population.runCalculation">
+<span class="sig-name descname"><span class="pre">runCalculation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.Population.runCalculation" title="Link to this definition"></a></dt>
+<dd><p>Run the GA.</p>
+<p>Runs the current population through the model, assigns scores to each
+organism, and sorts the organisms by score. If you want to save a list
+of the best parents, remember that the organisms are sorted in
+<em>ascending</em> order of fitness, so the best organism is
+pop.organisms[-1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.Population.nextGeneration">
+<span class="sig-name descname"><span class="pre">nextGeneration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.Population.nextGeneration" title="Link to this definition"></a></dt>
+<dd><p>Perform mutation and mixing to generate new children.</p>
+<p>Once you’ve runCalculation(), you call this to create new organisms
+for the next generation. This replaces the .organisms array with the new
+children, and those organisms will not have any profile or score data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.getCandidateCorruptorList">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">getCandidateCorruptorList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowDeletion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowInsertion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.getCandidateCorruptorList" title="Link to this definition"></a></dt>
+<dd><p>Give the corruptors that are possible in a given sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>str</em>) – The DNA sequence that will be used.</p></li>
+<li><p><strong>regions</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>] </em><em>| </em><em>None</em>) – An optional list of tuples giving <em>allowed</em> regions for mutations.</p></li>
+<li><p><strong>allowDeletion</strong> (<em>bool</em>) – Is deletion a valid corruptor type?</p></li>
+<li><p><strong>allowInsertion</strong> (<em>bool</em>) – Is insertion a valid corruptor type?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of Corruptors.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]</p>
+</dd>
+</dl>
+<p>Given a sequence (a string), this generates a list of tuples
+that contain all of the possible corruptors for each position in the
+sequence. It will have the format
+<code class="docutils literal notranslate"><span class="pre">[(0,</span> <span class="pre">&quot;ACGdǍČǦŤ&quot;),</span> <span class="pre">(1,</span> <span class="pre">&quot;AGTdǍČǦŤ&quot;),</span> <span class="pre">(2,</span> <span class="pre">&quot;CGTdǍČǦŤ&quot;),</span> <span class="pre">...]</span></code>
+where each number is a position in the sequence and the letters are the things
+that can be done at that location. A regular letter means a SNP, a d means deletion
+and the accented letters mean an insertion <em>after</em> the position.</p>
+<p>regions, if provided, must be a list of tuples.
+Each tuple contains two numbers, giving a start and stop location
+(left inclusive, right-exclusive, like python array slicing)
+of bases that are corruptor candidates. For example,
+<code class="docutils literal notranslate"><span class="pre">regions=[(100,200),</span> <span class="pre">(250,300)]</span></code> would return
+<code class="docutils literal notranslate"><span class="pre">[(100,</span> <span class="pre">&quot;ACG&quot;),</span> <span class="pre">(101,</span> <span class="pre">&quot;AGT&quot;),</span> <span class="pre">...</span> <span class="pre">(199,</span> <span class="pre">&quot;CGT&quot;),</span> <span class="pre">(250,</span> <span class="pre">&quot;ACT&quot;),</span> <span class="pre">...</span> <span class="pre">(299,&quot;ACG&quot;)]</span></code>
+The start position in each region tuple must be less than the stop point,
+but this method will check for (and remove) overlapping regions.
+If allowDeletion is True, then the strings will contain ‘d’, and if
+allowInsertion is True, then the strings will contain ‘ǍČǦŤ’.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.anyCorruptorsCloserThan">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">anyCorruptorsCloserThan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.anyCorruptorsCloserThan" title="Link to this definition"></a></dt>
+<dd><p>Are any corruptors close to each other?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corList</strong> (list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]) – The corruptors to consider.</p></li>
+<li><p><strong>distance</strong> (<em>int</em>) – The minimum distance that must be between corruptors.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if there exist two corruptors from corList that are less than
+distance apart, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>A utility function that you can integrate into checkCorruptors
+to see if any corruptors are close to each other. Given a sorted
+list of corruptors (each corruptor a tuple of (position, effect)),
+For example, to prevent corruptors on adjacent bases, distance=1.
+To ensure a gap of two bases between each corruptor, distance=2.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.removeCorruptors">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">removeCorruptors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corruptorList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corsToRemove</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.removeCorruptors" title="Link to this definition"></a></dt>
+<dd><p>Take corruptors out of a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corruptorList</strong> (list[<a class="reference internal" href="#bpreveal.gaOptimize.CandidateCorruptor" title="bpreveal.gaOptimize.CandidateCorruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">CandidateCorruptor</span></code></a>]) – A list of candidate corruptors, like [(100, “ACG”)].</p></li>
+<li><p><strong>corsToRemove</strong> (list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]) – A list of corruptors.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A newly-allocated list of candidate corruptors with the given corruptors
+removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#bpreveal.gaOptimize.CandidateCorruptor" title="bpreveal.gaOptimize.CandidateCorruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">CandidateCorruptor</span></code></a>]</p>
+</dd>
+</dl>
+<p>Given a candidate corruptor list, like from getCandidateCorruptorList, and
+a list of tuples giving disallowed corruptors, return a new candidate corruptor
+list where those disallowed corruptors are removed.
+corsToRemove is a list of tuples. The first element of each tuple is the position
+(relative to the start of the input sequence) that needs a corruptor removed, and
+the second is a string containing the forbidden letters.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">removeCorruptors</span><span class="p">([(</span><span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;ACG&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s2">&quot;AT&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">102</span><span class="p">,</span> <span class="s2">&quot;CGT&quot;</span><span class="p">),</span>
+                  <span class="p">(</span><span class="mi">103</span><span class="p">,</span> <span class="s2">&quot;CT&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">104</span><span class="p">,</span> <span class="s2">&quot;AGT&quot;</span><span class="p">)],</span>
+                 <span class="p">[(</span><span class="mi">101</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">103</span><span class="p">,</span> <span class="s2">&quot;CT&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">104</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">)])</span>
+<span class="o">-&gt;</span> <span class="p">[(</span><span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;ACG&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">102</span><span class="p">,</span> <span class="s2">&quot;CGT&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">104</span><span class="p">,</span> <span class="s2">&quot;AT&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.validCorruptorList">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">validCorruptorList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corruptorList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.validCorruptorList" title="Link to this definition"></a></dt>
+<dd><p>Is a list of corruptors even possible?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>corruptorList</strong> (list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]) – The corruptors to consider.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the corruptors could be applied by an organism,
+False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>A valid list satisfies the following property.
+For each pair <span class="math notranslate nohighlight">\((c_n, c_{n+1})\)</span> in corruptorList:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(c_n[0] &lt;= c_{n+1}[0]\)</span> (The list is ordered by the position of the corruptor.)</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(c_n[0] == c_{n+1}[0]\)</span>:</p>
+<blockquote>
+<div><ul>
+<li><p><span class="math notranslate nohighlight">\((c_n[1], c_{n+1}[1])\)</span> must be in sorted order. For stupid reasons,
+sorted order is <code class="docutils literal notranslate"><span class="pre">ACGTdČŤǍǦ</span></code>.</p></li>
+<li><p>Neither <span class="math notranslate nohighlight">\(c_n[1]\)</span> nor <span class="math notranslate nohighlight">\(c_{n+1}[1]\)</span> are <code class="docutils literal notranslate"><span class="pre">&quot;d&quot;</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>(You can’t delete a base and do anything else to it.)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><span class="math notranslate nohighlight">\(c_n[1] \in\)</span> <code class="docutils literal notranslate"><span class="pre">&quot;ACGT&quot;</span></code> <span class="math notranslate nohighlight">\(\implies c_{n+1}[1] \in\)</span> <code class="docutils literal notranslate"><span class="pre">&quot;ǍČǦŤ&quot;</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>(If you have a SNP, the only other thing
+at that position must be an insertion.)</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.gaOptimize.plotTraces">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.gaOptimize.</span></span><span class="sig-name descname"><span class="pre">plotTraces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">posTraces</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">negTraces</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xvals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corruptors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.gaOptimize.plotTraces" title="Link to this definition"></a></dt>
+<dd><p>Generate a nice little plot with pips for corruptors and boxes for annotations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>posTraces</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em><em>, </em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – The profiles to plot above the X axis.</p></li>
+<li><p><strong>negTraces</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em><em>, </em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – The profiles to plot below the X axis.</p></li>
+<li><p><strong>xvals</strong> (<em>ndarray</em><em>[</em><em>Any</em><em>, </em><em>dtype</em><em>[</em><em>float32</em><em>]</em><em>]</em>) – An array giving the genomic coordinates of your data.</p></li>
+<li><p><strong>annotations</strong> (<em>list</em><em>[</em><em>ANNOTATION_T</em><em>]</em>) – Annotations that you’d like to put on your plot.</p></li>
+<li><p><strong>corruptors</strong> (list[<a class="reference internal" href="#bpreveal.gaOptimize.Corruptor" title="bpreveal.gaOptimize.Corruptor"><code class="xref py py-data docutils literal notranslate"><span class="pre">Corruptor</span></code></a>]) – A list of Corruptors that you’d like to put on your plot.</p></li>
+<li><p><strong>ax</strong> (<em>Axes</em>) – The matplotlib Axes object to draw on.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>posTraces is a list of tuples. Each tuple has three things:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>A one-dimensional array of values. The number of values must be the
+same as the number of points in xvals.</p></li>
+<li><p>A string that will be used as a label for the trace.</p></li>
+<li><p>A string that will be used for the color of the trace.</p></li>
+</ol>
+</div></blockquote>
+<p>negTraces has the same structure as posTraces, but will be negated before
+being plotted. This is handy to make different conditions visually
+distinct, and of course for chip-nexus data.</p>
+<p>annotations is a list of tuples. Each tuple contains:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>a pair of integers, giving the start and stop points of that annotation,</p></li>
+<li><p>a string giving its label,</p></li>
+<li><p>a string giving its color,</p></li>
+<li><p>a float giving the bottom of its annotation box, and</p></li>
+<li><p>a float giving the top of its annotation box. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>`[((431075,431089), &quot;FKH2&quot;, &quot;red&quot;, 0.5, 0,7),
+((431200, 431206), &quot;PHO4&quot;, &quot;blue&quot;, 0.3, 0.6)]`
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>corruptors has the same format as the corruptors in an organism, but be
+sure you shift the coordinates appropriately so that they line up with
+xvals. In other words, the coordinates of the corruptors should be the
+real genomic coordinates of the mutations.
+(Remember that corruptor coordinates are relative to the start of
+the INPUT, not the output.)</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="callbacks.html" class="btn btn-neutral float-left" title="callbacks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generators.html" class="btn btn-neutral float-right" title="generators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

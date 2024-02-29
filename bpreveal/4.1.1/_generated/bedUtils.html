@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bedUtils &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="callbacks" href="callbacks.html" />
+    <link rel="prev" title="API" href="api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bedUtils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.bedUtils.makeWhitelistSegments"><code class="docutils literal notranslate"><span class="pre">makeWhitelistSegments()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.bedUtils.tileSegments"><code class="docutils literal notranslate"><span class="pre">tileSegments()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.bedUtils.createTilingRegions"><code class="docutils literal notranslate"><span class="pre">createTilingRegions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.bedUtils.resize"><code class="docutils literal notranslate"><span class="pre">resize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.bedUtils.getCounts"><code class="docutils literal notranslate"><span class="pre">getCounts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.bedUtils.sequenceChecker"><code class="docutils literal notranslate"><span class="pre">sequenceChecker()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.bedUtils.lineToInterval"><code class="docutils literal notranslate"><span class="pre">lineToInterval()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal.bedUtils.ParallelCounter"><code class="docutils literal notranslate"><span class="pre">ParallelCounter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.bedUtils.ParallelCounter.addQuery"><code class="docutils literal notranslate"><span class="pre">ParallelCounter.addQuery()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.bedUtils.ParallelCounter.done"><code class="docutils literal notranslate"><span class="pre">ParallelCounter.done()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal.bedUtils.ParallelCounter.getResult"><code class="docutils literal notranslate"><span class="pre">ParallelCounter.getResult()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html">callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaOptimize.html">gaOptimize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators.html">generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretUtils.html">interpretUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaccard.html">jaccard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html">layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logUtils.html">logUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="losses.html">losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="motifUtils.html">motifUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema.html">schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ushuffle.html">ushuffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">bedUtils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/bedUtils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bpreveal.bedUtils">
+<span id="bedutils"></span><h1>bedUtils<a class="headerlink" href="#module-bpreveal.bedUtils" title="Link to this heading"></a></h1>
+<p>Some utilities for dealing with bed files.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.makeWhitelistSegments">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.bedUtils.</span></span><span class="sig-name descname"><span class="pre">makeWhitelistSegments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blacklist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.makeWhitelistSegments" title="Link to this definition"></a></dt>
+<dd><p>Get a list of windows where it is safe to draw inputs for your model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>genome</strong> (<em>FastaFile</em>) – A FastaFile (pysam object, not a string filename!).</p></li>
+<li><p><strong>blacklist</strong> (<em>BedTool</em><em> | </em><em>None</em>) – (Optional) A BedTool that gives additional regions that should
+be excluded.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A BedTool that contains the whitelisted regions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>BedTool</em></p>
+</dd>
+</dl>
+<p>Given a genome file, go over each chromosome and see where the Ns are.
+Create a BedTool that contains all regions that don’t contain N.
+For example, if your genome were
+<code class="docutils literal notranslate"><span class="pre">ATATATATnnnnnnnATATATATATATnnn</span></code>,
+then this would return a BedTool corresponding to the regions containing
+As and Ts.</p>
+<p><code class="docutils literal notranslate"><span class="pre">blacklist</span></code>, if provided, is a bed file of regions that should be treated as though
+they contained N nucleotides.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.tileSegments">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.bedUtils.</span></span><span class="sig-name descname"><span class="pre">tileSegments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.tileSegments" title="Link to this definition"></a></dt>
+<dd><p>Tile the given segments with intervals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputLength</strong> (<em>int</em>) – The input-length of your model.</p></li>
+<li><p><strong>outputLength</strong> (<em>int</em>) – The output-length of your model, and also the length of the
+intervals in the returned <code class="docutils literal notranslate"><span class="pre">BedTool</span></code>.</p></li>
+<li><p><strong>segments</strong> (<em>BedTool</em>) – The regions of the genome that you’d like tiled.</p></li>
+<li><p><strong>spacing</strong> (<em>int</em>) – The distance <em>between</em> the windows.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A BedTool containing Intervals of length <code class="docutils literal notranslate"><span class="pre">outputLength</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>BedTool</em></p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">segments</span></code> will often come from <a class="reference internal" href="#bpreveal.bedUtils.makeWhitelistSegments" title="bpreveal.bedUtils.makeWhitelistSegments"><code class="xref py py-func docutils literal notranslate"><span class="pre">makeWhitelistSegments()</span></code></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">spacing</span></code> is the distance between the <em>end</em> of one region and the <em>start</em> of the next.
+So to tile the whole genome, set <code class="docutils literal notranslate"><span class="pre">spacing=0</span></code>. <code class="docutils literal notranslate"><span class="pre">spacing</span></code> may be negative, in which
+case the tiled regions will overlap.</p>
+<p>When this algorithm reaches the end of a segment, it will try to place an additional
+region if it can. For example, if your window is 30 bp long, with outputLength 6,
+inputLength 10, and spacing 5 you’d get:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">012345678901234567890123456789</span>
+<span class="o">--</span><span class="n">xxxxxx</span><span class="o">-----</span><span class="n">xxxxxx</span><span class="o">---</span><span class="n">xxxxxx</span><span class="o">--</span>
+</pre></div>
+</div>
+<p>The 2 bp padding on each end comes from the fact that
+<code class="docutils literal notranslate"><span class="pre">(inputLength</span> <span class="pre">-</span> <span class="pre">outputLength)</span> <span class="pre">/</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">2</span></code>
+Note how the last segment is not 5 bp away from the second-to-last.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.createTilingRegions">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.bedUtils.</span></span><span class="sig-name descname"><span class="pre">createTilingRegions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.createTilingRegions" title="Link to this definition"></a></dt>
+<dd><p>Create a list of regions that tile a genome.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputLength</strong> (<em>int</em>) – The input-length of your model.</p></li>
+<li><p><strong>outputLength</strong> (<em>int</em>) – The output-length of your model.</p></li>
+<li><p><strong>genome</strong> (<em>FastaFile</em>) – A FastaFile (the pysam object, not a string!)</p></li>
+<li><p><strong>spacing</strong> (<em>int</em>) – The space you’d like <em>between</em> returned intervals.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A BedTool containing regions that tile the genome.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>BedTool</em></p>
+</dd>
+</dl>
+<p>The returned BedTool will contain regions that are outputLength wide,
+and all regions will be far enough away from any N nucleotides that
+there will be no Ns in the input to your model.
+spacing specifies the amount of space <em>between</em> the regions. A spacing of 0
+means that the regions should join end-to-end, while a spacing of -500 would indicate
+regions that overlap by 500 bp.
+See <a class="reference internal" href="#bpreveal.bedUtils.tileSegments" title="bpreveal.bedUtils.tileSegments"><code class="xref py py-func docutils literal notranslate"><span class="pre">tileSegments()</span></code></a> for details on how the regions are placed.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.resize">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.bedUtils.</span></span><span class="sig-name descname"><span class="pre">resize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genome</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.resize" title="Link to this definition"></a></dt>
+<dd><p>Resize a given interval to a new size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interval</strong> (<em>Interval</em>) – A pyBedTools Interval object.</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – One of <code class="docutils literal notranslate"><span class="pre">&quot;none&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;center&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;start&quot;</span></code>.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – How long the returned Interval will be.</p></li>
+<li><p><strong>genome</strong> (<em>FastaFile</em>) – A FastaFile (the pysam object, not a string)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A newly-allocated Interval of the correct size, or <code class="docutils literal notranslate"><span class="pre">False</span></code>
+if resizing would run off the edge of a chromosome.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Interval</em> | <em>Literal</em>[False]</p>
+</dd>
+</dl>
+<p>Given an interval (a PyBedTools Interval object),
+return a new Interval that is at the same coordinate.</p>
+<p>mode is one of:</p>
+<ul class="simple">
+<li><p>“none”, meaning that no resizing is done. In that case, this function will
+check that the interval obeys stop-start == width. If an interval
+does not have the correct width, an assertion will fail.</p></li>
+<li><p>“center”, in which case the interval is resized around its center.</p></li>
+<li><p>“start”, in which case the start coordinate is preserved.</p></li>
+</ul>
+<p>The returned interval will obey x.end - x.start == width.
+It will preserve the chromosome, name, score, and strand
+information, but not other bed fields.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.getCounts">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.bedUtils.</span></span><span class="sig-name descname"><span class="pre">getCounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigwigs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.getCounts" title="Link to this definition"></a></dt>
+<dd><p>Get the total counts from all bigwigs at a given Interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interval</strong> (<em>Interval</em>) – A pyBedTools Interval.</p></li>
+<li><p><strong>bigwigs</strong> (<em>list</em>) – A list of opened pyBigWig objects (not strings!).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A single number giving the total reads from all bigwigs at
+the given interval.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>NaN entries in the bigwigs are treated as zero.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.sequenceChecker">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.bedUtils.</span></span><span class="sig-name descname"><span class="pre">sequenceChecker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genome</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.sequenceChecker" title="Link to this definition"></a></dt>
+<dd><p>For the given interval, does it only contain A, C, G, and T?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interval</strong> (<em>Interval</em>) – The interval to check.</p></li>
+<li><p><strong>genome</strong> (<em>FastaFile</em>) – A FastaFile (pysam object, not a string!).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the sequence matches <code class="docutils literal notranslate"><span class="pre">&quot;^[ACGTacgt]*$&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.lineToInterval">
+<span class="sig-prename descclassname"><span class="pre">bpreveal.bedUtils.</span></span><span class="sig-name descname"><span class="pre">lineToInterval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.lineToInterval" title="Link to this definition"></a></dt>
+<dd><p>Take a line from a bed file and create a PyBedTools Interval object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>line</strong> (<em>str</em>) – The line from the bed file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A newly-allocated pyBedTools Interval object, or <code class="docutils literal notranslate"><span class="pre">False</span></code> if
+the line is not a valid bed line.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Interval</em> | <em>Literal</em>[False]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.ParallelCounter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bpreveal.bedUtils.</span></span><span class="sig-name descname"><span class="pre">ParallelCounter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bigwigNames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numThreads</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.ParallelCounter" title="Link to this definition"></a></dt>
+<dd><p>A class that queues up getCounts() jobs and runs them in parallel.</p>
+<p>This is used by the prepareBed scripts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bigwigNames</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The name of the bigwig files to read from</p></li>
+<li><p><strong>numThreads</strong> (<em>int</em>) – How many parallel workers should be used?</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.ParallelCounter.addQuery">
+<span class="sig-name descname"><span class="pre">addQuery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.ParallelCounter.addQuery" title="Link to this definition"></a></dt>
+<dd><p>Add a region (chrom, start, end) to the task list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>tuple</em><em>[</em><em>str</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em>) – A tuple of (chromosome, start, end) giving the region to look at.</p></li>
+<li><p><strong>idx</strong> (<em>Any</em>) – An index that will be returned with the results.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.ParallelCounter.done">
+<span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.ParallelCounter.done" title="Link to this definition"></a></dt>
+<dd><p>Wrap up the show - close the child threads.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bpreveal.bedUtils.ParallelCounter.getResult">
+<span class="sig-name descname"><span class="pre">getResult</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bpreveal.bedUtils.ParallelCounter.getResult" title="Link to this definition"></a></dt>
+<dd><p>Get the next result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tuple of (counts, idx), where counts is the total counts
+for the bigwigs and idx is the index of the region you gave to addQuery.</p>
+</dd>
+</dl>
+<p>Note that the results will NOT be given in order - you must look at the index
+values.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="callbacks.html" class="btn btn-neutral float-right" title="callbacks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

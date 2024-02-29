@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tools.lossWeights &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.revcompTools" href="revcompTools.html" />
+    <link rel="prev" title="Tools Utility CLI" href="toolsminor.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="text.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tools.lossWeights</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#help-info">Help Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#named-arguments">Named Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="revcompTools.html">tools.revcompTools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shiftBigwigs.html">tools.shiftBigwigs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tileGenome.html">tools.tileGenome</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="toolsminor.html">Tools Utility CLI</a></li>
+      <li class="breadcrumb-item active">tools.lossWeights</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/lossWeights.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tools-lossweights">
+<h1>tools.lossWeights<a class="headerlink" href="#tools-lossweights" title="Link to this heading"></a></h1>
+<section id="help-info">
+<h2>Help Info<a class="headerlink" href="#help-info" title="Link to this heading"></a></h2>
+<p><p>Read in a model history json and calculate theprofile/counts loss ratio.</p>
+</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>usage: lossWeights [-h] [--json JSON]
+                   [--target-ratio TARGETRATIO]
+                   [--prev-weight PREVWEIGHT]
+</pre></div>
+</div>
+<section id="named-arguments">
+<h3>Named Arguments<a class="headerlink" href="#named-arguments" title="Link to this heading"></a></h3>
+<dl class="option-list">
+<dt><kbd>--json</kbd></dt>
+<dd><p>The name of the history json file</p>
+</dd>
+<dt><kbd>--target-ratio</kbd></dt>
+<dd><p>(optional) What counts loss weight do you want to have? A float from [0,∞), with 0 meaning no counts weight, 1 meaning equal weight between counts and profile. A normal setting would be 0.1. Use the output to set counts-loss-weight in your training configuration files.</p>
+<p>Default: 0.0</p>
+</dd>
+<dt><kbd>--prev-weight</kbd></dt>
+<dd><p>The counts-loss-weight you used to train your model. If provided, the printed ratios will be scaled by this number to reflect their actual contribution in your model.</p>
+<p>Default: 1.0</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p id="module-bpreveal.tools.lossWeights">This is a little utility to read in the training history json and calculate
+an appropriate counts loss weight parameter to get the loss balance you want.
+Since we only know how large the losses for profile and counts will be after
+we’ve trained a model, you have to use this script <em>after</em> training a burner model
+in order to find appropriate settings, then use those to re-train your model.
+How to use:
+First, pick a counts-loss-weight that sounds reasonable, like 10. Train a model.
+Run this script on the history json from that training, giving it a desired
+ratio of counts to profile loss.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="toolsminor.html" class="btn btn-neutral float-left" title="Tools Utility CLI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="revcompTools.html" class="btn btn-neutral float-right" title="tools.revcompTools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

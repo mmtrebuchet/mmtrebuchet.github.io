@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breaking Changes &mdash; BPReveal 4.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom-styles.css?v=f9494c3f" />
+      <link rel="stylesheet" type="text/css" href="../_static/libertinus.css?v=d73ac03a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Model architectures" href="modelArchitectures.html" />
+    <link rel="prev" title="Installation" href="setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BPReveal
+          </a>
+              <div class="version">
+                4.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="text.html">Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programs.html">Programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Breaking Changes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal-6-x">BPReveal 6.x</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal-6-0-0">BPReveal 6.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal-5-x">BPReveal 5.x</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal-5-0-0">BPReveal 5.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal-4-x">BPReveal 4.x</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal-4-1-1">BPReveal 4.1.1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal-4-1-0">BPReveal 4.1.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal-4-0-2">BPReveal 4.0.2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal-4-0-0">BPReveal 4.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bpreveal-3-x">BPReveal 3.x</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal-3-6-0">BPReveal 3.6.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal-3-5-0">BPReveal 3.5.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpreveal-3-0-0">BPReveal 3.0.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelArchitectures.html">Model architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="countsLossReweighting.html">Adaptive Counts Loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pisa.html">PISA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bnf.html">BNF Grammars</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="majorcli.html">Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minorcli.html">Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsminor.html">Tools Utility CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsmajor.html">Tools Main CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolsapi.html">Tools API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internalapi.html">Internal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BPReveal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="text.html">Overview</a></li>
+      <li class="breadcrumb-item active">Breaking Changes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generated/breakingChanges.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="breaking-changes">
+<h1>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Link to this heading"></a></h1>
+<p>A more detailed version history can be found in the <a class="reference internal" href="changelog.html"><span class="doc">Changelog</span></a>.</p>
+<section id="bpreveal-6-x">
+<h2>BPReveal 6.x<a class="headerlink" href="#bpreveal-6-x" title="Link to this heading"></a></h2>
+<section id="bpreveal-6-0-0">
+<h3>BPReveal 6.0.0<a class="headerlink" href="#bpreveal-6-0-0" title="Link to this heading"></a></h3>
+<p>When BPReveal 6.0.0 is released, the following breaking changes will occur:</p>
+<ol class="arabic simple">
+<li><p>The <a class="reference internal" href="showModel.html#module-bpreveal.showModel" title="bpreveal.showModel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">showModel</span></code></a> tool will be removed since it just
+wraps a single keras function call, and getting graphical output requires two
+rather large dependencies.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interpretPisaFasta</span></code> and <code class="docutils literal notranslate"><span class="pre">interpretPisaBed</span></code> are old names for
+<a class="reference internal" href="interpretPisa.html#module-bpreveal.interpretPisa" title="bpreveal.interpretPisa"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretPisa</span></code></a>. They exist only as symlinks
+in the bin/ directory, and using them has emitted a warning since 4.0.0.
+In BPReveal 6.0.0, the symlinks will be removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">makePredictionsFasta</span></code> and <code class="docutils literal notranslate"><span class="pre">makePredictionsBed</span></code> are old names for makePredictions.
+They exist only as symlinks in the bin/ directory, and using them has emitted a warning
+since 4.1.1. The old names will be removed.</p></li>
+</ol>
+</section>
+</section>
+<section id="bpreveal-5-x">
+<h2>BPReveal 5.x<a class="headerlink" href="#bpreveal-5-x" title="Link to this heading"></a></h2>
+<section id="bpreveal-5-0-0">
+<h3>BPReveal 5.0.0<a class="headerlink" href="#bpreveal-5-0-0" title="Link to this heading"></a></h3>
+<p>When BPReveal 5.0.0 is released, the following breaking changes will occur:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="prepareBed.html#module-bpreveal.prepareBed" title="bpreveal.prepareBed"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareBed</span></code></a> will no longer accept a list of
+bigwigs without head information. The program currently spits out warnings
+when you do this, and these will become an error.</p></li>
+<li><p>Using an importance hdf5 from before version 4.0.0 will now result in an
+error instead of a deprecation warning.</p></li>
+<li><p>When doing PISA interpretation on a fasta, you must call the fasta
+<code class="docutils literal notranslate"><span class="pre">fasta-file</span></code> instead of <code class="docutils literal notranslate"><span class="pre">sequence-fasta</span></code>. (Has emitted a warning
+since 4.0.0.)</p></li>
+<li><p>The first argument to
+<a class="reference internal" href="models.html#bpreveal.models.transformationModel" title="bpreveal.models.transformationModel"><code class="xref py py-func docutils literal notranslate"><span class="pre">models.transformationModel</span></code></a>
+will be renamed to get rid of a name collision that pylint gets upset about.</p></li>
+</ol>
+</section>
+</section>
+<section id="bpreveal-4-x">
+<h2>BPReveal 4.x<a class="headerlink" href="#bpreveal-4-x" title="Link to this heading"></a></h2>
+<section id="bpreveal-4-1-1">
+<h3>BPReveal 4.1.1<a class="headerlink" href="#bpreveal-4-1-1" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>The name of the counts head in a transformation model that uses bias counts changed from
+<code class="docutils literal notranslate"><span class="pre">combined_log_counts</span></code> to <code class="docutils literal notranslate"><span class="pre">combined_logcounts</span></code>, which might possibly break some very
+obscure use case. This change was necessary to fix a couple bugs with
+<a class="reference internal" href="countsLossReweighting.html"><span class="doc">adaptive counts loss</span></a> and
+<a class="reference internal" href="showTrainingProgress.html#module-bpreveal.showTrainingProgress" title="bpreveal.showTrainingProgress"><code class="xref py py-mod docutils literal notranslate"><span class="pre">showTrainingProgress</span></code></a>.</p></li>
+<li><p>To allow the prediction script to work with very large bed files, some refactoring was
+done. This included moving functions to add metadata to hdf5 files into a new module,
+<a class="reference internal" href="predictUtils.html#module-bpreveal.internal.predictUtils" title="bpreveal.internal.predictUtils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">internal.predictUtils</span></code></a>. If you were calling
+them from the old <code class="docutils literal notranslate"><span class="pre">makePredictionsFasta.py</span></code> module, they have moved.</p></li>
+<li><p>A new library, libslide, has been added. You will need to re-run make (or reinstall
+the environment) to use it.</p></li>
+</ol>
+</section>
+<section id="bpreveal-4-1-0">
+<h3>BPReveal 4.1.0<a class="headerlink" href="#bpreveal-4-1-0" title="Link to this heading"></a></h3>
+<p>The output format from training was totally re-written to be easier to use in log files.
+A new tool, <a class="reference internal" href="showTrainingProgress.html#module-bpreveal.showTrainingProgress" title="bpreveal.showTrainingProgress"><code class="xref py py-mod docutils literal notranslate"><span class="pre">showTrainingProgress</span></code></a> can be used to
+get a nice view of your model’s progress as it trains up.</p>
+</section>
+<section id="bpreveal-4-0-2">
+<h3>BPReveal 4.0.2<a class="headerlink" href="#bpreveal-4-0-2" title="Link to this heading"></a></h3>
+<p>A few variables deep inside BPReveal were changed from snake_case to the
+preferred style for BPReveal, camelCase. This should not have any effect unless
+you were digging deep inside the code.</p>
+</section>
+<section id="bpreveal-4-0-0">
+<h3>BPReveal 4.0.0<a class="headerlink" href="#bpreveal-4-0-0" title="Link to this heading"></a></h3>
+<p>The following breaking changes occurred when BPReveal 4.0.0 was released:</p>
+<ol class="arabic simple">
+<li><p>The chromosome list in the hdf5 files produced by
+<a class="reference internal" href="interpretFlat.html#module-bpreveal.interpretFlat" title="bpreveal.interpretFlat"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interpretFlat</span></code></a> stored chromosome
+information as strings, unlike all other output file formats. This changed
+so that chromosomes are numbered.
+<a class="reference internal" href="shapToBigwig.html#module-bpreveal.shapToBigwig" title="bpreveal.shapToBigwig"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shapToBigwig</span></code></a> and the motif scanning
+utilities now emit warnings if they detect an old-style importance hdf5.
+This will become an error in 5.0.0.</p></li>
+<li><p>The adaptive loss algorithm required me to implement a custom mse loss. In
+3.6, I sneakily called it <code class="docutils literal notranslate"><span class="pre">&quot;mse&quot;</span></code> so you didn’t have to add another custom
+object to scope when you load a new model. This loss will be renamed
+<code class="docutils literal notranslate"><span class="pre">&quot;reweightableMse&quot;</span></code> and you’ll have to add it to the custom object scopes
+when you load a model. Since the full new loss includes a tensor that must
+be created beforehand, <a class="reference internal" href="losses.html#module-bpreveal.losses" title="bpreveal.losses"><code class="xref py py-mod docutils literal notranslate"><span class="pre">losses</span></code></a> will include a
+dummy version that you can use to load, but not train, a model. See
+<a class="reference internal" href="countsLossReweighting.html"><span class="doc">Adaptive Counts Loss</span></a> for the algorithm.</p></li>
+</ol>
+</section>
+</section>
+<section id="bpreveal-3-x">
+<h2>BPReveal 3.x<a class="headerlink" href="#bpreveal-3-x" title="Link to this heading"></a></h2>
+<section id="bpreveal-3-6-0">
+<h3>BPReveal 3.6.0<a class="headerlink" href="#bpreveal-3-6-0" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>The <a class="reference internal" href="predictToBigwig.html#module-bpreveal.predictToBigwig" title="bpreveal.predictToBigwig"><code class="xref py py-mod docutils literal notranslate"><span class="pre">predictToBigwig</span></code></a> script now averages the values in
+overlapping regions instead of taking the leftmost base.
+This may result in small changes in generated bigwigs.</p></li>
+<li><p>In order to accommodate the adaptive loss algorithm
+(<a class="reference internal" href="countsLossReweighting.html"><span class="doc">Adaptive Counts Loss</span></a>), some of the layer names in transformation
+models were changed. If you were depending on these layer names, I’m curious
+to know how you got yourself in that situation.</p></li>
+</ol>
+</section>
+<section id="bpreveal-3-5-0">
+<h3>BPReveal 3.5.0<a class="headerlink" href="#bpreveal-3-5-0" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>BPReveal now uses Python 3.11, instead of 3.10. Users must re-build
+the <code class="docutils literal notranslate"><span class="pre">libjaccard</span></code> library for the new Python version.</p></li>
+</ol>
+</section>
+<section id="bpreveal-3-0-0">
+<h3>BPReveal 3.0.0<a class="headerlink" href="#bpreveal-3-0-0" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>You must specify a <code class="docutils literal notranslate"><span class="pre">&quot;remove-overlaps&quot;</span></code> field in configuration files for
+<a class="reference internal" href="prepareBed.html#module-bpreveal.prepareBed" title="bpreveal.prepareBed"><code class="xref py py-mod docutils literal notranslate"><span class="pre">prepareBed</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cropdown</span></code> layers were removed as an option for transformation models.</p></li>
+<li><p>The transformation model configuration file calls the input length
+<code class="docutils literal notranslate"><span class="pre">input-length</span></code> instead of <code class="docutils literal notranslate"><span class="pre">sequence-input-length</span></code>.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="setup.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modelArchitectures.html" class="btn btn-neutral float-right" title="Model architectures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Charles McAnany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

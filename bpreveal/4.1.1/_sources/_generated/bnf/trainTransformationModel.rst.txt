@@ -1,0 +1,95 @@
+.. raw:: html
+
+    <a name="transformation-input-configuration"></a>
+
+.. _transformation-input-configuration:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`transformation-input-configuration<transformation-input-configuration>`> ::=
+        {"settings" : <:ref:`transformation-settings-section<transformation-settings-section>`>,
+            <:ref:`data-section<data-section>`>,
+            <:ref:`head-section<head-section>`>, <:ref:`verbosity-section<verbosity-section>`>}
+    
+.. raw:: html
+
+    <a name="transformation-settings-section"></a>
+
+.. _transformation-settings-section:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`transformation-settings-section<transformation-settings-section>`> ::=
+         {"output-prefix" : "<:ref:`string<string>`>",
+          "epochs" : <:ref:`integer<integer>`>,
+          "max-jitter" : <:ref:`integer<integer>`>,
+          "early-stopping-patience" : <:ref:`integer<integer>`>,
+          "batch-size" : <:ref:`integer<integer>`>,
+          "learning-rate" : <:ref:`number<number>`>,
+          "learning-rate-plateau-patience" : <:ref:`integer<integer>`>
+          "solo-model-file" : <:ref:`file-name<file-name>`>,
+          "input-length" : <:ref:`integer<integer>`>,
+          "output-length" : <:ref:`integer<integer>`>,
+          "profile-architecture" : {<:ref:`transformation-architecture-specification<transformation-architecture-specification>`>},
+          "counts-architecture" : {<:ref:`transformation-architecture-specification<transformation-architecture-specification>`>} }
+    
+.. raw:: html
+
+    <a name="transformation-architecture-specification"></a>
+
+.. _transformation-architecture-specification:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`transformation-architecture-specification<transformation-architecture-specification>`> ::=
+        <:ref:`simple-transformation-architecture-specification<simple-transformation-architecture-specification>`>
+      | "name" : "passthrough"
+    
+.. raw:: html
+
+    <a name="simple-transformation-architecture-specification"></a>
+
+.. _simple-transformation-architecture-specification:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`simple-transformation-architecture-specification<simple-transformation-architecture-specification>`> ::=
+        "name" : "simple",
+        "types" : [<:ref:`list-of-simple-transformation-types<list-of-simple-transformation-types>`>]
+    
+.. raw:: html
+
+    <a name="list-of-simple-transformation-types"></a>
+
+.. _list-of-simple-transformation-types:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`list-of-simple-transformation-types<list-of-simple-transformation-types>`> ::=
+        <:ref:`simple-transformation-type<simple-transformation-type>`>
+      | <:ref:`simple-transformation-type<simple-transformation-type>`>, <:ref:`list-of-simple-transformation-types<list-of-simple-transformation-types>`>
+    
+.. raw:: html
+
+    <a name="simple-transformation-type"></a>
+
+.. _simple-transformation-type:
+
+.. highlight:: none
+
+.. parsed-literal::
+
+    <:ref:`simple-transformation-type<simple-transformation-type>`> ::=
+        "linear"
+      | "sigmoid"
+      | "relu"
